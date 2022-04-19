@@ -114,6 +114,12 @@ export interface Corrector {
      * @memberof Corrector
      */
     'type'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof Corrector
+     */
+    'args'?: object;
 }
 /**
  * 
@@ -126,7 +132,13 @@ export interface Estimator {
      * @type {string}
      * @memberof Estimator
      */
-    'algorithm'?: string;
+    'type'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof Estimator
+     */
+    'args'?: object;
 }
 /**
  * 
@@ -317,7 +329,7 @@ export interface Specification {
      * @type {Corrector}
      * @memberof Specification
      */
-    'corrector'?: Corrector;
+    'corrector'?: Corrector | null;
 }
 /**
  * 
@@ -379,7 +391,7 @@ export interface SpecificationReturn {
      * @type {Corrector}
      * @memberof SpecificationReturn
      */
-    'corrector'?: Corrector;
+    'corrector'?: Corrector | null;
     /**
      * 
      * @type {string}
