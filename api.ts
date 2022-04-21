@@ -330,6 +330,12 @@ export interface Specification {
      * @memberof Specification
      */
     'corrector'?: Corrector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Specification
+     */
+    'filter'?: string | null;
 }
 /**
  * 
@@ -392,6 +398,12 @@ export interface SpecificationReturn {
      * @memberof SpecificationReturn
      */
     'corrector'?: Corrector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationReturn
+     */
+    'filter'?: string | null;
     /**
      * 
      * @type {string}
