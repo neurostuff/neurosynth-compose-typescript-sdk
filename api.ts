@@ -114,6 +114,12 @@ export interface Corrector {
      * @memberof Corrector
      */
     'type'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof Corrector
+     */
+    'args'?: object;
 }
 /**
  * 
@@ -126,7 +132,13 @@ export interface Estimator {
      * @type {string}
      * @memberof Estimator
      */
-    'algorithm'?: string;
+    'type'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof Estimator
+     */
+    'args'?: object;
 }
 /**
  * 
@@ -148,10 +160,10 @@ export interface MetaAnalysis {
     'studyset'?: string | object;
     /**
      * 
-     * @type {object | string}
+     * @type {string | object}
      * @memberof MetaAnalysis
      */
-    'annotation'?: object | string;
+    'annotation'?: string | object;
     /**
      * 
      * @type {string}
@@ -204,10 +216,10 @@ export interface MetaAnalysisReturn {
     'studyset'?: string | object;
     /**
      * 
-     * @type {object | string}
+     * @type {string | object}
      * @memberof MetaAnalysisReturn
      */
-    'annotation'?: object | string;
+    'annotation'?: string | object;
     /**
      * 
      * @type {string}
@@ -293,7 +305,7 @@ export interface Specification {
      * @type {Estimator}
      * @memberof Specification
      */
-    'estimator'?: Estimator;
+    'estimator'?: Estimator | null;
     /**
      * 
      * @type {string}
@@ -317,7 +329,13 @@ export interface Specification {
      * @type {Corrector}
      * @memberof Specification
      */
-    'corrector'?: Corrector;
+    'corrector'?: Corrector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Specification
+     */
+    'filter'?: string | null;
 }
 /**
  * 
@@ -355,7 +373,7 @@ export interface SpecificationReturn {
      * @type {Estimator}
      * @memberof SpecificationReturn
      */
-    'estimator'?: Estimator;
+    'estimator'?: Estimator | null;
     /**
      * 
      * @type {string}
@@ -379,7 +397,13 @@ export interface SpecificationReturn {
      * @type {Corrector}
      * @memberof SpecificationReturn
      */
-    'corrector'?: Corrector;
+    'corrector'?: Corrector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationReturn
+     */
+    'filter'?: string | null;
     /**
      * 
      * @type {string}
