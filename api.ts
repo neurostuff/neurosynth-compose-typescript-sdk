@@ -39,6 +39,12 @@ export interface Annotation {
      * @memberof Annotation
      */
     'annotation'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof Annotation
+     */
+    'studyset_id'?: string;
 }
 /**
  * 
@@ -77,6 +83,12 @@ export interface AnnotationReturn {
      * @memberof AnnotationReturn
      */
     'annotation'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationReturn
+     */
+    'studyset_id'?: string;
     /**
      * 
      * @type {string}
