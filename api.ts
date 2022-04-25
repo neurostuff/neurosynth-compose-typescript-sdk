@@ -44,7 +44,7 @@ export interface Annotation {
      * @type {string}
      * @memberof Annotation
      */
-    'studyset_id'?: string;
+    'studyset'?: string;
 }
 /**
  * 
@@ -88,7 +88,7 @@ export interface AnnotationReturn {
      * @type {string}
      * @memberof AnnotationReturn
      */
-    'studyset_id'?: string;
+    'studyset'?: string;
     /**
      * 
      * @type {string}
