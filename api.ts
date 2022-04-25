@@ -38,7 +38,7 @@ export interface Annotation {
      * @type {object}
      * @memberof Annotation
      */
-    'annotation'?: object;
+    'annotation'?: object | null;
     /**
      * 
      * @type {string}
@@ -82,7 +82,7 @@ export interface AnnotationReturn {
      * @type {object}
      * @memberof AnnotationReturn
      */
-    'annotation'?: object;
+    'annotation'?: object | null;
     /**
      * 
      * @type {string}
@@ -458,7 +458,7 @@ export interface Studyset {
      * @type {object}
      * @memberof Studyset
      */
-    'studyset'?: object;
+    'studyset'?: object | null;
 }
 /**
  * 
@@ -496,7 +496,7 @@ export interface StudysetReturn {
      * @type {object}
      * @memberof StudysetReturn
      */
-    'studyset'?: object;
+    'studyset'?: object | null;
     /**
      * 
      * @type {string}
