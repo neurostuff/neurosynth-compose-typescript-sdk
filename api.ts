@@ -160,22 +160,22 @@ export interface Estimator {
 export interface MetaAnalysis {
     /**
      * 
-     * @type {string | object}
+     * @type {string | Specification}
      * @memberof MetaAnalysis
      */
-    'specification'?: string | object;
+    'specification'?: string | Specification;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Studyset}
      * @memberof MetaAnalysis
      */
-    'studyset'?: string | object;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Annotation}
      * @memberof MetaAnalysis
      */
-    'annotation'?: string | object;
+    'annotation'?: string | Annotation;
     /**
      * 
      * @type {string}
@@ -216,22 +216,22 @@ export interface MetaAnalysisList {
 export interface MetaAnalysisReturn {
     /**
      * 
-     * @type {string | object}
+     * @type {string | Specification}
      * @memberof MetaAnalysisReturn
      */
-    'specification'?: string | object;
+    'specification'?: string | Specification;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Studyset}
      * @memberof MetaAnalysisReturn
      */
-    'studyset'?: string | object;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Annotation}
      * @memberof MetaAnalysisReturn
      */
-    'annotation'?: string | object;
+    'annotation'?: string | Annotation;
     /**
      * 
      * @type {string}
