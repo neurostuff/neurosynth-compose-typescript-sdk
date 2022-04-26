@@ -38,7 +38,13 @@ export interface Annotation {
      * @type {object}
      * @memberof Annotation
      */
-    'annotation'?: object;
+    'snapshot'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Annotation
+     */
+    'studyset'?: string;
 }
 /**
  * 
@@ -76,7 +82,13 @@ export interface AnnotationReturn {
      * @type {object}
      * @memberof AnnotationReturn
      */
-    'annotation'?: object;
+    'snapshot'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationReturn
+     */
+    'studyset'?: string;
     /**
      * 
      * @type {string}
@@ -148,22 +160,22 @@ export interface Estimator {
 export interface MetaAnalysis {
     /**
      * 
-     * @type {string | object}
+     * @type {string | Specification}
      * @memberof MetaAnalysis
      */
-    'specification'?: string | object;
+    'specification'?: string | Specification;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Studyset}
      * @memberof MetaAnalysis
      */
-    'studyset'?: string | object;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Annotation}
      * @memberof MetaAnalysis
      */
-    'annotation'?: string | object;
+    'annotation'?: string | Annotation;
     /**
      * 
      * @type {string}
@@ -204,22 +216,22 @@ export interface MetaAnalysisList {
 export interface MetaAnalysisReturn {
     /**
      * 
-     * @type {string | object}
+     * @type {string | Specification}
      * @memberof MetaAnalysisReturn
      */
-    'specification'?: string | object;
+    'specification'?: string | Specification;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Studyset}
      * @memberof MetaAnalysisReturn
      */
-    'studyset'?: string | object;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {string | object}
+     * @type {string | Annotation}
      * @memberof MetaAnalysisReturn
      */
-    'annotation'?: string | object;
+    'annotation'?: string | Annotation;
     /**
      * 
      * @type {string}
@@ -305,7 +317,7 @@ export interface Specification {
      * @type {Estimator}
      * @memberof Specification
      */
-    'estimator'?: Estimator | null;
+    'estimator'?: Estimator;
     /**
      * 
      * @type {string}
@@ -373,7 +385,7 @@ export interface SpecificationReturn {
      * @type {Estimator}
      * @memberof SpecificationReturn
      */
-    'estimator'?: Estimator | null;
+    'estimator'?: Estimator;
     /**
      * 
      * @type {string}
@@ -446,7 +458,7 @@ export interface Studyset {
      * @type {object}
      * @memberof Studyset
      */
-    'studyset'?: object;
+    'snapshot'?: object | null;
 }
 /**
  * 
@@ -484,7 +496,7 @@ export interface StudysetReturn {
      * @type {object}
      * @memberof StudysetReturn
      */
-    'studyset'?: object;
+    'snapshot'?: object | null;
     /**
      * 
      * @type {string}
