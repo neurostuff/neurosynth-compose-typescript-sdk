@@ -341,7 +341,7 @@ export interface Specification {
      * @type {Corrector}
      * @memberof Specification
      */
-    'corrector'?: Corrector;
+    'corrector'?: Corrector | null;
     /**
      * 
      * @type {string}
@@ -409,7 +409,7 @@ export interface SpecificationReturn {
      * @type {Corrector}
      * @memberof SpecificationReturn
      */
-    'corrector'?: Corrector;
+    'corrector'?: Corrector | null;
     /**
      * 
      * @type {string}
