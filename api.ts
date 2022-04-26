@@ -317,7 +317,7 @@ export interface Specification {
      * @type {Estimator}
      * @memberof Specification
      */
-    'estimator'?: Estimator | null;
+    'estimator'?: Estimator;
     /**
      * 
      * @type {string}
@@ -341,7 +341,7 @@ export interface Specification {
      * @type {Corrector}
      * @memberof Specification
      */
-    'corrector'?: Corrector | null;
+    'corrector'?: Corrector;
     /**
      * 
      * @type {string}
@@ -385,7 +385,7 @@ export interface SpecificationReturn {
      * @type {Estimator}
      * @memberof SpecificationReturn
      */
-    'estimator'?: Estimator | null;
+    'estimator'?: Estimator;
     /**
      * 
      * @type {string}
@@ -409,7 +409,7 @@ export interface SpecificationReturn {
      * @type {Corrector}
      * @memberof SpecificationReturn
      */
-    'corrector'?: Corrector | null;
+    'corrector'?: Corrector;
     /**
      * 
      * @type {string}
