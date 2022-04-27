@@ -263,6 +263,18 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'internal_studyset_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'internal_annotation_id'?: string;
 }
 /**
  * 
@@ -319,6 +331,18 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'internal_studyset_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'internal_annotation_id'?: string;
     /**
      * 
      * @type {string}
