@@ -155,6 +155,37 @@ export interface Estimator {
 /**
  * 
  * @export
+ * @interface InlineResponse400
+ */
+export interface InlineResponse400 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse400
+     */
+    'detail'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse400
+     */
+    'status'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse400
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse400
+     */
+    'type'?: string;
+}
+/**
+ * 
+ * @export
  * @interface MetaAnalysis
  */
 export interface MetaAnalysis {
