@@ -256,13 +256,13 @@ export interface MetaAnalysis {
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
@@ -324,13 +324,13 @@ export interface MetaAnalysisReturn {
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
