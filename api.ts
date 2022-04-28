@@ -337,7 +337,7 @@ export interface MetaAnalysisPostBody {
      * @type {string | Specification}
      * @memberof MetaAnalysisPostBody
      */
-    'specification'?: string | Specification;
+    'specification': string | Specification;
     /**
      * 
      * @type {string | Studyset}
