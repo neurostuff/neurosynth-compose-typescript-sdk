@@ -68,6 +68,37 @@ export interface AnnotationList {
 /**
  * 
  * @export
+ * @interface AnnotationPostBody
+ */
+export interface AnnotationPostBody {
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationPostBody
+     */
+    'internal_studyset_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationPostBody
+     */
+    'neurostore_id'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof AnnotationPostBody
+     */
+    'snapshot'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationPostBody
+     */
+    'studyset'?: string;
+}
+/**
+ * 
+ * @export
  * @interface AnnotationReturn
  */
 export interface AnnotationReturn {
@@ -298,6 +329,55 @@ export interface MetaAnalysisList {
 /**
  * 
  * @export
+ * @interface MetaAnalysisPostBody
+ */
+export interface MetaAnalysisPostBody {
+    /**
+     * 
+     * @type {string | Specification}
+     * @memberof MetaAnalysisPostBody
+     */
+    'specification': string | Specification;
+    /**
+     * 
+     * @type {string | Studyset}
+     * @memberof MetaAnalysisPostBody
+     */
+    'studyset'?: string | Studyset;
+    /**
+     * 
+     * @type {string | Annotation}
+     * @memberof MetaAnalysisPostBody
+     */
+    'annotation'?: string | Annotation;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'internal_studyset_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'internal_annotation_id': string;
+}
+/**
+ * 
+ * @export
  * @interface MetaAnalysisReturn
  */
 export interface MetaAnalysisReturn {
@@ -470,6 +550,55 @@ export interface SpecificationList {
 /**
  * 
  * @export
+ * @interface SpecificationPostBody
+ */
+export interface SpecificationPostBody {
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'type': string;
+    /**
+     * 
+     * @type {Estimator}
+     * @memberof SpecificationPostBody
+     */
+    'estimator': Estimator;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'mask'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'contrast'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'transformer'?: string | null;
+    /**
+     * 
+     * @type {Corrector}
+     * @memberof SpecificationPostBody
+     */
+    'corrector'?: Corrector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'filter'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface SpecificationReturn
  */
 export interface SpecificationReturn {
@@ -577,6 +706,25 @@ export interface StudysetList {
      * @memberof StudysetList
      */
     'metadata'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface StudysetPostBody
+ */
+export interface StudysetPostBody {
+    /**
+     * 
+     * @type {string}
+     * @memberof StudysetPostBody
+     */
+    'neurostore_id': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof StudysetPostBody
+     */
+    'snapshot'?: object | null;
 }
 /**
  * 
@@ -806,11 +954,11 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
         /**
          * create a new serialized annotation
          * @summary Create Annotation
-         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {AnnotationPostBody} [annotationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost: async (annotationUpdate?: AnnotationUpdate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        annotationsPost: async (annotationPostBody?: AnnotationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -834,7 +982,7 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(annotationUpdate, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationPostBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -887,12 +1035,12 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
         /**
          * create a new serialized annotation
          * @summary Create Annotation
-         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {AnnotationPostBody} [annotationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsPost(annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotationUpdate, options);
+        async annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotationPostBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -938,12 +1086,12 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
         /**
          * create a new serialized annotation
          * @summary Create Annotation
-         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {AnnotationPostBody} [annotationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost(annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
-            return localVarFp.annotationsPost(annotationUpdate, options).then((request) => request(axios, basePath));
+        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -994,13 +1142,13 @@ export class AnnotationApi extends BaseAPI {
     /**
      * create a new serialized annotation
      * @summary Create Annotation
-     * @param {AnnotationUpdate} [annotationUpdate] 
+     * @param {AnnotationPostBody} [annotationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AnnotationApi
      */
-    public annotationsPost(annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsPost(annotationUpdate, options).then((request) => request(this.axios, this.basePath));
+    public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig) {
+        return AnnotationApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1014,11 +1162,11 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * list all runnable meta-analysis, studyset, annotation bundles
          * @summary Your GET endpoint
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1050,11 +1198,11 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
          * get a bundle (specification, annotation, and studyset)
          * @summary Your GET endpoint
          * @param {string} id 
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet: async (id: string, nested?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesIdGet: async (id: string, nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('metaAnalysesIdGet', 'id', id)
             const localVarPath = `/meta-analyses/{id}`
@@ -1130,11 +1278,11 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * create a new specification, studyset, annotation bundle
          * @summary Create Bundle
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesPost: async (metaAnalysis?: MetaAnalysis, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesPost: async (metaAnalysisPostBody?: MetaAnalysisPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1158,7 +1306,7 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysis, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysisPostBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1178,11 +1326,11 @@ export const BundleApiFp = function(configuration?: Configuration) {
         /**
          * list all runnable meta-analysis, studyset, annotation bundles
          * @summary Your GET endpoint
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1190,11 +1338,11 @@ export const BundleApiFp = function(configuration?: Configuration) {
          * get a bundle (specification, annotation, and studyset)
          * @summary Your GET endpoint
          * @param {string} id 
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesIdGet(id: string, nested?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1213,12 +1361,12 @@ export const BundleApiFp = function(configuration?: Configuration) {
         /**
          * create a new specification, studyset, annotation bundle
          * @summary Create Bundle
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesPost(metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysis, options);
+        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1234,22 +1382,22 @@ export const BundleApiFactory = function (configuration?: Configuration, basePat
         /**
          * list all runnable meta-analysis, studyset, annotation bundles
          * @summary Your GET endpoint
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: string, options?: any): AxiosPromise<MetaAnalysisList> {
+        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
             return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
          * get a bundle (specification, annotation, and studyset)
          * @summary Your GET endpoint
          * @param {string} id 
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet(id: string, nested?: string, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1266,12 +1414,12 @@ export const BundleApiFactory = function (configuration?: Configuration, basePat
         /**
          * create a new specification, studyset, annotation bundle
          * @summary Create Bundle
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesPost(metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesPost(metaAnalysis, options).then((request) => request(axios, basePath));
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1286,12 +1434,12 @@ export class BundleApi extends BaseAPI {
     /**
      * list all runnable meta-analysis, studyset, annotation bundles
      * @summary Your GET endpoint
-     * @param {string} [nested] show nested component instead of id
+     * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BundleApi
      */
-    public metaAnalysesGet(nested?: string, options?: AxiosRequestConfig) {
+    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
         return BundleApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1299,12 +1447,12 @@ export class BundleApi extends BaseAPI {
      * get a bundle (specification, annotation, and studyset)
      * @summary Your GET endpoint
      * @param {string} id 
-     * @param {string} [nested] show nested component instead of id
+     * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BundleApi
      */
-    public metaAnalysesIdGet(id: string, nested?: string, options?: AxiosRequestConfig) {
+    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
         return BundleApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1324,13 +1472,13 @@ export class BundleApi extends BaseAPI {
     /**
      * create a new specification, studyset, annotation bundle
      * @summary Create Bundle
-     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BundleApi
      */
-    public metaAnalysesPost(metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return BundleApiFp(this.configuration).metaAnalysesPost(metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
+        return BundleApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1449,11 +1597,11 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * create a new meta-analysis specification
-         * @param {Specification} [specification] 
+         * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost: async (specification?: Specification, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        specificationsPost: async (specificationPostBody?: SpecificationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/specifications`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1477,7 +1625,7 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(specification, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(specificationPostBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1529,12 +1677,12 @@ export const MetaAnalysisApiFp = function(configuration?: Configuration) {
         },
         /**
          * create a new meta-analysis specification
-         * @param {Specification} [specification] 
+         * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async specificationsPost(specification?: Specification, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specification, options);
+        async specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specificationPostBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1579,12 +1727,12 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
         },
         /**
          * create a new meta-analysis specification
-         * @param {Specification} [specification] 
+         * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost(specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
-            return localVarFp.specificationsPost(specification, options).then((request) => request(axios, basePath));
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1634,13 +1782,13 @@ export class MetaAnalysisApi extends BaseAPI {
 
     /**
      * create a new meta-analysis specification
-     * @param {Specification} [specification] 
+     * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysisApi
      */
-    public specificationsPost(specification?: Specification, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsPost(specification, options).then((request) => request(this.axios, this.basePath));
+    public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1760,11 +1908,11 @@ export const StudysetApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * create a new serialized studyset
          * @summary Create Studyset
-         * @param {Studyset} [studyset] 
+         * @param {StudysetPostBody} [studysetPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost: async (studyset?: Studyset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        studysetsPost: async (studysetPostBody?: StudysetPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1788,7 +1936,7 @@ export const StudysetApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(studyset, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(studysetPostBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1841,12 +1989,12 @@ export const StudysetApiFp = function(configuration?: Configuration) {
         /**
          * create a new serialized studyset
          * @summary Create Studyset
-         * @param {Studyset} [studyset] 
+         * @param {StudysetPostBody} [studysetPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsPost(studyset?: Studyset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsPost(studyset, options);
+        async studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsPost(studysetPostBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1892,12 +2040,12 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
         /**
          * create a new serialized studyset
          * @summary Create Studyset
-         * @param {Studyset} [studyset] 
+         * @param {StudysetPostBody} [studysetPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost(studyset?: Studyset, options?: any): AxiosPromise<StudysetReturn> {
-            return localVarFp.studysetsPost(studyset, options).then((request) => request(axios, basePath));
+        studysetsPost(studysetPostBody?: StudysetPostBody, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1948,13 +2096,13 @@ export class StudysetApi extends BaseAPI {
     /**
      * create a new serialized studyset
      * @summary Create Studyset
-     * @param {Studyset} [studyset] 
+     * @param {StudysetPostBody} [studysetPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StudysetApi
      */
-    public studysetsPost(studyset?: Studyset, options?: AxiosRequestConfig) {
-        return StudysetApiFp(this.configuration).studysetsPost(studyset, options).then((request) => request(this.axios, this.basePath));
+    public studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig) {
+        return StudysetApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
