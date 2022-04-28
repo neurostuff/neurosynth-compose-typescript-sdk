@@ -1313,6 +1313,182 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+    }
+};
+
+/**
+ * MetaAnalysisApi - functional programming interface
+ * @export
+ */
+export const MetaAnalysisApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MetaAnalysisApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * MetaAnalysisApi - factory interface
+ * @export
+ */
+export const MetaAnalysisApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MetaAnalysisApiFp(configuration)
+    return {
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MetaAnalysisApi - object-oriented interface
+ * @export
+ * @class MetaAnalysisApi
+ * @extends {BaseAPI}
+ */
+export class MetaAnalysisApi extends BaseAPI {
+    /**
+     * list all runnable specification, studyset, annotation bundles
+     * @summary GET a list of meta-analyses
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a meta-analysis (specification, annotation, and studyset)
+     * @summary GET meta-analysis information
+     * @param {string} id 
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing meta-analysis (that has not yet been run)
+     * @summary Update a meta-analysis
+     * @param {string} id 
+     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new specification, studyset, annotation bundle
+     * @summary Create a new meta-analysis
+     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * SpecificationApi - axios parameter creator
+ * @export
+ */
+export const SpecificationApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
         /**
          * list of meta-analysis specifications
          * @summary Your GET endpoint
@@ -1460,58 +1636,12 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
 };
 
 /**
- * MetaAnalysisApi - functional programming interface
+ * SpecificationApi - functional programming interface
  * @export
  */
-export const MetaAnalysisApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = MetaAnalysisApiAxiosParamCreator(configuration)
+export const SpecificationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SpecificationApiAxiosParamCreator(configuration)
     return {
-        /**
-         * list all runnable specification, studyset, annotation bundles
-         * @summary GET a list of meta-analyses
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * get a meta-analysis (specification, annotation, and studyset)
-         * @summary GET meta-analysis information
-         * @param {string} id 
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * update an existing meta-analysis (that has not yet been run)
-         * @summary Update a meta-analysis
-         * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * create a new specification, studyset, annotation bundle
-         * @summary Create a new meta-analysis
-         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
         /**
          * list of meta-analysis specifications
          * @summary Your GET endpoint
@@ -1559,54 +1689,12 @@ export const MetaAnalysisApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * MetaAnalysisApi - factory interface
+ * SpecificationApi - factory interface
  * @export
  */
-export const MetaAnalysisApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = MetaAnalysisApiFp(configuration)
+export const SpecificationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SpecificationApiFp(configuration)
     return {
-        /**
-         * list all runnable specification, studyset, annotation bundles
-         * @summary GET a list of meta-analyses
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * get a meta-analysis (specification, annotation, and studyset)
-         * @summary GET meta-analysis information
-         * @param {string} id 
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * update an existing meta-analysis (that has not yet been run)
-         * @summary Update a meta-analysis
-         * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * create a new specification, studyset, annotation bundle
-         * @summary Create a new meta-analysis
-         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
-        },
         /**
          * list of meta-analysis specifications
          * @summary Your GET endpoint
@@ -1650,71 +1738,21 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
 };
 
 /**
- * MetaAnalysisApi - object-oriented interface
+ * SpecificationApi - object-oriented interface
  * @export
- * @class MetaAnalysisApi
+ * @class SpecificationApi
  * @extends {BaseAPI}
  */
-export class MetaAnalysisApi extends BaseAPI {
-    /**
-     * list all runnable specification, studyset, annotation bundles
-     * @summary GET a list of meta-analyses
-     * @param {boolean} [nested] show nested component instead of id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
-     */
-    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * get a meta-analysis (specification, annotation, and studyset)
-     * @summary GET meta-analysis information
-     * @param {string} id 
-     * @param {boolean} [nested] show nested component instead of id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
-     */
-    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * update an existing meta-analysis (that has not yet been run)
-     * @summary Update a meta-analysis
-     * @param {string} id 
-     * @param {MetaAnalysis} [metaAnalysis] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
-     */
-    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * create a new specification, studyset, annotation bundle
-     * @summary Create a new meta-analysis
-     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
-     */
-    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
+export class SpecificationApi extends BaseAPI {
     /**
      * list of meta-analysis specifications
      * @summary Your GET endpoint
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof SpecificationApi
      */
     public specificationsGet(options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+        return SpecificationApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1723,10 +1761,10 @@ export class MetaAnalysisApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof SpecificationApi
      */
     public specificationsIdGet(id: string, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+        return SpecificationApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1736,10 +1774,10 @@ export class MetaAnalysisApi extends BaseAPI {
      * @param {Specification} [specification] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof SpecificationApi
      */
     public specificationsIdPut(id: string, specification?: Specification, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
+        return SpecificationApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1747,10 +1785,10 @@ export class MetaAnalysisApi extends BaseAPI {
      * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof SpecificationApi
      */
     public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
+        return SpecificationApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
