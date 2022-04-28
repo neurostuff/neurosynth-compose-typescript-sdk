@@ -470,6 +470,55 @@ export interface SpecificationList {
 /**
  * 
  * @export
+ * @interface SpecificationPostBody
+ */
+export interface SpecificationPostBody {
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'type': string;
+    /**
+     * 
+     * @type {Estimator}
+     * @memberof SpecificationPostBody
+     */
+    'estimator': Estimator;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'mask'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'contrast'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'transformer'?: string | null;
+    /**
+     * 
+     * @type {Corrector}
+     * @memberof SpecificationPostBody
+     */
+    'corrector'?: Corrector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'filter'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface SpecificationReturn
  */
 export interface SpecificationReturn {
@@ -1449,11 +1498,11 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * create a new meta-analysis specification
-         * @param {Specification} [specification] 
+         * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost: async (specification?: Specification, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        specificationsPost: async (specificationPostBody?: SpecificationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/specifications`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1477,7 +1526,7 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(specification, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(specificationPostBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1529,12 +1578,12 @@ export const MetaAnalysisApiFp = function(configuration?: Configuration) {
         },
         /**
          * create a new meta-analysis specification
-         * @param {Specification} [specification] 
+         * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async specificationsPost(specification?: Specification, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specification, options);
+        async specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specificationPostBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1579,12 +1628,12 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
         },
         /**
          * create a new meta-analysis specification
-         * @param {Specification} [specification] 
+         * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost(specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
-            return localVarFp.specificationsPost(specification, options).then((request) => request(axios, basePath));
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1634,13 +1683,13 @@ export class MetaAnalysisApi extends BaseAPI {
 
     /**
      * create a new meta-analysis specification
-     * @param {Specification} [specification] 
+     * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysisApi
      */
-    public specificationsPost(specification?: Specification, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsPost(specification, options).then((request) => request(this.axios, this.basePath));
+    public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
