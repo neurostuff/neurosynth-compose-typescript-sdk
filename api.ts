@@ -1449,11 +1449,11 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * create a new meta-analysis specification
-         * @param {UNKNOWN_BASE_TYPE} [uNKNOWNBASETYPE] 
+         * @param {Specification} [specification] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost: async (uNKNOWNBASETYPE?: UNKNOWN_BASE_TYPE, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        specificationsPost: async (specification?: Specification, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/specifications`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1477,7 +1477,7 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(uNKNOWNBASETYPE, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(specification, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1529,12 +1529,12 @@ export const MetaAnalysisApiFp = function(configuration?: Configuration) {
         },
         /**
          * create a new meta-analysis specification
-         * @param {UNKNOWN_BASE_TYPE} [uNKNOWNBASETYPE] 
+         * @param {Specification} [specification] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async specificationsPost(uNKNOWNBASETYPE?: UNKNOWN_BASE_TYPE, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(uNKNOWNBASETYPE, options);
+        async specificationsPost(specification?: Specification, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specification, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1579,12 +1579,12 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
         },
         /**
          * create a new meta-analysis specification
-         * @param {UNKNOWN_BASE_TYPE} [uNKNOWNBASETYPE] 
+         * @param {Specification} [specification] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost(uNKNOWNBASETYPE?: UNKNOWN_BASE_TYPE, options?: any): AxiosPromise<SpecificationReturn> {
-            return localVarFp.specificationsPost(uNKNOWNBASETYPE, options).then((request) => request(axios, basePath));
+        specificationsPost(specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsPost(specification, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1634,13 +1634,13 @@ export class MetaAnalysisApi extends BaseAPI {
 
     /**
      * create a new meta-analysis specification
-     * @param {UNKNOWN_BASE_TYPE} [uNKNOWNBASETYPE] 
+     * @param {Specification} [specification] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysisApi
      */
-    public specificationsPost(uNKNOWNBASETYPE?: UNKNOWN_BASE_TYPE, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).specificationsPost(uNKNOWNBASETYPE, options).then((request) => request(this.axios, this.basePath));
+    public specificationsPost(specification?: Specification, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).specificationsPost(specification, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
