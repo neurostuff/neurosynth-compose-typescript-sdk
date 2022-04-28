@@ -117,6 +117,50 @@ export interface AnnotationReturn {
 /**
  * 
  * @export
+ * @interface AnnotationUpdate
+ */
+export interface AnnotationUpdate {
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationUpdate
+     */
+    'internal_studyset_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationUpdate
+     */
+    'neurostore_id'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof AnnotationUpdate
+     */
+    'snapshot'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationUpdate
+     */
+    'studyset'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AnnotationUpdateAllOf
+ */
+export interface AnnotationUpdateAllOf {
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationUpdateAllOf
+     */
+    'internal_studyset_id'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Corrector
  */
 export interface Corrector {
@@ -155,6 +199,37 @@ export interface Estimator {
 /**
  * 
  * @export
+ * @interface InlineResponse400
+ */
+export interface InlineResponse400 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse400
+     */
+    'detail'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse400
+     */
+    'status'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse400
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse400
+     */
+    'type'?: string;
+}
+/**
+ * 
+ * @export
  * @interface MetaAnalysis
  */
 export interface MetaAnalysis {
@@ -181,13 +256,25 @@ export interface MetaAnalysis {
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'description'?: string;
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'internal_studyset_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'internal_annotation_id'?: string;
 }
 /**
  * 
@@ -237,13 +324,25 @@ export interface MetaAnalysisReturn {
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'description'?: string;
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'internal_studyset_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'internal_annotation_id'?: string;
     /**
      * 
      * @type {string}
@@ -666,11 +765,11 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
          * update an existing annotation
          * @summary Update Annotation
          * @param {string} id 
-         * @param {Annotation} [annotation] 
+         * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut: async (id: string, annotation?: Annotation, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        annotationsIdPut: async (id: string, annotationUpdate?: AnnotationUpdate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('annotationsIdPut', 'id', id)
             const localVarPath = `/annotations/{id}`
@@ -697,7 +796,7 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(annotation, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationUpdate, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -707,11 +806,11 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
         /**
          * create a new serialized annotation
          * @summary Create Annotation
-         * @param {Annotation} [annotation] 
+         * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost: async (annotation?: Annotation, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        annotationsPost: async (annotationUpdate?: AnnotationUpdate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -735,7 +834,7 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(annotation, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationUpdate, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -777,23 +876,23 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
          * update an existing annotation
          * @summary Update Annotation
          * @param {string} id 
-         * @param {Annotation} [annotation] 
+         * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsIdPut(id: string, annotation?: Annotation, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdPut(id, annotation, options);
+        async annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdPut(id, annotationUpdate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * create a new serialized annotation
          * @summary Create Annotation
-         * @param {Annotation} [annotation] 
+         * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsPost(annotation?: Annotation, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotation, options);
+        async annotationsPost(annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotationUpdate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -829,22 +928,22 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
          * update an existing annotation
          * @summary Update Annotation
          * @param {string} id 
-         * @param {Annotation} [annotation] 
+         * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut(id: string, annotation?: Annotation, options?: any): AxiosPromise<AnnotationReturn> {
-            return localVarFp.annotationsIdPut(id, annotation, options).then((request) => request(axios, basePath));
+        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
         },
         /**
          * create a new serialized annotation
          * @summary Create Annotation
-         * @param {Annotation} [annotation] 
+         * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost(annotation?: Annotation, options?: any): AxiosPromise<AnnotationReturn> {
-            return localVarFp.annotationsPost(annotation, options).then((request) => request(axios, basePath));
+        annotationsPost(annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsPost(annotationUpdate, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -883,25 +982,25 @@ export class AnnotationApi extends BaseAPI {
      * update an existing annotation
      * @summary Update Annotation
      * @param {string} id 
-     * @param {Annotation} [annotation] 
+     * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AnnotationApi
      */
-    public annotationsIdPut(id: string, annotation?: Annotation, options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsIdPut(id, annotation, options).then((request) => request(this.axios, this.basePath));
+    public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig) {
+        return AnnotationApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * create a new serialized annotation
      * @summary Create Annotation
-     * @param {Annotation} [annotation] 
+     * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AnnotationApi
      */
-    public annotationsPost(annotation?: Annotation, options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsPost(annotation, options).then((request) => request(this.axios, this.basePath));
+    public annotationsPost(annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig) {
+        return AnnotationApiFp(this.configuration).annotationsPost(annotationUpdate, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
