@@ -1162,11 +1162,11 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * list all runnable meta-analysis, studyset, annotation bundles
          * @summary Your GET endpoint
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1198,11 +1198,11 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
          * get a bundle (specification, annotation, and studyset)
          * @summary Your GET endpoint
          * @param {string} id 
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet: async (id: string, nested?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesIdGet: async (id: string, nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('metaAnalysesIdGet', 'id', id)
             const localVarPath = `/meta-analyses/{id}`
@@ -1326,11 +1326,11 @@ export const BundleApiFp = function(configuration?: Configuration) {
         /**
          * list all runnable meta-analysis, studyset, annotation bundles
          * @summary Your GET endpoint
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1338,11 +1338,11 @@ export const BundleApiFp = function(configuration?: Configuration) {
          * get a bundle (specification, annotation, and studyset)
          * @summary Your GET endpoint
          * @param {string} id 
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesIdGet(id: string, nested?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1382,22 +1382,22 @@ export const BundleApiFactory = function (configuration?: Configuration, basePat
         /**
          * list all runnable meta-analysis, studyset, annotation bundles
          * @summary Your GET endpoint
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: string, options?: any): AxiosPromise<MetaAnalysisList> {
+        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
             return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
          * get a bundle (specification, annotation, and studyset)
          * @summary Your GET endpoint
          * @param {string} id 
-         * @param {string} [nested] show nested component instead of id
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet(id: string, nested?: string, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1434,12 +1434,12 @@ export class BundleApi extends BaseAPI {
     /**
      * list all runnable meta-analysis, studyset, annotation bundles
      * @summary Your GET endpoint
-     * @param {string} [nested] show nested component instead of id
+     * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BundleApi
      */
-    public metaAnalysesGet(nested?: string, options?: AxiosRequestConfig) {
+    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
         return BundleApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1447,12 +1447,12 @@ export class BundleApi extends BaseAPI {
      * get a bundle (specification, annotation, and studyset)
      * @summary Your GET endpoint
      * @param {string} id 
-     * @param {string} [nested] show nested component instead of id
+     * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BundleApi
      */
-    public metaAnalysesIdGet(id: string, nested?: string, options?: AxiosRequestConfig) {
+    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
         return BundleApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
     }
 
