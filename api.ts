@@ -22,25 +22,25 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
 /**
- * 
+ * a holder/reference to the annotation on neurostore
  * @export
  * @interface Annotation
  */
 export interface Annotation {
     /**
-     * 
+     * the id of the annotation on neurostore
      * @type {string}
      * @memberof Annotation
      */
     'neurostore_id'?: string;
     /**
-     * 
+     * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      * @type {object}
      * @memberof Annotation
      */
     'snapshot'?: object | null;
     /**
-     * 
+     * The related studyset to this annotation.
      * @type {string}
      * @memberof Annotation
      */
@@ -78,19 +78,19 @@ export interface AnnotationPostBody {
      */
     'internal_studyset_id': string;
     /**
-     * 
+     * the id of the annotation on neurostore
      * @type {string}
      * @memberof AnnotationPostBody
      */
     'neurostore_id'?: string;
     /**
-     * 
+     * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      * @type {object}
      * @memberof AnnotationPostBody
      */
     'snapshot'?: object | null;
     /**
-     * 
+     * The related studyset to this annotation.
      * @type {string}
      * @memberof AnnotationPostBody
      */
@@ -103,43 +103,43 @@ export interface AnnotationPostBody {
  */
 export interface AnnotationReturn {
     /**
-     * 
+     * the id of the annotation on neurostore
      * @type {string}
      * @memberof AnnotationReturn
      */
     'neurostore_id'?: string;
     /**
-     * 
+     * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      * @type {object}
      * @memberof AnnotationReturn
      */
     'snapshot'?: object | null;
     /**
-     * 
+     * The related studyset to this annotation.
      * @type {string}
      * @memberof AnnotationReturn
      */
     'studyset'?: string;
     /**
-     * 
+     * the identifier for the resource.
      * @type {string}
      * @memberof AnnotationReturn
      */
     'id'?: string;
     /**
-     * 
+     * when the resource was last modified.
      * @type {string}
      * @memberof AnnotationReturn
      */
     'updated_at'?: string | null;
     /**
-     * 
+     * When the resource was created.
      * @type {string}
      * @memberof AnnotationReturn
      */
     'created_at'?: string;
     /**
-     * 
+     * Who owns the resource.
      * @type {string}
      * @memberof AnnotationReturn
      */
@@ -158,19 +158,19 @@ export interface AnnotationUpdate {
      */
     'internal_studyset_id'?: string;
     /**
-     * 
+     * the id of the annotation on neurostore
      * @type {string}
      * @memberof AnnotationUpdate
      */
     'neurostore_id'?: string;
     /**
-     * 
+     * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      * @type {object}
      * @memberof AnnotationUpdate
      */
     'snapshot'?: object | null;
     /**
-     * 
+     * The related studyset to this annotation.
      * @type {string}
      * @memberof AnnotationUpdate
      */
@@ -190,38 +190,38 @@ export interface AnnotationUpdateAllOf {
     'internal_studyset_id'?: string;
 }
 /**
- * 
+ * The function/class applying statistical adjustments to the output of the meta-analysis (optional).
  * @export
  * @interface Corrector
  */
 export interface Corrector {
     /**
-     * 
+     * the name of the function/class performing the correction. For example FWECorrector from NiMARE would be valid.
      * @type {string}
      * @memberof Corrector
      */
     'type'?: string;
     /**
-     * 
+     * key word arguments passed to the corrector to modidy default functionality, such as number of iterations, or the particular method of correction being applied.
      * @type {object}
      * @memberof Corrector
      */
     'args'?: object;
 }
 /**
- * 
+ * the specification for the function/class running the meta-analysis
  * @export
  * @interface Estimator
  */
 export interface Estimator {
     /**
-     * 
+     * the meta-analytic algorithm applied to the data. Currently this should be directly tied to the function/class running the meta-analysis. For example, ALE, or MKDADensity are valid NiMARE classes to put here.
      * @type {string}
      * @memberof Estimator
      */
     'type'?: string;
     /**
-     * 
+     * arbitrary keyword arguments to be passed into the function/class to modify default functionality, this could modify the kernel, resampling methods, or any other behavior defined in the function/class (like MKDADensity).
      * @type {object}
      * @memberof Estimator
      */
@@ -259,49 +259,49 @@ export interface InlineResponse400 {
     'type'?: string;
 }
 /**
- * 
+ * The combination of the specification determining what meta-analysis to run (required), the studyset to act as input to the meta-analytic algorithm (required), and the annotation to provide human readable annotations as well as acts as an optional filter on which analyses to select within the studyset (optional, but suggested).
  * @export
  * @interface MetaAnalysis
  */
 export interface MetaAnalysis {
     /**
-     * 
+     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
      * @type {string | Specification}
      * @memberof MetaAnalysis
      */
     'specification'?: string | Specification;
     /**
-     * 
+     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
      * @type {string | Studyset}
      * @memberof MetaAnalysis
      */
     'studyset'?: string | Studyset;
     /**
-     * 
+     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
      * @type {string | Annotation}
      * @memberof MetaAnalysis
      */
     'annotation'?: string | Annotation;
     /**
-     * 
+     * Human-readable name of the meta-analysis.
      * @type {string}
      * @memberof MetaAnalysis
      */
     'name'?: string | null;
     /**
-     * 
+     * Long form description of the meta-analysis.
      * @type {string}
      * @memberof MetaAnalysis
      */
     'description'?: string | null;
     /**
-     * 
+     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysis
      */
     'internal_studyset_id'?: string;
     /**
-     * 
+     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysis
      */
@@ -333,43 +333,43 @@ export interface MetaAnalysisList {
  */
 export interface MetaAnalysisPostBody {
     /**
-     * 
+     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
      * @type {string | Specification}
      * @memberof MetaAnalysisPostBody
      */
     'specification': string | Specification;
     /**
-     * 
+     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
      * @type {string | Studyset}
      * @memberof MetaAnalysisPostBody
      */
     'studyset'?: string | Studyset;
     /**
-     * 
+     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
      * @type {string | Annotation}
      * @memberof MetaAnalysisPostBody
      */
     'annotation'?: string | Annotation;
     /**
-     * 
+     * Human-readable name of the meta-analysis.
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
     'name'?: string | null;
     /**
-     * 
+     * Long form description of the meta-analysis.
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
     'description'?: string | null;
     /**
-     * 
+     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
     'internal_studyset_id': string;
     /**
-     * 
+     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
@@ -382,67 +382,67 @@ export interface MetaAnalysisPostBody {
  */
 export interface MetaAnalysisReturn {
     /**
-     * 
+     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
      * @type {string | Specification}
      * @memberof MetaAnalysisReturn
      */
     'specification'?: string | Specification;
     /**
-     * 
+     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
      * @type {string | Studyset}
      * @memberof MetaAnalysisReturn
      */
     'studyset'?: string | Studyset;
     /**
-     * 
+     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
      * @type {string | Annotation}
      * @memberof MetaAnalysisReturn
      */
     'annotation'?: string | Annotation;
     /**
-     * 
+     * Human-readable name of the meta-analysis.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'name'?: string | null;
     /**
-     * 
+     * Long form description of the meta-analysis.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'description'?: string | null;
     /**
-     * 
+     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'internal_studyset_id'?: string;
     /**
-     * 
+     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'internal_annotation_id'?: string;
     /**
-     * 
+     * the identifier for the resource.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'id'?: string;
     /**
-     * 
+     * when the resource was last modified.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'updated_at'?: string | null;
     /**
-     * 
+     * When the resource was created.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
     'created_at'?: string;
     /**
-     * 
+     * Who owns the resource.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
@@ -455,38 +455,38 @@ export interface MetaAnalysisReturn {
  */
 export interface ReadOnly {
     /**
-     * 
+     * the identifier for the resource.
      * @type {string}
      * @memberof ReadOnly
      */
     'id'?: string;
     /**
-     * 
+     * when the resource was last modified.
      * @type {string}
      * @memberof ReadOnly
      */
     'updated_at'?: string | null;
     /**
-     * 
+     * When the resource was created.
      * @type {string}
      * @memberof ReadOnly
      */
     'created_at'?: string;
     /**
-     * 
+     * Who owns the resource.
      * @type {string}
      * @memberof ReadOnly
      */
     'user'?: string | null;
 }
 /**
- * 
+ * a machine readable specification of how to run a meta-analysis (currently specifically tailored to NiMARE).
  * @export
  * @interface Specification
  */
 export interface Specification {
     /**
-     * 
+     * the type of meta-analysis being run, typically either cbma or ibma, but others may become available in the future.
      * @type {string}
      * @memberof Specification
      */
@@ -498,19 +498,19 @@ export interface Specification {
      */
     'estimator'?: Estimator;
     /**
-     * 
+     * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
      * @type {string}
      * @memberof Specification
      */
     'mask'?: string | null;
     /**
-     * 
+     * underspecified selection of columns to contrast (TODO, make better).
      * @type {string}
      * @memberof Specification
      */
     'contrast'?: string | null;
     /**
-     * 
+     * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
      * @type {string}
      * @memberof Specification
      */
@@ -522,14 +522,14 @@ export interface Specification {
      */
     'corrector'?: Corrector | null;
     /**
-     * 
+     * a boolean column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof Specification
      */
     'filter'?: string | null;
 }
 /**
- * 
+ * The representation of a list of specifications.
  * @export
  * @interface SpecificationList
  */
@@ -554,7 +554,7 @@ export interface SpecificationList {
  */
 export interface SpecificationPostBody {
     /**
-     * 
+     * the type of meta-analysis being run, typically either cbma or ibma, but others may become available in the future.
      * @type {string}
      * @memberof SpecificationPostBody
      */
@@ -566,19 +566,19 @@ export interface SpecificationPostBody {
      */
     'estimator': Estimator;
     /**
-     * 
+     * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
      * @type {string}
      * @memberof SpecificationPostBody
      */
     'mask'?: string | null;
     /**
-     * 
+     * underspecified selection of columns to contrast (TODO, make better).
      * @type {string}
      * @memberof SpecificationPostBody
      */
     'contrast'?: string | null;
     /**
-     * 
+     * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
      * @type {string}
      * @memberof SpecificationPostBody
      */
@@ -590,20 +590,20 @@ export interface SpecificationPostBody {
      */
     'corrector'?: Corrector | null;
     /**
-     * 
+     * a boolean column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof SpecificationPostBody
      */
     'filter'?: string | null;
 }
 /**
- * 
+ * The view of the specification through an endpoint.
  * @export
  * @interface SpecificationReturn
  */
 export interface SpecificationReturn {
     /**
-     * 
+     * the type of meta-analysis being run, typically either cbma or ibma, but others may become available in the future.
      * @type {string}
      * @memberof SpecificationReturn
      */
@@ -615,19 +615,19 @@ export interface SpecificationReturn {
      */
     'estimator'?: Estimator;
     /**
-     * 
+     * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
      * @type {string}
      * @memberof SpecificationReturn
      */
     'mask'?: string | null;
     /**
-     * 
+     * underspecified selection of columns to contrast (TODO, make better).
      * @type {string}
      * @memberof SpecificationReturn
      */
     'contrast'?: string | null;
     /**
-     * 
+     * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
      * @type {string}
      * @memberof SpecificationReturn
      */
@@ -639,31 +639,31 @@ export interface SpecificationReturn {
      */
     'corrector'?: Corrector | null;
     /**
-     * 
+     * a boolean column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof SpecificationReturn
      */
     'filter'?: string | null;
     /**
-     * 
+     * the identifier for the resource.
      * @type {string}
      * @memberof SpecificationReturn
      */
     'id'?: string;
     /**
-     * 
+     * when the resource was last modified.
      * @type {string}
      * @memberof SpecificationReturn
      */
     'updated_at'?: string | null;
     /**
-     * 
+     * When the resource was created.
      * @type {string}
      * @memberof SpecificationReturn
      */
     'created_at'?: string;
     /**
-     * 
+     * Who owns the resource.
      * @type {string}
      * @memberof SpecificationReturn
      */
@@ -676,13 +676,13 @@ export interface SpecificationReturn {
  */
 export interface Studyset {
     /**
-     * 
+     * The id of the studyset on neurostore.
      * @type {string}
      * @memberof Studyset
      */
     'neurostore_id'?: string;
     /**
-     * 
+     * The snapshot of the studyset pending a successful run of the meta-analysis.
      * @type {object}
      * @memberof Studyset
      */
@@ -714,13 +714,13 @@ export interface StudysetList {
  */
 export interface StudysetPostBody {
     /**
-     * 
+     * The id of the studyset on neurostore.
      * @type {string}
      * @memberof StudysetPostBody
      */
     'neurostore_id': string;
     /**
-     * 
+     * The snapshot of the studyset pending a successful run of the meta-analysis.
      * @type {object}
      * @memberof StudysetPostBody
      */
@@ -733,37 +733,37 @@ export interface StudysetPostBody {
  */
 export interface StudysetReturn {
     /**
-     * 
+     * The id of the studyset on neurostore.
      * @type {string}
      * @memberof StudysetReturn
      */
     'neurostore_id'?: string;
     /**
-     * 
+     * The snapshot of the studyset pending a successful run of the meta-analysis.
      * @type {object}
      * @memberof StudysetReturn
      */
     'snapshot'?: object | null;
     /**
-     * 
+     * the identifier for the resource.
      * @type {string}
      * @memberof StudysetReturn
      */
     'id'?: string;
     /**
-     * 
+     * when the resource was last modified.
      * @type {string}
      * @memberof StudysetReturn
      */
     'updated_at'?: string | null;
     /**
-     * 
+     * When the resource was created.
      * @type {string}
      * @memberof StudysetReturn
      */
     'created_at'?: string;
     /**
-     * 
+     * Who owns the resource.
      * @type {string}
      * @memberof StudysetReturn
      */
@@ -814,25 +814,25 @@ export interface UserReturn {
      */
     'external_id'?: string;
     /**
-     * 
+     * the identifier for the resource.
      * @type {string}
      * @memberof UserReturn
      */
     'id'?: string;
     /**
-     * 
+     * when the resource was last modified.
      * @type {string}
      * @memberof UserReturn
      */
     'updated_at'?: string | null;
     /**
-     * 
+     * When the resource was created.
      * @type {string}
      * @memberof UserReturn
      */
     'created_at'?: string;
     /**
-     * 
+     * Who owns the resource.
      * @type {string}
      * @memberof UserReturn
      */
@@ -846,8 +846,8 @@ export interface UserReturn {
 export const AnnotationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * get a list of serialized annotations
-         * @summary Your GET endpoint
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -877,7 +877,7 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * get a single annotation
-         * @summary Your GET endpoint
+         * @summary GET information about an annotation
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -911,7 +911,7 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * update an existing annotation
-         * @summary Update Annotation
+         * @summary Update an Annotation
          * @param {string} id 
          * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
@@ -952,8 +952,8 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * create a new serialized annotation
-         * @summary Create Annotation
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
          * @param {AnnotationPostBody} [annotationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1000,8 +1000,8 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AnnotationApiAxiosParamCreator(configuration)
     return {
         /**
-         * get a list of serialized annotations
-         * @summary Your GET endpoint
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1011,7 +1011,7 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
         },
         /**
          * get a single annotation
-         * @summary Your GET endpoint
+         * @summary GET information about an annotation
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1022,7 +1022,7 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
         },
         /**
          * update an existing annotation
-         * @summary Update Annotation
+         * @summary Update an Annotation
          * @param {string} id 
          * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
@@ -1033,8 +1033,8 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * create a new serialized annotation
-         * @summary Create Annotation
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
          * @param {AnnotationPostBody} [annotationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1054,8 +1054,8 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
     const localVarFp = AnnotationApiFp(configuration)
     return {
         /**
-         * get a list of serialized annotations
-         * @summary Your GET endpoint
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1064,7 +1064,7 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * get a single annotation
-         * @summary Your GET endpoint
+         * @summary GET information about an annotation
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1074,7 +1074,7 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * update an existing annotation
-         * @summary Update Annotation
+         * @summary Update an Annotation
          * @param {string} id 
          * @param {AnnotationUpdate} [annotationUpdate] 
          * @param {*} [options] Override http request option.
@@ -1084,8 +1084,8 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
             return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
         },
         /**
-         * create a new serialized annotation
-         * @summary Create Annotation
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
          * @param {AnnotationPostBody} [annotationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1104,8 +1104,8 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
  */
 export class AnnotationApi extends BaseAPI {
     /**
-     * get a list of serialized annotations
-     * @summary Your GET endpoint
+     * get a list of serialized/referenced annotations
+     * @summary GET a list of annotations
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AnnotationApi
@@ -1116,7 +1116,7 @@ export class AnnotationApi extends BaseAPI {
 
     /**
      * get a single annotation
-     * @summary Your GET endpoint
+     * @summary GET information about an annotation
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1128,7 +1128,7 @@ export class AnnotationApi extends BaseAPI {
 
     /**
      * update an existing annotation
-     * @summary Update Annotation
+     * @summary Update an Annotation
      * @param {string} id 
      * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
@@ -1140,8 +1140,8 @@ export class AnnotationApi extends BaseAPI {
     }
 
     /**
-     * create a new serialized annotation
-     * @summary Create Annotation
+     * create a new serialized/referenced annotation
+     * @summary Create a new Annotation
      * @param {AnnotationPostBody} [annotationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1154,14 +1154,14 @@ export class AnnotationApi extends BaseAPI {
 
 
 /**
- * BundleApi - axios parameter creator
+ * MetaAnalysisApi - axios parameter creator
  * @export
  */
-export const BundleApiAxiosParamCreator = function (configuration?: Configuration) {
+export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * list all runnable meta-analysis, studyset, annotation bundles
-         * @summary Your GET endpoint
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1195,8 +1195,8 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * get a bundle (specification, annotation, and studyset)
-         * @summary Your GET endpoint
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1235,7 +1235,7 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * update an existing meta-analysis (that has not yet been run)
-         * @summary Update Bundle
+         * @summary Update a meta-analysis
          * @param {string} id 
          * @param {MetaAnalysis} [metaAnalysis] 
          * @param {*} [options] Override http request option.
@@ -1277,7 +1277,7 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * create a new specification, studyset, annotation bundle
-         * @summary Create Bundle
+         * @summary Create a new meta-analysis
          * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1313,182 +1313,6 @@ export const BundleApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
-    }
-};
-
-/**
- * BundleApi - functional programming interface
- * @export
- */
-export const BundleApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BundleApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * list all runnable meta-analysis, studyset, annotation bundles
-         * @summary Your GET endpoint
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * get a bundle (specification, annotation, and studyset)
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * update an existing meta-analysis (that has not yet been run)
-         * @summary Update Bundle
-         * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * create a new specification, studyset, annotation bundle
-         * @summary Create Bundle
-         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * BundleApi - factory interface
- * @export
- */
-export const BundleApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BundleApiFp(configuration)
-    return {
-        /**
-         * list all runnable meta-analysis, studyset, annotation bundles
-         * @summary Your GET endpoint
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * get a bundle (specification, annotation, and studyset)
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {boolean} [nested] show nested component instead of id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * update an existing meta-analysis (that has not yet been run)
-         * @summary Update Bundle
-         * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * create a new specification, studyset, annotation bundle
-         * @summary Create Bundle
-         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BundleApi - object-oriented interface
- * @export
- * @class BundleApi
- * @extends {BaseAPI}
- */
-export class BundleApi extends BaseAPI {
-    /**
-     * list all runnable meta-analysis, studyset, annotation bundles
-     * @summary Your GET endpoint
-     * @param {boolean} [nested] show nested component instead of id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BundleApi
-     */
-    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
-        return BundleApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * get a bundle (specification, annotation, and studyset)
-     * @summary Your GET endpoint
-     * @param {string} id 
-     * @param {boolean} [nested] show nested component instead of id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BundleApi
-     */
-    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
-        return BundleApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * update an existing meta-analysis (that has not yet been run)
-     * @summary Update Bundle
-     * @param {string} id 
-     * @param {MetaAnalysis} [metaAnalysis] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BundleApi
-     */
-    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return BundleApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * create a new specification, studyset, annotation bundle
-     * @summary Create Bundle
-     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BundleApi
-     */
-    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
-        return BundleApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * MetaAnalysisApi - axios parameter creator
- * @export
- */
-export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
         /**
          * list of meta-analysis specifications
          * @summary Your GET endpoint
@@ -1643,6 +1467,52 @@ export const MetaAnalysisApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MetaAnalysisApiAxiosParamCreator(configuration)
     return {
         /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * list of meta-analysis specifications
          * @summary Your GET endpoint
          * @param {*} [options] Override http request option.
@@ -1696,6 +1566,48 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
     const localVarFp = MetaAnalysisApiFp(configuration)
     return {
         /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
          * list of meta-analysis specifications
          * @summary Your GET endpoint
          * @param {*} [options] Override http request option.
@@ -1744,6 +1656,56 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
  * @extends {BaseAPI}
  */
 export class MetaAnalysisApi extends BaseAPI {
+    /**
+     * list all runnable specification, studyset, annotation bundles
+     * @summary GET a list of meta-analyses
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a meta-analysis (specification, annotation, and studyset)
+     * @summary GET meta-analysis information
+     * @param {string} id 
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing meta-analysis (that has not yet been run)
+     * @summary Update a meta-analysis
+     * @param {string} id 
+     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new specification, studyset, annotation bundle
+     * @summary Create a new meta-analysis
+     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysisApi
+     */
+    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
+        return MetaAnalysisApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * list of meta-analysis specifications
      * @summary Your GET endpoint
@@ -1800,8 +1762,8 @@ export class MetaAnalysisApi extends BaseAPI {
 export const StudysetApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * get a list of serialized studyset
-         * @summary Your GET endpoint
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1830,8 +1792,8 @@ export const StudysetApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * get a single serialized studyset
-         * @summary Your GET endpoint
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1864,8 +1826,8 @@ export const StudysetApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * update an existing serialized studyset
-         * @summary Update Studyset
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
          * @param {string} id 
          * @param {Studyset} [studyset] 
          * @param {*} [options] Override http request option.
@@ -1906,8 +1868,8 @@ export const StudysetApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * create a new serialized studyset
-         * @summary Create Studyset
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
          * @param {StudysetPostBody} [studysetPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1954,8 +1916,8 @@ export const StudysetApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = StudysetApiAxiosParamCreator(configuration)
     return {
         /**
-         * get a list of serialized studyset
-         * @summary Your GET endpoint
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1964,8 +1926,8 @@ export const StudysetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * get a single serialized studyset
-         * @summary Your GET endpoint
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1975,8 +1937,8 @@ export const StudysetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * update an existing serialized studyset
-         * @summary Update Studyset
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
          * @param {string} id 
          * @param {Studyset} [studyset] 
          * @param {*} [options] Override http request option.
@@ -1987,8 +1949,8 @@ export const StudysetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * create a new serialized studyset
-         * @summary Create Studyset
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
          * @param {StudysetPostBody} [studysetPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2008,8 +1970,8 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = StudysetApiFp(configuration)
     return {
         /**
-         * get a list of serialized studyset
-         * @summary Your GET endpoint
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2017,8 +1979,8 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
         },
         /**
-         * get a single serialized studyset
-         * @summary Your GET endpoint
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2027,8 +1989,8 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * update an existing serialized studyset
-         * @summary Update Studyset
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
          * @param {string} id 
          * @param {Studyset} [studyset] 
          * @param {*} [options] Override http request option.
@@ -2038,8 +2000,8 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
         },
         /**
-         * create a new serialized studyset
-         * @summary Create Studyset
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
          * @param {StudysetPostBody} [studysetPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2058,8 +2020,8 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
  */
 export class StudysetApi extends BaseAPI {
     /**
-     * get a list of serialized studyset
-     * @summary Your GET endpoint
+     * get a list of serialized/referenced studysets
+     * @summary Get a list of Studysets
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StudysetApi
@@ -2069,8 +2031,8 @@ export class StudysetApi extends BaseAPI {
     }
 
     /**
-     * get a single serialized studyset
-     * @summary Your GET endpoint
+     * get a single serialized/referenced studyset
+     * @summary Get information about a Studyset
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2081,8 +2043,8 @@ export class StudysetApi extends BaseAPI {
     }
 
     /**
-     * update an existing serialized studyset
-     * @summary Update Studyset
+     * update an existing serialized/referenced studyset
+     * @summary Update a Studyset
      * @param {string} id 
      * @param {Studyset} [studyset] 
      * @param {*} [options] Override http request option.
@@ -2094,8 +2056,8 @@ export class StudysetApi extends BaseAPI {
     }
 
     /**
-     * create a new serialized studyset
-     * @summary Create Studyset
+     * create a new serialized/referenced studyset
+     * @summary Create a new Studyset
      * @param {StudysetPostBody} [studysetPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2115,6 +2077,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * List all users
+         * @summary GET list of Users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2268,6 +2231,7 @@ export const UserApiFp = function(configuration?: Configuration) {
     return {
         /**
          * List all users
+         * @summary GET list of Users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2321,6 +2285,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * List all users
+         * @summary GET list of Users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2370,6 +2335,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
 export class UserApi extends BaseAPI {
     /**
      * List all users
+     * @summary GET list of Users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
