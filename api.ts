@@ -1491,7 +1491,7 @@ export const SpecificationApiAxiosParamCreator = function (configuration?: Confi
     return {
         /**
          * list of meta-analysis specifications
-         * @summary Your GET endpoint
+         * @summary Get a list of Specifications
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1521,7 +1521,7 @@ export const SpecificationApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * get a meta-analysis specification
-         * @summary Your GET endpoint
+         * @summary Get information about a Specification
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1597,6 +1597,7 @@ export const SpecificationApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * create a new meta-analysis specification
+         * @summary Create a Specification
          * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1644,7 +1645,7 @@ export const SpecificationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * list of meta-analysis specifications
-         * @summary Your GET endpoint
+         * @summary Get a list of Specifications
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1654,7 +1655,7 @@ export const SpecificationApiFp = function(configuration?: Configuration) {
         },
         /**
          * get a meta-analysis specification
-         * @summary Your GET endpoint
+         * @summary Get information about a Specification
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1677,6 +1678,7 @@ export const SpecificationApiFp = function(configuration?: Configuration) {
         },
         /**
          * create a new meta-analysis specification
+         * @summary Create a Specification
          * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1697,7 +1699,7 @@ export const SpecificationApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * list of meta-analysis specifications
-         * @summary Your GET endpoint
+         * @summary Get a list of Specifications
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1706,7 +1708,7 @@ export const SpecificationApiFactory = function (configuration?: Configuration, 
         },
         /**
          * get a meta-analysis specification
-         * @summary Your GET endpoint
+         * @summary Get information about a Specification
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1727,6 +1729,7 @@ export const SpecificationApiFactory = function (configuration?: Configuration, 
         },
         /**
          * create a new meta-analysis specification
+         * @summary Create a Specification
          * @param {SpecificationPostBody} [specificationPostBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1746,7 +1749,7 @@ export const SpecificationApiFactory = function (configuration?: Configuration, 
 export class SpecificationApi extends BaseAPI {
     /**
      * list of meta-analysis specifications
-     * @summary Your GET endpoint
+     * @summary Get a list of Specifications
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SpecificationApi
@@ -1757,7 +1760,7 @@ export class SpecificationApi extends BaseAPI {
 
     /**
      * get a meta-analysis specification
-     * @summary Your GET endpoint
+     * @summary Get information about a Specification
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1782,6 +1785,7 @@ export class SpecificationApi extends BaseAPI {
 
     /**
      * create a new meta-analysis specification
+     * @summary Create a Specification
      * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
