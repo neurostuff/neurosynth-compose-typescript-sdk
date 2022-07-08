@@ -306,6 +306,12 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'internal_annotation_id'?: string;
+    /**
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<string>}
+     * @memberof MetaAnalysis
+     */
+    'results'?: Array<string>;
 }
 /**
  * 
@@ -374,6 +380,12 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'internal_annotation_id': string;
+    /**
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<string>}
+     * @memberof MetaAnalysisPostBody
+     */
+    'results'?: Array<string>;
 }
 /**
  * 
@@ -423,6 +435,12 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'internal_annotation_id'?: string;
+    /**
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<string>}
+     * @memberof MetaAnalysisReturn
+     */
+    'results'?: Array<string>;
     /**
      * the identifier for the resource.
      * @type {string}
