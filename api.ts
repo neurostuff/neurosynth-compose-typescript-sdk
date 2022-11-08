@@ -265,19 +265,19 @@ export interface InlineResponse400 {
  */
 export interface MetaAnalysis {
     /**
-     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
+     * 
      * @type {string | Specification}
      * @memberof MetaAnalysis
      */
     'specification'?: string | Specification;
     /**
-     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
+     * 
      * @type {string | Studyset}
      * @memberof MetaAnalysis
      */
     'studyset'?: string | Studyset;
     /**
-     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
+     * 
      * @type {string | Annotation}
      * @memberof MetaAnalysis
      */
@@ -306,6 +306,12 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'internal_annotation_id'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysis
+     */
+    'provenance'?: object | null;
 }
 /**
  * 
@@ -333,19 +339,19 @@ export interface MetaAnalysisList {
  */
 export interface MetaAnalysisPostBody {
     /**
-     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
+     * 
      * @type {string | Specification}
      * @memberof MetaAnalysisPostBody
      */
     'specification': string | Specification;
     /**
-     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
+     * 
      * @type {string | Studyset}
      * @memberof MetaAnalysisPostBody
      */
     'studyset'?: string | Studyset;
     /**
-     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
+     * 
      * @type {string | Annotation}
      * @memberof MetaAnalysisPostBody
      */
@@ -374,6 +380,12 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'internal_annotation_id': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysisPostBody
+     */
+    'provenance'?: object | null;
 }
 /**
  * 
@@ -382,19 +394,19 @@ export interface MetaAnalysisPostBody {
  */
 export interface MetaAnalysisReturn {
     /**
-     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
+     * 
      * @type {string | Specification}
      * @memberof MetaAnalysisReturn
      */
     'specification'?: string | Specification;
     /**
-     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
+     * 
      * @type {string | Studyset}
      * @memberof MetaAnalysisReturn
      */
     'studyset'?: string | Studyset;
     /**
-     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
+     * 
      * @type {string | Annotation}
      * @memberof MetaAnalysisReturn
      */
@@ -423,6 +435,12 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'internal_annotation_id'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysisReturn
+     */
+    'provenance'?: object | null;
     /**
      * the identifier for the resource.
      * @type {string}
