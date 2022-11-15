@@ -1816,17 +1816,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {string} [collectionId] 
-         * @param {string} [path] 
-         * @param {string} [exception] 
-         * @param {string} [traceback] 
-         * @param {string} [status] 
-         * @param {string} [file] 
-         * @param {string} [imageId] 
+         * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesPost: async (collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultFilesPost: async (neurovaultFile?: NeurovaultFile, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/neurovault-files`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1838,48 +1832,19 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
-            if (collectionId !== undefined) { 
-                localVarFormParams.append('collection_id', collectionId as any);
-            }
     
-            if (path !== undefined) { 
-                localVarFormParams.append('path', path as any);
-            }
-    
-            if (exception !== undefined) { 
-                localVarFormParams.append('exception', exception as any);
-            }
-    
-            if (traceback !== undefined) { 
-                localVarFormParams.append('traceback', traceback as any);
-            }
-    
-            if (status !== undefined) { 
-                localVarFormParams.append('status', status as any);
-            }
-    
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
-            if (imageId !== undefined) { 
-                localVarFormParams.append('image_id', imageId as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(neurovaultFile, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2119,18 +2084,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} [collectionId] 
-         * @param {string} [path] 
-         * @param {string} [exception] 
-         * @param {string} [traceback] 
-         * @param {string} [status] 
-         * @param {string} [file] 
-         * @param {string} [imageId] 
+         * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultFilesPost(collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesPost(collectionId, path, exception, traceback, status, file, imageId, options);
+        async neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesPost(neurovaultFile, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2259,18 +2218,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {string} [collectionId] 
-         * @param {string} [path] 
-         * @param {string} [exception] 
-         * @param {string} [traceback] 
-         * @param {string} [status] 
-         * @param {string} [file] 
-         * @param {string} [imageId] 
+         * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesPost(collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesPost(collectionId, path, exception, traceback, status, file, imageId, options).then((request) => request(axios, basePath));
+        neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesPost(neurovaultFile, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2408,19 +2361,13 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} [collectionId] 
-     * @param {string} [path] 
-     * @param {string} [exception] 
-     * @param {string} [traceback] 
-     * @param {string} [status] 
-     * @param {string} [file] 
-     * @param {string} [imageId] 
+     * @param {NeurovaultFile} [neurovaultFile] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public neurovaultFilesPost(collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultFilesPost(collectionId, path, exception, traceback, status, file, imageId, options).then((request) => request(this.axios, this.basePath));
+    public neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurovaultFilesPost(neurovaultFile, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
