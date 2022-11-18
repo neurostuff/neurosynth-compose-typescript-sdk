@@ -495,7 +495,7 @@ export interface Project {
      * @type {object}
      * @memberof Project
      */
-    'provenance'?: object;
+    'provenance'?: object | null;
     /**
      * 
      * @type {Array<MetaAnalysis | string>}
@@ -569,7 +569,7 @@ export interface ProjectReturn {
      * @type {object}
      * @memberof ProjectReturn
      */
-    'provenance'?: object;
+    'provenance'?: object | null;
     /**
      * 
      * @type {Array<MetaAnalysis | string>}
