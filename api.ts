@@ -507,13 +507,13 @@ export interface Project {
      * @type {string}
      * @memberof Project
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Project
      */
-    'description'?: string;
+    'description'?: string | null;
 }
 /**
  * 
@@ -581,13 +581,13 @@ export interface ProjectReturn {
      * @type {string}
      * @memberof ProjectReturn
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ProjectReturn
      */
-    'description'?: string;
+    'description'?: string | null;
 }
 /**
  * 
