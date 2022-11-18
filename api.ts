@@ -484,6 +484,18 @@ export interface Project {
      * @memberof Project
      */
     'meta_analyses'?: Array<MetaAnalysis | string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Project
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Project
+     */
+    'description'?: string;
 }
 /**
  * 
@@ -546,6 +558,18 @@ export interface ProjectReturn {
      * @memberof ProjectReturn
      */
     'meta_analyses'?: Array<MetaAnalysis | string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'description'?: string;
 }
 /**
  * 
