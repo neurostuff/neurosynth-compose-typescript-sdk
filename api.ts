@@ -312,6 +312,12 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'project'?: string;
 }
 /**
  * 
@@ -386,6 +392,12 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'project'?: string;
 }
 /**
  * 
@@ -441,6 +453,12 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'project'?: string;
     /**
      * the identifier for the resource.
      * @type {string}
