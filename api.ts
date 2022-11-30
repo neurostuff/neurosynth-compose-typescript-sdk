@@ -582,6 +582,42 @@ export interface NeurovaultFile {
      * @memberof NeurovaultFile
      */
     'image_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFile
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFile
+     */
+    'map_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFile
+     */
+    'cognitive_contrast_cogatlas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFile
+     */
+    'cognitive_contrast_cogatlas_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFile
+     */
+    'cognitive_paradigm_cogatlas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFile
+     */
+    'cognitive_paradigm_cogatlas_id'?: string;
 }
 /**
  * 
@@ -644,6 +680,42 @@ export interface NeurovaultFileReturn {
      * @memberof NeurovaultFileReturn
      */
     'image_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'map_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'cognitive_contrast_cogatlas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'cognitive_contrast_cogatlas_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'cognitive_paradigm_cogatlas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'cognitive_paradigm_cogatlas_id'?: string;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -1878,10 +1950,16 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [status] 
          * @param {string} [file] 
          * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('neurovaultFilesIdPut', 'id', id)
             const localVarPath = `/neurovault-files/{id}`
@@ -1925,6 +2003,30 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     
             if (imageId !== undefined) { 
                 localVarFormParams.append('image_id', imageId as any);
+            }
+    
+            if (name !== undefined) { 
+                localVarFormParams.append('name', name as any);
+            }
+    
+            if (mapType !== undefined) { 
+                localVarFormParams.append('map_type', mapType as any);
+            }
+    
+            if (cognitiveContrastCogatlas !== undefined) { 
+                localVarFormParams.append('cognitive_contrast_cogatlas', cognitiveContrastCogatlas as any);
+            }
+    
+            if (cognitiveContrastCogatlasId !== undefined) { 
+                localVarFormParams.append('cognitive_contrast_cogatlas_id', cognitiveContrastCogatlasId as any);
+            }
+    
+            if (cognitiveParadigmCogatlas !== undefined) { 
+                localVarFormParams.append('cognitive_paradigm_cogatlas', cognitiveParadigmCogatlas as any);
+            }
+    
+            if (cognitiveParadigmCogatlasId !== undefined) { 
+                localVarFormParams.append('cognitive_paradigm_cogatlas_id', cognitiveParadigmCogatlasId as any);
             }
     
     
@@ -2100,11 +2202,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {string} [status] 
          * @param {string} [file] 
          * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, options);
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2230,11 +2338,17 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [status] 
          * @param {string} [file] 
          * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, options).then((request) => request(axios, basePath));
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2378,12 +2492,18 @@ export class DefaultApi extends BaseAPI {
      * @param {string} [status] 
      * @param {string} [file] 
      * @param {string} [imageId] 
+     * @param {string} [name] 
+     * @param {string} [mapType] 
+     * @param {string} [cognitiveContrastCogatlas] 
+     * @param {string} [cognitiveContrastCogatlasId] 
+     * @param {string} [cognitiveParadigmCogatlas] 
+     * @param {string} [cognitiveParadigmCogatlasId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, options).then((request) => request(this.axios, this.basePath));
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
