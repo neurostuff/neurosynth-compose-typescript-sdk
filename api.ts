@@ -265,19 +265,19 @@ export interface InlineResponse400 {
  */
 export interface MetaAnalysis {
     /**
-     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
+     * 
      * @type {string | Specification}
      * @memberof MetaAnalysis
      */
     'specification'?: string | Specification;
     /**
-     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
+     * 
      * @type {string | Studyset}
      * @memberof MetaAnalysis
      */
     'studyset'?: string | Studyset;
     /**
-     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
+     * 
      * @type {string | Annotation}
      * @memberof MetaAnalysis
      */
@@ -308,10 +308,10 @@ export interface MetaAnalysis {
     'internal_annotation_id'?: string;
     /**
      * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<string>}
+     * @type {Array<string | ResultReturn>}
      * @memberof MetaAnalysis
      */
-    'results'?: Array<string>;
+    'results'?: Array<string | ResultReturn>;
 }
 /**
  * 
@@ -339,19 +339,19 @@ export interface MetaAnalysisList {
  */
 export interface MetaAnalysisPostBody {
     /**
-     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
+     * 
      * @type {string | Specification}
      * @memberof MetaAnalysisPostBody
      */
     'specification': string | Specification;
     /**
-     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
+     * 
      * @type {string | Studyset}
      * @memberof MetaAnalysisPostBody
      */
     'studyset'?: string | Studyset;
     /**
-     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
+     * 
      * @type {string | Annotation}
      * @memberof MetaAnalysisPostBody
      */
@@ -382,10 +382,10 @@ export interface MetaAnalysisPostBody {
     'internal_annotation_id': string;
     /**
      * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<string>}
+     * @type {Array<string | ResultReturn>}
      * @memberof MetaAnalysisPostBody
      */
-    'results'?: Array<string>;
+    'results'?: Array<string | ResultReturn>;
 }
 /**
  * 
@@ -394,19 +394,19 @@ export interface MetaAnalysisPostBody {
  */
 export interface MetaAnalysisReturn {
     /**
-     * Either a string representation of the id of the specification (nested=False) or a JSON representation of the specification itself (nested=True).
+     * 
      * @type {string | Specification}
      * @memberof MetaAnalysisReturn
      */
     'specification'?: string | Specification;
     /**
-     * Either a string representation of the id of the studyset (nested=False) or a JSON representation of the studyset itself (nested=True).
+     * 
      * @type {string | Studyset}
      * @memberof MetaAnalysisReturn
      */
     'studyset'?: string | Studyset;
     /**
-     * Either a string representation of the id of the annotation (nested=False) or a JSON representation of the annotation itself (nested=True).
+     * 
      * @type {string | Annotation}
      * @memberof MetaAnalysisReturn
      */
@@ -437,10 +437,10 @@ export interface MetaAnalysisReturn {
     'internal_annotation_id'?: string;
     /**
      * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<string>}
+     * @type {Array<string | ResultReturn>}
      * @memberof MetaAnalysisReturn
      */
-    'results'?: Array<string>;
+    'results'?: Array<string | ResultReturn>;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -788,10 +788,10 @@ export interface Result {
 export interface ResultList {
     /**
      * 
-     * @type {ResultReturn}
+     * @type {Array<string | ResultReturn>}
      * @memberof ResultList
      */
-    'results'?: ResultReturn;
+    'results'?: Array<string | ResultReturn>;
     /**
      * 
      * @type {object}
