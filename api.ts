@@ -480,22 +480,16 @@ export interface NeurovaultCollection {
     'collection_id'?: string;
     /**
      * 
+     * @type {Array<string | NeurovaultFile>}
+     * @memberof NeurovaultCollection
+     */
+    'files'?: Array<string | NeurovaultFile>;
+    /**
+     * 
      * @type {string}
      * @memberof NeurovaultCollection
      */
-    'meta_analysis_id'?: string;
-    /**
-     * 
-     * @type {Array<NeurovaultFile>}
-     * @memberof NeurovaultCollection
-     */
-    'files'?: Array<NeurovaultFile>;
-    /**
-     * 
-     * @type {string | Result}
-     * @memberof NeurovaultCollection
-     */
-    'result'?: string | Result;
+    'result'?: string;
 }
 /**
  * 
@@ -511,22 +505,16 @@ export interface NeurovaultCollectionReturn {
     'collection_id'?: string;
     /**
      * 
+     * @type {Array<string | NeurovaultFile>}
+     * @memberof NeurovaultCollectionReturn
+     */
+    'files'?: Array<string | NeurovaultFile>;
+    /**
+     * 
      * @type {string}
      * @memberof NeurovaultCollectionReturn
      */
-    'meta_analysis_id'?: string;
-    /**
-     * 
-     * @type {Array<NeurovaultFile>}
-     * @memberof NeurovaultCollectionReturn
-     */
-    'files'?: Array<NeurovaultFile>;
-    /**
-     * 
-     * @type {string | Result}
-     * @memberof NeurovaultCollectionReturn
-     */
-    'result'?: string | Result;
+    'result'?: string;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -564,12 +552,6 @@ export interface NeurovaultFile {
      * @memberof NeurovaultFile
      */
     'collection_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
-    'path'?: string;
     /**
      * 
      * @type {string}
@@ -632,12 +614,6 @@ export interface NeurovaultFileReturn {
      * @memberof NeurovaultFileReturn
      */
     'collection_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
-    'path'?: string;
     /**
      * 
      * @type {string}
@@ -1885,7 +1861,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @param {string} id 
          * @param {string} [collectionId] 
-         * @param {string} [path] 
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
@@ -1894,7 +1869,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut: async (id: string, collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('neurovaultFilesIdPut', 'id', id)
             const localVarPath = `/neurovault-files/{id}`
@@ -1918,10 +1893,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
             if (collectionId !== undefined) { 
                 localVarFormParams.append('collection_id', collectionId as any);
-            }
-    
-            if (path !== undefined) { 
-                localVarFormParams.append('path', path as any);
             }
     
             if (exception !== undefined) { 
@@ -2112,7 +2083,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} id 
          * @param {string} [collectionId] 
-         * @param {string} [path] 
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
@@ -2121,8 +2091,8 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultFilesIdPut(id: string, collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, path, exception, traceback, status, file, imageId, options);
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2243,7 +2213,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * 
          * @param {string} id 
          * @param {string} [collectionId] 
-         * @param {string} [path] 
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
@@ -2252,8 +2221,8 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut(id: string, collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesIdPut(id, collectionId, path, exception, traceback, status, file, imageId, options).then((request) => request(axios, basePath));
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2392,7 +2361,6 @@ export class DefaultApi extends BaseAPI {
      * 
      * @param {string} id 
      * @param {string} [collectionId] 
-     * @param {string} [path] 
      * @param {string} [exception] 
      * @param {string} [traceback] 
      * @param {string} [status] 
@@ -2402,8 +2370,8 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public neurovaultFilesIdPut(id: string, collectionId?: string, path?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, path, exception, traceback, status, file, imageId, options).then((request) => request(this.axios, this.basePath));
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
