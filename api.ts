@@ -745,16 +745,22 @@ export interface Result {
     'cli_version'?: string;
     /**
      * 
+     * @type {Estimator}
+     * @memberof Result
+     */
+    'estimator'?: Estimator;
+    /**
+     * 
      * @type {string}
      * @memberof Result
      */
-    'estimator'?: string;
+    'neurostore_id'?: string;
     /**
      * 
-     * @type {number | NeurovaultCollection}
+     * @type {NeurovaultCollection}
      * @memberof Result
      */
-    'neurovault_collection_id'?: number | NeurovaultCollection;
+    'neurovault_collection'?: NeurovaultCollection;
 }
 /**
  * 
@@ -801,16 +807,22 @@ export interface ResultReturn {
     'cli_version'?: string;
     /**
      * 
+     * @type {Estimator}
+     * @memberof ResultReturn
+     */
+    'estimator'?: Estimator;
+    /**
+     * 
      * @type {string}
      * @memberof ResultReturn
      */
-    'estimator'?: string;
+    'neurostore_id'?: string;
     /**
      * 
-     * @type {number | NeurovaultCollection}
+     * @type {NeurovaultCollection}
      * @memberof ResultReturn
      */
-    'neurovault_collection_id'?: number | NeurovaultCollection;
+    'neurovault_collection'?: NeurovaultCollection;
     /**
      * the identifier for the resource.
      * @type {string}
