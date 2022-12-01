@@ -581,7 +581,7 @@ export interface NeurovaultFile {
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'image_id'?: string;
+    'image_id'?: string | null;
     /**
      * 
      * @type {string}
@@ -679,7 +679,7 @@ export interface NeurovaultFileReturn {
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'image_id'?: string;
+    'image_id'?: string | null;
     /**
      * 
      * @type {string}
