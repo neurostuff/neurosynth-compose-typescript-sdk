@@ -557,13 +557,13 @@ export interface NeurovaultFile {
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'exception'?: string;
+    'exception'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'traceback'?: string;
+    'traceback'?: string | null;
     /**
      * 
      * @type {string}
@@ -587,37 +587,37 @@ export interface NeurovaultFile {
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'map_type'?: string;
+    'map_type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'cognitive_contrast_cogatlas'?: string;
+    'cognitive_contrast_cogatlas'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'cognitive_contrast_cogatlas_id'?: string;
+    'cognitive_contrast_cogatlas_id'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'cognitive_paradigm_cogatlas'?: string;
+    'cognitive_paradigm_cogatlas'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'cognitive_paradigm_cogatlas_id'?: string;
+    'cognitive_paradigm_cogatlas_id'?: string | null;
 }
 /**
  * 
@@ -655,13 +655,13 @@ export interface NeurovaultFileReturn {
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'exception'?: string;
+    'exception'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'traceback'?: string;
+    'traceback'?: string | null;
     /**
      * 
      * @type {string}
@@ -685,37 +685,37 @@ export interface NeurovaultFileReturn {
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'map_type'?: string;
+    'map_type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'cognitive_contrast_cogatlas'?: string;
+    'cognitive_contrast_cogatlas'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'cognitive_contrast_cogatlas_id'?: string;
+    'cognitive_contrast_cogatlas_id'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'cognitive_paradigm_cogatlas'?: string;
+    'cognitive_paradigm_cogatlas'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'cognitive_paradigm_cogatlas_id'?: string;
+    'cognitive_paradigm_cogatlas_id'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -814,7 +814,7 @@ export interface Result {
      * @type {string}
      * @memberof Result
      */
-    'cli_version'?: string;
+    'cli_version'?: string | null;
     /**
      * 
      * @type {Estimator}
@@ -826,7 +826,7 @@ export interface Result {
      * @type {string}
      * @memberof Result
      */
-    'neurostore_id'?: string;
+    'neurostore_id'?: string | null;
     /**
      * 
      * @type {NeurovaultCollection}
@@ -876,7 +876,7 @@ export interface ResultReturn {
      * @type {string}
      * @memberof ResultReturn
      */
-    'cli_version'?: string;
+    'cli_version'?: string | null;
     /**
      * 
      * @type {Estimator}
@@ -888,7 +888,7 @@ export interface ResultReturn {
      * @type {string}
      * @memberof ResultReturn
      */
-    'neurostore_id'?: string;
+    'neurostore_id'?: string | null;
     /**
      * 
      * @type {NeurovaultCollection}
