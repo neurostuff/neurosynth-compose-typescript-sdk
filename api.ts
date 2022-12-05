@@ -763,6 +763,111 @@ export interface NeurovaultList {
 /**
  * 
  * @export
+ * @interface Project
+ */
+export interface Project {
+    /**
+     * 
+     * @type {object}
+     * @memberof Project
+     */
+    'provenance'?: object | null;
+    /**
+     * 
+     * @type {Array<MetaAnalysis | string>}
+     * @memberof Project
+     */
+    'meta_analyses'?: Array<MetaAnalysis | string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Project
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Project
+     */
+    'description'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectList
+ */
+export interface ProjectList {
+    /**
+     * 
+     * @type {Array<ProjectReturn>}
+     * @memberof ProjectList
+     */
+    'results'?: Array<ProjectReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof ProjectList
+     */
+    'metadata'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectReturn
+ */
+export interface ProjectReturn {
+    /**
+     * the identifier for the resource.
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'id'?: string;
+    /**
+     * when the resource was last modified.
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'updated_at'?: string | null;
+    /**
+     * When the resource was created.
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'created_at'?: string;
+    /**
+     * Who owns the resource.
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'user'?: string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof ProjectReturn
+     */
+    'provenance'?: object | null;
+    /**
+     * 
+     * @type {Array<MetaAnalysis | string>}
+     * @memberof ProjectReturn
+     */
+    'meta_analyses'?: Array<MetaAnalysis | string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'description'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface ReadOnly
  */
 export interface ReadOnly {
@@ -2079,6 +2184,148 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdGet', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdPut: async (id: string, project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdPut', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsPost: async (project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -2225,6 +2472,48 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesPost(neurovaultFile, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsPost(project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(project, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -2358,6 +2647,44 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: any): AxiosPromise<NeurovaultFileReturn> {
             return localVarFp.neurovaultFilesPost(neurovaultFile, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet(options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsPost(project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2515,6 +2842,52 @@ export class DefaultApi extends BaseAPI {
      */
     public neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).neurovaultFilesPost(neurovaultFile, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public projectsGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {Project} [project] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Project} [project] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public projectsPost(project?: Project, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
