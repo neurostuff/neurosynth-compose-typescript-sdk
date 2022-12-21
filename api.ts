@@ -317,7 +317,7 @@ export interface MetaAnalysis {
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'project'?: string;
+    'project'?: string | null;
 }
 /**
  * 
@@ -397,7 +397,7 @@ export interface MetaAnalysisPostBody {
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
-    'project'?: string;
+    'project'?: string | null;
 }
 /**
  * 
@@ -458,7 +458,7 @@ export interface MetaAnalysisReturn {
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'project'?: string;
+    'project'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
