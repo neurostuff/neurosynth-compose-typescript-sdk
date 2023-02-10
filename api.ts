@@ -312,6 +312,18 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'results'?: Array<string | ResultReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysis
+     */
+    'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'project'?: string | null;
 }
 /**
  * 
@@ -386,6 +398,18 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'results'?: Array<string | ResultReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysisPostBody
+     */
+    'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'project'?: string | null;
 }
 /**
  * 
@@ -441,6 +465,18 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'results'?: Array<string | ResultReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysisReturn
+     */
+    'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'project'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
