@@ -1422,10 +1422,10 @@ export interface UserReturn {
 }
 
 /**
- * AnnotationApi - axios parameter creator
+ * AnnotationsApi - axios parameter creator
  * @export
  */
-export const AnnotationApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AnnotationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * get a list of serialized/referenced annotations
@@ -1575,11 +1575,11 @@ export const AnnotationApiAxiosParamCreator = function (configuration?: Configur
 };
 
 /**
- * AnnotationApi - functional programming interface
+ * AnnotationsApi - functional programming interface
  * @export
  */
-export const AnnotationApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = AnnotationApiAxiosParamCreator(configuration)
+export const AnnotationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AnnotationsApiAxiosParamCreator(configuration)
     return {
         /**
          * get a list of serialized/referenced annotations
@@ -1629,11 +1629,11 @@ export const AnnotationApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * AnnotationApi - factory interface
+ * AnnotationsApi - factory interface
  * @export
  */
-export const AnnotationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AnnotationApiFp(configuration)
+export const AnnotationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AnnotationsApiFp(configuration)
     return {
         /**
          * get a list of serialized/referenced annotations
@@ -1679,21 +1679,21 @@ export const AnnotationApiFactory = function (configuration?: Configuration, bas
 };
 
 /**
- * AnnotationApi - object-oriented interface
+ * AnnotationsApi - object-oriented interface
  * @export
- * @class AnnotationApi
+ * @class AnnotationsApi
  * @extends {BaseAPI}
  */
-export class AnnotationApi extends BaseAPI {
+export class AnnotationsApi extends BaseAPI {
     /**
      * get a list of serialized/referenced annotations
      * @summary GET a list of annotations
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationApi
+     * @memberof AnnotationsApi
      */
     public annotationsGet(options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
+        return AnnotationsApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1702,10 +1702,10 @@ export class AnnotationApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationApi
+     * @memberof AnnotationsApi
      */
     public annotationsIdGet(id: string, options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+        return AnnotationsApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1715,10 +1715,10 @@ export class AnnotationApi extends BaseAPI {
      * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationApi
+     * @memberof AnnotationsApi
      */
     public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
+        return AnnotationsApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1727,10 +1727,10 @@ export class AnnotationApi extends BaseAPI {
      * @param {AnnotationPostBody} [annotationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationApi
+     * @memberof AnnotationsApi
      */
     public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig) {
-        return AnnotationApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
+        return AnnotationsApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1741,75 +1741,6 @@ export class AnnotationApi extends BaseAPI {
  */
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysisResultsGet: async (metaAnalysisId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/meta-analysis-results`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (metaAnalysisId !== undefined) {
-                localVarQueryParameter['meta_analysis_id'] = metaAnalysisId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysisResultsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('metaAnalysisResultsIdGet', 'id', id)
-            const localVarPath = `/meta-analysis-results/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @param {string} id 
@@ -1886,70 +1817,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultCollectionsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/neurovault-collections`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultCollectionsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('neurovaultCollectionsIdGet', 'id', id)
-            const localVarPath = `/neurovault-collections/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2006,70 +1873,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultFilesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/neurovault-files`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultFilesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('neurovaultFilesIdGet', 'id', id)
-            const localVarPath = `/neurovault-files/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
 
     
@@ -2222,70 +2025,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/projects`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('projectsIdGet', 'id', id)
-            const localVarPath = `/projects/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -2374,28 +2113,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsGet(metaAnalysisId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdGet(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -2417,27 +2134,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async neurovaultCollectionsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultCollectionReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsIdGet(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2453,27 +2149,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async neurovaultCollectionsPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async neurovaultFilesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdGet(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2510,27 +2185,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -2562,26 +2216,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
-            return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -2601,25 +2235,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultCollectionsGet(options?: any): AxiosPromise<void> {
-            return localVarFp.neurovaultCollectionsGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultCollectionsIdGet(id: string, options?: any): AxiosPromise<NeurovaultCollectionReturn> {
-            return localVarFp.neurovaultCollectionsIdGet(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2634,25 +2249,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         neurovaultCollectionsPost(options?: any): AxiosPromise<void> {
             return localVarFp.neurovaultCollectionsPost(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultFilesGet(options?: any): AxiosPromise<NeurovaultFileList> {
-            return localVarFp.neurovaultFilesGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        neurovaultFilesIdGet(id: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2686,25 +2282,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Your GET endpoint
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectsGet(options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Your GET endpoint
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -2734,30 +2311,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 export class DefaultApi extends BaseAPI {
     /**
      * 
-     * @summary Your GET endpoint
-     * @param {string} [metaAnalysisId] search for results with this meta-analysis id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Your GET endpoint
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {string} id 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
@@ -2781,29 +2334,6 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary Your GET endpoint
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public neurovaultCollectionsGet(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultCollectionsGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Your GET endpoint
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultCollectionsIdGet(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2821,29 +2351,6 @@ export class DefaultApi extends BaseAPI {
      */
     public neurovaultCollectionsPost(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).neurovaultCollectionsPost(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Your GET endpoint
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public neurovaultFilesGet(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultFilesGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Your GET endpoint
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).neurovaultFilesIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2882,29 +2389,6 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary Your GET endpoint
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public projectsGet(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Your GET endpoint
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {string} id 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
@@ -2929,10 +2413,10 @@ export class DefaultApi extends BaseAPI {
 
 
 /**
- * MetaAnalysisApi - axios parameter creator
+ * MetaAnalysesApi - axios parameter creator
  * @export
  */
-export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Configuration) {
+export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * list all runnable specification, studyset, annotation bundles
@@ -3088,15 +2572,84 @@ export const MetaAnalysisApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsGet: async (metaAnalysisId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (metaAnalysisId !== undefined) {
+                localVarQueryParameter['meta_analysis_id'] = metaAnalysisId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysisResultsIdGet', 'id', id)
+            const localVarPath = `/meta-analysis-results/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
 /**
- * MetaAnalysisApi - functional programming interface
+ * MetaAnalysesApi - functional programming interface
  * @export
  */
-export const MetaAnalysisApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = MetaAnalysisApiAxiosParamCreator(configuration)
+export const MetaAnalysesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MetaAnalysesApiAxiosParamCreator(configuration)
     return {
         /**
          * list all runnable specification, studyset, annotation bundles
@@ -3144,15 +2697,37 @@ export const MetaAnalysisApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsGet(metaAnalysisId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
 /**
- * MetaAnalysisApi - factory interface
+ * MetaAnalysesApi - factory interface
  * @export
  */
-export const MetaAnalysisApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = MetaAnalysisApiFp(configuration)
+export const MetaAnalysesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MetaAnalysesApiFp(configuration)
     return {
         /**
          * list all runnable specification, studyset, annotation bundles
@@ -3196,26 +2771,46 @@ export const MetaAnalysisApiFactory = function (configuration?: Configuration, b
         metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
+            return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
 /**
- * MetaAnalysisApi - object-oriented interface
+ * MetaAnalysesApi - object-oriented interface
  * @export
- * @class MetaAnalysisApi
+ * @class MetaAnalysesApi
  * @extends {BaseAPI}
  */
-export class MetaAnalysisApi extends BaseAPI {
+export class MetaAnalysesApi extends BaseAPI {
     /**
      * list all runnable specification, studyset, annotation bundles
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof MetaAnalysesApi
      */
     public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3225,10 +2820,10 @@ export class MetaAnalysisApi extends BaseAPI {
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof MetaAnalysesApi
      */
     public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3238,10 +2833,10 @@ export class MetaAnalysisApi extends BaseAPI {
      * @param {MetaAnalysis} [metaAnalysis] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof MetaAnalysesApi
      */
     public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3250,19 +2845,500 @@ export class MetaAnalysisApi extends BaseAPI {
      * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysisApi
+     * @memberof MetaAnalysesApi
      */
     public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
-        return MetaAnalysisApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysesApi
+     */
+    public metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysesApi
+     */
+    public metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
 
 /**
- * SpecificationApi - axios parameter creator
+ * NeurovaultApi - axios parameter creator
  * @export
  */
-export const SpecificationApiAxiosParamCreator = function (configuration?: Configuration) {
+export const NeurovaultApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-collections`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultCollectionsIdGet', 'id', id)
+            const localVarPath = `/neurovault-collections/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-files`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultFilesIdGet', 'id', id)
+            const localVarPath = `/neurovault-files/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * NeurovaultApi - functional programming interface
+ * @export
+ */
+export const NeurovaultApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = NeurovaultApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultCollectionReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * NeurovaultApi - factory interface
+ * @export
+ */
+export const NeurovaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = NeurovaultApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsGet(options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdGet(id: string, options?: any): AxiosPromise<NeurovaultCollectionReturn> {
+            return localVarFp.neurovaultCollectionsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesGet(options?: any): AxiosPromise<NeurovaultFileList> {
+            return localVarFp.neurovaultFilesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdGet(id: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdGet(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * NeurovaultApi - object-oriented interface
+ * @export
+ * @class NeurovaultApi
+ * @extends {BaseAPI}
+ */
+export class NeurovaultApi extends BaseAPI {
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof NeurovaultApi
+     */
+    public neurovaultCollectionsGet(options?: AxiosRequestConfig) {
+        return NeurovaultApiFp(this.configuration).neurovaultCollectionsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof NeurovaultApi
+     */
+    public neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig) {
+        return NeurovaultApiFp(this.configuration).neurovaultCollectionsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof NeurovaultApi
+     */
+    public neurovaultFilesGet(options?: AxiosRequestConfig) {
+        return NeurovaultApiFp(this.configuration).neurovaultFilesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof NeurovaultApi
+     */
+    public neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig) {
+        return NeurovaultApiFp(this.configuration).neurovaultFilesIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ProjectsApi - axios parameter creator
+ * @export
+ */
+export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdGet', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProjectsApi - functional programming interface
+ * @export
+ */
+export const ProjectsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProjectsApi - factory interface
+ * @export
+ */
+export const ProjectsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProjectsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet(options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProjectsApi - object-oriented interface
+ * @export
+ * @class ProjectsApi
+ * @extends {BaseAPI}
+ */
+export class ProjectsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApi
+     */
+    public projectsGet(options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApi
+     */
+    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * SpecificationsApi - axios parameter creator
+ * @export
+ */
+export const SpecificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * list of meta-analysis specifications
@@ -3412,11 +3488,11 @@ export const SpecificationApiAxiosParamCreator = function (configuration?: Confi
 };
 
 /**
- * SpecificationApi - functional programming interface
+ * SpecificationsApi - functional programming interface
  * @export
  */
-export const SpecificationApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SpecificationApiAxiosParamCreator(configuration)
+export const SpecificationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SpecificationsApiAxiosParamCreator(configuration)
     return {
         /**
          * list of meta-analysis specifications
@@ -3466,11 +3542,11 @@ export const SpecificationApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * SpecificationApi - factory interface
+ * SpecificationsApi - factory interface
  * @export
  */
-export const SpecificationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SpecificationApiFp(configuration)
+export const SpecificationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SpecificationsApiFp(configuration)
     return {
         /**
          * list of meta-analysis specifications
@@ -3516,21 +3592,21 @@ export const SpecificationApiFactory = function (configuration?: Configuration, 
 };
 
 /**
- * SpecificationApi - object-oriented interface
+ * SpecificationsApi - object-oriented interface
  * @export
- * @class SpecificationApi
+ * @class SpecificationsApi
  * @extends {BaseAPI}
  */
-export class SpecificationApi extends BaseAPI {
+export class SpecificationsApi extends BaseAPI {
     /**
      * list of meta-analysis specifications
      * @summary Get a list of Specifications
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationApi
+     * @memberof SpecificationsApi
      */
     public specificationsGet(options?: AxiosRequestConfig) {
-        return SpecificationApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+        return SpecificationsApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3539,10 +3615,10 @@ export class SpecificationApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationApi
+     * @memberof SpecificationsApi
      */
     public specificationsIdGet(id: string, options?: AxiosRequestConfig) {
-        return SpecificationApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+        return SpecificationsApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3552,10 +3628,10 @@ export class SpecificationApi extends BaseAPI {
      * @param {Specification} [specification] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationApi
+     * @memberof SpecificationsApi
      */
     public specificationsIdPut(id: string, specification?: Specification, options?: AxiosRequestConfig) {
-        return SpecificationApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
+        return SpecificationsApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3564,10 +3640,10 @@ export class SpecificationApi extends BaseAPI {
      * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationApi
+     * @memberof SpecificationsApi
      */
     public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig) {
-        return SpecificationApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
+        return SpecificationsApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
