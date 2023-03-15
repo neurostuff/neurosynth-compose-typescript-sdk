@@ -3611,10 +3611,10 @@ export class SpecificationsApi extends BaseAPI {
 
 
 /**
- * StudysetApi - axios parameter creator
+ * StudysetsApi - axios parameter creator
  * @export
  */
-export const StudysetApiAxiosParamCreator = function (configuration?: Configuration) {
+export const StudysetsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * get a list of serialized/referenced studysets
@@ -3764,11 +3764,11 @@ export const StudysetApiAxiosParamCreator = function (configuration?: Configurat
 };
 
 /**
- * StudysetApi - functional programming interface
+ * StudysetsApi - functional programming interface
  * @export
  */
-export const StudysetApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = StudysetApiAxiosParamCreator(configuration)
+export const StudysetsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = StudysetsApiAxiosParamCreator(configuration)
     return {
         /**
          * get a list of serialized/referenced studysets
@@ -3818,11 +3818,11 @@ export const StudysetApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * StudysetApi - factory interface
+ * StudysetsApi - factory interface
  * @export
  */
-export const StudysetApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = StudysetApiFp(configuration)
+export const StudysetsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = StudysetsApiFp(configuration)
     return {
         /**
          * get a list of serialized/referenced studysets
@@ -3868,21 +3868,21 @@ export const StudysetApiFactory = function (configuration?: Configuration, baseP
 };
 
 /**
- * StudysetApi - object-oriented interface
+ * StudysetsApi - object-oriented interface
  * @export
- * @class StudysetApi
+ * @class StudysetsApi
  * @extends {BaseAPI}
  */
-export class StudysetApi extends BaseAPI {
+export class StudysetsApi extends BaseAPI {
     /**
      * get a list of serialized/referenced studysets
      * @summary Get a list of Studysets
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetApi
+     * @memberof StudysetsApi
      */
     public studysetsGet(options?: AxiosRequestConfig) {
-        return StudysetApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
+        return StudysetsApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3891,10 +3891,10 @@ export class StudysetApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetApi
+     * @memberof StudysetsApi
      */
     public studysetsIdGet(id: string, options?: AxiosRequestConfig) {
-        return StudysetApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+        return StudysetsApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3904,10 +3904,10 @@ export class StudysetApi extends BaseAPI {
      * @param {Studyset} [studyset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetApi
+     * @memberof StudysetsApi
      */
     public studysetsIdPut(id: string, studyset?: Studyset, options?: AxiosRequestConfig) {
-        return StudysetApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
+        return StudysetsApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3916,10 +3916,10 @@ export class StudysetApi extends BaseAPI {
      * @param {StudysetPostBody} [studysetPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetApi
+     * @memberof StudysetsApi
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig) {
-        return StudysetApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+        return StudysetsApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
