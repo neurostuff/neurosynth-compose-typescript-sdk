@@ -13,13 +13,15 @@
  */
 
 
-import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { Configuration } from './configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import type { RequestArgs } from './base';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
+import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 
 /**
  * a holder/reference to the annotation on neurostore
@@ -230,31 +232,31 @@ export interface Estimator {
 /**
  * 
  * @export
- * @interface InlineResponse400
+ * @interface MetaAnalysesGet400Response
  */
-export interface InlineResponse400 {
+export interface MetaAnalysesGet400Response {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse400
+     * @memberof MetaAnalysesGet400Response
      */
     'detail'?: string;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse400
+     * @memberof MetaAnalysesGet400Response
      */
     'status'?: number;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse400
+     * @memberof MetaAnalysesGet400Response
      */
     'title'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse400
+     * @memberof MetaAnalysesGet400Response
      */
     'type'?: string;
 }
@@ -266,22 +268,22 @@ export interface InlineResponse400 {
 export interface MetaAnalysis {
     /**
      * 
-     * @type {string | Specification}
+     * @type {MetaAnalysisSpecification}
      * @memberof MetaAnalysis
      */
-    'specification'?: string | Specification;
+    'specification'?: MetaAnalysisSpecification;
     /**
      * 
-     * @type {string | Studyset}
+     * @type {MetaAnalysisStudyset}
      * @memberof MetaAnalysis
      */
-    'studyset'?: string | Studyset;
+    'studyset'?: MetaAnalysisStudyset;
     /**
      * 
-     * @type {string | Annotation}
+     * @type {MetaAnalysisAnnotation}
      * @memberof MetaAnalysis
      */
-    'annotation'?: string | Annotation;
+    'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -308,10 +310,10 @@ export interface MetaAnalysis {
     'internal_annotation_id'?: string;
     /**
      * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<string | ResultReturn>}
+     * @type {Array<MetaAnalysisResultsInner>}
      * @memberof MetaAnalysis
      */
-    'results'?: Array<string | ResultReturn>;
+    'results'?: Array<MetaAnalysisResultsInner>;
     /**
      * 
      * @type {object}
@@ -325,6 +327,12 @@ export interface MetaAnalysis {
      */
     'project'?: string | null;
 }
+/**
+ * @type MetaAnalysisAnnotation
+ * @export
+ */
+export type MetaAnalysisAnnotation = Annotation | string;
+
 /**
  * 
  * @export
@@ -352,22 +360,22 @@ export interface MetaAnalysisList {
 export interface MetaAnalysisPostBody {
     /**
      * 
-     * @type {string | Specification}
+     * @type {MetaAnalysisSpecification}
      * @memberof MetaAnalysisPostBody
      */
-    'specification': string | Specification;
+    'specification': MetaAnalysisSpecification;
     /**
      * 
-     * @type {string | Studyset}
+     * @type {MetaAnalysisStudyset}
      * @memberof MetaAnalysisPostBody
      */
-    'studyset'?: string | Studyset;
+    'studyset'?: MetaAnalysisStudyset;
     /**
      * 
-     * @type {string | Annotation}
+     * @type {MetaAnalysisAnnotation}
      * @memberof MetaAnalysisPostBody
      */
-    'annotation'?: string | Annotation;
+    'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -394,10 +402,10 @@ export interface MetaAnalysisPostBody {
     'internal_annotation_id': string;
     /**
      * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<string | ResultReturn>}
+     * @type {Array<MetaAnalysisResultsInner>}
      * @memberof MetaAnalysisPostBody
      */
-    'results'?: Array<string | ResultReturn>;
+    'results'?: Array<MetaAnalysisResultsInner>;
     /**
      * 
      * @type {object}
@@ -412,6 +420,12 @@ export interface MetaAnalysisPostBody {
     'project'?: string | null;
 }
 /**
+ * @type MetaAnalysisResultsInner
+ * @export
+ */
+export type MetaAnalysisResultsInner = ResultReturn | string;
+
+/**
  * 
  * @export
  * @interface MetaAnalysisReturn
@@ -419,22 +433,22 @@ export interface MetaAnalysisPostBody {
 export interface MetaAnalysisReturn {
     /**
      * 
-     * @type {string | Specification}
+     * @type {MetaAnalysisSpecification}
      * @memberof MetaAnalysisReturn
      */
-    'specification'?: string | Specification;
+    'specification'?: MetaAnalysisSpecification;
     /**
      * 
-     * @type {string | Studyset}
+     * @type {MetaAnalysisStudyset}
      * @memberof MetaAnalysisReturn
      */
-    'studyset'?: string | Studyset;
+    'studyset'?: MetaAnalysisStudyset;
     /**
      * 
-     * @type {string | Annotation}
+     * @type {MetaAnalysisAnnotation}
      * @memberof MetaAnalysisReturn
      */
-    'annotation'?: string | Annotation;
+    'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -461,10 +475,10 @@ export interface MetaAnalysisReturn {
     'internal_annotation_id'?: string;
     /**
      * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<string | ResultReturn>}
+     * @type {Array<MetaAnalysisResultsInner>}
      * @memberof MetaAnalysisReturn
      */
-    'results'?: Array<string | ResultReturn>;
+    'results'?: Array<MetaAnalysisResultsInner>;
     /**
      * 
      * @type {object}
@@ -503,6 +517,18 @@ export interface MetaAnalysisReturn {
     'user'?: string | null;
 }
 /**
+ * @type MetaAnalysisSpecification
+ * @export
+ */
+export type MetaAnalysisSpecification = Specification | string;
+
+/**
+ * @type MetaAnalysisStudyset
+ * @export
+ */
+export type MetaAnalysisStudyset = Studyset | string;
+
+/**
  * 
  * @export
  * @interface NeurovaultCollection
@@ -516,10 +542,10 @@ export interface NeurovaultCollection {
     'collection_id'?: string;
     /**
      * 
-     * @type {Array<string | NeurovaultFile>}
+     * @type {Array<NeurovaultCollectionFilesInner>}
      * @memberof NeurovaultCollection
      */
-    'files'?: Array<string | NeurovaultFile>;
+    'files'?: Array<NeurovaultCollectionFilesInner>;
     /**
      * 
      * @type {string}
@@ -527,6 +553,12 @@ export interface NeurovaultCollection {
      */
     'result'?: string;
 }
+/**
+ * @type NeurovaultCollectionFilesInner
+ * @export
+ */
+export type NeurovaultCollectionFilesInner = NeurovaultFile | string;
+
 /**
  * 
  * @export
@@ -541,10 +573,10 @@ export interface NeurovaultCollectionReturn {
     'collection_id'?: string;
     /**
      * 
-     * @type {Array<string | NeurovaultFile>}
+     * @type {Array<NeurovaultCollectionFilesInner>}
      * @memberof NeurovaultCollectionReturn
      */
-    'files'?: Array<string | NeurovaultFile>;
+    'files'?: Array<NeurovaultCollectionFilesInner>;
     /**
      * 
      * @type {string}
@@ -810,10 +842,10 @@ export interface Project {
     'provenance'?: object | null;
     /**
      * 
-     * @type {Array<MetaAnalysis | string>}
+     * @type {Array<ProjectMetaAnalysesInner>}
      * @memberof Project
      */
-    'meta_analyses'?: Array<MetaAnalysis | string>;
+    'meta_analyses'?: Array<ProjectMetaAnalysesInner>;
     /**
      * 
      * @type {string}
@@ -846,6 +878,12 @@ export interface ProjectList {
      */
     'metadata'?: object;
 }
+/**
+ * @type ProjectMetaAnalysesInner
+ * @export
+ */
+export type ProjectMetaAnalysesInner = MetaAnalysis | string;
+
 /**
  * 
  * @export
@@ -884,10 +922,10 @@ export interface ProjectReturn {
     'provenance'?: object | null;
     /**
      * 
-     * @type {Array<MetaAnalysis | string>}
+     * @type {Array<ProjectMetaAnalysesInner>}
      * @memberof ProjectReturn
      */
-    'meta_analyses'?: Array<MetaAnalysis | string>;
+    'meta_analyses'?: Array<ProjectMetaAnalysesInner>;
     /**
      * 
      * @type {string}
@@ -983,10 +1021,10 @@ export interface Result {
 export interface ResultList {
     /**
      * 
-     * @type {Array<string | ResultReturn>}
+     * @type {Array<MetaAnalysisResultsInner>}
      * @memberof ResultList
      */
-    'results'?: Array<string | ResultReturn>;
+    'results'?: Array<MetaAnalysisResultsInner>;
     /**
      * 
      * @type {object}
@@ -2110,6 +2148,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -2147,6 +2186,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2248,6 +2288,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2285,6 +2326,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2382,6 +2424,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -2483,6 +2526,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2584,6 +2628,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -2625,6 +2670,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3072,6 +3118,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -3083,6 +3130,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3114,6 +3162,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3124,6 +3173,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3154,6 +3204,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -3176,6 +3227,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3207,6 +3259,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -3218,6 +3271,7 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3428,6 +3482,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -3438,6 +3493,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3466,6 +3522,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3475,6 +3532,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3502,6 +3560,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -3523,6 +3582,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3551,6 +3611,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -3561,6 +3622,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3782,6 +3844,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
@@ -3794,6 +3857,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3828,6 +3892,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3839,6 +3904,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
@@ -3872,6 +3938,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {string} [collectionId] 
      * @param {string} [exception] 
@@ -3895,6 +3962,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {NeurovaultFile} [neurovaultFile] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3929,6 +3997,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
@@ -3941,6 +4010,7 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5357,6 +5427,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -5394,6 +5465,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5509,6 +5581,7 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -5520,6 +5593,7 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5602,6 +5676,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -5612,6 +5687,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5705,6 +5781,7 @@ export class MetaAnalysesApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
@@ -5717,6 +5794,7 @@ export class MetaAnalysesApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5800,6 +5878,7 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5837,6 +5916,7 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5934,6 +6014,7 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -6035,6 +6116,7 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6103,6 +6185,7 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6113,6 +6196,7 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6143,6 +6227,7 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -6165,6 +6250,7 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6204,6 +6290,7 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6213,6 +6300,7 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6240,6 +6328,7 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -6261,6 +6350,7 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6303,6 +6393,7 @@ export class NeurovaultApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6314,6 +6405,7 @@ export class NeurovaultApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NeurovaultApi
@@ -6347,6 +6439,7 @@ export class NeurovaultApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {string} [collectionId] 
      * @param {string} [exception] 
@@ -6370,6 +6463,7 @@ export class NeurovaultApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {NeurovaultFile} [neurovaultFile] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6465,6 +6559,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6502,6 +6597,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6535,6 +6631,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6572,6 +6669,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6717,6 +6815,7 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6727,6 +6826,7 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6736,6 +6836,7 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6746,6 +6847,7 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6808,6 +6910,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @summary 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6817,6 +6920,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @summary 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6825,6 +6929,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @summary 
          * @param {NeurovaultFile} [neurovaultFile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6834,6 +6939,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6897,6 +7003,7 @@ export class PostApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6908,6 +7015,7 @@ export class PostApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
@@ -6918,6 +7026,7 @@ export class PostApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {NeurovaultFile} [neurovaultFile] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6929,6 +7038,7 @@ export class PostApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7036,6 +7146,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -7077,6 +7188,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7145,6 +7257,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -7156,6 +7269,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7195,6 +7309,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -7205,6 +7320,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7247,6 +7363,7 @@ export class ProjectsApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
@@ -7259,6 +7376,7 @@ export class ProjectsApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7362,6 +7480,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -7399,6 +7518,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7436,6 +7556,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -7537,6 +7658,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -7696,6 +7818,7 @@ export const PutApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -7707,6 +7830,7 @@ export const PutApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7717,6 +7841,7 @@ export const PutApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -7739,6 +7864,7 @@ export const PutApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -7806,6 +7932,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Result} [result] 
          * @param {*} [options] Override http request option.
@@ -7816,6 +7943,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7825,6 +7953,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {string} [collectionId] 
          * @param {string} [exception] 
@@ -7846,6 +7975,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
+         * @summary 
          * @param {string} id 
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
@@ -7914,6 +8044,7 @@ export class PutApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
@@ -7926,6 +8057,7 @@ export class PutApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7937,6 +8069,7 @@ export class PutApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {string} [collectionId] 
      * @param {string} [exception] 
@@ -7960,6 +8093,7 @@ export class PutApi extends BaseAPI {
 
     /**
      * 
+     * @summary 
      * @param {string} id 
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
