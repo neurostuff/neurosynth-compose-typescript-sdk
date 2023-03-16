@@ -1736,6 +1736,3397 @@ export class AnnotationsApi extends BaseAPI {
 
 
 /**
+ * ComposeApi - axios parameter creator
+ * @export
+ */
+export const ComposeApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/annotations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a single annotation
+         * @summary GET information about an annotation
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('annotationsIdGet', 'id', id)
+            const localVarPath = `/annotations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing annotation
+         * @summary Update an Annotation
+         * @param {string} id 
+         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdPut: async (id: string, annotationUpdate?: AnnotationUpdate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('annotationsIdPut', 'id', id)
+            const localVarPath = `/annotations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationUpdate, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
+         * @param {AnnotationPostBody} [annotationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsPost: async (annotationPostBody?: AnnotationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/annotations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analyses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdGet: async (id: string, nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysesIdGet', 'id', id)
+            const localVarPath = `/meta-analyses/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdPut: async (id: string, metaAnalysis?: MetaAnalysis, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysesIdPut', 'id', id)
+            const localVarPath = `/meta-analyses/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysis, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesPost: async (metaAnalysisPostBody?: MetaAnalysisPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analyses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysisPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsGet: async (metaAnalysisId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (metaAnalysisId !== undefined) {
+                localVarQueryParameter['meta_analysis_id'] = metaAnalysisId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysisResultsIdGet', 'id', id)
+            const localVarPath = `/meta-analysis-results/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdPut: async (id: string, result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysisResultsIdPut', 'id', id)
+            const localVarPath = `/meta-analysis-results/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsPost: async (result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-collections`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultCollectionsIdGet', 'id', id)
+            const localVarPath = `/neurovault-collections/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdPut: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultCollectionsIdPut', 'id', id)
+            const localVarPath = `/neurovault-collections/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-collections`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-files`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultFilesIdGet', 'id', id)
+            const localVarPath = `/neurovault-files/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} [collectionId] 
+         * @param {string} [exception] 
+         * @param {string} [traceback] 
+         * @param {string} [status] 
+         * @param {string} [file] 
+         * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultFilesIdPut', 'id', id)
+            const localVarPath = `/neurovault-files/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+            if (collectionId !== undefined) { 
+                localVarFormParams.append('collection_id', collectionId as any);
+            }
+    
+            if (exception !== undefined) { 
+                localVarFormParams.append('exception', exception as any);
+            }
+    
+            if (traceback !== undefined) { 
+                localVarFormParams.append('traceback', traceback as any);
+            }
+    
+            if (status !== undefined) { 
+                localVarFormParams.append('status', status as any);
+            }
+    
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (imageId !== undefined) { 
+                localVarFormParams.append('image_id', imageId as any);
+            }
+    
+            if (name !== undefined) { 
+                localVarFormParams.append('name', name as any);
+            }
+    
+            if (mapType !== undefined) { 
+                localVarFormParams.append('map_type', mapType as any);
+            }
+    
+            if (cognitiveContrastCogatlas !== undefined) { 
+                localVarFormParams.append('cognitive_contrast_cogatlas', cognitiveContrastCogatlas as any);
+            }
+    
+            if (cognitiveContrastCogatlasId !== undefined) { 
+                localVarFormParams.append('cognitive_contrast_cogatlas_id', cognitiveContrastCogatlasId as any);
+            }
+    
+            if (cognitiveParadigmCogatlas !== undefined) { 
+                localVarFormParams.append('cognitive_paradigm_cogatlas', cognitiveParadigmCogatlas as any);
+            }
+    
+            if (cognitiveParadigmCogatlasId !== undefined) { 
+                localVarFormParams.append('cognitive_paradigm_cogatlas_id', cognitiveParadigmCogatlasId as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NeurovaultFile} [neurovaultFile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesPost: async (neurovaultFile?: NeurovaultFile, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-files`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(neurovaultFile, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdGet', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdPut: async (id: string, project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdPut', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsPost: async (project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * list of meta-analysis specifications
+         * @summary Get a list of Specifications
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/specifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a meta-analysis specification
+         * @summary Get information about a Specification
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('specificationsIdGet', 'id', id)
+            const localVarPath = `/specifications/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing meta analysis specification
+         * @summary Update Meta-Analysis specification
+         * @param {string} id 
+         * @param {Specification} [specification] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdPut: async (id: string, specification?: Specification, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('specificationsIdPut', 'id', id)
+            const localVarPath = `/specifications/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(specification, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new meta-analysis specification
+         * @summary Create a Specification
+         * @param {SpecificationPostBody} [specificationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsPost: async (specificationPostBody?: SpecificationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/specifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(specificationPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/studysets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('studysetsIdGet', 'id', id)
+            const localVarPath = `/studysets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
+         * @param {string} id 
+         * @param {Studyset} [studyset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdPut: async (id: string, studyset?: Studyset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('studysetsIdPut', 'id', id)
+            const localVarPath = `/studysets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(studyset, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
+         * @param {StudysetPostBody} [studysetPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsPost: async (studysetPostBody?: StudysetPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/studysets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(studysetPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ComposeApi - functional programming interface
+ * @export
+ */
+export const ComposeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ComposeApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a single annotation
+         * @summary GET information about an annotation
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing annotation
+         * @summary Update an Annotation
+         * @param {string} id 
+         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdPut(id, annotationUpdate, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
+         * @param {AnnotationPostBody} [annotationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotationPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsGet(metaAnalysisId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsIdPut(id: string, result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdPut(id, result, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(result, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultCollectionReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsIdPut(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultCollectionReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsIdPut(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} [collectionId] 
+         * @param {string} [exception] 
+         * @param {string} [traceback] 
+         * @param {string} [status] 
+         * @param {string} [file] 
+         * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NeurovaultFile} [neurovaultFile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesPost(neurovaultFile, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsPost(project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(project, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * list of meta-analysis specifications
+         * @summary Get a list of Specifications
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a meta-analysis specification
+         * @summary Get information about a Specification
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing meta analysis specification
+         * @summary Update Meta-Analysis specification
+         * @param {string} id 
+         * @param {Specification} [specification] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsIdPut(id: string, specification?: Specification, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsIdPut(id, specification, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new meta-analysis specification
+         * @summary Create a Specification
+         * @param {SpecificationPostBody} [specificationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specificationPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
+         * @param {string} id 
+         * @param {Studyset} [studyset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsIdPut(id: string, studyset?: Studyset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsIdPut(id, studyset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
+         * @param {StudysetPostBody} [studysetPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsPost(studysetPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ComposeApi - factory interface
+ * @export
+ */
+export const ComposeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ComposeApiFp(configuration)
+    return {
+        /**
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsGet(options?: any): AxiosPromise<AnnotationList> {
+            return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a single annotation
+         * @summary GET information about an annotation
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdGet(id: string, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing annotation
+         * @summary Update an Annotation
+         * @param {string} id 
+         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
+         * @param {AnnotationPostBody} [annotationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
+            return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdPut(id: string, result?: Result, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsIdPut(id, result, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsPost(result?: Result, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(result, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsGet(options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdGet(id: string, options?: any): AxiosPromise<NeurovaultCollectionReturn> {
+            return localVarFp.neurovaultCollectionsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdPut(id: string, options?: any): AxiosPromise<NeurovaultCollectionReturn> {
+            return localVarFp.neurovaultCollectionsIdPut(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsPost(options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsPost(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesGet(options?: any): AxiosPromise<NeurovaultFileList> {
+            return localVarFp.neurovaultFilesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdGet(id: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} [collectionId] 
+         * @param {string} [exception] 
+         * @param {string} [traceback] 
+         * @param {string} [status] 
+         * @param {string} [file] 
+         * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NeurovaultFile} [neurovaultFile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesPost(neurovaultFile, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet(options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsPost(project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * list of meta-analysis specifications
+         * @summary Get a list of Specifications
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsGet(options?: any): AxiosPromise<SpecificationList> {
+            return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a meta-analysis specification
+         * @summary Get information about a Specification
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdGet(id: string, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing meta analysis specification
+         * @summary Update Meta-Analysis specification
+         * @param {string} id 
+         * @param {Specification} [specification] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdPut(id: string, specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsIdPut(id, specification, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new meta-analysis specification
+         * @summary Create a Specification
+         * @param {SpecificationPostBody} [specificationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsGet(options?: any): AxiosPromise<StudysetList> {
+            return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdGet(id: string, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
+         * @param {string} id 
+         * @param {Studyset} [studyset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdPut(id: string, studyset?: Studyset, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
+         * @param {StudysetPostBody} [studysetPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsPost(studysetPostBody?: StudysetPostBody, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ComposeApi - object-oriented interface
+ * @export
+ * @class ComposeApi
+ * @extends {BaseAPI}
+ */
+export class ComposeApi extends BaseAPI {
+    /**
+     * get a list of serialized/referenced annotations
+     * @summary GET a list of annotations
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public annotationsGet(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a single annotation
+     * @summary GET information about an annotation
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public annotationsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing annotation
+     * @summary Update an Annotation
+     * @param {string} id 
+     * @param {AnnotationUpdate} [annotationUpdate] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new serialized/referenced annotation
+     * @summary Create a new Annotation
+     * @param {AnnotationPostBody} [annotationPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * list all runnable specification, studyset, annotation bundles
+     * @summary GET a list of meta-analyses
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a meta-analysis (specification, annotation, and studyset)
+     * @summary GET meta-analysis information
+     * @param {string} id 
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing meta-analysis (that has not yet been run)
+     * @summary Update a meta-analysis
+     * @param {string} id 
+     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new specification, studyset, annotation bundle
+     * @summary Create a new meta-analysis
+     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {Result} [result] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysisResultsIdPut(id: string, result?: Result, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsIdPut(id, result, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Result} [result] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsPost(result, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultCollectionsGet(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultCollectionsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultCollectionsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultCollectionsIdPut(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultCollectionsIdPut(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultCollectionsPost(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultCollectionsPost(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultFilesGet(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultFilesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultFilesIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} [collectionId] 
+     * @param {string} [exception] 
+     * @param {string} [traceback] 
+     * @param {string} [status] 
+     * @param {string} [file] 
+     * @param {string} [imageId] 
+     * @param {string} [name] 
+     * @param {string} [mapType] 
+     * @param {string} [cognitiveContrastCogatlas] 
+     * @param {string} [cognitiveContrastCogatlasId] 
+     * @param {string} [cognitiveParadigmCogatlas] 
+     * @param {string} [cognitiveParadigmCogatlasId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NeurovaultFile} [neurovaultFile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultFilesPost(neurovaultFile, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public projectsGet(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {Project} [project] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Project} [project] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public projectsPost(project?: Project, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * list of meta-analysis specifications
+     * @summary Get a list of Specifications
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public specificationsGet(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a meta-analysis specification
+     * @summary Get information about a Specification
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public specificationsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing meta analysis specification
+     * @summary Update Meta-Analysis specification
+     * @param {string} id 
+     * @param {Specification} [specification] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public specificationsIdPut(id: string, specification?: Specification, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new meta-analysis specification
+     * @summary Create a Specification
+     * @param {SpecificationPostBody} [specificationPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a list of serialized/referenced studysets
+     * @summary Get a list of Studysets
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public studysetsGet(options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a single serialized/referenced studyset
+     * @summary Get information about a Studyset
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public studysetsIdGet(id: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing serialized/referenced studyset
+     * @summary Update a Studyset
+     * @param {string} id 
+     * @param {Studyset} [studyset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public studysetsIdPut(id: string, studyset?: Studyset, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new serialized/referenced studyset
+     * @summary Create a new Studyset
+     * @param {StudysetPostBody} [studysetPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * GetApi - axios parameter creator
+ * @export
+ */
+export const GetApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/annotations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a single annotation
+         * @summary GET information about an annotation
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('annotationsIdGet', 'id', id)
+            const localVarPath = `/annotations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analyses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdGet: async (id: string, nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysesIdGet', 'id', id)
+            const localVarPath = `/meta-analyses/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsGet: async (metaAnalysisId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (metaAnalysisId !== undefined) {
+                localVarQueryParameter['meta_analysis_id'] = metaAnalysisId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysisResultsIdGet', 'id', id)
+            const localVarPath = `/meta-analysis-results/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-collections`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultCollectionsIdGet', 'id', id)
+            const localVarPath = `/neurovault-collections/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-files`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultFilesIdGet', 'id', id)
+            const localVarPath = `/neurovault-files/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdGet', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * list of meta-analysis specifications
+         * @summary Get a list of Specifications
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/specifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a meta-analysis specification
+         * @summary Get information about a Specification
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('specificationsIdGet', 'id', id)
+            const localVarPath = `/specifications/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/studysets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('studysetsIdGet', 'id', id)
+            const localVarPath = `/studysets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * GetApi - functional programming interface
+ * @export
+ */
+export const GetApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GetApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a single annotation
+         * @summary GET information about an annotation
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdGet(id, nested, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsGet(metaAnalysisId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultCollectionReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * list of meta-analysis specifications
+         * @summary Get a list of Specifications
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a meta-analysis specification
+         * @summary Get information about a Specification
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * GetApi - factory interface
+ * @export
+ */
+export const GetApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GetApiFp(configuration)
+    return {
+        /**
+         * get a list of serialized/referenced annotations
+         * @summary GET a list of annotations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsGet(options?: any): AxiosPromise<AnnotationList> {
+            return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a single annotation
+         * @summary GET information about an annotation
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdGet(id: string, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * list all runnable specification, studyset, annotation bundles
+         * @summary GET a list of meta-analyses
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a meta-analysis (specification, annotation, and studyset)
+         * @summary GET meta-analysis information
+         * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
+            return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsGet(options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdGet(id: string, options?: any): AxiosPromise<NeurovaultCollectionReturn> {
+            return localVarFp.neurovaultCollectionsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesGet(options?: any): AxiosPromise<NeurovaultFileList> {
+            return localVarFp.neurovaultFilesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdGet(id: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsGet(options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * list of meta-analysis specifications
+         * @summary Get a list of Specifications
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsGet(options?: any): AxiosPromise<SpecificationList> {
+            return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a meta-analysis specification
+         * @summary Get information about a Specification
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdGet(id: string, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a list of serialized/referenced studysets
+         * @summary Get a list of Studysets
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsGet(options?: any): AxiosPromise<StudysetList> {
+            return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * get a single serialized/referenced studyset
+         * @summary Get information about a Studyset
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdGet(id: string, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * GetApi - object-oriented interface
+ * @export
+ * @class GetApi
+ * @extends {BaseAPI}
+ */
+export class GetApi extends BaseAPI {
+    /**
+     * get a list of serialized/referenced annotations
+     * @summary GET a list of annotations
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public annotationsGet(options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a single annotation
+     * @summary GET information about an annotation
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public annotationsIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * list all runnable specification, studyset, annotation bundles
+     * @summary GET a list of meta-analyses
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a meta-analysis (specification, annotation, and studyset)
+     * @summary GET meta-analysis information
+     * @param {string} id 
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public metaAnalysesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} [metaAnalysisId] search for results with this meta-analysis id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public metaAnalysisResultsGet(metaAnalysisId?: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public metaAnalysisResultsIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public neurovaultCollectionsGet(options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).neurovaultCollectionsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public neurovaultCollectionsIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).neurovaultCollectionsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public neurovaultFilesGet(options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).neurovaultFilesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public neurovaultFilesIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).neurovaultFilesIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public projectsGet(options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * list of meta-analysis specifications
+     * @summary Get a list of Specifications
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public specificationsGet(options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a meta-analysis specification
+     * @summary Get information about a Specification
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public specificationsIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a list of serialized/referenced studysets
+     * @summary Get a list of Studysets
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public studysetsGet(options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * get a single serialized/referenced studyset
+     * @summary Get information about a Studyset
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public studysetsIdGet(id: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * MetaAnalysesApi - axios parameter creator
  * @export
  */
@@ -2991,6 +6382,589 @@ export class NeurovaultApi extends BaseAPI {
 
 
 /**
+ * PostApi - axios parameter creator
+ * @export
+ */
+export const PostApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
+         * @param {AnnotationPostBody} [annotationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsPost: async (annotationPostBody?: AnnotationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/annotations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesPost: async (metaAnalysisPostBody?: MetaAnalysisPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analyses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysisPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsPost: async (result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-collections`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NeurovaultFile} [neurovaultFile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesPost: async (neurovaultFile?: NeurovaultFile, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurovault-files`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(neurovaultFile, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsPost: async (project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new meta-analysis specification
+         * @summary Create a Specification
+         * @param {SpecificationPostBody} [specificationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsPost: async (specificationPostBody?: SpecificationPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/specifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(specificationPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
+         * @param {StudysetPostBody} [studysetPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsPost: async (studysetPostBody?: StudysetPostBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/studysets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(studysetPostBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PostApi - functional programming interface
+ * @export
+ */
+export const PostApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PostApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
+         * @param {AnnotationPostBody} [annotationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotationPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesPost(metaAnalysisPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(result, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NeurovaultFile} [neurovaultFile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesPost(neurovaultFile, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsPost(project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(project, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new meta-analysis specification
+         * @summary Create a Specification
+         * @param {SpecificationPostBody} [specificationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsPost(specificationPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
+         * @param {StudysetPostBody} [studysetPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsPost(studysetPostBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PostApi - factory interface
+ * @export
+ */
+export const PostApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PostApiFp(configuration)
+    return {
+        /**
+         * create a new serialized/referenced annotation
+         * @summary Create a new Annotation
+         * @param {AnnotationPostBody} [annotationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new specification, studyset, annotation bundle
+         * @summary Create a new meta-analysis
+         * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsPost(result?: Result, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(result, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsPost(options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsPost(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NeurovaultFile} [neurovaultFile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesPost(neurovaultFile, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsPost(project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new meta-analysis specification
+         * @summary Create a Specification
+         * @param {SpecificationPostBody} [specificationPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * create a new serialized/referenced studyset
+         * @summary Create a new Studyset
+         * @param {StudysetPostBody} [studysetPostBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsPost(studysetPostBody?: StudysetPostBody, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PostApi - object-oriented interface
+ * @export
+ * @class PostApi
+ * @extends {BaseAPI}
+ */
+export class PostApi extends BaseAPI {
+    /**
+     * create a new serialized/referenced annotation
+     * @summary Create a new Annotation
+     * @param {AnnotationPostBody} [annotationPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new specification, studyset, annotation bundle
+     * @summary Create a new meta-analysis
+     * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Result} [result] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).metaAnalysisResultsPost(result, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public neurovaultCollectionsPost(options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).neurovaultCollectionsPost(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NeurovaultFile} [neurovaultFile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public neurovaultFilesPost(neurovaultFile?: NeurovaultFile, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).neurovaultFilesPost(neurovaultFile, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Project} [project] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public projectsPost(project?: Project, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new meta-analysis specification
+     * @summary Create a Specification
+     * @param {SpecificationPostBody} [specificationPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * create a new serialized/referenced studyset
+     * @summary Create a new Studyset
+     * @param {StudysetPostBody} [studysetPostBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * ProjectsApi - axios parameter creator
  * @export
  */
@@ -3292,6 +7266,734 @@ export class ProjectsApi extends BaseAPI {
      */
     public projectsPost(project?: Project, options?: AxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PutApi - axios parameter creator
+ * @export
+ */
+export const PutApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * update an existing annotation
+         * @summary Update an Annotation
+         * @param {string} id 
+         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdPut: async (id: string, annotationUpdate?: AnnotationUpdate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('annotationsIdPut', 'id', id)
+            const localVarPath = `/annotations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(annotationUpdate, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdPut: async (id: string, metaAnalysis?: MetaAnalysis, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysesIdPut', 'id', id)
+            const localVarPath = `/meta-analyses/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysis, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdPut: async (id: string, result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('metaAnalysisResultsIdPut', 'id', id)
+            const localVarPath = `/meta-analysis-results/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdPut: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultCollectionsIdPut', 'id', id)
+            const localVarPath = `/neurovault-collections/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} [collectionId] 
+         * @param {string} [exception] 
+         * @param {string} [traceback] 
+         * @param {string} [status] 
+         * @param {string} [file] 
+         * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurovaultFilesIdPut', 'id', id)
+            const localVarPath = `/neurovault-files/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+            if (collectionId !== undefined) { 
+                localVarFormParams.append('collection_id', collectionId as any);
+            }
+    
+            if (exception !== undefined) { 
+                localVarFormParams.append('exception', exception as any);
+            }
+    
+            if (traceback !== undefined) { 
+                localVarFormParams.append('traceback', traceback as any);
+            }
+    
+            if (status !== undefined) { 
+                localVarFormParams.append('status', status as any);
+            }
+    
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (imageId !== undefined) { 
+                localVarFormParams.append('image_id', imageId as any);
+            }
+    
+            if (name !== undefined) { 
+                localVarFormParams.append('name', name as any);
+            }
+    
+            if (mapType !== undefined) { 
+                localVarFormParams.append('map_type', mapType as any);
+            }
+    
+            if (cognitiveContrastCogatlas !== undefined) { 
+                localVarFormParams.append('cognitive_contrast_cogatlas', cognitiveContrastCogatlas as any);
+            }
+    
+            if (cognitiveContrastCogatlasId !== undefined) { 
+                localVarFormParams.append('cognitive_contrast_cogatlas_id', cognitiveContrastCogatlasId as any);
+            }
+    
+            if (cognitiveParadigmCogatlas !== undefined) { 
+                localVarFormParams.append('cognitive_paradigm_cogatlas', cognitiveParadigmCogatlas as any);
+            }
+    
+            if (cognitiveParadigmCogatlasId !== undefined) { 
+                localVarFormParams.append('cognitive_paradigm_cogatlas_id', cognitiveParadigmCogatlasId as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdPut: async (id: string, project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdPut', 'id', id)
+            const localVarPath = `/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing meta analysis specification
+         * @summary Update Meta-Analysis specification
+         * @param {string} id 
+         * @param {Specification} [specification] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdPut: async (id: string, specification?: Specification, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('specificationsIdPut', 'id', id)
+            const localVarPath = `/specifications/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(specification, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
+         * @param {string} id 
+         * @param {Studyset} [studyset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdPut: async (id: string, studyset?: Studyset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('studysetsIdPut', 'id', id)
+            const localVarPath = `/studysets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(studyset, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PutApi - functional programming interface
+ * @export
+ */
+export const PutApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PutApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * update an existing annotation
+         * @summary Update an Annotation
+         * @param {string} id 
+         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdPut(id, annotationUpdate, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async metaAnalysisResultsIdPut(id: string, result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdPut(id, result, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultCollectionsIdPut(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultCollectionReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsIdPut(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} [collectionId] 
+         * @param {string} [exception] 
+         * @param {string} [traceback] 
+         * @param {string} [status] 
+         * @param {string} [file] 
+         * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing meta analysis specification
+         * @summary Update Meta-Analysis specification
+         * @param {string} id 
+         * @param {Specification} [specification] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async specificationsIdPut(id: string, specification?: Specification, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsIdPut(id, specification, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
+         * @param {string} id 
+         * @param {Studyset} [studyset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetsIdPut(id: string, studyset?: Studyset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsIdPut(id, studyset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PutApi - factory interface
+ * @export
+ */
+export const PutApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PutApiFp(configuration)
+    return {
+        /**
+         * update an existing annotation
+         * @summary Update an Annotation
+         * @param {string} id 
+         * @param {AnnotationUpdate} [annotationUpdate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+            return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing meta-analysis (that has not yet been run)
+         * @summary Update a meta-analysis
+         * @param {string} id 
+         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Result} [result] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        metaAnalysisResultsIdPut(id: string, result?: Result, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsIdPut(id, result, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultCollectionsIdPut(id: string, options?: any): AxiosPromise<NeurovaultCollectionReturn> {
+            return localVarFp.neurovaultCollectionsIdPut(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} [collectionId] 
+         * @param {string} [exception] 
+         * @param {string} [traceback] 
+         * @param {string} [status] 
+         * @param {string} [file] 
+         * @param {string} [imageId] 
+         * @param {string} [name] 
+         * @param {string} [mapType] 
+         * @param {string} [cognitiveContrastCogatlas] 
+         * @param {string} [cognitiveContrastCogatlasId] 
+         * @param {string} [cognitiveParadigmCogatlas] 
+         * @param {string} [cognitiveParadigmCogatlasId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {Project} [project] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing meta analysis specification
+         * @summary Update Meta-Analysis specification
+         * @param {string} id 
+         * @param {Specification} [specification] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        specificationsIdPut(id: string, specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
+            return localVarFp.specificationsIdPut(id, specification, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * update an existing serialized/referenced studyset
+         * @summary Update a Studyset
+         * @param {string} id 
+         * @param {Studyset} [studyset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetsIdPut(id: string, studyset?: Studyset, options?: any): AxiosPromise<StudysetReturn> {
+            return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PutApi - object-oriented interface
+ * @export
+ * @class PutApi
+ * @extends {BaseAPI}
+ */
+export class PutApi extends BaseAPI {
+    /**
+     * update an existing annotation
+     * @summary Update an Annotation
+     * @param {string} id 
+     * @param {AnnotationUpdate} [annotationUpdate] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing meta-analysis (that has not yet been run)
+     * @summary Update a meta-analysis
+     * @param {string} id 
+     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {Result} [result] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public metaAnalysisResultsIdPut(id: string, result?: Result, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).metaAnalysisResultsIdPut(id, result, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public neurovaultCollectionsIdPut(id: string, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).neurovaultCollectionsIdPut(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} [collectionId] 
+     * @param {string} [exception] 
+     * @param {string} [traceback] 
+     * @param {string} [status] 
+     * @param {string} [file] 
+     * @param {string} [imageId] 
+     * @param {string} [name] 
+     * @param {string} [mapType] 
+     * @param {string} [cognitiveContrastCogatlas] 
+     * @param {string} [cognitiveContrastCogatlasId] 
+     * @param {string} [cognitiveParadigmCogatlas] 
+     * @param {string} [cognitiveParadigmCogatlasId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {Project} [project] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing meta analysis specification
+     * @summary Update Meta-Analysis specification
+     * @param {string} id 
+     * @param {Specification} [specification] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public specificationsIdPut(id: string, specification?: Specification, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * update an existing serialized/referenced studyset
+     * @summary Update a Studyset
+     * @param {string} id 
+     * @param {Studyset} [studyset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PutApi
+     */
+    public studysetsIdPut(id: string, studyset?: Studyset, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
