@@ -326,6 +326,12 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'project'?: string | null;
+    /**
+     * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'run_key'?: string;
 }
 /**
  * @type MetaAnalysisAnnotation
@@ -418,6 +424,12 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'project'?: string | null;
+    /**
+     * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'run_key'?: string;
 }
 /**
  * @type MetaAnalysisResultsInner
@@ -491,6 +503,12 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'project'?: string | null;
+    /**
+     * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'run_key'?: string;
     /**
      * the identifier for the resource.
      * @type {string}
