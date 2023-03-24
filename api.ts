@@ -309,11 +309,11 @@ export interface MetaAnalysis {
      */
     'internal_annotation_id'?: string;
     /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<MetaAnalysisResultsInner>}
+     * 
+     * @type {MetaAnalysisResults}
      * @memberof MetaAnalysis
      */
-    'results'?: Array<MetaAnalysisResultsInner>;
+    'results'?: MetaAnalysisResults;
     /**
      * 
      * @type {object}
@@ -401,11 +401,11 @@ export interface MetaAnalysisPostBody {
      */
     'internal_annotation_id': string;
     /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<MetaAnalysisResultsInner>}
+     * 
+     * @type {MetaAnalysisResults}
      * @memberof MetaAnalysisPostBody
      */
-    'results'?: Array<MetaAnalysisResultsInner>;
+    'results'?: MetaAnalysisResults;
     /**
      * 
      * @type {object}
@@ -420,10 +420,11 @@ export interface MetaAnalysisPostBody {
     'project'?: string | null;
 }
 /**
- * @type MetaAnalysisResultsInner
+ * @type MetaAnalysisResults
+ * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
  * @export
  */
-export type MetaAnalysisResultsInner = ResultReturn | string;
+export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
 
 /**
  * 
@@ -474,11 +475,11 @@ export interface MetaAnalysisReturn {
      */
     'internal_annotation_id'?: string;
     /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<MetaAnalysisResultsInner>}
+     * 
+     * @type {MetaAnalysisResults}
      * @memberof MetaAnalysisReturn
      */
-    'results'?: Array<MetaAnalysisResultsInner>;
+    'results'?: MetaAnalysisResults;
     /**
      * 
      * @type {object}
@@ -542,10 +543,10 @@ export interface NeurovaultCollection {
     'collection_id'?: string;
     /**
      * 
-     * @type {Array<NeurovaultCollectionFilesInner>}
+     * @type {NeurovaultCollectionFiles}
      * @memberof NeurovaultCollection
      */
-    'files'?: Array<NeurovaultCollectionFilesInner>;
+    'files'?: NeurovaultCollectionFiles;
     /**
      * 
      * @type {string}
@@ -554,10 +555,10 @@ export interface NeurovaultCollection {
     'result'?: string;
 }
 /**
- * @type NeurovaultCollectionFilesInner
+ * @type NeurovaultCollectionFiles
  * @export
  */
-export type NeurovaultCollectionFilesInner = NeurovaultFile | string;
+export type NeurovaultCollectionFiles = Array<NeurovaultFile> | Array<string>;
 
 /**
  * 
@@ -573,10 +574,10 @@ export interface NeurovaultCollectionReturn {
     'collection_id'?: string;
     /**
      * 
-     * @type {Array<NeurovaultCollectionFilesInner>}
+     * @type {NeurovaultCollectionFiles}
      * @memberof NeurovaultCollectionReturn
      */
-    'files'?: Array<NeurovaultCollectionFilesInner>;
+    'files'?: NeurovaultCollectionFiles;
     /**
      * 
      * @type {string}
@@ -842,10 +843,10 @@ export interface Project {
     'provenance'?: object | null;
     /**
      * 
-     * @type {Array<ProjectMetaAnalysesInner>}
+     * @type {ProjectMetaAnalyses}
      * @memberof Project
      */
-    'meta_analyses'?: Array<ProjectMetaAnalysesInner>;
+    'meta_analyses'?: ProjectMetaAnalyses;
     /**
      * 
      * @type {string}
@@ -879,10 +880,10 @@ export interface ProjectList {
     'metadata'?: object;
 }
 /**
- * @type ProjectMetaAnalysesInner
+ * @type ProjectMetaAnalyses
  * @export
  */
-export type ProjectMetaAnalysesInner = MetaAnalysis | string;
+export type ProjectMetaAnalyses = Array<MetaAnalysis> | Array<string>;
 
 /**
  * 
@@ -922,10 +923,10 @@ export interface ProjectReturn {
     'provenance'?: object | null;
     /**
      * 
-     * @type {Array<ProjectMetaAnalysesInner>}
+     * @type {ProjectMetaAnalyses}
      * @memberof ProjectReturn
      */
-    'meta_analyses'?: Array<ProjectMetaAnalysesInner>;
+    'meta_analyses'?: ProjectMetaAnalyses;
     /**
      * 
      * @type {string}
@@ -1021,10 +1022,10 @@ export interface Result {
 export interface ResultList {
     /**
      * 
-     * @type {Array<MetaAnalysisResultsInner>}
+     * @type {ResultListResults}
      * @memberof ResultList
      */
-    'results'?: Array<MetaAnalysisResultsInner>;
+    'results'?: ResultListResults;
     /**
      * 
      * @type {object}
@@ -1032,6 +1033,12 @@ export interface ResultList {
      */
     'metadata'?: object;
 }
+/**
+ * @type ResultListResults
+ * @export
+ */
+export type ResultListResults = Array<ResultReturn> | Array<string>;
+
 /**
  * 
  * @export
