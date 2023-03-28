@@ -1015,12 +1015,6 @@ export interface Result {
     'cli_version'?: string | null;
     /**
      * 
-     * @type {Estimator}
-     * @memberof Result
-     */
-    'estimator'?: Estimator;
-    /**
-     * 
      * @type {string}
      * @memberof Result
      */
@@ -1031,6 +1025,24 @@ export interface Result {
      * @memberof Result
      */
     'neurovault_collection'?: NeurovaultCollection;
+    /**
+     * 
+     * @type {object}
+     * @memberof Result
+     */
+    'specification_snapshot'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof Result
+     */
+    'studyset_snapshot'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof Result
+     */
+    'annotation_snapshot'?: object;
 }
 /**
  * 
@@ -1083,12 +1095,6 @@ export interface ResultReturn {
     'cli_version'?: string | null;
     /**
      * 
-     * @type {Estimator}
-     * @memberof ResultReturn
-     */
-    'estimator'?: Estimator;
-    /**
-     * 
      * @type {string}
      * @memberof ResultReturn
      */
@@ -1099,6 +1105,24 @@ export interface ResultReturn {
      * @memberof ResultReturn
      */
     'neurovault_collection'?: NeurovaultCollection;
+    /**
+     * 
+     * @type {object}
+     * @memberof ResultReturn
+     */
+    'specification_snapshot'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof ResultReturn
+     */
+    'studyset_snapshot'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof ResultReturn
+     */
+    'annotation_snapshot'?: object;
     /**
      * the identifier for the resource.
      * @type {string}
