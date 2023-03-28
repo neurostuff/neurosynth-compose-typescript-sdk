@@ -2234,7 +2234,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "upload meta-analysis", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
     
@@ -5516,7 +5516,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "upload meta-analysis", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
     
@@ -6613,7 +6613,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "upload meta-analysis", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
     
