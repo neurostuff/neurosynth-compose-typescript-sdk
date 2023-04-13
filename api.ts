@@ -268,22 +268,22 @@ export interface MetaAnalysesGet400Response {
 export interface MetaAnalysis {
     /**
      * 
-     * @type {MetaAnalysisSpecification}
+     * @type {string | Specification}
      * @memberof MetaAnalysis
      */
-    'specification'?: MetaAnalysisSpecification;
+    'specification'?: string | Specification;
     /**
      * 
-     * @type {MetaAnalysisStudyset}
+     * @type {string | Studyset}
      * @memberof MetaAnalysis
      */
-    'studyset'?: MetaAnalysisStudyset;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {MetaAnalysisAnnotation}
+     * @type {string | Annotation}
      * @memberof MetaAnalysis
      */
-    'annotation'?: MetaAnalysisAnnotation;
+    'annotation'?: string | Annotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -309,11 +309,11 @@ export interface MetaAnalysis {
      */
     'internal_annotation_id'?: string;
     /**
-     * 
-     * @type {MetaAnalysisResults}
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<ResultReturn> | Array<string>}
      * @memberof MetaAnalysis
      */
-    'results'?: MetaAnalysisResults;
+    'results'?: Array<ResultReturn> | Array<string>;
     /**
      * 
      * @type {object}
@@ -334,11 +334,78 @@ export interface MetaAnalysis {
     'run_key'?: string;
 }
 /**
- * @type MetaAnalysisAnnotation
+ * 
  * @export
+ * @interface MetaAnalysisAllOf
  */
-export type MetaAnalysisAnnotation = Annotation | string;
-
+export interface MetaAnalysisAllOf {
+    /**
+     * 
+     * @type {string | Specification}
+     * @memberof MetaAnalysisAllOf
+     */
+    'specification'?: string | Specification;
+    /**
+     * 
+     * @type {string | Studyset}
+     * @memberof MetaAnalysisAllOf
+     */
+    'studyset'?: string | Studyset;
+    /**
+     * 
+     * @type {string | Annotation}
+     * @memberof MetaAnalysisAllOf
+     */
+    'annotation'?: string | Annotation;
+    /**
+     * Human-readable name of the meta-analysis.
+     * @type {string}
+     * @memberof MetaAnalysisAllOf
+     */
+    'name'?: string | null;
+    /**
+     * Long form description of the meta-analysis.
+     * @type {string}
+     * @memberof MetaAnalysisAllOf
+     */
+    'description'?: string | null;
+    /**
+     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
+     * @type {string}
+     * @memberof MetaAnalysisAllOf
+     */
+    'internal_studyset_id'?: string;
+    /**
+     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
+     * @type {string}
+     * @memberof MetaAnalysisAllOf
+     */
+    'internal_annotation_id'?: string;
+    /**
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<ResultReturn> | Array<string>}
+     * @memberof MetaAnalysisAllOf
+     */
+    'results'?: Array<ResultReturn> | Array<string>;
+    /**
+     * 
+     * @type {object}
+     * @memberof MetaAnalysisAllOf
+     */
+    'provenance'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisAllOf
+     */
+    'project'?: string | null;
+    /**
+     * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
+     * @type {string}
+     * @memberof MetaAnalysisAllOf
+     */
+    'run_key'?: string;
+}
 /**
  * 
  * @export
@@ -366,22 +433,22 @@ export interface MetaAnalysisList {
 export interface MetaAnalysisPostBody {
     /**
      * 
-     * @type {MetaAnalysisSpecification}
+     * @type {string | Specification}
      * @memberof MetaAnalysisPostBody
      */
-    'specification': MetaAnalysisSpecification;
+    'specification': string | Specification;
     /**
      * 
-     * @type {MetaAnalysisStudyset}
+     * @type {string | Studyset}
      * @memberof MetaAnalysisPostBody
      */
-    'studyset'?: MetaAnalysisStudyset;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {MetaAnalysisAnnotation}
+     * @type {string | Annotation}
      * @memberof MetaAnalysisPostBody
      */
-    'annotation'?: MetaAnalysisAnnotation;
+    'annotation'?: string | Annotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -407,11 +474,11 @@ export interface MetaAnalysisPostBody {
      */
     'internal_annotation_id': string;
     /**
-     * 
-     * @type {MetaAnalysisResults}
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<ResultReturn> | Array<string>}
      * @memberof MetaAnalysisPostBody
      */
-    'results'?: MetaAnalysisResults;
+    'results'?: Array<ResultReturn> | Array<string>;
     /**
      * 
      * @type {object}
@@ -432,13 +499,6 @@ export interface MetaAnalysisPostBody {
     'run_key'?: string;
 }
 /**
- * @type MetaAnalysisResults
- * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
- * @export
- */
-export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
-
-/**
  * 
  * @export
  * @interface MetaAnalysisReturn
@@ -446,22 +506,22 @@ export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
 export interface MetaAnalysisReturn {
     /**
      * 
-     * @type {MetaAnalysisSpecification}
+     * @type {string | Specification}
      * @memberof MetaAnalysisReturn
      */
-    'specification'?: MetaAnalysisSpecification;
+    'specification'?: string | Specification;
     /**
      * 
-     * @type {MetaAnalysisStudyset}
+     * @type {string | Studyset}
      * @memberof MetaAnalysisReturn
      */
-    'studyset'?: MetaAnalysisStudyset;
+    'studyset'?: string | Studyset;
     /**
      * 
-     * @type {MetaAnalysisAnnotation}
+     * @type {string | Annotation}
      * @memberof MetaAnalysisReturn
      */
-    'annotation'?: MetaAnalysisAnnotation;
+    'annotation'?: string | Annotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -487,11 +547,11 @@ export interface MetaAnalysisReturn {
      */
     'internal_annotation_id'?: string;
     /**
-     * 
-     * @type {MetaAnalysisResults}
+     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+     * @type {Array<ResultReturn> | Array<string>}
      * @memberof MetaAnalysisReturn
      */
-    'results'?: MetaAnalysisResults;
+    'results'?: Array<ResultReturn> | Array<string>;
     /**
      * 
      * @type {object}
@@ -536,17 +596,99 @@ export interface MetaAnalysisReturn {
     'user'?: string | null;
 }
 /**
- * @type MetaAnalysisSpecification
+ * 
  * @export
+ * @interface NeurostoreList
  */
-export type MetaAnalysisSpecification = Specification | string;
-
+export interface NeurostoreList {
+    /**
+     * 
+     * @type {Array<NeurostoreStudyReturn>}
+     * @memberof NeurostoreList
+     */
+    'results'?: Array<NeurostoreStudyReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof NeurostoreList
+     */
+    'metadata'?: object;
+}
 /**
- * @type MetaAnalysisStudyset
+ * 
  * @export
+ * @interface NeurostoreStudy
  */
-export type MetaAnalysisStudyset = Studyset | string;
-
+export interface NeurostoreStudy {
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreStudy
+     */
+    'neurostore_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreStudy
+     */
+    'table'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface NeurostoreStudyList
+ */
+export interface NeurostoreStudyList {
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreStudyList
+     */
+    'id'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface NeurostoreStudyReturn
+ */
+export interface NeurostoreStudyReturn {
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'neurostore_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'table'?: string;
+    /**
+     * the identifier for the resource.
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'id'?: string;
+    /**
+     * when the resource was last modified.
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'updated_at'?: string | null;
+    /**
+     * When the resource was created.
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'created_at'?: string;
+    /**
+     * Who owns the resource.
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'user'?: string | null;
+}
 /**
  * 
  * @export
@@ -877,6 +1019,12 @@ export interface Project {
      * @memberof Project
      */
     'description'?: string | null;
+    /**
+     * whether the project is public or private
+     * @type {boolean}
+     * @memberof Project
+     */
+    'public'?: boolean;
 }
 /**
  * 
@@ -957,6 +1105,12 @@ export interface ProjectReturn {
      * @memberof ProjectReturn
      */
     'description'?: string | null;
+    /**
+     * whether the project is public or private
+     * @type {boolean}
+     * @memberof ProjectReturn
+     */
+    'public'?: boolean;
 }
 /**
  * 
@@ -1043,6 +1197,12 @@ export interface Result {
      * @memberof Result
      */
     'annotation_snapshot'?: object;
+    /**
+     * 
+     * @type {NeurostoreStudy}
+     * @memberof Result
+     */
+    'neurostore_study'?: NeurostoreStudy;
 }
 /**
  * 
@@ -1123,6 +1283,12 @@ export interface ResultReturn {
      * @memberof ResultReturn
      */
     'annotation_snapshot'?: object;
+    /**
+     * 
+     * @type {NeurostoreStudy}
+     * @memberof ResultReturn
+     */
+    'neurostore_study'?: NeurostoreStudy;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -1227,13 +1393,13 @@ export interface SpecificationPostBody {
      * @type {string}
      * @memberof SpecificationPostBody
      */
-    'type': string;
+    'type'?: string;
     /**
      * 
      * @type {Estimator}
      * @memberof SpecificationPostBody
      */
-    'estimator': Estimator;
+    'estimator'?: Estimator;
     /**
      * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
      * @type {string}
@@ -4166,6 +4332,306 @@ export class ComposeApi extends BaseAPI {
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: AxiosRequestConfig) {
         return ComposeApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * DefaultApi - axios parameter creator
+ * @export
+ */
+export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurostore-studies`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurostoreStudiesIdGet', 'id', id)
+            const localVarPath = `/neurostore-studies/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesIdPut: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurostoreStudiesIdPut', 'id', id)
+            const localVarPath = `/neurostore-studies/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurostore-studies`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DefaultApi - functional programming interface
+ * @export
+ */
+export const DefaultApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurostoreStudiesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurostoreStudyList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreStudiesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurostoreStudiesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurostoreStudyReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreStudiesIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurostoreStudiesIdPut(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurostoreStudyReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreStudiesIdPut(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurostoreStudiesPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurostoreStudyReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreStudiesPost(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * DefaultApi - factory interface
+ * @export
+ */
+export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DefaultApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesGet(options?: any): AxiosPromise<NeurostoreStudyList> {
+            return localVarFp.neurostoreStudiesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesIdGet(id: string, options?: any): AxiosPromise<NeurostoreStudyReturn> {
+            return localVarFp.neurostoreStudiesIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesIdPut(id: string, options?: any): AxiosPromise<NeurostoreStudyReturn> {
+            return localVarFp.neurostoreStudiesIdPut(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreStudiesPost(options?: any): AxiosPromise<NeurostoreStudyReturn> {
+            return localVarFp.neurostoreStudiesPost(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DefaultApi - object-oriented interface
+ * @export
+ * @class DefaultApi
+ * @extends {BaseAPI}
+ */
+export class DefaultApi extends BaseAPI {
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public neurostoreStudiesGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreStudiesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public neurostoreStudiesIdGet(id: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreStudiesIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public neurostoreStudiesIdPut(id: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreStudiesIdPut(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public neurostoreStudiesPost(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreStudiesPost(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
