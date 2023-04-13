@@ -598,21 +598,21 @@ export interface MetaAnalysisReturn {
 /**
  * 
  * @export
- * @interface NeurostoreList
+ * @interface NeurostoreAnalysis
  */
-export interface NeurostoreList {
+export interface NeurostoreAnalysis {
     /**
      * 
-     * @type {Array<NeurostoreStudyReturn>}
-     * @memberof NeurostoreList
+     * @type {string}
+     * @memberof NeurostoreAnalysis
      */
-    'results'?: Array<NeurostoreStudyReturn>;
+    'table'?: string;
     /**
      * 
-     * @type {object}
-     * @memberof NeurostoreList
+     * @type {string}
+     * @memberof NeurostoreAnalysis
      */
-    'metadata'?: object;
+    'neurostore_id'?: string;
 }
 /**
  * 
@@ -628,10 +628,10 @@ export interface NeurostoreStudy {
     'neurostore_id'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<NeurostoreAnalysis>}
      * @memberof NeurostoreStudy
      */
-    'table'?: string;
+    'analyses'?: Array<NeurostoreAnalysis>;
 }
 /**
  * 
@@ -641,10 +641,16 @@ export interface NeurostoreStudy {
 export interface NeurostoreStudyList {
     /**
      * 
-     * @type {string}
+     * @type {Array<NeurostoreStudyReturn>}
      * @memberof NeurostoreStudyList
      */
-    'id'?: string;
+    'results'?: Array<NeurostoreStudyReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof NeurostoreStudyList
+     */
+    'metadata'?: object;
 }
 /**
  * 
@@ -660,10 +666,10 @@ export interface NeurostoreStudyReturn {
     'neurostore_id'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<NeurostoreAnalysis>}
      * @memberof NeurostoreStudyReturn
      */
-    'table'?: string;
+    'analyses'?: Array<NeurostoreAnalysis>;
     /**
      * the identifier for the resource.
      * @type {string}
