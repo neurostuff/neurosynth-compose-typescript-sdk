@@ -2408,11 +2408,19 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost: async (result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsPost: async (images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analysis-results`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2424,6 +2432,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
@@ -2433,13 +2442,49 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
+            if (images !== undefined) { 
+                localVarFormParams.append('images', new Blob([JSON.stringify(images)], { type: "application/json", }));
+            }
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+            if (metaAnalysisId !== undefined) { 
+                localVarFormParams.append('meta_analysis_id', metaAnalysisId as any);
+            }
+    
+            if (cliVersion !== undefined) { 
+                localVarFormParams.append('cli_version', cliVersion as any);
+            }
+    
+            if (neurostoreId !== undefined) { 
+                localVarFormParams.append('neurostore_id', neurostoreId as any);
+            }
+    
+            if (neurovaultCollection !== undefined) { 
+                localVarFormParams.append('neurovault_collection', new Blob([JSON.stringify(neurovaultCollection)], { type: "application/json", }));
+            }
+    
+            if (specificationSnapshot !== undefined) { 
+                localVarFormParams.append('specification_snapshot', new Blob([JSON.stringify(specificationSnapshot)], { type: "application/json", }));
+            }
+    
+            if (studysetSnapshot !== undefined) { 
+                localVarFormParams.append('studyset_snapshot', new Blob([JSON.stringify(studysetSnapshot)], { type: "application/json", }));
+            }
+    
+            if (annotationSnapshot !== undefined) { 
+                localVarFormParams.append('annotation_snapshot', new Blob([JSON.stringify(annotationSnapshot)], { type: "application/json", }));
+            }
+    
+            if (neurostoreStudy !== undefined) { 
+                localVarFormParams.append('neurostore_study', new Blob([JSON.stringify(neurostoreStudy)], { type: "application/json", }));
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3355,12 +3400,20 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(result, options);
+        async metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3718,12 +3771,20 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(result?: Result, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsPost(result, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4082,13 +4143,21 @@ export class ComposeApi extends BaseAPI {
     /**
      * 
      * @summary 
-     * @param {Result} [result] 
+     * @param {object} [images] 
+     * @param {string} [metaAnalysisId] 
+     * @param {string} [cliVersion] 
+     * @param {string} [neurostoreId] 
+     * @param {NeurovaultCollection} [neurovaultCollection] 
+     * @param {object} [specificationSnapshot] 
+     * @param {object} [studysetSnapshot] 
+     * @param {object} [annotationSnapshot] 
+     * @param {NeurostoreStudy} [neurostoreStudy] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).metaAnalysisResultsPost(result, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5990,11 +6059,19 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost: async (result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsPost: async (images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analysis-results`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6006,6 +6083,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
@@ -6015,13 +6093,49 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
+            if (images !== undefined) { 
+                localVarFormParams.append('images', new Blob([JSON.stringify(images)], { type: "application/json", }));
+            }
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+            if (metaAnalysisId !== undefined) { 
+                localVarFormParams.append('meta_analysis_id', metaAnalysisId as any);
+            }
+    
+            if (cliVersion !== undefined) { 
+                localVarFormParams.append('cli_version', cliVersion as any);
+            }
+    
+            if (neurostoreId !== undefined) { 
+                localVarFormParams.append('neurostore_id', neurostoreId as any);
+            }
+    
+            if (neurovaultCollection !== undefined) { 
+                localVarFormParams.append('neurovault_collection', new Blob([JSON.stringify(neurovaultCollection)], { type: "application/json", }));
+            }
+    
+            if (specificationSnapshot !== undefined) { 
+                localVarFormParams.append('specification_snapshot', new Blob([JSON.stringify(specificationSnapshot)], { type: "application/json", }));
+            }
+    
+            if (studysetSnapshot !== undefined) { 
+                localVarFormParams.append('studyset_snapshot', new Blob([JSON.stringify(studysetSnapshot)], { type: "application/json", }));
+            }
+    
+            if (annotationSnapshot !== undefined) { 
+                localVarFormParams.append('annotation_snapshot', new Blob([JSON.stringify(annotationSnapshot)], { type: "application/json", }));
+            }
+    
+            if (neurostoreStudy !== undefined) { 
+                localVarFormParams.append('neurostore_study', new Blob([JSON.stringify(neurostoreStudy)], { type: "application/json", }));
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6121,12 +6235,20 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(result, options);
+        async metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -6215,12 +6337,20 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(result?: Result, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsPost(result, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6322,13 +6452,21 @@ export class MetaAnalysesApi extends BaseAPI {
     /**
      * 
      * @summary 
-     * @param {Result} [result] 
+     * @param {object} [images] 
+     * @param {string} [metaAnalysisId] 
+     * @param {string} [cliVersion] 
+     * @param {string} [neurostoreId] 
+     * @param {NeurovaultCollection} [neurovaultCollection] 
+     * @param {object} [specificationSnapshot] 
+     * @param {object} [studysetSnapshot] 
+     * @param {object} [annotationSnapshot] 
+     * @param {NeurostoreStudy} [neurostoreStudy] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysesApi
      */
-    public metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig) {
-        return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsPost(result, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -7087,11 +7225,19 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost: async (result?: Result, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsPost: async (images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analysis-results`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7103,6 +7249,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
@@ -7112,13 +7259,49 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
+            if (images !== undefined) { 
+                localVarFormParams.append('images', new Blob([JSON.stringify(images)], { type: "application/json", }));
+            }
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+            if (metaAnalysisId !== undefined) { 
+                localVarFormParams.append('meta_analysis_id', metaAnalysisId as any);
+            }
+    
+            if (cliVersion !== undefined) { 
+                localVarFormParams.append('cli_version', cliVersion as any);
+            }
+    
+            if (neurostoreId !== undefined) { 
+                localVarFormParams.append('neurostore_id', neurostoreId as any);
+            }
+    
+            if (neurovaultCollection !== undefined) { 
+                localVarFormParams.append('neurovault_collection', new Blob([JSON.stringify(neurovaultCollection)], { type: "application/json", }));
+            }
+    
+            if (specificationSnapshot !== undefined) { 
+                localVarFormParams.append('specification_snapshot', new Blob([JSON.stringify(specificationSnapshot)], { type: "application/json", }));
+            }
+    
+            if (studysetSnapshot !== undefined) { 
+                localVarFormParams.append('studyset_snapshot', new Blob([JSON.stringify(studysetSnapshot)], { type: "application/json", }));
+            }
+    
+            if (annotationSnapshot !== undefined) { 
+                localVarFormParams.append('annotation_snapshot', new Blob([JSON.stringify(annotationSnapshot)], { type: "application/json", }));
+            }
+    
+            if (neurostoreStudy !== undefined) { 
+                localVarFormParams.append('neurostore_study', new Blob([JSON.stringify(neurostoreStudy)], { type: "application/json", }));
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(result, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7346,12 +7529,20 @@ export const PostApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(result, options);
+        async metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7441,12 +7632,20 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @summary 
-         * @param {Result} [result] 
+         * @param {object} [images] 
+         * @param {string} [metaAnalysisId] 
+         * @param {string} [cliVersion] 
+         * @param {string} [neurostoreId] 
+         * @param {NeurovaultCollection} [neurovaultCollection] 
+         * @param {object} [specificationSnapshot] 
+         * @param {object} [studysetSnapshot] 
+         * @param {object} [annotationSnapshot] 
+         * @param {NeurostoreStudy} [neurostoreStudy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(result?: Result, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsPost(result, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7534,13 +7733,21 @@ export class PostApi extends BaseAPI {
     /**
      * 
      * @summary 
-     * @param {Result} [result] 
+     * @param {object} [images] 
+     * @param {string} [metaAnalysisId] 
+     * @param {string} [cliVersion] 
+     * @param {string} [neurostoreId] 
+     * @param {NeurovaultCollection} [neurovaultCollection] 
+     * @param {object} [specificationSnapshot] 
+     * @param {object} [studysetSnapshot] 
+     * @param {object} [annotationSnapshot] 
+     * @param {NeurostoreStudy} [neurostoreStudy] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
      */
-    public metaAnalysisResultsPost(result?: Result, options?: AxiosRequestConfig) {
-        return PostApiFp(this.configuration).metaAnalysisResultsPost(result, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
