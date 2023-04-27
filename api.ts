@@ -42,7 +42,7 @@ export interface Annotation {
      */
     'snapshot'?: object | null;
     /**
-     * The related studyset to this annotation.
+     * The related cached studyset to this annotation.
      * @type {string}
      * @memberof Annotation
      */
@@ -92,7 +92,7 @@ export interface AnnotationPostBody {
      */
     'snapshot'?: object | null;
     /**
-     * The related studyset to this annotation.
+     * The related cached studyset to this annotation.
      * @type {string}
      * @memberof AnnotationPostBody
      */
@@ -117,7 +117,7 @@ export interface AnnotationReturn {
      */
     'snapshot'?: object | null;
     /**
-     * The related studyset to this annotation.
+     * The related cached studyset to this annotation.
      * @type {string}
      * @memberof AnnotationReturn
      */
@@ -172,7 +172,7 @@ export interface AnnotationUpdate {
      */
     'snapshot'?: object | null;
     /**
-     * The related studyset to this annotation.
+     * The related cached studyset to this annotation.
      * @type {string}
      * @memberof AnnotationUpdate
      */
@@ -268,22 +268,22 @@ export interface MetaAnalysesGet400Response {
 export interface MetaAnalysis {
     /**
      * 
-     * @type {string | Specification}
+     * @type {MetaAnalysisSpecification}
      * @memberof MetaAnalysis
      */
-    'specification'?: string | Specification;
+    'specification'?: MetaAnalysisSpecification;
     /**
      * 
-     * @type {string | Studyset}
+     * @type {MetaAnalysisStudyset}
      * @memberof MetaAnalysis
      */
-    'studyset'?: string | Studyset;
+    'studyset'?: MetaAnalysisStudyset;
     /**
      * 
-     * @type {string | Annotation}
+     * @type {MetaAnalysisAnnotation}
      * @memberof MetaAnalysis
      */
-    'annotation'?: string | Annotation;
+    'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -301,19 +301,19 @@ export interface MetaAnalysis {
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'internal_studyset_id'?: string;
+    'cached_studyset_id'?: string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'internal_annotation_id'?: string;
+    'cached_annotation_id'?: string;
     /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<ResultReturn> | Array<string>}
+     * 
+     * @type {MetaAnalysisResults}
      * @memberof MetaAnalysis
      */
-    'results'?: Array<ResultReturn> | Array<string>;
+    'results'?: MetaAnalysisResults;
     /**
      * 
      * @type {object}
@@ -332,80 +332,49 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'run_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'neurostore_analysis_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'hash'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'cognitive_contrast_cogatlas'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'cognitive_contrast_cogatlas_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'cognitive_paradigm_cogatlas'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'cognitive_paradigm_cogatlas_id'?: string | null;
 }
 /**
- * 
+ * @type MetaAnalysisAnnotation
  * @export
- * @interface MetaAnalysisAllOf
  */
-export interface MetaAnalysisAllOf {
-    /**
-     * 
-     * @type {string | Specification}
-     * @memberof MetaAnalysisAllOf
-     */
-    'specification'?: string | Specification;
-    /**
-     * 
-     * @type {string | Studyset}
-     * @memberof MetaAnalysisAllOf
-     */
-    'studyset'?: string | Studyset;
-    /**
-     * 
-     * @type {string | Annotation}
-     * @memberof MetaAnalysisAllOf
-     */
-    'annotation'?: string | Annotation;
-    /**
-     * Human-readable name of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysisAllOf
-     */
-    'name'?: string | null;
-    /**
-     * Long form description of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysisAllOf
-     */
-    'description'?: string | null;
-    /**
-     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysisAllOf
-     */
-    'internal_studyset_id'?: string;
-    /**
-     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysisAllOf
-     */
-    'internal_annotation_id'?: string;
-    /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<ResultReturn> | Array<string>}
-     * @memberof MetaAnalysisAllOf
-     */
-    'results'?: Array<ResultReturn> | Array<string>;
-    /**
-     * 
-     * @type {object}
-     * @memberof MetaAnalysisAllOf
-     */
-    'provenance'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisAllOf
-     */
-    'project'?: string | null;
-    /**
-     * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
-     * @type {string}
-     * @memberof MetaAnalysisAllOf
-     */
-    'run_key'?: string;
-}
+export type MetaAnalysisAnnotation = Annotation | string;
+
 /**
  * 
  * @export
@@ -433,22 +402,22 @@ export interface MetaAnalysisList {
 export interface MetaAnalysisPostBody {
     /**
      * 
-     * @type {string | Specification}
+     * @type {MetaAnalysisSpecification}
      * @memberof MetaAnalysisPostBody
      */
-    'specification': string | Specification;
+    'specification': MetaAnalysisSpecification;
     /**
      * 
-     * @type {string | Studyset}
+     * @type {MetaAnalysisStudyset}
      * @memberof MetaAnalysisPostBody
      */
-    'studyset'?: string | Studyset;
+    'studyset'?: MetaAnalysisStudyset;
     /**
      * 
-     * @type {string | Annotation}
+     * @type {MetaAnalysisAnnotation}
      * @memberof MetaAnalysisPostBody
      */
-    'annotation'?: string | Annotation;
+    'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -466,19 +435,19 @@ export interface MetaAnalysisPostBody {
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
-    'internal_studyset_id': string;
+    'cached_studyset_id'?: string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
-    'internal_annotation_id': string;
+    'cached_annotation_id'?: string;
     /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<ResultReturn> | Array<string>}
+     * 
+     * @type {MetaAnalysisResults}
      * @memberof MetaAnalysisPostBody
      */
-    'results'?: Array<ResultReturn> | Array<string>;
+    'results'?: MetaAnalysisResults;
     /**
      * 
      * @type {object}
@@ -497,7 +466,50 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'run_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'neurostore_analysis_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'hash'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'cognitive_contrast_cogatlas'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'cognitive_contrast_cogatlas_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'cognitive_paradigm_cogatlas'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'cognitive_paradigm_cogatlas_id'?: string | null;
 }
+/**
+ * @type MetaAnalysisResults
+ * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
+ * @export
+ */
+export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
+
 /**
  * 
  * @export
@@ -506,22 +518,22 @@ export interface MetaAnalysisPostBody {
 export interface MetaAnalysisReturn {
     /**
      * 
-     * @type {string | Specification}
+     * @type {MetaAnalysisSpecification}
      * @memberof MetaAnalysisReturn
      */
-    'specification'?: string | Specification;
+    'specification'?: MetaAnalysisSpecification;
     /**
      * 
-     * @type {string | Studyset}
+     * @type {MetaAnalysisStudyset}
      * @memberof MetaAnalysisReturn
      */
-    'studyset'?: string | Studyset;
+    'studyset'?: MetaAnalysisStudyset;
     /**
      * 
-     * @type {string | Annotation}
+     * @type {MetaAnalysisAnnotation}
      * @memberof MetaAnalysisReturn
      */
-    'annotation'?: string | Annotation;
+    'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      * @type {string}
@@ -539,19 +551,19 @@ export interface MetaAnalysisReturn {
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'internal_studyset_id'?: string;
+    'cached_studyset_id'?: string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'internal_annotation_id'?: string;
+    'cached_annotation_id'?: string;
     /**
-     * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
-     * @type {Array<ResultReturn> | Array<string>}
+     * 
+     * @type {MetaAnalysisResults}
      * @memberof MetaAnalysisReturn
      */
-    'results'?: Array<ResultReturn> | Array<string>;
+    'results'?: MetaAnalysisResults;
     /**
      * 
      * @type {object}
@@ -570,6 +582,42 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'run_key'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'neurostore_analysis_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'hash'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'cognitive_contrast_cogatlas'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'cognitive_contrast_cogatlas_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'cognitive_paradigm_cogatlas'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'cognitive_paradigm_cogatlas_id'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -596,6 +644,18 @@ export interface MetaAnalysisReturn {
     'user'?: string | null;
 }
 /**
+ * @type MetaAnalysisSpecification
+ * @export
+ */
+export type MetaAnalysisSpecification = Specification | string;
+
+/**
+ * @type MetaAnalysisStudyset
+ * @export
+ */
+export type MetaAnalysisStudyset = Studyset | string;
+
+/**
  * 
  * @export
  * @interface NeurostoreAnalysis
@@ -606,13 +666,25 @@ export interface NeurostoreAnalysis {
      * @type {string}
      * @memberof NeurostoreAnalysis
      */
-    'table'?: string;
+    'neurostore_id'?: string;
     /**
      * 
      * @type {string}
      * @memberof NeurostoreAnalysis
      */
-    'neurostore_id'?: string;
+    'exception'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreAnalysis
+     */
+    'traceback'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreAnalysis
+     */
+    'status'?: string;
 }
 /**
  * 
@@ -810,12 +882,6 @@ export interface NeurovaultFile {
      * @type {string}
      * @memberof NeurovaultFile
      */
-    'file'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'image_id'?: string | null;
     /**
      * 
@@ -823,36 +889,6 @@ export interface NeurovaultFile {
      * @memberof NeurovaultFile
      */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
-    'map_type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
-    'cognitive_contrast_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
-    'cognitive_contrast_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
-    'cognitive_paradigm_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
-    'cognitive_paradigm_cogatlas_id'?: string | null;
 }
 /**
  * 
@@ -908,12 +944,6 @@ export interface NeurovaultFileReturn {
      * @type {string}
      * @memberof NeurovaultFileReturn
      */
-    'file'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'image_id'?: string | null;
     /**
      * 
@@ -921,36 +951,6 @@ export interface NeurovaultFileReturn {
      * @memberof NeurovaultFileReturn
      */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
-    'map_type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
-    'cognitive_contrast_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
-    'cognitive_contrast_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
-    'cognitive_paradigm_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
-    'cognitive_paradigm_cogatlas_id'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -1031,6 +1031,12 @@ export interface Project {
      * @memberof Project
      */
     'public'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Project
+     */
+    'neurostore_id'?: string;
 }
 /**
  * 
@@ -1117,6 +1123,12 @@ export interface ProjectReturn {
      * @memberof ProjectReturn
      */
     'public'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'neurostore_id'?: string;
 }
 /**
  * 
@@ -1157,12 +1169,6 @@ export interface ReadOnly {
 export interface Result {
     /**
      * 
-     * @type {object}
-     * @memberof Result
-     */
-    'images'?: object;
-    /**
-     * 
      * @type {string}
      * @memberof Result
      */
@@ -1178,37 +1184,62 @@ export interface Result {
      * @type {string}
      * @memberof Result
      */
-    'neurostore_id'?: string | null;
+    'neurovault_collection_id'?: string | null;
     /**
      * 
-     * @type {NeurovaultCollection}
+     * @type {string}
      * @memberof Result
      */
-    'neurovault_collection'?: NeurovaultCollection;
+    'methods_description'?: string | null;
+    /**
+     * 
+     * @type {Array<NeurovaultFile>}
+     * @memberof Result
+     */
+    'neurovault_images'?: Array<NeurovaultFile>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Result
+     */
+    'diagnostic_tables'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Result
+     */
+    ''?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ResultInit
+ */
+export interface ResultInit {
+    /**
+     * 
+     * @type {string}
+     * @memberof ResultInit
+     */
+    'meta_analysis_id'?: string;
     /**
      * 
      * @type {object}
-     * @memberof Result
-     */
-    'specification_snapshot'?: object;
-    /**
-     * 
-     * @type {object}
-     * @memberof Result
+     * @memberof ResultInit
      */
     'studyset_snapshot'?: object;
     /**
      * 
      * @type {object}
-     * @memberof Result
+     * @memberof ResultInit
      */
     'annotation_snapshot'?: object;
     /**
      * 
-     * @type {NeurostoreStudy}
-     * @memberof Result
+     * @type {string}
+     * @memberof ResultInit
      */
-    'neurostore_study'?: NeurostoreStudy;
+    'cli_version'?: string;
 }
 /**
  * 
@@ -1243,12 +1274,6 @@ export type ResultListResults = Array<ResultReturn> | Array<string>;
 export interface ResultReturn {
     /**
      * 
-     * @type {object}
-     * @memberof ResultReturn
-     */
-    'images'?: object;
-    /**
-     * 
      * @type {string}
      * @memberof ResultReturn
      */
@@ -1264,37 +1289,31 @@ export interface ResultReturn {
      * @type {string}
      * @memberof ResultReturn
      */
-    'neurostore_id'?: string | null;
+    'neurovault_collection_id'?: string | null;
     /**
      * 
-     * @type {NeurovaultCollection}
+     * @type {string}
      * @memberof ResultReturn
      */
-    'neurovault_collection'?: NeurovaultCollection;
+    'methods_description'?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {Array<NeurovaultFile>}
      * @memberof ResultReturn
      */
-    'specification_snapshot'?: object;
+    'neurovault_images'?: Array<NeurovaultFile>;
     /**
      * 
-     * @type {object}
+     * @type {Array<string>}
      * @memberof ResultReturn
      */
-    'studyset_snapshot'?: object;
+    'diagnostic_tables'?: Array<string>;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof ResultReturn
      */
-    'annotation_snapshot'?: object;
-    /**
-     * 
-     * @type {NeurostoreStudy}
-     * @memberof ResultReturn
-     */
-    'neurostore_study'?: NeurostoreStudy;
+    ''?: string;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -2408,19 +2427,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost: async (images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsPost: async (resultInit?: ResultInit, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analysis-results`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2432,7 +2443,6 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
@@ -2442,49 +2452,13 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
-            if (images !== undefined) { 
-                localVarFormParams.append('images', new Blob([JSON.stringify(images)], { type: "application/json", }));
-            }
     
-            if (metaAnalysisId !== undefined) { 
-                localVarFormParams.append('meta_analysis_id', metaAnalysisId as any);
-            }
-    
-            if (cliVersion !== undefined) { 
-                localVarFormParams.append('cli_version', cliVersion as any);
-            }
-    
-            if (neurostoreId !== undefined) { 
-                localVarFormParams.append('neurostore_id', neurostoreId as any);
-            }
-    
-            if (neurovaultCollection !== undefined) { 
-                localVarFormParams.append('neurovault_collection', new Blob([JSON.stringify(neurovaultCollection)], { type: "application/json", }));
-            }
-    
-            if (specificationSnapshot !== undefined) { 
-                localVarFormParams.append('specification_snapshot', new Blob([JSON.stringify(specificationSnapshot)], { type: "application/json", }));
-            }
-    
-            if (studysetSnapshot !== undefined) { 
-                localVarFormParams.append('studyset_snapshot', new Blob([JSON.stringify(studysetSnapshot)], { type: "application/json", }));
-            }
-    
-            if (annotationSnapshot !== undefined) { 
-                localVarFormParams.append('annotation_snapshot', new Blob([JSON.stringify(annotationSnapshot)], { type: "application/json", }));
-            }
-    
-            if (neurostoreStudy !== undefined) { 
-                localVarFormParams.append('neurostore_study', new Blob([JSON.stringify(neurostoreStudy)], { type: "application/json", }));
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(resultInit, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2493,7 +2467,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2595,11 +2569,12 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultCollectionsPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultCollectionsPost: async (neurovaultCollection?: NeurovaultCollection, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/neurovault-collections`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2618,9 +2593,12 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(neurovaultCollection, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2699,18 +2677,12 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('neurovaultFilesIdPut', 'id', id)
             const localVarPath = `/neurovault-files/{id}`
@@ -2748,36 +2720,12 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
                 localVarFormParams.append('status', status as any);
             }
     
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
             if (imageId !== undefined) { 
                 localVarFormParams.append('image_id', imageId as any);
             }
     
             if (name !== undefined) { 
                 localVarFormParams.append('name', name as any);
-            }
-    
-            if (mapType !== undefined) { 
-                localVarFormParams.append('map_type', mapType as any);
-            }
-    
-            if (cognitiveContrastCogatlas !== undefined) { 
-                localVarFormParams.append('cognitive_contrast_cogatlas', cognitiveContrastCogatlas as any);
-            }
-    
-            if (cognitiveContrastCogatlasId !== undefined) { 
-                localVarFormParams.append('cognitive_contrast_cogatlas_id', cognitiveContrastCogatlasId as any);
-            }
-    
-            if (cognitiveParadigmCogatlas !== undefined) { 
-                localVarFormParams.append('cognitive_paradigm_cogatlas', cognitiveParadigmCogatlas as any);
-            }
-    
-            if (cognitiveParadigmCogatlasId !== undefined) { 
-                localVarFormParams.append('cognitive_paradigm_cogatlas_id', cognitiveParadigmCogatlasId as any);
             }
     
     
@@ -3400,25 +3348,17 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options);
+        async metaAnalysisResultsPost(resultInit?: ResultInit, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(resultInit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3450,12 +3390,13 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultCollectionsPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(options);
+        async neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(neurovaultCollection, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3487,19 +3428,13 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options);
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3771,24 +3706,16 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsPost(resultInit?: ResultInit, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3817,12 +3744,13 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultCollectionsPost(options?: any): AxiosPromise<void> {
-            return localVarFp.neurovaultCollectionsPost(options).then((request) => request(axios, basePath));
+        neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsPost(neurovaultCollection, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3851,19 +3779,13 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(axios, basePath));
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4143,26 +4065,18 @@ export class ComposeApi extends BaseAPI {
     /**
      * 
      * @summary 
-     * @param {object} [images] 
-     * @param {string} [metaAnalysisId] 
-     * @param {string} [cliVersion] 
-     * @param {string} [neurostoreId] 
-     * @param {NeurovaultCollection} [neurovaultCollection] 
-     * @param {object} [specificationSnapshot] 
-     * @param {object} [studysetSnapshot] 
-     * @param {object} [annotationSnapshot] 
-     * @param {NeurostoreStudy} [neurostoreStudy] 
+     * @param {ResultInit} [resultInit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsPost(resultInit?: ResultInit, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Your GET endpoint
+     * @summary Get neurovault collections
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
@@ -4197,13 +4111,14 @@ export class ComposeApi extends BaseAPI {
 
     /**
      * 
-     * @summary 
+     * @summary Create neurovault collection
+     * @param {NeurovaultCollection} [neurovaultCollection] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public neurovaultCollectionsPost(options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).neurovaultCollectionsPost(options).then((request) => request(this.axios, this.basePath));
+    public neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultCollectionsPost(neurovaultCollection, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4237,20 +4152,14 @@ export class ComposeApi extends BaseAPI {
      * @param {string} [exception] 
      * @param {string} [traceback] 
      * @param {string} [status] 
-     * @param {string} [file] 
      * @param {string} [imageId] 
      * @param {string} [name] 
-     * @param {string} [mapType] 
-     * @param {string} [cognitiveContrastCogatlas] 
-     * @param {string} [cognitiveContrastCogatlasId] 
-     * @param {string} [cognitiveParadigmCogatlas] 
-     * @param {string} [cognitiveParadigmCogatlasId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(this.axios, this.basePath));
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4926,7 +4835,7 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5322,7 +5231,7 @@ export const GetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5497,7 +5406,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5674,7 +5583,7 @@ export class GetApi extends BaseAPI {
 
     /**
      * 
-     * @summary Your GET endpoint
+     * @summary Get neurovault collections
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
@@ -6059,19 +5968,11 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost: async (images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsPost: async (resultInit?: ResultInit, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analysis-results`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6083,7 +5984,6 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
@@ -6093,49 +5993,13 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
-            if (images !== undefined) { 
-                localVarFormParams.append('images', new Blob([JSON.stringify(images)], { type: "application/json", }));
-            }
     
-            if (metaAnalysisId !== undefined) { 
-                localVarFormParams.append('meta_analysis_id', metaAnalysisId as any);
-            }
-    
-            if (cliVersion !== undefined) { 
-                localVarFormParams.append('cli_version', cliVersion as any);
-            }
-    
-            if (neurostoreId !== undefined) { 
-                localVarFormParams.append('neurostore_id', neurostoreId as any);
-            }
-    
-            if (neurovaultCollection !== undefined) { 
-                localVarFormParams.append('neurovault_collection', new Blob([JSON.stringify(neurovaultCollection)], { type: "application/json", }));
-            }
-    
-            if (specificationSnapshot !== undefined) { 
-                localVarFormParams.append('specification_snapshot', new Blob([JSON.stringify(specificationSnapshot)], { type: "application/json", }));
-            }
-    
-            if (studysetSnapshot !== undefined) { 
-                localVarFormParams.append('studyset_snapshot', new Blob([JSON.stringify(studysetSnapshot)], { type: "application/json", }));
-            }
-    
-            if (annotationSnapshot !== undefined) { 
-                localVarFormParams.append('annotation_snapshot', new Blob([JSON.stringify(annotationSnapshot)], { type: "application/json", }));
-            }
-    
-            if (neurostoreStudy !== undefined) { 
-                localVarFormParams.append('neurostore_study', new Blob([JSON.stringify(neurostoreStudy)], { type: "application/json", }));
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(resultInit, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6235,20 +6099,12 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options);
+        async metaAnalysisResultsPost(resultInit?: ResultInit, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(resultInit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -6337,20 +6193,12 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsPost(resultInit?: ResultInit, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6452,21 +6300,13 @@ export class MetaAnalysesApi extends BaseAPI {
     /**
      * 
      * @summary 
-     * @param {object} [images] 
-     * @param {string} [metaAnalysisId] 
-     * @param {string} [cliVersion] 
-     * @param {string} [neurostoreId] 
-     * @param {NeurovaultCollection} [neurovaultCollection] 
-     * @param {object} [specificationSnapshot] 
-     * @param {object} [studysetSnapshot] 
-     * @param {object} [annotationSnapshot] 
-     * @param {NeurostoreStudy} [neurostoreStudy] 
+     * @param {ResultInit} [resultInit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysesApi
      */
-    public metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig) {
-        return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsPost(resultInit?: ResultInit, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -6479,7 +6319,7 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6581,11 +6421,12 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultCollectionsPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultCollectionsPost: async (neurovaultCollection?: NeurovaultCollection, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/neurovault-collections`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6604,9 +6445,12 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(neurovaultCollection, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6685,18 +6529,12 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('neurovaultFilesIdPut', 'id', id)
             const localVarPath = `/neurovault-files/{id}`
@@ -6734,36 +6572,12 @@ export const NeurovaultApiAxiosParamCreator = function (configuration?: Configur
                 localVarFormParams.append('status', status as any);
             }
     
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
             if (imageId !== undefined) { 
                 localVarFormParams.append('image_id', imageId as any);
             }
     
             if (name !== undefined) { 
                 localVarFormParams.append('name', name as any);
-            }
-    
-            if (mapType !== undefined) { 
-                localVarFormParams.append('map_type', mapType as any);
-            }
-    
-            if (cognitiveContrastCogatlas !== undefined) { 
-                localVarFormParams.append('cognitive_contrast_cogatlas', cognitiveContrastCogatlas as any);
-            }
-    
-            if (cognitiveContrastCogatlasId !== undefined) { 
-                localVarFormParams.append('cognitive_contrast_cogatlas_id', cognitiveContrastCogatlasId as any);
-            }
-    
-            if (cognitiveParadigmCogatlas !== undefined) { 
-                localVarFormParams.append('cognitive_paradigm_cogatlas', cognitiveParadigmCogatlas as any);
-            }
-    
-            if (cognitiveParadigmCogatlasId !== undefined) { 
-                localVarFormParams.append('cognitive_paradigm_cogatlas_id', cognitiveParadigmCogatlasId as any);
             }
     
     
@@ -6829,7 +6643,7 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6861,12 +6675,13 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultCollectionsPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(options);
+        async neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(neurovaultCollection, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6898,19 +6713,13 @@ export const NeurovaultApiFp = function(configuration?: Configuration) {
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options);
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6936,7 +6745,7 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
-         * @summary Your GET endpoint
+         * @summary Get neurovault collections
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6965,12 +6774,13 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultCollectionsPost(options?: any): AxiosPromise<void> {
-            return localVarFp.neurovaultCollectionsPost(options).then((request) => request(axios, basePath));
+        neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsPost(neurovaultCollection, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6999,19 +6809,13 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(axios, basePath));
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7035,7 +6839,7 @@ export const NeurovaultApiFactory = function (configuration?: Configuration, bas
 export class NeurovaultApi extends BaseAPI {
     /**
      * 
-     * @summary Your GET endpoint
+     * @summary Get neurovault collections
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NeurovaultApi
@@ -7070,13 +6874,14 @@ export class NeurovaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary 
+     * @summary Create neurovault collection
+     * @param {NeurovaultCollection} [neurovaultCollection] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NeurovaultApi
      */
-    public neurovaultCollectionsPost(options?: AxiosRequestConfig) {
-        return NeurovaultApiFp(this.configuration).neurovaultCollectionsPost(options).then((request) => request(this.axios, this.basePath));
+    public neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: AxiosRequestConfig) {
+        return NeurovaultApiFp(this.configuration).neurovaultCollectionsPost(neurovaultCollection, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7110,20 +6915,14 @@ export class NeurovaultApi extends BaseAPI {
      * @param {string} [exception] 
      * @param {string} [traceback] 
      * @param {string} [status] 
-     * @param {string} [file] 
      * @param {string} [imageId] 
      * @param {string} [name] 
-     * @param {string} [mapType] 
-     * @param {string} [cognitiveContrastCogatlas] 
-     * @param {string} [cognitiveContrastCogatlasId] 
-     * @param {string} [cognitiveParadigmCogatlas] 
-     * @param {string} [cognitiveParadigmCogatlasId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NeurovaultApi
      */
-    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig) {
-        return NeurovaultApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(this.axios, this.basePath));
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: AxiosRequestConfig) {
+        return NeurovaultApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7225,19 +7024,11 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost: async (images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsPost: async (resultInit?: ResultInit, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analysis-results`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7249,7 +7040,6 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication JSON-Web-Token required
             // http bearer authentication required
@@ -7259,49 +7049,13 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
-            if (images !== undefined) { 
-                localVarFormParams.append('images', new Blob([JSON.stringify(images)], { type: "application/json", }));
-            }
     
-            if (metaAnalysisId !== undefined) { 
-                localVarFormParams.append('meta_analysis_id', metaAnalysisId as any);
-            }
-    
-            if (cliVersion !== undefined) { 
-                localVarFormParams.append('cli_version', cliVersion as any);
-            }
-    
-            if (neurostoreId !== undefined) { 
-                localVarFormParams.append('neurostore_id', neurostoreId as any);
-            }
-    
-            if (neurovaultCollection !== undefined) { 
-                localVarFormParams.append('neurovault_collection', new Blob([JSON.stringify(neurovaultCollection)], { type: "application/json", }));
-            }
-    
-            if (specificationSnapshot !== undefined) { 
-                localVarFormParams.append('specification_snapshot', new Blob([JSON.stringify(specificationSnapshot)], { type: "application/json", }));
-            }
-    
-            if (studysetSnapshot !== undefined) { 
-                localVarFormParams.append('studyset_snapshot', new Blob([JSON.stringify(studysetSnapshot)], { type: "application/json", }));
-            }
-    
-            if (annotationSnapshot !== undefined) { 
-                localVarFormParams.append('annotation_snapshot', new Blob([JSON.stringify(annotationSnapshot)], { type: "application/json", }));
-            }
-    
-            if (neurostoreStudy !== undefined) { 
-                localVarFormParams.append('neurostore_study', new Blob([JSON.stringify(neurostoreStudy)], { type: "application/json", }));
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(resultInit, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7310,11 +7064,12 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultCollectionsPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultCollectionsPost: async (neurovaultCollection?: NeurovaultCollection, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/neurovault-collections`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7333,9 +7088,12 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(neurovaultCollection, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7529,30 +7287,23 @@ export const PostApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options);
+        async metaAnalysisResultsPost(resultInit?: ResultInit, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsPost(resultInit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultCollectionsPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(options);
+        async neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultCollectionsPost(neurovaultCollection, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7632,29 +7383,22 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @summary 
-         * @param {object} [images] 
-         * @param {string} [metaAnalysisId] 
-         * @param {string} [cliVersion] 
-         * @param {string} [neurostoreId] 
-         * @param {NeurovaultCollection} [neurovaultCollection] 
-         * @param {object} [specificationSnapshot] 
-         * @param {object} [studysetSnapshot] 
-         * @param {object} [annotationSnapshot] 
-         * @param {NeurostoreStudy} [neurostoreStudy] 
+         * @param {ResultInit} [resultInit] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: any): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsPost(resultInit?: ResultInit, options?: any): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary 
+         * @summary Create neurovault collection
+         * @param {NeurovaultCollection} [neurovaultCollection] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultCollectionsPost(options?: any): AxiosPromise<void> {
-            return localVarFp.neurovaultCollectionsPost(options).then((request) => request(axios, basePath));
+        neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: any): AxiosPromise<void> {
+            return localVarFp.neurovaultCollectionsPost(neurovaultCollection, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7733,32 +7477,25 @@ export class PostApi extends BaseAPI {
     /**
      * 
      * @summary 
-     * @param {object} [images] 
-     * @param {string} [metaAnalysisId] 
-     * @param {string} [cliVersion] 
-     * @param {string} [neurostoreId] 
-     * @param {NeurovaultCollection} [neurovaultCollection] 
-     * @param {object} [specificationSnapshot] 
-     * @param {object} [studysetSnapshot] 
-     * @param {object} [annotationSnapshot] 
-     * @param {NeurostoreStudy} [neurostoreStudy] 
+     * @param {ResultInit} [resultInit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
      */
-    public metaAnalysisResultsPost(images?: object, metaAnalysisId?: string, cliVersion?: string, neurostoreId?: string, neurovaultCollection?: NeurovaultCollection, specificationSnapshot?: object, studysetSnapshot?: object, annotationSnapshot?: object, neurostoreStudy?: NeurostoreStudy, options?: AxiosRequestConfig) {
-        return PostApiFp(this.configuration).metaAnalysisResultsPost(images, metaAnalysisId, cliVersion, neurostoreId, neurovaultCollection, specificationSnapshot, studysetSnapshot, annotationSnapshot, neurostoreStudy, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsPost(resultInit?: ResultInit, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary 
+     * @summary Create neurovault collection
+     * @param {NeurovaultCollection} [neurovaultCollection] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
      */
-    public neurovaultCollectionsPost(options?: AxiosRequestConfig) {
-        return PostApiFp(this.configuration).neurovaultCollectionsPost(options).then((request) => request(this.axios, this.basePath));
+    public neurovaultCollectionsPost(neurovaultCollection?: NeurovaultCollection, options?: AxiosRequestConfig) {
+        return PostApiFp(this.configuration).neurovaultCollectionsPost(neurovaultCollection, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8299,18 +8036,12 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurovaultFilesIdPut: async (id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('neurovaultFilesIdPut', 'id', id)
             const localVarPath = `/neurovault-files/{id}`
@@ -8348,36 +8079,12 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
                 localVarFormParams.append('status', status as any);
             }
     
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
             if (imageId !== undefined) { 
                 localVarFormParams.append('image_id', imageId as any);
             }
     
             if (name !== undefined) { 
                 localVarFormParams.append('name', name as any);
-            }
-    
-            if (mapType !== undefined) { 
-                localVarFormParams.append('map_type', mapType as any);
-            }
-    
-            if (cognitiveContrastCogatlas !== undefined) { 
-                localVarFormParams.append('cognitive_contrast_cogatlas', cognitiveContrastCogatlas as any);
-            }
-    
-            if (cognitiveContrastCogatlasId !== undefined) { 
-                localVarFormParams.append('cognitive_contrast_cogatlas_id', cognitiveContrastCogatlasId as any);
-            }
-    
-            if (cognitiveParadigmCogatlas !== undefined) { 
-                localVarFormParams.append('cognitive_paradigm_cogatlas', cognitiveParadigmCogatlas as any);
-            }
-    
-            if (cognitiveParadigmCogatlasId !== undefined) { 
-                localVarFormParams.append('cognitive_paradigm_cogatlas_id', cognitiveParadigmCogatlasId as any);
             }
     
     
@@ -8584,19 +8291,13 @@ export const PutApiFp = function(configuration?: Configuration) {
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options);
+        async neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeurovaultFileReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8696,19 +8397,13 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {string} [exception] 
          * @param {string} [traceback] 
          * @param {string} [status] 
-         * @param {string} [file] 
          * @param {string} [imageId] 
          * @param {string} [name] 
-         * @param {string} [mapType] 
-         * @param {string} [cognitiveContrastCogatlas] 
-         * @param {string} [cognitiveContrastCogatlasId] 
-         * @param {string} [cognitiveParadigmCogatlas] 
-         * @param {string} [cognitiveParadigmCogatlasId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
-            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(axios, basePath));
+        neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: any): AxiosPromise<NeurovaultFileReturn> {
+            return localVarFp.neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8812,20 +8507,14 @@ export class PutApi extends BaseAPI {
      * @param {string} [exception] 
      * @param {string} [traceback] 
      * @param {string} [status] 
-     * @param {string} [file] 
      * @param {string} [imageId] 
      * @param {string} [name] 
-     * @param {string} [mapType] 
-     * @param {string} [cognitiveContrastCogatlas] 
-     * @param {string} [cognitiveContrastCogatlasId] 
-     * @param {string} [cognitiveParadigmCogatlas] 
-     * @param {string} [cognitiveParadigmCogatlasId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PutApi
      */
-    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, file?: string, imageId?: string, name?: string, mapType?: string, cognitiveContrastCogatlas?: string, cognitiveContrastCogatlasId?: string, cognitiveParadigmCogatlas?: string, cognitiveParadigmCogatlasId?: string, options?: AxiosRequestConfig) {
-        return PutApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, file, imageId, name, mapType, cognitiveContrastCogatlas, cognitiveContrastCogatlasId, cognitiveParadigmCogatlas, cognitiveParadigmCogatlasId, options).then((request) => request(this.axios, this.basePath));
+    public neurovaultFilesIdPut(id: string, collectionId?: string, exception?: string, traceback?: string, status?: string, imageId?: string, name?: string, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).neurovaultFilesIdPut(id, collectionId, exception, traceback, status, imageId, name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
