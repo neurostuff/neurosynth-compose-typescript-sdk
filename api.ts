@@ -1196,7 +1196,7 @@ export interface Result {
      * @type {Array<NeurovaultFile>}
      * @memberof Result
      */
-    'neurovault_images'?: Array<NeurovaultFile>;
+    'neurovault_images'?: Array<NeurovaultFile> | null;
     /**
      * 
      * @type {Array<string>}
@@ -1205,10 +1205,10 @@ export interface Result {
     'diagnostic_tables'?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof Result
      */
-    ''?: string;
+    'cluster_tables'?: Array<string>;
 }
 /**
  * 
@@ -1301,7 +1301,7 @@ export interface ResultReturn {
      * @type {Array<NeurovaultFile>}
      * @memberof ResultReturn
      */
-    'neurovault_images'?: Array<NeurovaultFile>;
+    'neurovault_images'?: Array<NeurovaultFile> | null;
     /**
      * 
      * @type {Array<string>}
@@ -1310,10 +1310,10 @@ export interface ResultReturn {
     'diagnostic_tables'?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof ResultReturn
      */
-    ''?: string;
+    'cluster_tables'?: Array<string>;
     /**
      * the identifier for the resource.
      * @type {string}
