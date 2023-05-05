@@ -78,7 +78,7 @@ export interface AnnotationPostBody {
      * @type {string}
      * @memberof AnnotationPostBody
      */
-    'internal_studyset_id': string;
+    'cached_studyset_id': string;
     /**
      * the id of the annotation on neurostore
      * @type {string}
@@ -158,7 +158,7 @@ export interface AnnotationUpdate {
      * @type {string}
      * @memberof AnnotationUpdate
      */
-    'internal_studyset_id'?: string;
+    'cached_studyset_id'?: string;
     /**
      * the id of the annotation on neurostore
      * @type {string}
@@ -189,7 +189,7 @@ export interface AnnotationUpdateAllOf {
      * @type {string}
      * @memberof AnnotationUpdateAllOf
      */
-    'internal_studyset_id'?: string;
+    'cached_studyset_id'?: string;
 }
 /**
  * The function/class applying statistical adjustments to the output of the meta-analysis (optional).
@@ -435,13 +435,13 @@ export interface MetaAnalysisPostBody {
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
-    'cached_studyset_id'?: string;
+    'cached_studyset_id': string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
-    'cached_annotation_id'?: string;
+    'cached_annotation_id': string;
     /**
      * 
      * @type {MetaAnalysisResults}
