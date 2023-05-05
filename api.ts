@@ -2410,6 +2410,13 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication run_key required
+            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -5951,6 +5958,13 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication run_key required
+            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -7975,6 +7989,13 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication run_key required
+            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
 
 
     
