@@ -2414,8 +2414,8 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+            // authentication upload_key required
+            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
 
 
     
@@ -2455,8 +2455,8 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+            // authentication upload_key required
+            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
 
 
     
@@ -5962,8 +5962,8 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+            // authentication upload_key required
+            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
 
 
     
@@ -6003,8 +6003,8 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+            // authentication upload_key required
+            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
 
 
     
@@ -7059,8 +7059,8 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+            // authentication upload_key required
+            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
 
 
     
@@ -7994,8 +7994,8 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication run_key required
-            await setApiKeyToObject(localVarHeaderParameter, "run_key", configuration)
+            // authentication upload_key required
+            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
 
 
     
