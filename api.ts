@@ -2415,7 +2415,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication upload_key required
-            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "Compose-Upload-Key", configuration)
 
 
     
@@ -2456,7 +2456,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication upload_key required
-            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "Compose-Upload-Key", configuration)
 
 
     
@@ -6113,7 +6113,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication upload_key required
-            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "Compose-Upload-Key", configuration)
 
 
     
@@ -6154,7 +6154,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication upload_key required
-            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "Compose-Upload-Key", configuration)
 
 
     
@@ -7210,7 +7210,7 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication upload_key required
-            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "Compose-Upload-Key", configuration)
 
 
     
@@ -8149,7 +8149,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication upload_key required
-            await setApiKeyToObject(localVarHeaderParameter, "compose_upload_key", configuration)
+            await setApiKeyToObject(localVarHeaderParameter, "Compose-Upload-Key", configuration)
 
 
     
