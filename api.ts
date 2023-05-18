@@ -1204,43 +1204,43 @@ export interface ReadOnly {
  */
 export interface Result {
     /**
-     * 
+     * the meta analysis this result was derived from.
      * @type {string}
      * @memberof Result
      */
     'meta_analysis_id'?: string;
     /**
-     * 
+     * version of the command-line-tool that is uploading the results. 
      * @type {string}
      * @memberof Result
      */
     'cli_version'?: string | null;
     /**
-     * 
+     * the specific neurovault collection associated with this result.
      * @type {string}
      * @memberof Result
      */
     'neurovault_collection_id'?: string | null;
     /**
-     * 
+     * the description of the methods applied to create this result.
      * @type {string}
      * @memberof Result
      */
     'methods_description'?: string | null;
     /**
-     * 
+     * the representation of the neurovault images associated with the result.
      * @type {Array<NeurovaultFile>}
      * @memberof Result
      */
     'neurovault_images'?: Array<NeurovaultFile> | null;
     /**
-     * 
+     * a text representation of a tsv that marks the contribution of each study to each particular cluster.
      * @type {string}
      * @memberof Result
      */
     'diagnostic_table'?: string | null;
     /**
-     * 
+     * additional parameters that were passed to the commandline tool at runtime. 
      * @type {object}
      * @memberof Result
      */
@@ -1309,43 +1309,43 @@ export type ResultListResults = Array<ResultReturn> | Array<string>;
  */
 export interface ResultReturn {
     /**
-     * 
+     * the meta analysis this result was derived from.
      * @type {string}
      * @memberof ResultReturn
      */
     'meta_analysis_id'?: string;
     /**
-     * 
+     * version of the command-line-tool that is uploading the results. 
      * @type {string}
      * @memberof ResultReturn
      */
     'cli_version'?: string | null;
     /**
-     * 
+     * the specific neurovault collection associated with this result.
      * @type {string}
      * @memberof ResultReturn
      */
     'neurovault_collection_id'?: string | null;
     /**
-     * 
+     * the description of the methods applied to create this result.
      * @type {string}
      * @memberof ResultReturn
      */
     'methods_description'?: string | null;
     /**
-     * 
+     * the representation of the neurovault images associated with the result.
      * @type {Array<NeurovaultFile>}
      * @memberof ResultReturn
      */
     'neurovault_images'?: Array<NeurovaultFile> | null;
     /**
-     * 
+     * a text representation of a tsv that marks the contribution of each study to each particular cluster.
      * @type {string}
      * @memberof ResultReturn
      */
     'diagnostic_table'?: string | null;
     /**
-     * 
+     * additional parameters that were passed to the commandline tool at runtime. 
      * @type {object}
      * @memberof ResultReturn
      */
