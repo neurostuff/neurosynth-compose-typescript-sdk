@@ -1244,7 +1244,7 @@ export interface Result {
      * @type {object}
      * @memberof Result
      */
-    'cli_args'?: object;
+    'cli_args'?: object | null;
 }
 /**
  * 
@@ -1349,7 +1349,7 @@ export interface ResultReturn {
      * @type {object}
      * @memberof ResultReturn
      */
-    'cli_args'?: object;
+    'cli_args'?: object | null;
     /**
      * the identifier for the resource.
      * @type {string}
