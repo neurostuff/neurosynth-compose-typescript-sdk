@@ -1238,7 +1238,7 @@ export interface Result {
      * @type {string}
      * @memberof Result
      */
-    'diagnostic_table'?: string;
+    'diagnostic_table'?: string | null;
     /**
      * 
      * @type {object}
@@ -1343,7 +1343,7 @@ export interface ResultReturn {
      * @type {string}
      * @memberof ResultReturn
      */
-    'diagnostic_table'?: string;
+    'diagnostic_table'?: string | null;
     /**
      * 
      * @type {object}
