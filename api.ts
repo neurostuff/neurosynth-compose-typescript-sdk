@@ -337,9 +337,9 @@ export interface MetaAnalysis {
      * @type {string}
      * @memberof MetaAnalysis
      */
-    'neurostore_analysis_id'?: string;
+    'neurostore_analysis_id'?: string | null;
     /**
-     * 
+     * TODO: create hash of studyset and annotation and use that for the run_key
      * @type {string}
      * @memberof MetaAnalysis
      */
@@ -368,6 +368,18 @@ export interface MetaAnalysis {
      * @memberof MetaAnalysis
      */
     'cognitive_paradigm_cogatlas_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'cached_studyset'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysis
+     */
+    'cached_annotation'?: string | null;
 }
 /**
  * @type MetaAnalysisAnnotation
@@ -471,9 +483,9 @@ export interface MetaAnalysisPostBody {
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
-    'neurostore_analysis_id'?: string;
+    'neurostore_analysis_id'?: string | null;
     /**
-     * 
+     * TODO: create hash of studyset and annotation and use that for the run_key
      * @type {string}
      * @memberof MetaAnalysisPostBody
      */
@@ -502,6 +514,18 @@ export interface MetaAnalysisPostBody {
      * @memberof MetaAnalysisPostBody
      */
     'cognitive_paradigm_cogatlas_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'cached_studyset'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisPostBody
+     */
+    'cached_annotation'?: string | null;
 }
 /**
  * @type MetaAnalysisResults
@@ -587,9 +611,9 @@ export interface MetaAnalysisReturn {
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
-    'neurostore_analysis_id'?: string;
+    'neurostore_analysis_id'?: string | null;
     /**
-     * 
+     * TODO: create hash of studyset and annotation and use that for the run_key
      * @type {string}
      * @memberof MetaAnalysisReturn
      */
@@ -618,6 +642,18 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'cognitive_paradigm_cogatlas_id'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'cached_studyset'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'cached_annotation'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
