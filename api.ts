@@ -285,6 +285,12 @@ export interface MetaAnalysesGet400Response {
     'type'?: string;
 }
 /**
+ * @type MetaAnalysesIdPutRequest
+ * @export
+ */
+export type MetaAnalysesIdPutRequest = MetaAnalysis | RecreateNeurostoreAnalysis;
+
+/**
  * The combination of the specification determining what meta-analysis to run (required), the studyset to act as input to the meta-analytic algorithm (required), and the annotation to provide human readable annotations as well as acts as an optional filter on which analyses to select within the studyset (optional, but suggested).
  * @export
  * @interface MetaAnalysis
@@ -1251,6 +1257,12 @@ export interface ProjectReturn {
     'neurostore_url'?: string | null;
 }
 /**
+ * @type ProjectsIdPutRequest
+ * @export
+ */
+export type ProjectsIdPutRequest = Project | RecreateNeurostoreStudy;
+
+/**
  * 
  * @export
  * @interface ReadOnly
@@ -1280,6 +1292,32 @@ export interface ReadOnly {
      * @memberof ReadOnly
      */
     'user'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface RecreateNeurostoreAnalysis
+ */
+export interface RecreateNeurostoreAnalysis {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RecreateNeurostoreAnalysis
+     */
+    'create_neurostore_analysis'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface RecreateNeurostoreStudy
+ */
+export interface RecreateNeurostoreStudy {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RecreateNeurostoreStudy
+     */
+    'create_neurostore_study'?: boolean;
 }
 /**
  * describes the output of a meta-analysis
@@ -2379,11 +2417,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut: async (id: string, metaAnalysis?: MetaAnalysis, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesIdPut: async (id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('metaAnalysesIdPut', 'id', id)
             const localVarPath = `/meta-analyses/{id}`
@@ -2410,7 +2448,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysis, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysesIdPutRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3001,11 +3039,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut: async (id: string, project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdPut: async (id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdPut', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -3032,7 +3070,7 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(projectsIdPutRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3446,12 +3484,12 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+        async metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3628,12 +3666,12 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+        async projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, projectsIdPutRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3810,12 +3848,12 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * create a new specification, studyset, annotation bundle
@@ -3976,12 +4014,12 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, projectsIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4160,13 +4198,13 @@ export class ComposeApi extends BaseAPI {
      * update an existing meta-analysis (that has not yet been run)
      * @summary Update a meta-analysis
      * @param {string} id 
-     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4358,13 +4396,13 @@ export class ComposeApi extends BaseAPI {
      * 
      * @summary 
      * @param {string} id 
-     * @param {Project} [project] 
+     * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdPut(id, projectsIdPutRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6085,11 +6123,11 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut: async (id: string, metaAnalysis?: MetaAnalysis, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesIdPut: async (id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('metaAnalysesIdPut', 'id', id)
             const localVarPath = `/meta-analyses/{id}`
@@ -6116,7 +6154,7 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysis, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysesIdPutRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6353,12 +6391,12 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+        async metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6452,12 +6490,12 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * create a new specification, studyset, annotation bundle
@@ -6549,13 +6587,13 @@ export class MetaAnalysesApi extends BaseAPI {
      * update an existing meta-analysis (that has not yet been run)
      * @summary Update a meta-analysis
      * @param {string} id 
-     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysesApi
      */
-    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return MetaAnalysesApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7944,11 +7982,11 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut: async (id: string, project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdPut: async (id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdPut', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -7975,7 +8013,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(projectsIdPutRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8055,12 +8093,12 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+        async projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, projectsIdPutRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8107,12 +8145,12 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, projectsIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8161,13 +8199,13 @@ export class ProjectsApi extends BaseAPI {
      * 
      * @summary 
      * @param {string} id 
-     * @param {Project} [project] 
+     * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
      */
-    public projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsIdPut(id, projectsIdPutRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8236,11 +8274,11 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut: async (id: string, metaAnalysis?: MetaAnalysis, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesIdPut: async (id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('metaAnalysesIdPut', 'id', id)
             const localVarPath = `/meta-analyses/{id}`
@@ -8267,7 +8305,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysis, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysesIdPutRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8438,11 +8476,11 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut: async (id: string, project?: Project, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdPut: async (id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdPut', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -8469,7 +8507,7 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(projectsIdPutRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8586,12 +8624,12 @@ export const PutApiFp = function(configuration?: Configuration) {
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysis, options);
+        async metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8639,12 +8677,12 @@ export const PutApiFp = function(configuration?: Configuration) {
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+        async projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, projectsIdPutRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8696,12 +8734,12 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * update an existing meta-analysis (that has not yet been run)
          * @summary Update a meta-analysis
          * @param {string} id 
-         * @param {MetaAnalysis} [metaAnalysis] 
+         * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
-            return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
+        metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: any): AxiosPromise<MetaAnalysisReturn> {
+            return localVarFp.metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8745,12 +8783,12 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * 
          * @summary 
          * @param {string} id 
-         * @param {Project} [project] 
+         * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, projectsIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * update an existing meta analysis specification
@@ -8801,13 +8839,13 @@ export class PutApi extends BaseAPI {
      * update an existing meta-analysis (that has not yet been run)
      * @summary Update a meta-analysis
      * @param {string} id 
-     * @param {MetaAnalysis} [metaAnalysis] 
+     * @param {MetaAnalysesIdPutRequest} [metaAnalysesIdPutRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PutApi
      */
-    public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: AxiosRequestConfig) {
-        return PutApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesIdPut(id: string, metaAnalysesIdPutRequest?: MetaAnalysesIdPutRequest, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysesIdPutRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8858,13 +8896,13 @@ export class PutApi extends BaseAPI {
      * 
      * @summary 
      * @param {string} id 
-     * @param {Project} [project] 
+     * @param {ProjectsIdPutRequest} [projectsIdPutRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PutApi
      */
-    public projectsIdPut(id: string, project?: Project, options?: AxiosRequestConfig) {
-        return PutApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdPut(id: string, projectsIdPutRequest?: ProjectsIdPutRequest, options?: AxiosRequestConfig) {
+        return PutApiFp(this.configuration).projectsIdPut(id, projectsIdPutRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
