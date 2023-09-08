@@ -164,6 +164,12 @@ export interface AnnotationReturn {
      * @memberof AnnotationReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AnnotationReturn
+     */
+    'username'?: string | null;
 }
 /**
  * 
@@ -702,6 +708,12 @@ export interface MetaAnalysisReturn {
      * @memberof MetaAnalysisReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MetaAnalysisReturn
+     */
+    'username'?: string | null;
 }
 /**
  * @type MetaAnalysisSpecification
@@ -862,6 +874,12 @@ export interface NeurostoreStudyReturn {
      * @memberof NeurostoreStudyReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurostoreStudyReturn
+     */
+    'username'?: string | null;
 }
 /**
  * 
@@ -942,6 +960,12 @@ export interface NeurovaultCollectionReturn {
      * @memberof NeurovaultCollectionReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultCollectionReturn
+     */
+    'username'?: string | null;
 }
 /**
  * 
@@ -1083,6 +1107,12 @@ export interface NeurovaultFileReturn {
      * @memberof NeurovaultFileReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NeurovaultFileReturn
+     */
+    'username'?: string | null;
 }
 /**
  * 
@@ -1209,6 +1239,12 @@ export interface ProjectReturn {
     'user'?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof ProjectReturn
+     */
+    'username'?: string | null;
+    /**
+     * 
      * @type {object}
      * @memberof ProjectReturn
      */
@@ -1280,6 +1316,12 @@ export interface ReadOnly {
      * @memberof ReadOnly
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReadOnly
+     */
+    'username'?: string | null;
 }
 /**
  * describes the output of a meta-analysis
@@ -1458,6 +1500,12 @@ export interface ResultReturn {
      * @memberof ResultReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResultReturn
+     */
+    'username'?: string | null;
 }
 /**
  * a machine readable specification of how to run a meta-analysis (currently specifically tailored to NiMARE).
@@ -1648,6 +1696,12 @@ export interface SpecificationReturn {
      * @memberof SpecificationReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationReturn
+     */
+    'username'?: string | null;
 }
 /**
  * 
@@ -1766,6 +1820,12 @@ export interface StudysetReturn {
      * @memberof StudysetReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof StudysetReturn
+     */
+    'username'?: string | null;
 }
 /**
  * attributes of the user object
@@ -1835,6 +1895,12 @@ export interface UserReturn {
      * @memberof UserReturn
      */
     'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserReturn
+     */
+    'username'?: string | null;
 }
 
 /**
