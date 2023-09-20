@@ -1727,6 +1727,12 @@ export interface Studyset {
      * @memberof Studyset
      */
     'neurostore_url'?: string;
+    /**
+     * A string representing a labeled version of this particular studyset.
+     * @type {string}
+     * @memberof Studyset
+     */
+    'version'?: string | null;
 }
 /**
  * 
@@ -1771,6 +1777,12 @@ export interface StudysetPostBody {
      * @memberof StudysetPostBody
      */
     'neurostore_url'?: string;
+    /**
+     * A string representing a labeled version of this particular studyset.
+     * @type {string}
+     * @memberof StudysetPostBody
+     */
+    'version'?: string | null;
 }
 /**
  * 
@@ -1877,6 +1889,12 @@ export interface StudysetReturn {
      * @memberof StudysetReturn
      */
     'neurostore_url'?: string;
+    /**
+     * A string representing a labeled version of this particular studyset.
+     * @type {string}
+     * @memberof StudysetReturn
+     */
+    'version'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
