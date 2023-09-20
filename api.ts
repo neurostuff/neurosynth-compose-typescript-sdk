@@ -1532,7 +1532,7 @@ export interface Specification {
      */
     'mask'?: string | null;
     /**
-     * underspecified selection of columns to contrast (TODO, make better).
+     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
      * @type {string}
      * @memberof Specification
      */
@@ -1550,7 +1550,7 @@ export interface Specification {
      */
     'corrector'?: Corrector | null;
     /**
-     * a boolean column from annotations selecting which analyses to include in the meta-analysis
+     * a column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof Specification
      */
@@ -1600,7 +1600,7 @@ export interface SpecificationPostBody {
      */
     'mask'?: string | null;
     /**
-     * underspecified selection of columns to contrast (TODO, make better).
+     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
      * @type {string}
      * @memberof SpecificationPostBody
      */
@@ -1618,7 +1618,7 @@ export interface SpecificationPostBody {
      */
     'corrector'?: Corrector | null;
     /**
-     * a boolean column from annotations selecting which analyses to include in the meta-analysis
+     * a column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof SpecificationPostBody
      */
@@ -1649,7 +1649,7 @@ export interface SpecificationReturn {
      */
     'mask'?: string | null;
     /**
-     * underspecified selection of columns to contrast (TODO, make better).
+     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
      * @type {string}
      * @memberof SpecificationReturn
      */
@@ -1667,7 +1667,7 @@ export interface SpecificationReturn {
      */
     'corrector'?: Corrector | null;
     /**
-     * a boolean column from annotations selecting which analyses to include in the meta-analysis
+     * a column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof SpecificationReturn
      */
