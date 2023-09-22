@@ -1532,7 +1532,7 @@ export interface Specification {
      */
     'mask'?: string | null;
     /**
-     * underspecified selection of columns to contrast (TODO, make better).
+     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
      * @type {string}
      * @memberof Specification
      */
@@ -1550,7 +1550,7 @@ export interface Specification {
      */
     'corrector'?: Corrector | null;
     /**
-     * a boolean column from annotations selecting which analyses to include in the meta-analysis
+     * a column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof Specification
      */
@@ -1600,7 +1600,7 @@ export interface SpecificationPostBody {
      */
     'mask'?: string | null;
     /**
-     * underspecified selection of columns to contrast (TODO, make better).
+     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
      * @type {string}
      * @memberof SpecificationPostBody
      */
@@ -1618,7 +1618,7 @@ export interface SpecificationPostBody {
      */
     'corrector'?: Corrector | null;
     /**
-     * a boolean column from annotations selecting which analyses to include in the meta-analysis
+     * a column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof SpecificationPostBody
      */
@@ -1649,7 +1649,7 @@ export interface SpecificationReturn {
      */
     'mask'?: string | null;
     /**
-     * underspecified selection of columns to contrast (TODO, make better).
+     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
      * @type {string}
      * @memberof SpecificationReturn
      */
@@ -1667,7 +1667,7 @@ export interface SpecificationReturn {
      */
     'corrector'?: Corrector | null;
     /**
-     * a boolean column from annotations selecting which analyses to include in the meta-analysis
+     * a column from annotations selecting which analyses to include in the meta-analysis
      * @type {string}
      * @memberof SpecificationReturn
      */
@@ -1727,6 +1727,12 @@ export interface Studyset {
      * @memberof Studyset
      */
     'neurostore_url'?: string;
+    /**
+     * A string representing a labeled version of this particular studyset.
+     * @type {string}
+     * @memberof Studyset
+     */
+    'version'?: string | null;
 }
 /**
  * 
@@ -1771,7 +1777,94 @@ export interface StudysetPostBody {
      * @memberof StudysetPostBody
      */
     'neurostore_url'?: string;
+    /**
+     * A string representing a labeled version of this particular studyset.
+     * @type {string}
+     * @memberof StudysetPostBody
+     */
+    'version'?: string | null;
 }
+/**
+ * 
+ * @export
+ * @interface StudysetReference
+ */
+export interface StudysetReference {
+    /**
+     * 
+     * @type {Array<StudysetReferenceSnapshotsInner>}
+     * @memberof StudysetReference
+     */
+    'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface StudysetReferenceList
+ */
+export interface StudysetReferenceList {
+    /**
+     * 
+     * @type {Array<StudysetReferenceReturn>}
+     * @memberof StudysetReferenceList
+     */
+    'results'?: Array<StudysetReferenceReturn>;
+    /**
+     * 
+     * @type {object}
+     * @memberof StudysetReferenceList
+     */
+    'metadata'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface StudysetReferenceReturn
+ */
+export interface StudysetReferenceReturn {
+    /**
+     * 
+     * @type {Array<StudysetReferenceSnapshotsInner>}
+     * @memberof StudysetReferenceReturn
+     */
+    'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
+    /**
+     * the identifier for the resource.
+     * @type {string}
+     * @memberof StudysetReferenceReturn
+     */
+    'id'?: string;
+    /**
+     * when the resource was last modified.
+     * @type {string}
+     * @memberof StudysetReferenceReturn
+     */
+    'updated_at'?: string | null;
+    /**
+     * When the resource was created.
+     * @type {string}
+     * @memberof StudysetReferenceReturn
+     */
+    'created_at'?: string;
+    /**
+     * Who owns the resource.
+     * @type {string}
+     * @memberof StudysetReferenceReturn
+     */
+    'user'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof StudysetReferenceReturn
+     */
+    'username'?: string | null;
+}
+/**
+ * @type StudysetReferenceSnapshotsInner
+ * @export
+ */
+export type StudysetReferenceSnapshotsInner = Studyset | string;
+
 /**
  * 
  * @export
@@ -1796,6 +1889,12 @@ export interface StudysetReturn {
      * @memberof StudysetReturn
      */
     'neurostore_url'?: string;
+    /**
+     * A string representing a labeled version of this particular studyset.
+     * @type {string}
+     * @memberof StudysetReturn
+     */
+    'version'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -4761,6 +4860,70 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetReferencesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/studyset-references`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetReferencesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('studysetReferencesIdGet', 'id', id)
+            const localVarPath = `/studyset-references/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4835,6 +4998,27 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdDelete(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetReferencesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async studysetReferencesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -4902,6 +5086,25 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         projectsIdDelete(id: string, options?: any): AxiosPromise<void> {
             return localVarFp.projectsIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetReferencesGet(options?: any): AxiosPromise<StudysetReferenceList> {
+            return localVarFp.studysetReferencesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Your GET endpoint
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        studysetReferencesIdGet(id: string, options?: any): AxiosPromise<StudysetReferenceReturn> {
+            return localVarFp.studysetReferencesIdGet(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4981,6 +5184,29 @@ export class DefaultApi extends BaseAPI {
      */
     public projectsIdDelete(id: string, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).projectsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public studysetReferencesGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).studysetReferencesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public studysetReferencesIdGet(id: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).studysetReferencesIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
