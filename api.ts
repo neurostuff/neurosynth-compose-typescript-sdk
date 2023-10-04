@@ -1532,11 +1532,17 @@ export interface Specification {
      */
     'mask'?: string | null;
     /**
-     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
-     * @type {string}
+     * 
+     * @type {SpecificationConditions}
      * @memberof Specification
      */
-    'contrast'?: string | null;
+    'conditions'?: SpecificationConditions;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Specification
+     */
+    'weights'?: Array<number> | null;
     /**
      * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
      * @type {string}
@@ -1555,7 +1561,20 @@ export interface Specification {
      * @memberof Specification
      */
     'filter'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Specification
+     */
+    'database_studyset'?: string | null;
 }
+/**
+ * @type SpecificationConditions
+ * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
+ * @export
+ */
+export type SpecificationConditions = Array<boolean> | Array<string>;
+
 /**
  * The representation of a list of specifications.
  * @export
@@ -1600,11 +1619,17 @@ export interface SpecificationPostBody {
      */
     'mask'?: string | null;
     /**
-     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
-     * @type {string}
+     * 
+     * @type {SpecificationConditions}
      * @memberof SpecificationPostBody
      */
-    'contrast'?: string | null;
+    'conditions'?: SpecificationConditions;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof SpecificationPostBody
+     */
+    'weights'?: Array<number> | null;
     /**
      * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
      * @type {string}
@@ -1623,6 +1648,12 @@ export interface SpecificationPostBody {
      * @memberof SpecificationPostBody
      */
     'filter'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationPostBody
+     */
+    'database_studyset'?: string | null;
 }
 /**
  * The view of the specification through an endpoint.
@@ -1649,11 +1680,17 @@ export interface SpecificationReturn {
      */
     'mask'?: string | null;
     /**
-     * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
-     * @type {string}
+     * 
+     * @type {SpecificationConditions}
      * @memberof SpecificationReturn
      */
-    'contrast'?: string | null;
+    'conditions'?: SpecificationConditions;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof SpecificationReturn
+     */
+    'weights'?: Array<number> | null;
     /**
      * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
      * @type {string}
@@ -1672,6 +1709,12 @@ export interface SpecificationReturn {
      * @memberof SpecificationReturn
      */
     'filter'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SpecificationReturn
+     */
+    'database_studyset'?: string | null;
     /**
      * the identifier for the resource.
      * @type {string}
@@ -4863,10 +4906,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Your GET endpoint
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        studysetReferencesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/studyset-references`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4878,6 +4922,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
 
 
     
@@ -4894,10 +4942,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        studysetReferencesIdGet: async (id: string, nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('studysetReferencesIdGet', 'id', id)
             const localVarPath = `/studyset-references/{id}`
@@ -4912,6 +4961,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
 
 
     
@@ -5001,22 +5054,24 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Your GET endpoint
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetReferencesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesGet(options);
+        async studysetReferencesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesGet(nested, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetReferencesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesIdGet(id, options);
+        async studysetReferencesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesIdGet(id, nested, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5090,21 +5145,23 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Your GET endpoint
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesGet(options?: any): AxiosPromise<StudysetReferenceList> {
-            return localVarFp.studysetReferencesGet(options).then((request) => request(axios, basePath));
+        studysetReferencesGet(nested?: boolean, options?: any): AxiosPromise<StudysetReferenceList> {
+            return localVarFp.studysetReferencesGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesIdGet(id: string, options?: any): AxiosPromise<StudysetReferenceReturn> {
-            return localVarFp.studysetReferencesIdGet(id, options).then((request) => request(axios, basePath));
+        studysetReferencesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<StudysetReferenceReturn> {
+            return localVarFp.studysetReferencesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5189,24 +5246,26 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary Your GET endpoint
+     * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public studysetReferencesGet(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).studysetReferencesGet(options).then((request) => request(this.axios, this.basePath));
+    public studysetReferencesGet(nested?: boolean, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).studysetReferencesGet(nested, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Your GET endpoint
      * @param {string} id 
+     * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public studysetReferencesIdGet(id: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).studysetReferencesIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public studysetReferencesIdGet(id: string, nested?: boolean, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).studysetReferencesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
