@@ -3213,10 +3213,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdGet: async (id: string, info?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdGet', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -3231,6 +3232,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -3874,11 +3879,12 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+        async projectsIdGet(id: string, info?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4233,11 +4239,12 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        projectsIdGet(id: string, info?: boolean, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4625,12 +4632,13 @@ export class ComposeApi extends BaseAPI {
      * 
      * @summary Your GET endpoint
      * @param {string} id 
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdGet(id: string, info?: boolean, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5649,10 +5657,11 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdGet: async (id: string, info?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdGet', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -5667,6 +5676,10 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -5939,11 +5952,12 @@ export const GetApiFp = function(configuration?: Configuration) {
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+        async projectsIdGet(id: string, info?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6109,11 +6123,12 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        projectsIdGet(id: string, info?: boolean, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
         },
         /**
          * list of meta-analysis specifications
@@ -6296,12 +6311,13 @@ export class GetApi extends BaseAPI {
      * 
      * @summary Your GET endpoint
      * @param {string} id 
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
-        return GetApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdGet(id: string, info?: boolean, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8299,10 +8315,11 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdGet: async (id: string, info?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdGet', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -8317,6 +8334,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -8444,11 +8465,12 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, options);
+        async projectsIdGet(id: string, info?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8507,11 +8529,12 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * 
          * @summary Your GET endpoint
          * @param {string} id 
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, options?: any): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdGet(id, options).then((request) => request(axios, basePath));
+        projectsIdGet(id: string, info?: boolean, options?: any): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8571,12 +8594,13 @@ export class ProjectsApi extends BaseAPI {
      * 
      * @summary Your GET endpoint
      * @param {string} id 
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
      */
-    public projectsIdGet(id: string, options?: AxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdGet(id: string, info?: boolean, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
