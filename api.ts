@@ -2513,10 +2513,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2531,6 +2532,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
             }
 
 
@@ -3674,11 +3679,12 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4052,11 +4058,12 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, ids, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis (specification, annotation, and studyset)
@@ -4409,12 +4416,13 @@ export class ComposeApi extends BaseAPI {
      * list all runnable specification, studyset, annotation bundles
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesGet(nested, ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5352,10 +5360,11 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5370,6 +5379,10 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
 
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
             }
 
 
@@ -5855,11 +5868,12 @@ export const GetApiFp = function(configuration?: Configuration) {
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6035,11 +6049,12 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, ids, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis (specification, annotation, and studyset)
@@ -6205,12 +6220,13 @@ export class GetApi extends BaseAPI {
      * list all runnable specification, studyset, annotation bundles
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
-        return GetApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).metaAnalysesGet(nested, ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6378,10 +6394,11 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6396,6 +6413,10 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
 
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
             }
 
 
@@ -6697,11 +6718,12 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, options);
+        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6798,11 +6820,12 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * list all runnable specification, studyset, annotation bundles
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, options).then((request) => request(axios, basePath));
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, ids, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis (specification, annotation, and studyset)
@@ -6891,12 +6914,13 @@ export class MetaAnalysesApi extends BaseAPI {
      * list all runnable specification, studyset, annotation bundles
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysesApi
      */
-    public metaAnalysesGet(nested?: boolean, options?: AxiosRequestConfig) {
-        return MetaAnalysesApiFp(this.configuration).metaAnalysesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesGet(nested, ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
