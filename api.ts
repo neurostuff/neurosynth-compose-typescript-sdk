@@ -2514,10 +2514,16 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2536,6 +2542,30 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
             if (ids) {
                 localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
 
@@ -3145,10 +3175,16 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3164,6 +3200,30 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
 
 
     
@@ -3680,11 +3740,17 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, options);
+        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3863,11 +3929,17 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4059,11 +4131,17 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, ids, options).then((request) => request(axios, basePath));
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis (specification, annotation, and studyset)
@@ -4226,11 +4304,17 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4417,12 +4501,18 @@ export class ComposeApi extends BaseAPI {
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
      * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [description] search description field for a term
+     * @param {string} [sort] Parameter to sort results on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).metaAnalysesGet(nested, ids, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4616,12 +4706,18 @@ export class ComposeApi extends BaseAPI {
     /**
      * 
      * @summary Your GET endpoint
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [description] search description field for a term
+     * @param {string} [sort] Parameter to sort results on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public projectsGet(options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5361,10 +5457,16 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5383,6 +5485,30 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
 
             if (ids) {
                 localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
 
@@ -5635,10 +5761,16 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5654,6 +5786,30 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
 
 
     
@@ -5869,11 +6025,17 @@ export const GetApiFp = function(configuration?: Configuration) {
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, options);
+        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5955,11 +6117,17 @@ export const GetApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6050,11 +6218,17 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, ids, options).then((request) => request(axios, basePath));
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis (specification, annotation, and studyset)
@@ -6128,11 +6302,17 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6221,12 +6401,18 @@ export class GetApi extends BaseAPI {
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
      * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [description] search description field for a term
+     * @param {string} [sort] Parameter to sort results on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig) {
-        return GetApiFp(this.configuration).metaAnalysesGet(nested, ids, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6315,12 +6501,18 @@ export class GetApi extends BaseAPI {
     /**
      * 
      * @summary Your GET endpoint
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [description] search description field for a term
+     * @param {string} [sort] Parameter to sort results on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public projectsGet(options?: AxiosRequestConfig) {
-        return GetApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6395,10 +6587,16 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysesGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/meta-analyses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6417,6 +6615,30 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
 
             if (ids) {
                 localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
 
@@ -6719,11 +6941,17 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, options);
+        async metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6821,11 +7049,17 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @summary GET a list of meta-analyses
          * @param {boolean} [nested] show nested component instead of id
          * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: any): AxiosPromise<MetaAnalysisList> {
-            return localVarFp.metaAnalysesGet(nested, ids, options).then((request) => request(axios, basePath));
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: any): AxiosPromise<MetaAnalysisList> {
+            return localVarFp.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis (specification, annotation, and studyset)
@@ -6915,12 +7149,18 @@ export class MetaAnalysesApi extends BaseAPI {
      * @summary GET a list of meta-analyses
      * @param {boolean} [nested] show nested component instead of id
      * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [description] search description field for a term
+     * @param {string} [sort] Parameter to sort results on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetaAnalysesApi
      */
-    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, options?: AxiosRequestConfig) {
-        return MetaAnalysesApiFp(this.configuration).metaAnalysesGet(nested, ids, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8266,10 +8506,16 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8285,6 +8531,30 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
 
 
     
@@ -8467,11 +8737,17 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8533,11 +8809,17 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Your GET endpoint
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [description] search description field for a term
+         * @param {string} [sort] Parameter to sort results on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8594,12 +8876,18 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary Your GET endpoint
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [description] search description field for a term
+     * @param {string} [sort] Parameter to sort results on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
      */
-    public projectsGet(options?: AxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsGet(options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
