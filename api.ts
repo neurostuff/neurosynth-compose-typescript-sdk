@@ -3187,10 +3187,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3233,6 +3234,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
             if (desc !== undefined) {
                 localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
             }
 
 
@@ -3947,11 +3952,12 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4324,11 +4330,12 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4728,12 +4735,13 @@ export class ComposeApi extends BaseAPI {
      * @param {string} [description] search description field for a term
      * @param {string} [sort] Parameter to sort results on
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: AxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: AxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5789,10 +5797,11 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5835,6 +5844,10 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
 
             if (desc !== undefined) {
                 localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
             }
 
 
@@ -6151,11 +6164,12 @@ export const GetApiFp = function(configuration?: Configuration) {
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6338,11 +6352,12 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6539,12 +6554,13 @@ export class GetApi extends BaseAPI {
      * @param {string} [description] search description field for a term
      * @param {string} [sort] Parameter to sort results on
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: AxiosRequestConfig) {
-        return GetApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: AxiosRequestConfig) {
+        return GetApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8553,10 +8569,11 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8599,6 +8616,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
 
             if (desc !== undefined) {
                 localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
             }
 
 
@@ -8789,11 +8810,12 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8862,11 +8884,12 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {string} [description] search description field for a term
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: any): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: any): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8930,12 +8953,13 @@ export class ProjectsApi extends BaseAPI {
      * @param {string} [description] search description field for a term
      * @param {string} [sort] Parameter to sort results on
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
      */
-    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: AxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
