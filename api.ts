@@ -1168,6 +1168,12 @@ export interface Project {
      * @memberof Project
      */
     'neurostore_url'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Project
+     */
+    'draft'?: boolean;
 }
 /**
  * 
@@ -1272,6 +1278,12 @@ export interface ProjectReturn {
      * @memberof ProjectReturn
      */
     'neurostore_url'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProjectReturn
+     */
+    'draft'?: boolean;
 }
 /**
  * 
