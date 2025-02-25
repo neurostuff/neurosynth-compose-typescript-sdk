@@ -2272,7 +2272,7 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(options?: any): AxiosPromise<AnnotationList> {
+        annotationsGet(options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
             return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -2282,7 +2282,7 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdGet(id: string, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2293,7 +2293,7 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2303,7 +2303,7 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
         },
     };
@@ -3756,7 +3756,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(options?: any): AxiosPromise<AnnotationList> {
+        annotationsGet(options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
             return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -3766,7 +3766,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdGet(id: string, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3777,7 +3777,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3787,7 +3787,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3805,7 +3805,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisList> {
             return localVarFp.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, desc, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3816,7 +3816,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3827,7 +3827,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3837,7 +3837,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3847,7 +3847,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
+        metaAnalysisResultsGet(metaAnalysisId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultList> {
             return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3857,7 +3857,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3868,7 +3868,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdPut(id: string, result?: Result, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsIdPut(id: string, result?: Result, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsIdPut(id, result, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3878,7 +3878,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(resultInit?: ResultInit, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3895,7 +3895,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: any): AxiosPromise<ProjectList> {
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
             return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3905,7 +3905,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdDelete(id: string, options?: any): AxiosPromise<void> {
+        projectsIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.projectsIdDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3916,7 +3916,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, info?: boolean, options?: any): AxiosPromise<ProjectReturn> {
+        projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3927,7 +3927,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+        projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3937,7 +3937,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost(project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+        projectsPost(project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3946,7 +3946,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet(options?: any): AxiosPromise<SpecificationList> {
+        specificationsGet(options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
             return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -3956,7 +3956,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsIdGet(id: string, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3967,7 +3967,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsIdPut(id: string, specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsIdPut(id: string, specification?: Specification, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsIdPut(id, specification, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3977,7 +3977,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3986,7 +3986,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(options?: any): AxiosPromise<StudysetList> {
+        studysetsGet(options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
             return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -3996,7 +3996,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdGet(id: string, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4007,7 +4007,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdPut(id: string, studyset?: Studyset, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4017,7 +4017,7 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost(studysetPostBody?: StudysetPostBody, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
         },
     };
@@ -4538,7 +4538,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdDelete(id: string, options?: any): AxiosPromise<void> {
+        metaAnalysesIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.metaAnalysesIdDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4548,7 +4548,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesGet(nested?: boolean, options?: any): AxiosPromise<StudysetReferenceList> {
+        studysetReferencesGet(nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReferenceList> {
             return localVarFp.studysetReferencesGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4559,7 +4559,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<StudysetReferenceReturn> {
+        studysetReferencesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReferenceReturn> {
             return localVarFp.studysetReferencesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
     };
@@ -5302,7 +5302,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(options?: any): AxiosPromise<AnnotationList> {
+        annotationsGet(options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
             return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -5312,7 +5312,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdGet(id: string, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5330,7 +5330,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisList> {
             return localVarFp.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, desc, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5341,7 +5341,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5351,7 +5351,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
+        metaAnalysisResultsGet(metaAnalysisId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultList> {
             return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5361,7 +5361,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5378,7 +5378,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: any): AxiosPromise<ProjectList> {
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
             return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5389,7 +5389,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, info?: boolean, options?: any): AxiosPromise<ProjectReturn> {
+        projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5398,7 +5398,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet(options?: any): AxiosPromise<SpecificationList> {
+        specificationsGet(options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
             return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -5408,7 +5408,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsIdGet(id: string, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5417,7 +5417,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(options?: any): AxiosPromise<StudysetList> {
+        studysetsGet(options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
             return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -5427,7 +5427,7 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdGet(id: string, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -6106,7 +6106,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: any): AxiosPromise<MetaAnalysisList> {
+        metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisList> {
             return localVarFp.metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, desc, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6117,7 +6117,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdGet(id: string, nested?: boolean, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6128,7 +6128,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6138,7 +6138,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6148,7 +6148,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsGet(metaAnalysisId?: string, options?: any): AxiosPromise<ResultList> {
+        metaAnalysisResultsGet(metaAnalysisId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultList> {
             return localVarFp.metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6158,7 +6158,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdGet(id: string, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6169,7 +6169,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdPut(id: string, result?: Result, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsIdPut(id: string, result?: Result, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsIdPut(id, result, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6179,7 +6179,7 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(resultInit?: ResultInit, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
     };
@@ -6644,7 +6644,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6654,7 +6654,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6664,7 +6664,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsPost(resultInit?: ResultInit, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6674,7 +6674,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost(project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+        projectsPost(project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6684,7 +6684,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6694,7 +6694,7 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost(studysetPostBody?: StudysetPostBody, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
         },
     };
@@ -7127,7 +7127,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: any): AxiosPromise<ProjectList> {
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
             return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7137,7 +7137,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdDelete(id: string, options?: any): AxiosPromise<void> {
+        projectsIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.projectsIdDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7148,7 +7148,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, info?: boolean, options?: any): AxiosPromise<ProjectReturn> {
+        projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7159,7 +7159,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+        projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7169,7 +7169,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost(project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+        projectsPost(project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
         },
     };
@@ -7627,7 +7627,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: any): AxiosPromise<AnnotationReturn> {
+        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
             return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7638,7 +7638,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: any): AxiosPromise<MetaAnalysisReturn> {
+        metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisReturn> {
             return localVarFp.metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7649,7 +7649,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdPut(id: string, result?: Result, options?: any): AxiosPromise<ResultReturn> {
+        metaAnalysisResultsIdPut(id: string, result?: Result, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsIdPut(id, result, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7660,7 +7660,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: any): AxiosPromise<ProjectReturn> {
+        projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
             return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7671,7 +7671,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsIdPut(id: string, specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsIdPut(id: string, specification?: Specification, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsIdPut(id, specification, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7682,7 +7682,7 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdPut(id: string, studyset?: Studyset, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
         },
     };
@@ -8004,7 +8004,7 @@ export const SpecificationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet(options?: any): AxiosPromise<SpecificationList> {
+        specificationsGet(options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
             return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -8014,7 +8014,7 @@ export const SpecificationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsIdGet(id: string, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8025,7 +8025,7 @@ export const SpecificationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsIdPut(id: string, specification?: Specification, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsIdPut(id: string, specification?: Specification, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsIdPut(id, specification, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8035,7 +8035,7 @@ export const SpecificationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: any): AxiosPromise<SpecificationReturn> {
+        specificationsPost(specificationPostBody?: SpecificationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationReturn> {
             return localVarFp.specificationsPost(specificationPostBody, options).then((request) => request(axios, basePath));
         },
     };
@@ -8327,7 +8327,7 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(options?: any): AxiosPromise<StudysetList> {
+        studysetsGet(options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
             return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -8337,7 +8337,7 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdGet(id: string, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8348,7 +8348,7 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdPut(id: string, studyset?: Studyset, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8358,7 +8358,7 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost(studysetPostBody?: StudysetPostBody, options?: any): AxiosPromise<StudysetReturn> {
+        studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
         },
     };
@@ -8650,7 +8650,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGet(options?: any): AxiosPromise<UserList> {
+        usersGet(options?: RawAxiosRequestConfig): AxiosPromise<UserList> {
             return localVarFp.usersGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -8660,7 +8660,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIdGet(id: string, options?: any): AxiosPromise<UserReturn> {
+        usersIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<UserReturn> {
             return localVarFp.usersIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8671,7 +8671,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIdPut(id: string, user?: User, options?: any): AxiosPromise<UserReturn> {
+        usersIdPut(id: string, user?: User, options?: RawAxiosRequestConfig): AxiosPromise<UserReturn> {
             return localVarFp.usersIdPut(id, user, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8681,7 +8681,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersPost(user?: User, options?: any): AxiosPromise<UserReturn> {
+        usersPost(user?: User, options?: RawAxiosRequestConfig): AxiosPromise<UserReturn> {
             return localVarFp.usersPost(user, options).then((request) => request(axios, basePath));
         },
     };
