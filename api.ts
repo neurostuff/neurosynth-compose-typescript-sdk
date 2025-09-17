@@ -1507,6 +1507,12 @@ export interface ResultReturn {
     'username'?: string | null;
 }
 /**
+ * @type ResultUploadStatisticalMaps
+ * @export
+ */
+export type ResultUploadStatisticalMaps = Array<File> | File;
+
+/**
  * a machine readable specification of how to run a meta-analysis (currently specifically tailored to NiMARE).
  * @export
  * @interface Specification
@@ -2053,10 +2059,19 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        annotationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2068,6 +2083,42 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -2207,11 +2258,20 @@ export const AnnotationsApiFp = function(configuration?: Configuration) {
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(options);
+        async annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.annotationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2269,11 +2329,20 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
-            return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
+        annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
+            return localVarFp.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single annotation
@@ -2319,12 +2388,21 @@ export class AnnotationsApi extends BaseAPI {
     /**
      * get a list of serialized/referenced annotations
      * @summary GET a list of annotations
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AnnotationsApi
      */
-    public annotationsGet(options?: RawAxiosRequestConfig) {
-        return AnnotationsApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
+    public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return AnnotationsApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2376,10 +2454,19 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        annotationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2391,6 +2478,42 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -3100,10 +3223,19 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        specificationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/specifications`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3115,6 +3247,42 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -3244,10 +3412,19 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        studysetsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3259,6 +3436,42 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -3398,11 +3611,20 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(options);
+        async annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.annotationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3639,11 +3861,20 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async specificationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(options);
+        async specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.specificationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3691,11 +3922,20 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(options);
+        async studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.studysetsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3753,11 +3993,20 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
-            return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
+        annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
+            return localVarFp.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single annotation
@@ -3943,11 +4192,20 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet(options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
-            return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
+        specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
+            return localVarFp.specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis specification
@@ -3983,11 +4241,20 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
-            return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
+        studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
+            return localVarFp.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single serialized/referenced studyset
@@ -4033,12 +4300,21 @@ export class ComposeApi extends BaseAPI {
     /**
      * get a list of serialized/referenced annotations
      * @summary GET a list of annotations
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public annotationsGet(options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
+    public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4257,12 +4533,21 @@ export class ComposeApi extends BaseAPI {
     /**
      * list of meta-analysis specifications
      * @summary Get a list of Specifications
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public specificationsGet(options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+    public specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4305,12 +4590,21 @@ export class ComposeApi extends BaseAPI {
     /**
      * get a list of serialized/referenced studysets
      * @summary Get a list of Studysets
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public studysetsGet(options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
+    public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4621,10 +4915,19 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        annotationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4636,6 +4939,42 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -4981,10 +5320,19 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        specificationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/specifications`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4996,6 +5344,42 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -5045,10 +5429,19 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        studysetsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5060,6 +5453,42 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -5119,11 +5548,20 @@ export const GetApiFp = function(configuration?: Configuration) {
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(options);
+        async annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GetApi.annotationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5239,11 +5677,20 @@ export const GetApiFp = function(configuration?: Configuration) {
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async specificationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(options);
+        async specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GetApi.specificationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5264,11 +5711,20 @@ export const GetApiFp = function(configuration?: Configuration) {
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(options);
+        async studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GetApi.studysetsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5299,11 +5755,20 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * get a list of serialized/referenced annotations
          * @summary GET a list of annotations
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
-            return localVarFp.annotationsGet(options).then((request) => request(axios, basePath));
+        annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
+            return localVarFp.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single annotation
@@ -5395,11 +5860,20 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet(options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
-            return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
+        specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
+            return localVarFp.specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis specification
@@ -5414,11 +5888,20 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
-            return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
+        studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
+            return localVarFp.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single serialized/referenced studyset
@@ -5443,12 +5926,21 @@ export class GetApi extends BaseAPI {
     /**
      * get a list of serialized/referenced annotations
      * @summary GET a list of annotations
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public annotationsGet(options?: RawAxiosRequestConfig) {
-        return GetApiFp(this.configuration).annotationsGet(options).then((request) => request(this.axios, this.basePath));
+    public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5555,12 +6047,21 @@ export class GetApi extends BaseAPI {
     /**
      * list of meta-analysis specifications
      * @summary Get a list of Specifications
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public specificationsGet(options?: RawAxiosRequestConfig) {
-        return GetApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+    public specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5578,12 +6079,21 @@ export class GetApi extends BaseAPI {
     /**
      * get a list of serialized/referenced studysets
      * @summary Get a list of Studysets
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GetApi
      */
-    public studysetsGet(options?: RawAxiosRequestConfig) {
-        return GetApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
+    public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7785,10 +8295,19 @@ export const SpecificationsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        specificationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/specifications`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7800,6 +8319,42 @@ export const SpecificationsApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -7939,11 +8494,20 @@ export const SpecificationsApiFp = function(configuration?: Configuration) {
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async specificationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(options);
+        async specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpecificationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SpecificationsApi.specificationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -8001,11 +8565,20 @@ export const SpecificationsApiFactory = function (configuration?: Configuration,
         /**
          * list of meta-analysis specifications
          * @summary Get a list of Specifications
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        specificationsGet(options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
-            return localVarFp.specificationsGet(options).then((request) => request(axios, basePath));
+        specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<SpecificationList> {
+            return localVarFp.specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a meta-analysis specification
@@ -8051,12 +8624,21 @@ export class SpecificationsApi extends BaseAPI {
     /**
      * list of meta-analysis specifications
      * @summary Get a list of Specifications
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SpecificationsApi
      */
-    public specificationsGet(options?: RawAxiosRequestConfig) {
-        return SpecificationsApiFp(this.configuration).specificationsGet(options).then((request) => request(this.axios, this.basePath));
+    public specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return SpecificationsApiFp(this.configuration).specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8108,10 +8690,19 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        studysetsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8123,6 +8714,42 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (nested !== undefined) {
+                localVarQueryParameter['nested'] = nested;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (info !== undefined) {
+                localVarQueryParameter['info'] = info;
+            }
 
 
     
@@ -8262,11 +8889,20 @@ export const StudysetsApiFp = function(configuration?: Configuration) {
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(options);
+        async studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['StudysetsApi.studysetsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -8324,11 +8960,20 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
         /**
          * get a list of serialized/referenced studysets
          * @summary Get a list of Studysets
+         * @param {boolean} [nested] show nested component instead of id
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
-            return localVarFp.studysetsGet(options).then((request) => request(axios, basePath));
+        studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
+            return localVarFp.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single serialized/referenced studyset
@@ -8374,12 +9019,21 @@ export class StudysetsApi extends BaseAPI {
     /**
      * get a list of serialized/referenced studysets
      * @summary Get a list of Studysets
+     * @param {boolean} [nested] show nested component instead of id
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StudysetsApi
      */
-    public studysetsGet(options?: RawAxiosRequestConfig) {
-        return StudysetsApiFp(this.configuration).studysetsGet(options).then((request) => request(this.axios, this.basePath));
+    public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return StudysetsApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
