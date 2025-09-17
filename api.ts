@@ -3185,11 +3185,13 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost: async (project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsPost: async (sourceId?: string, copyAnnotations?: boolean, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3205,6 +3207,14 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (sourceId !== undefined) {
+                localVarQueryParameter['source_id'] = sourceId;
+            }
+
+            if (copyAnnotations !== undefined) {
+                localVarQueryParameter['copy_annotations'] = copyAnnotations;
+            }
 
 
     
@@ -3848,12 +3858,14 @@ export const ComposeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsPost(project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(project, options);
+        async projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(sourceId, copyAnnotations, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4182,12 +4194,14 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost(project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
+        projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(axios, basePath));
         },
         /**
          * list of meta-analysis specifications
@@ -4521,13 +4535,15 @@ export class ComposeApi extends BaseAPI {
     /**
      * 
      * @summary 
+     * @param {string} [sourceId] clone an existing project when creating a new project
+     * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComposeApi
      */
-    public projectsPost(project?: Project, options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
+    public projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6938,11 +6954,13 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost: async (project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsPost: async (sourceId?: string, copyAnnotations?: boolean, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6958,6 +6976,14 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (sourceId !== undefined) {
+                localVarQueryParameter['source_id'] = sourceId;
+            }
+
+            if (copyAnnotations !== undefined) {
+                localVarQueryParameter['copy_annotations'] = copyAnnotations;
+            }
 
 
     
@@ -7101,12 +7127,14 @@ export const PostApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsPost(project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(project, options);
+        async projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(sourceId, copyAnnotations, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PostApi.projectsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -7180,12 +7208,14 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost(project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
+        projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(axios, basePath));
         },
         /**
          * create a new meta-analysis specification
@@ -7256,13 +7286,15 @@ export class PostApi extends BaseAPI {
     /**
      * 
      * @summary 
+     * @param {string} [sourceId] clone an existing project when creating a new project
+     * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
      */
-    public projectsPost(project?: Project, options?: RawAxiosRequestConfig) {
-        return PostApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
+    public projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
+        return PostApiFp(this.configuration).projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7494,11 +7526,13 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost: async (project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsPost: async (sourceId?: string, copyAnnotations?: boolean, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7514,6 +7548,14 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (sourceId !== undefined) {
+                localVarQueryParameter['source_id'] = sourceId;
+            }
+
+            if (copyAnnotations !== undefined) {
+                localVarQueryParameter['copy_annotations'] = copyAnnotations;
+            }
 
 
     
@@ -7603,12 +7645,14 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsPost(project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(project, options);
+        async projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsPost(sourceId, copyAnnotations, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectsApi.projectsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -7675,12 +7719,14 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary 
+         * @param {string} [sourceId] clone an existing project when creating a new project
+         * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsPost(project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsPost(project, options).then((request) => request(axios, basePath));
+        projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -7752,13 +7798,15 @@ export class ProjectsApi extends BaseAPI {
     /**
      * 
      * @summary 
+     * @param {string} [sourceId] clone an existing project when creating a new project
+     * @param {boolean} [copyAnnotations] when cloning via &#x60;source_id&#x60;, also duplicate associated annotations
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApi
      */
-    public projectsPost(project?: Project, options?: RawAxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsPost(project, options).then((request) => request(this.axios, this.basePath));
+    public projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
