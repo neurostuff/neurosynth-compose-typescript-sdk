@@ -407,6 +407,155 @@ export type MetaAnalysisAnnotation = Annotation | string;
 /**
  * 
  * @export
+ * @interface MetaAnalysisJobList
+ */
+export interface MetaAnalysisJobList {
+    /**
+     * 
+     * @type {Array<MetaAnalysisJobResponse>}
+     * @memberof MetaAnalysisJobList
+     */
+    'results'?: Array<MetaAnalysisJobResponse>;
+    /**
+     * 
+     * @type {MetaAnalysisJobListMetadata}
+     * @memberof MetaAnalysisJobList
+     */
+    'metadata'?: MetaAnalysisJobListMetadata;
+}
+/**
+ * 
+ * @export
+ * @interface MetaAnalysisJobListMetadata
+ */
+export interface MetaAnalysisJobListMetadata {
+    /**
+     * Number of jobs in the response.
+     * @type {number}
+     * @memberof MetaAnalysisJobListMetadata
+     */
+    'count'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface MetaAnalysisJobLog
+ */
+export interface MetaAnalysisJobLog {
+    /**
+     * Epoch timestamp returned by the compose runner.
+     * @type {number}
+     * @memberof MetaAnalysisJobLog
+     */
+    'timestamp'?: number;
+    /**
+     * Log message emitted by the compose runner.
+     * @type {string}
+     * @memberof MetaAnalysisJobLog
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface MetaAnalysisJobRequest
+ */
+export interface MetaAnalysisJobRequest {
+    /**
+     * Identifier of the meta-analysis to submit.
+     * @type {string}
+     * @memberof MetaAnalysisJobRequest
+     */
+    'meta_analysis_id': string;
+    /**
+     * Skip upload of results to Neurostore/Neurovault.
+     * @type {boolean}
+     * @memberof MetaAnalysisJobRequest
+     */
+    'no_upload'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface MetaAnalysisJobResponse
+ */
+export interface MetaAnalysisJobResponse {
+    /**
+     * Identifier returned by the compose runner service.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'job_id'?: string;
+    /**
+     * Identifier of the meta-analysis that was submitted.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'meta_analysis_id'?: string;
+    /**
+     * Artifact key prefix for logs and outputs.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'artifact_prefix'?: string;
+    /**
+     * Latest known status reported by the compose runner.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'status'?: string;
+    /**
+     * Convenience URL for polling job status.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'status_url'?: string | null;
+    /**
+     * Deployment environment the job was submitted to.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'environment'?: string;
+    /**
+     * Indicates whether the upload step was skipped.
+     * @type {boolean}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'no_upload'?: boolean;
+    /**
+     * Start time reported by the compose runner status endpoint.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'start_time'?: string | null;
+    /**
+     * Raw output payload returned by the compose runner.
+     * @type {{ [key: string]: any; }}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'output'?: { [key: string]: any; } | null;
+    /**
+     * Aggregated log events returned by the compose runner.
+     * @type {Array<MetaAnalysisJobLog>}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'logs'?: Array<MetaAnalysisJobLog>;
+    /**
+     * Timestamp when the job entry was cached.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'created_at'?: string | null;
+    /**
+     * Timestamp when the job entry was last refreshed.
+     * @type {string}
+     * @memberof MetaAnalysisJobResponse
+     */
+    'updated_at'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface MetaAnalysisList
  */
 export interface MetaAnalysisList {
@@ -2990,6 +3139,118 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet: async (jobId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet', 'jobId', jobId)
+            const localVarPath = `/meta-analysis-jobs/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost: async (metaAnalysisJobRequest: MetaAnalysisJobRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'metaAnalysisJobRequest' is not null or undefined
+            assertParamExists('neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost', 'metaAnalysisJobRequest', metaAnalysisJobRequest)
+            const localVarPath = `/meta-analysis-jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysisJobRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {number} [page] page of results
@@ -3795,6 +4056,44 @@ export const ComposeApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {number} [page] page of results
@@ -4143,6 +4442,35 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobResponse> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobList> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobResponse> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {number} [page] page of results
@@ -4473,6 +4801,41 @@ export class ComposeApi extends BaseAPI {
      */
     public metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the most recent status information and logs for a submitted job.
+     * @summary Get status and logs for a meta-analysis job
+     * @param {string} jobId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return cached job submissions associated with the authenticated user.
+     * @summary List meta-analysis jobs for the current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Submit a meta-analysis to the compose runner service.
+     * @summary Submit a meta-analysis job
+     * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComposeApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5221,6 +5584,78 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet: async (jobId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet', 'jobId', jobId)
+            const localVarPath = `/meta-analysis-jobs/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {number} [page] page of results
@@ -5657,6 +6092,31 @@ export const GetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GetApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GetApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {number} [page] page of results
@@ -5846,6 +6306,25 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
             return localVarFp.metaAnalysisResultsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobResponse> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobList> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {number} [page] page of results
@@ -6026,6 +6505,29 @@ export class GetApi extends BaseAPI {
      */
     public metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the most recent status information and logs for a submitted job.
+     * @summary Get status and logs for a meta-analysis job
+     * @param {string} jobId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return cached job submissions associated with the authenticated user.
+     * @summary List meta-analysis jobs for the current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GetApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6482,6 +6984,118 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet: async (jobId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'jobId' is not null or undefined
+            assertParamExists('neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet', 'jobId', jobId)
+            const localVarPath = `/meta-analysis-jobs/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/meta-analysis-jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost: async (metaAnalysisJobRequest: MetaAnalysisJobRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'metaAnalysisJobRequest' is not null or undefined
+            assertParamExists('neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost', 'metaAnalysisJobRequest', metaAnalysisJobRequest)
+            const localVarPath = `/meta-analysis-jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysisJobRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -6607,6 +7221,44 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['MetaAnalysesApi.metaAnalysisResultsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MetaAnalysesApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MetaAnalysesApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MetaAnalysesApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -6707,6 +7359,35 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
          */
         metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
             return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the most recent status information and logs for a submitted job.
+         * @summary Get status and logs for a meta-analysis job
+         * @param {string} jobId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobResponse> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return cached job submissions associated with the authenticated user.
+         * @summary List meta-analysis jobs for the current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobList> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobResponse> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6823,6 +7504,41 @@ export class MetaAnalysesApi extends BaseAPI {
      */
     public metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the most recent status information and logs for a submitted job.
+     * @summary Get status and logs for a meta-analysis job
+     * @param {string} jobId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysesApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return cached job submissions associated with the authenticated user.
+     * @summary List meta-analysis jobs for the current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysesApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Submit a meta-analysis to the compose runner service.
+     * @summary Submit a meta-analysis job
+     * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaAnalysesApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig) {
+        return MetaAnalysesApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -6945,6 +7661,46 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(resultInit, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost: async (metaAnalysisJobRequest: MetaAnalysisJobRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'metaAnalysisJobRequest' is not null or undefined
+            assertParamExists('neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost', 'metaAnalysisJobRequest', metaAnalysisJobRequest)
+            const localVarPath = `/meta-analysis-jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(metaAnalysisJobRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7125,6 +7881,19 @@ export const PostApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MetaAnalysisJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PostApi.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary 
          * @param {string} [sourceId] clone an existing project when creating a new project
@@ -7206,6 +7975,16 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.metaAnalysisResultsPost(resultInit, options).then((request) => request(axios, basePath));
         },
         /**
+         * Submit a meta-analysis to the compose runner service.
+         * @summary Submit a meta-analysis job
+         * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig): AxiosPromise<MetaAnalysisJobResponse> {
+            return localVarFp.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary 
          * @param {string} [sourceId] clone an existing project when creating a new project
@@ -7281,6 +8060,18 @@ export class PostApi extends BaseAPI {
      */
     public metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Submit a meta-analysis to the compose runner service.
+     * @summary Submit a meta-analysis job
+     * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig) {
+        return PostApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
