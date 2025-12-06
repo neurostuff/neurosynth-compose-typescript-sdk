@@ -25,2183 +25,866 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 
 /**
  * a holder/reference to the annotation on neurostore
- * @export
- * @interface Annotation
  */
 export interface Annotation {
     /**
      * the id of the annotation on neurostore
-     * @type {string}
-     * @memberof Annotation
      */
     'neurostore_id'?: string;
     /**
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
-     * @type {object}
-     * @memberof Annotation
      */
     'snapshot'?: object | null;
     /**
      * The related cached studyset to this annotation.
-     * @type {string}
-     * @memberof Annotation
      */
     'studyset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Annotation
-     */
     'neurostore_url'?: string;
 }
-/**
- * 
- * @export
- * @interface AnnotationList
- */
 export interface AnnotationList {
-    /**
-     * 
-     * @type {Array<AnnotationReturn>}
-     * @memberof AnnotationList
-     */
     'results'?: Array<AnnotationReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof AnnotationList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface AnnotationPostBody
- */
 export interface AnnotationPostBody {
-    /**
-     * 
-     * @type {string}
-     * @memberof AnnotationPostBody
-     */
-    'cached_studyset_id': string;
+    'cached_studyset_id'?: string;
     /**
      * the id of the annotation on neurostore
-     * @type {string}
-     * @memberof AnnotationPostBody
      */
     'neurostore_id'?: string;
     /**
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
-     * @type {object}
-     * @memberof AnnotationPostBody
      */
     'snapshot'?: object | null;
     /**
      * The related cached studyset to this annotation.
-     * @type {string}
-     * @memberof AnnotationPostBody
      */
     'studyset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AnnotationPostBody
-     */
     'neurostore_url'?: string;
 }
-/**
- * 
- * @export
- * @interface AnnotationReturn
- */
 export interface AnnotationReturn {
     /**
      * the id of the annotation on neurostore
-     * @type {string}
-     * @memberof AnnotationReturn
      */
     'neurostore_id'?: string;
     /**
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
-     * @type {object}
-     * @memberof AnnotationReturn
      */
     'snapshot'?: object | null;
     /**
      * The related cached studyset to this annotation.
-     * @type {string}
-     * @memberof AnnotationReturn
      */
     'studyset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AnnotationReturn
-     */
     'neurostore_url'?: string;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof AnnotationReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof AnnotationReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof AnnotationReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof AnnotationReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AnnotationReturn
-     */
     'username'?: string | null;
 }
-/**
- * 
- * @export
- * @interface AnnotationUpdate
- */
 export interface AnnotationUpdate {
     /**
      * the id of the annotation on neurostore
-     * @type {string}
-     * @memberof AnnotationUpdate
      */
     'neurostore_id'?: string;
     /**
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
-     * @type {object}
-     * @memberof AnnotationUpdate
      */
     'snapshot'?: object | null;
     /**
      * The related cached studyset to this annotation.
-     * @type {string}
-     * @memberof AnnotationUpdate
      */
     'studyset'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AnnotationUpdate
-     */
     'neurostore_url'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AnnotationUpdate
-     */
     'cached_studyset_id'?: string;
 }
 /**
  * The function/class applying statistical adjustments to the output of the meta-analysis (optional).
- * @export
- * @interface Corrector
  */
 export interface Corrector {
     /**
      * the name of the function/class performing the correction. For example FWECorrector from NiMARE would be valid.
-     * @type {string}
-     * @memberof Corrector
      */
     'type'?: string;
     /**
      * key word arguments passed to the corrector to modidy default functionality, such as number of iterations, or the particular method of correction being applied.
-     * @type {object}
-     * @memberof Corrector
      */
     'args'?: object;
 }
 /**
  * the specification for the function/class running the meta-analysis
- * @export
- * @interface Estimator
  */
 export interface Estimator {
     /**
      * the meta-analytic algorithm applied to the data. Currently this should be directly tied to the function/class running the meta-analysis. For example, ALE, or MKDADensity are valid NiMARE classes to put here.
-     * @type {string}
-     * @memberof Estimator
      */
     'type'?: string;
     /**
      * arbitrary keyword arguments to be passed into the function/class to modify default functionality, this could modify the kernel, resampling methods, or any other behavior defined in the function/class (like MKDADensity).
-     * @type {object}
-     * @memberof Estimator
      */
     'args'?: object;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysesGet400Response
- */
 export interface MetaAnalysesGet400Response {
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysesGet400Response
-     */
     'detail'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof MetaAnalysesGet400Response
-     */
     'status'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysesGet400Response
-     */
     'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysesGet400Response
-     */
     'type'?: string;
 }
 /**
  * The combination of the specification determining what meta-analysis to run (required), the studyset to act as input to the meta-analytic algorithm (required), and the annotation to provide human readable annotations as well as acts as an optional filter on which analyses to select within the studyset (optional, but suggested).
- * @export
- * @interface MetaAnalysis
  */
 export interface MetaAnalysis {
-    /**
-     * 
-     * @type {MetaAnalysisSpecification}
-     * @memberof MetaAnalysis
-     */
     'specification'?: MetaAnalysisSpecification;
-    /**
-     * 
-     * @type {MetaAnalysisStudyset}
-     * @memberof MetaAnalysis
-     */
     'studyset'?: MetaAnalysisStudyset;
-    /**
-     * 
-     * @type {MetaAnalysisAnnotation}
-     * @memberof MetaAnalysis
-     */
     'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysis
      */
     'name'?: string | null;
     /**
      * Long form description of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysis
      */
     'description'?: string | null;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysis
      */
     'cached_studyset_id'?: string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysis
      */
     'cached_annotation_id'?: string;
-    /**
-     * 
-     * @type {MetaAnalysisResults}
-     * @memberof MetaAnalysis
-     */
     'results'?: MetaAnalysisResults;
-    /**
-     * 
-     * @type {object}
-     * @memberof MetaAnalysis
-     */
     'provenance'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'project'?: string | null;
     /**
      * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
-     * @type {string}
-     * @memberof MetaAnalysis
      */
     'run_key'?: string;
-    /**
-     * 
-     * @type {NeurostoreAnalysis}
-     * @memberof MetaAnalysis
-     */
     'neurostore_analysis'?: NeurostoreAnalysis;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'cognitive_contrast_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'cognitive_contrast_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'cognitive_paradigm_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'cognitive_paradigm_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'cached_studyset'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'cached_annotation'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysis
-     */
     'neurostore_url'?: string | null;
 }
 /**
  * @type MetaAnalysisAnnotation
- * @export
  */
 export type MetaAnalysisAnnotation = Annotation | string;
 
-/**
- * 
- * @export
- * @interface MetaAnalysisJobList
- */
 export interface MetaAnalysisJobList {
-    /**
-     * 
-     * @type {Array<MetaAnalysisJobResponse>}
-     * @memberof MetaAnalysisJobList
-     */
     'results'?: Array<MetaAnalysisJobResponse>;
-    /**
-     * 
-     * @type {MetaAnalysisJobListMetadata}
-     * @memberof MetaAnalysisJobList
-     */
     'metadata'?: MetaAnalysisJobListMetadata;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysisJobListMetadata
- */
 export interface MetaAnalysisJobListMetadata {
     /**
      * Number of jobs in the response.
-     * @type {number}
-     * @memberof MetaAnalysisJobListMetadata
      */
     'count'?: number;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysisJobLog
- */
 export interface MetaAnalysisJobLog {
     /**
      * Epoch timestamp returned by the compose runner.
-     * @type {number}
-     * @memberof MetaAnalysisJobLog
      */
     'timestamp'?: number;
     /**
      * Log message emitted by the compose runner.
-     * @type {string}
-     * @memberof MetaAnalysisJobLog
      */
     'message'?: string;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysisJobRequest
- */
 export interface MetaAnalysisJobRequest {
     /**
      * Identifier of the meta-analysis to submit.
-     * @type {string}
-     * @memberof MetaAnalysisJobRequest
      */
     'meta_analysis_id': string;
     /**
      * Skip upload of results to Neurostore/Neurovault.
-     * @type {boolean}
-     * @memberof MetaAnalysisJobRequest
      */
     'no_upload'?: boolean;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysisJobResponse
- */
 export interface MetaAnalysisJobResponse {
     /**
      * Identifier returned by the compose runner service.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'job_id'?: string;
     /**
      * Identifier of the meta-analysis that was submitted.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'meta_analysis_id'?: string;
     /**
      * Artifact key prefix for logs and outputs.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'artifact_prefix'?: string;
     /**
      * Latest known status reported by the compose runner.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'status'?: string;
     /**
      * Convenience URL for polling job status.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'status_url'?: string | null;
     /**
      * Deployment environment the job was submitted to.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'environment'?: string;
     /**
      * Indicates whether the upload step was skipped.
-     * @type {boolean}
-     * @memberof MetaAnalysisJobResponse
      */
     'no_upload'?: boolean;
     /**
      * Start time reported by the compose runner status endpoint.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'start_time'?: string | null;
     /**
      * Raw output payload returned by the compose runner.
-     * @type {{ [key: string]: any; }}
-     * @memberof MetaAnalysisJobResponse
      */
     'output'?: { [key: string]: any; } | null;
     /**
      * Aggregated log events returned by the compose runner.
-     * @type {Array<MetaAnalysisJobLog>}
-     * @memberof MetaAnalysisJobResponse
      */
     'logs'?: Array<MetaAnalysisJobLog>;
     /**
      * Timestamp when the job entry was cached.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'created_at'?: string | null;
     /**
      * Timestamp when the job entry was last refreshed.
-     * @type {string}
-     * @memberof MetaAnalysisJobResponse
      */
     'updated_at'?: string | null;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysisList
- */
 export interface MetaAnalysisList {
-    /**
-     * 
-     * @type {Array<MetaAnalysisReturn>}
-     * @memberof MetaAnalysisList
-     */
     'results'?: Array<MetaAnalysisReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof MetaAnalysisList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface MetaAnalysisPostBody
- */
 export interface MetaAnalysisPostBody {
-    /**
-     * 
-     * @type {MetaAnalysisSpecification}
-     * @memberof MetaAnalysisPostBody
-     */
-    'specification': MetaAnalysisSpecification;
-    /**
-     * 
-     * @type {MetaAnalysisStudyset}
-     * @memberof MetaAnalysisPostBody
-     */
+    'specification'?: MetaAnalysisSpecification;
     'studyset'?: MetaAnalysisStudyset;
-    /**
-     * 
-     * @type {MetaAnalysisAnnotation}
-     * @memberof MetaAnalysisPostBody
-     */
     'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
      */
     'name'?: string | null;
     /**
      * Long form description of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
      */
     'description'?: string | null;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
      */
-    'cached_studyset_id': string;
+    'cached_studyset_id'?: string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
      */
-    'cached_annotation_id': string;
-    /**
-     * 
-     * @type {MetaAnalysisResults}
-     * @memberof MetaAnalysisPostBody
-     */
+    'cached_annotation_id'?: string;
     'results'?: MetaAnalysisResults;
-    /**
-     * 
-     * @type {object}
-     * @memberof MetaAnalysisPostBody
-     */
     'provenance'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'project'?: string | null;
     /**
      * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
      */
     'run_key'?: string;
-    /**
-     * 
-     * @type {NeurostoreAnalysis}
-     * @memberof MetaAnalysisPostBody
-     */
     'neurostore_analysis'?: NeurostoreAnalysis;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'cognitive_contrast_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'cognitive_contrast_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'cognitive_paradigm_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'cognitive_paradigm_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'cached_studyset'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'cached_annotation'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisPostBody
-     */
     'neurostore_url'?: string | null;
 }
 /**
  * @type MetaAnalysisResults
  * array of neurostore ids representing the results of this meta-analysis (nominally all results should be the same, but machine architecture differences/algorithm stochastic-ness may lead to slightly different outcomes for each result.
- * @export
  */
 export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
 
-/**
- * 
- * @export
- * @interface MetaAnalysisReturn
- */
 export interface MetaAnalysisReturn {
-    /**
-     * 
-     * @type {MetaAnalysisSpecification}
-     * @memberof MetaAnalysisReturn
-     */
     'specification'?: MetaAnalysisSpecification;
-    /**
-     * 
-     * @type {MetaAnalysisStudyset}
-     * @memberof MetaAnalysisReturn
-     */
     'studyset'?: MetaAnalysisStudyset;
-    /**
-     * 
-     * @type {MetaAnalysisAnnotation}
-     * @memberof MetaAnalysisReturn
-     */
     'annotation'?: MetaAnalysisAnnotation;
     /**
      * Human-readable name of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'name'?: string | null;
     /**
      * Long form description of the meta-analysis.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'description'?: string | null;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'cached_studyset_id'?: string;
     /**
      * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'cached_annotation_id'?: string;
-    /**
-     * 
-     * @type {MetaAnalysisResults}
-     * @memberof MetaAnalysisReturn
-     */
     'results'?: MetaAnalysisResults;
-    /**
-     * 
-     * @type {object}
-     * @memberof MetaAnalysisReturn
-     */
     'provenance'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'project'?: string | null;
     /**
      * a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login. 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'run_key'?: string;
-    /**
-     * 
-     * @type {NeurostoreAnalysis}
-     * @memberof MetaAnalysisReturn
-     */
     'neurostore_analysis'?: NeurostoreAnalysis;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'cognitive_contrast_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'cognitive_contrast_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'cognitive_paradigm_cogatlas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'cognitive_paradigm_cogatlas_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'cached_studyset'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'cached_annotation'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'neurostore_url'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof MetaAnalysisReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MetaAnalysisReturn
-     */
     'username'?: string | null;
 }
 /**
  * @type MetaAnalysisSpecification
- * @export
  */
 export type MetaAnalysisSpecification = Specification | string;
 
 /**
  * @type MetaAnalysisStudyset
- * @export
  */
 export type MetaAnalysisStudyset = Studyset | string;
 
-/**
- * 
- * @export
- * @interface NeurostoreAnalysis
- */
 export interface NeurostoreAnalysis {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreAnalysis
-     */
     'neurostore_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreAnalysis
-     */
     'exception'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreAnalysis
-     */
     'traceback'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreAnalysis
-     */
     'status'?: string | null;
 }
-/**
- * 
- * @export
- * @interface NeurostoreStudy
- */
 export interface NeurostoreStudy {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudy
-     */
     'neurostore_id'?: string | null;
-    /**
-     * 
-     * @type {Array<NeurostoreAnalysis>}
-     * @memberof NeurostoreStudy
-     */
     'analyses'?: Array<NeurostoreAnalysis>;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudy
-     */
     'exception'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudy
-     */
     'traceback'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudy
-     */
     'status'?: string | null;
 }
-/**
- * 
- * @export
- * @interface NeurostoreStudyList
- */
 export interface NeurostoreStudyList {
-    /**
-     * 
-     * @type {Array<NeurostoreStudyReturn>}
-     * @memberof NeurostoreStudyList
-     */
     'results'?: Array<NeurostoreStudyReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof NeurostoreStudyList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface NeurostoreStudyReturn
- */
 export interface NeurostoreStudyReturn {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
-     */
     'neurostore_id'?: string | null;
-    /**
-     * 
-     * @type {Array<NeurostoreAnalysis>}
-     * @memberof NeurostoreStudyReturn
-     */
     'analyses'?: Array<NeurostoreAnalysis>;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
-     */
     'exception'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
-     */
     'traceback'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
-     */
     'status'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurostoreStudyReturn
-     */
     'username'?: string | null;
 }
-/**
- * 
- * @export
- * @interface NeurovaultCollection
- */
 export interface NeurovaultCollection {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultCollection
-     */
     'collection_id'?: string | null;
-    /**
-     * 
-     * @type {NeurovaultCollectionFiles}
-     * @memberof NeurovaultCollection
-     */
     'files'?: NeurovaultCollectionFiles;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultCollection
-     */
     'url'?: string | null;
 }
 /**
  * @type NeurovaultCollectionFiles
- * @export
  */
 export type NeurovaultCollectionFiles = Array<NeurovaultFile> | Array<string>;
 
-/**
- * 
- * @export
- * @interface NeurovaultCollectionReturn
- */
 export interface NeurovaultCollectionReturn {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
-     */
     'collection_id'?: string | null;
-    /**
-     * 
-     * @type {NeurovaultCollectionFiles}
-     * @memberof NeurovaultCollectionReturn
-     */
     'files'?: NeurovaultCollectionFiles;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
-     */
     'url'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultCollectionReturn
-     */
     'username'?: string | null;
 }
-/**
- * 
- * @export
- * @interface NeurovaultFile
- */
 export interface NeurovaultFile {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'collection_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'exception'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'traceback'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'status'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'image_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFile
-     */
     'url'?: string | null;
 }
-/**
- * 
- * @export
- * @interface NeurovaultFileList
- */
 export interface NeurovaultFileList {
-    /**
-     * 
-     * @type {Array<NeurovaultFileReturn>}
-     * @memberof NeurovaultFileList
-     */
     'results'?: Array<NeurovaultFileReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof NeurovaultFileList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface NeurovaultFileReturn
- */
 export interface NeurovaultFileReturn {
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'collection_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'exception'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'traceback'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'status'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'image_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'url'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof NeurovaultFileReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof NeurovaultFileReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof NeurovaultFileReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof NeurovaultFileReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NeurovaultFileReturn
-     */
     'username'?: string | null;
 }
-/**
- * 
- * @export
- * @interface NeurovaultList
- */
 export interface NeurovaultList {
-    /**
-     * 
-     * @type {Array<NeurovaultCollectionReturn>}
-     * @memberof NeurovaultList
-     */
     'results'?: Array<NeurovaultCollectionReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof NeurovaultList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface Project
- */
 export interface Project {
-    /**
-     * 
-     * @type {object}
-     * @memberof Project
-     */
     'provenance'?: object | null;
-    /**
-     * 
-     * @type {ProjectMetaAnalyses}
-     * @memberof Project
-     */
     'meta_analyses'?: ProjectMetaAnalyses;
-    /**
-     * 
-     * @type {string}
-     * @memberof Project
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Project
-     */
     'description'?: string | null;
     /**
      * whether the project is public or private
-     * @type {boolean}
-     * @memberof Project
      */
     'public'?: boolean;
-    /**
-     * 
-     * @type {NeurostoreStudy}
-     * @memberof Project
-     */
     'neurostore_study'?: NeurostoreStudy;
-    /**
-     * 
-     * @type {string}
-     * @memberof Project
-     */
     'neurostore_url'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Project
-     */
     'draft'?: boolean;
 }
-/**
- * 
- * @export
- * @interface ProjectList
- */
 export interface ProjectList {
-    /**
-     * 
-     * @type {Array<ProjectReturn>}
-     * @memberof ProjectList
-     */
     'results'?: Array<ProjectReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof ProjectList
-     */
     'metadata'?: object;
 }
 /**
  * @type ProjectMetaAnalyses
- * @export
  */
 export type ProjectMetaAnalyses = Array<MetaAnalysis> | Array<string>;
 
-/**
- * 
- * @export
- * @interface ProjectReturn
- */
 export interface ProjectReturn {
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof ProjectReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof ProjectReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof ProjectReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof ProjectReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectReturn
-     */
     'username'?: string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof ProjectReturn
-     */
     'provenance'?: object | null;
-    /**
-     * 
-     * @type {ProjectMetaAnalyses}
-     * @memberof ProjectReturn
-     */
     'meta_analyses'?: ProjectMetaAnalyses;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectReturn
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectReturn
-     */
     'description'?: string | null;
     /**
      * whether the project is public or private
-     * @type {boolean}
-     * @memberof ProjectReturn
      */
     'public'?: boolean;
-    /**
-     * 
-     * @type {NeurostoreStudy}
-     * @memberof ProjectReturn
-     */
     'neurostore_study'?: NeurostoreStudy;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectReturn
-     */
     'neurostore_url'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ProjectReturn
-     */
     'draft'?: boolean;
 }
-/**
- * 
- * @export
- * @interface ReadOnly
- */
 export interface ReadOnly {
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof ReadOnly
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof ReadOnly
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof ReadOnly
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof ReadOnly
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ReadOnly
-     */
     'username'?: string | null;
 }
 /**
  * describes the output of a meta-analysis
- * @export
- * @interface Result
  */
 export interface Result {
     /**
      * the meta analysis this result was derived from.
-     * @type {string}
-     * @memberof Result
      */
     'meta_analysis_id'?: string;
     /**
      * version of the command-line-tool that is uploading the results. 
-     * @type {string}
-     * @memberof Result
      */
     'cli_version'?: string | null;
-    /**
-     * 
-     * @type {NeurovaultCollectionReturn}
-     * @memberof Result
-     */
     'neurovault_collection'?: NeurovaultCollectionReturn;
     /**
      * the description of the methods applied to create this result.
-     * @type {string}
-     * @memberof Result
      */
     'methods_description'?: string | null;
     /**
      * a text representation of a tsv that marks the contribution of each study to each particular cluster.
-     * @type {string}
-     * @memberof Result
      */
     'diagnostic_table'?: string | null;
     /**
      * additional parameters that were passed to the commandline tool at runtime. 
-     * @type {object}
-     * @memberof Result
      */
     'cli_args'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Result
-     */
     'status'?: string | null;
 }
-/**
- * 
- * @export
- * @interface ResultInit
- */
 export interface ResultInit {
-    /**
-     * 
-     * @type {string}
-     * @memberof ResultInit
-     */
     'meta_analysis_id'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof ResultInit
-     */
     'studyset_snapshot'?: object;
-    /**
-     * 
-     * @type {object}
-     * @memberof ResultInit
-     */
     'annotation_snapshot'?: object;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResultInit
-     */
     'cli_version'?: string;
 }
-/**
- * 
- * @export
- * @interface ResultList
- */
 export interface ResultList {
-    /**
-     * 
-     * @type {ResultListResults}
-     * @memberof ResultList
-     */
     'results'?: ResultListResults;
-    /**
-     * 
-     * @type {object}
-     * @memberof ResultList
-     */
     'metadata'?: object;
 }
 /**
  * @type ResultListResults
- * @export
  */
 export type ResultListResults = Array<ResultReturn> | Array<string>;
 
-/**
- * 
- * @export
- * @interface ResultReturn
- */
 export interface ResultReturn {
     /**
      * the meta analysis this result was derived from.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'meta_analysis_id'?: string;
     /**
      * version of the command-line-tool that is uploading the results. 
-     * @type {string}
-     * @memberof ResultReturn
      */
     'cli_version'?: string | null;
-    /**
-     * 
-     * @type {NeurovaultCollectionReturn}
-     * @memberof ResultReturn
-     */
     'neurovault_collection'?: NeurovaultCollectionReturn;
     /**
      * the description of the methods applied to create this result.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'methods_description'?: string | null;
     /**
      * a text representation of a tsv that marks the contribution of each study to each particular cluster.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'diagnostic_table'?: string | null;
     /**
      * additional parameters that were passed to the commandline tool at runtime. 
-     * @type {object}
-     * @memberof ResultReturn
      */
     'cli_args'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResultReturn
-     */
     'status'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof ResultReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResultReturn
-     */
     'username'?: string | null;
 }
 /**
  * @type ResultUploadStatisticalMaps
- * @export
  */
 export type ResultUploadStatisticalMaps = Array<File> | File;
 
 /**
  * a machine readable specification of how to run a meta-analysis (currently specifically tailored to NiMARE).
- * @export
- * @interface Specification
  */
 export interface Specification {
     /**
      * the type of meta-analysis being run, typically either cbma or ibma, but others may become available in the future.
-     * @type {string}
-     * @memberof Specification
      */
     'type'?: string;
-    /**
-     * 
-     * @type {Estimator}
-     * @memberof Specification
-     */
     'estimator'?: Estimator;
     /**
      * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
-     * @type {string}
-     * @memberof Specification
      */
     'mask'?: string | null;
-    /**
-     * 
-     * @type {SpecificationConditions}
-     * @memberof Specification
-     */
     'conditions'?: SpecificationConditions;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof Specification
-     */
     'weights'?: Array<number> | null;
     /**
      * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
-     * @type {string}
-     * @memberof Specification
      */
     'transformer'?: string | null;
-    /**
-     * 
-     * @type {Corrector}
-     * @memberof Specification
-     */
     'corrector'?: Corrector | null;
     /**
      * a column from annotations selecting which analyses to include in the meta-analysis
-     * @type {string}
-     * @memberof Specification
      */
     'filter'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Specification
-     */
     'database_studyset'?: string | null;
 }
 /**
  * @type SpecificationConditions
  * selection of categories in the filter column to differentiate groups, or \"neurosynth\", \"neuroquery\", or \"neurostore\" to compare to a database reference group
- * @export
  */
 export type SpecificationConditions = Array<boolean> | Array<string>;
 
 /**
  * The representation of a list of specifications.
- * @export
- * @interface SpecificationList
  */
 export interface SpecificationList {
-    /**
-     * 
-     * @type {Array<SpecificationReturn>}
-     * @memberof SpecificationList
-     */
     'results'?: Array<SpecificationReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof SpecificationList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface SpecificationPostBody
- */
 export interface SpecificationPostBody {
     /**
      * the type of meta-analysis being run, typically either cbma or ibma, but others may become available in the future.
-     * @type {string}
-     * @memberof SpecificationPostBody
      */
     'type'?: string;
-    /**
-     * 
-     * @type {Estimator}
-     * @memberof SpecificationPostBody
-     */
     'estimator'?: Estimator;
     /**
      * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
-     * @type {string}
-     * @memberof SpecificationPostBody
      */
     'mask'?: string | null;
-    /**
-     * 
-     * @type {SpecificationConditions}
-     * @memberof SpecificationPostBody
-     */
     'conditions'?: SpecificationConditions;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof SpecificationPostBody
-     */
     'weights'?: Array<number> | null;
     /**
      * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
-     * @type {string}
-     * @memberof SpecificationPostBody
      */
     'transformer'?: string | null;
-    /**
-     * 
-     * @type {Corrector}
-     * @memberof SpecificationPostBody
-     */
     'corrector'?: Corrector | null;
     /**
      * a column from annotations selecting which analyses to include in the meta-analysis
-     * @type {string}
-     * @memberof SpecificationPostBody
      */
     'filter'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SpecificationPostBody
-     */
     'database_studyset'?: string | null;
 }
 /**
  * The view of the specification through an endpoint.
- * @export
- * @interface SpecificationReturn
  */
 export interface SpecificationReturn {
     /**
      * the type of meta-analysis being run, typically either cbma or ibma, but others may become available in the future.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'type'?: string;
-    /**
-     * 
-     * @type {Estimator}
-     * @memberof SpecificationReturn
-     */
     'estimator'?: Estimator;
     /**
      * a string representing a binary nifti file to select which voxels a user wants to include in the analysis.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'mask'?: string | null;
-    /**
-     * 
-     * @type {SpecificationConditions}
-     * @memberof SpecificationReturn
-     */
     'conditions'?: SpecificationConditions;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof SpecificationReturn
-     */
     'weights'?: Array<number> | null;
     /**
      * A transformation applied to column(s) (e.g., binarize based on a threshold). This is likely to become deprecated.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'transformer'?: string | null;
-    /**
-     * 
-     * @type {Corrector}
-     * @memberof SpecificationReturn
-     */
     'corrector'?: Corrector | null;
     /**
      * a column from annotations selecting which analyses to include in the meta-analysis
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'filter'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SpecificationReturn
-     */
     'database_studyset'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof SpecificationReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SpecificationReturn
-     */
     'username'?: string | null;
 }
-/**
- * 
- * @export
- * @interface Studyset
- */
 export interface Studyset {
     /**
      * The id of the studyset on neurostore.
-     * @type {string}
-     * @memberof Studyset
      */
     'neurostore_id'?: string;
     /**
      * The snapshot of the studyset pending a successful run of the meta-analysis.
-     * @type {object}
-     * @memberof Studyset
      */
     'snapshot'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Studyset
-     */
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
-     * @type {string}
-     * @memberof Studyset
      */
     'version'?: string | null;
 }
-/**
- * 
- * @export
- * @interface StudysetList
- */
 export interface StudysetList {
-    /**
-     * 
-     * @type {Array<StudysetReturn>}
-     * @memberof StudysetList
-     */
     'results'?: Array<StudysetReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof StudysetList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface StudysetPostBody
- */
 export interface StudysetPostBody {
     /**
      * The id of the studyset on neurostore.
-     * @type {string}
-     * @memberof StudysetPostBody
      */
-    'neurostore_id': string;
+    'neurostore_id'?: string;
     /**
      * The snapshot of the studyset pending a successful run of the meta-analysis.
-     * @type {object}
-     * @memberof StudysetPostBody
      */
     'snapshot'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof StudysetPostBody
-     */
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
-     * @type {string}
-     * @memberof StudysetPostBody
      */
     'version'?: string | null;
 }
-/**
- * 
- * @export
- * @interface StudysetReference
- */
 export interface StudysetReference {
-    /**
-     * 
-     * @type {Array<StudysetReferenceSnapshotsInner>}
-     * @memberof StudysetReference
-     */
     'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
 }
-/**
- * 
- * @export
- * @interface StudysetReferenceList
- */
 export interface StudysetReferenceList {
-    /**
-     * 
-     * @type {Array<StudysetReferenceReturn>}
-     * @memberof StudysetReferenceList
-     */
     'results'?: Array<StudysetReferenceReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof StudysetReferenceList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface StudysetReferenceReturn
- */
 export interface StudysetReferenceReturn {
-    /**
-     * 
-     * @type {Array<StudysetReferenceSnapshotsInner>}
-     * @memberof StudysetReferenceReturn
-     */
     'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof StudysetReferenceReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof StudysetReferenceReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof StudysetReferenceReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof StudysetReferenceReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof StudysetReferenceReturn
-     */
     'username'?: string | null;
 }
 /**
  * @type StudysetReferenceSnapshotsInner
- * @export
  */
 export type StudysetReferenceSnapshotsInner = Studyset | string;
 
-/**
- * 
- * @export
- * @interface StudysetReturn
- */
 export interface StudysetReturn {
     /**
      * The id of the studyset on neurostore.
-     * @type {string}
-     * @memberof StudysetReturn
      */
     'neurostore_id'?: string;
     /**
      * The snapshot of the studyset pending a successful run of the meta-analysis.
-     * @type {object}
-     * @memberof StudysetReturn
      */
     'snapshot'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof StudysetReturn
-     */
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
-     * @type {string}
-     * @memberof StudysetReturn
      */
     'version'?: string | null;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof StudysetReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof StudysetReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof StudysetReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof StudysetReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof StudysetReturn
-     */
     'username'?: string | null;
 }
 /**
  * attributes of the user object
- * @export
- * @interface User
  */
 export interface User {
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
     'external_id'?: string;
 }
-/**
- * 
- * @export
- * @interface UserList
- */
 export interface UserList {
-    /**
-     * 
-     * @type {Array<UserReturn>}
-     * @memberof UserList
-     */
     'results'?: Array<UserReturn>;
-    /**
-     * 
-     * @type {object}
-     * @memberof UserList
-     */
     'metadata'?: object;
 }
-/**
- * 
- * @export
- * @interface UserReturn
- */
 export interface UserReturn {
-    /**
-     * 
-     * @type {string}
-     * @memberof UserReturn
-     */
     'external_id'?: string;
     /**
      * the identifier for the resource.
-     * @type {string}
-     * @memberof UserReturn
      */
     'id'?: string;
     /**
      * when the resource was last modified.
-     * @type {string}
-     * @memberof UserReturn
      */
     'updated_at'?: string | null;
     /**
      * When the resource was created.
-     * @type {string}
-     * @memberof UserReturn
      */
     'created_at'?: string;
     /**
      * Who owns the resource.
-     * @type {string}
-     * @memberof UserReturn
      */
     'user'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserReturn
-     */
     'username'?: string | null;
 }
 
 /**
  * AnnotationsApi - axios parameter creator
- * @export
  */
 export const AnnotationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -2399,7 +1082,6 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
 
 /**
  * AnnotationsApi - functional programming interface
- * @export
  */
 export const AnnotationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AnnotationsApiAxiosParamCreator(configuration)
@@ -2470,7 +1152,6 @@ export const AnnotationsApiFp = function(configuration?: Configuration) {
 
 /**
  * AnnotationsApi - factory interface
- * @export
  */
 export const AnnotationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = AnnotationsApiFp(configuration)
@@ -2529,9 +1210,6 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
 
 /**
  * AnnotationsApi - object-oriented interface
- * @export
- * @class AnnotationsApi
- * @extends {BaseAPI}
  */
 export class AnnotationsApi extends BaseAPI {
     /**
@@ -2548,7 +1226,6 @@ export class AnnotationsApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationsApi
      */
     public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return AnnotationsApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -2560,7 +1237,6 @@ export class AnnotationsApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationsApi
      */
     public annotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return AnnotationsApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -2573,7 +1249,6 @@ export class AnnotationsApi extends BaseAPI {
      * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationsApi
      */
     public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig) {
         return AnnotationsApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
@@ -2585,7 +1260,6 @@ export class AnnotationsApi extends BaseAPI {
      * @param {AnnotationPostBody} [annotationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AnnotationsApi
      */
     public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig) {
         return AnnotationsApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -2596,7 +1270,6 @@ export class AnnotationsApi extends BaseAPI {
 
 /**
  * ComposeApi - axios parameter creator
- * @export
  */
 export const ComposeApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -3874,7 +2547,6 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * ComposeApi - functional programming interface
- * @export
  */
 export const ComposeApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ComposeApiAxiosParamCreator(configuration)
@@ -4296,7 +2968,6 @@ export const ComposeApiFp = function(configuration?: Configuration) {
 
 /**
  * ComposeApi - factory interface
- * @export
  */
 export const ComposeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ComposeApiFp(configuration)
@@ -4634,9 +3305,6 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * ComposeApi - object-oriented interface
- * @export
- * @class ComposeApi
- * @extends {BaseAPI}
  */
 export class ComposeApi extends BaseAPI {
     /**
@@ -4653,7 +3321,6 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -4665,7 +3332,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public annotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -4678,7 +3344,6 @@ export class ComposeApi extends BaseAPI {
      * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
@@ -4690,7 +3355,6 @@ export class ComposeApi extends BaseAPI {
      * @param {AnnotationPostBody} [annotationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -4710,7 +3374,6 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, desc, options).then((request) => request(this.axios, this.basePath));
@@ -4723,7 +3386,6 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
@@ -4736,7 +3398,6 @@ export class ComposeApi extends BaseAPI {
      * @param {MetaAnalysis} [metaAnalysis] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
@@ -4748,7 +3409,6 @@ export class ComposeApi extends BaseAPI {
      * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -4760,7 +3420,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} [metaAnalysisId] search for results with this meta-analysis id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysisResultsGet(metaAnalysisId?: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
@@ -4772,7 +3431,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -4785,7 +3443,6 @@ export class ComposeApi extends BaseAPI {
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysisResultsIdPut(id: string, result?: Result, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysisResultsIdPut(id, result, options).then((request) => request(this.axios, this.basePath));
@@ -4797,7 +3454,6 @@ export class ComposeApi extends BaseAPI {
      * @param {ResultInit} [resultInit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
@@ -4809,7 +3465,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} jobId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(this.axios, this.basePath));
@@ -4820,7 +3475,6 @@ export class ComposeApi extends BaseAPI {
      * @summary List meta-analysis jobs for the current user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(this.axios, this.basePath));
@@ -4832,7 +3486,6 @@ export class ComposeApi extends BaseAPI {
      * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(this.axios, this.basePath));
@@ -4851,7 +3504,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} [userId] user id you want to filter on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
@@ -4863,7 +3515,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public projectsIdDelete(id: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).projectsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -4876,7 +3527,6 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
@@ -4889,7 +3539,6 @@ export class ComposeApi extends BaseAPI {
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
@@ -4903,7 +3552,6 @@ export class ComposeApi extends BaseAPI {
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(this.axios, this.basePath));
@@ -4923,7 +3571,6 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -4935,7 +3582,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public specificationsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -4948,7 +3594,6 @@ export class ComposeApi extends BaseAPI {
      * @param {Specification} [specification] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public specificationsIdPut(id: string, specification?: Specification, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
@@ -4960,7 +3605,6 @@ export class ComposeApi extends BaseAPI {
      * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -4980,7 +3624,6 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -4992,7 +3635,6 @@ export class ComposeApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public studysetsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -5005,7 +3647,6 @@ export class ComposeApi extends BaseAPI {
      * @param {Studyset} [studyset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
@@ -5017,7 +3658,6 @@ export class ComposeApi extends BaseAPI {
      * @param {StudysetPostBody} [studysetPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ComposeApi
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -5028,7 +3668,6 @@ export class ComposeApi extends BaseAPI {
 
 /**
  * DefaultApi - axios parameter creator
- * @export
  */
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -5149,7 +3788,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * DefaultApi - functional programming interface
- * @export
  */
 export const DefaultApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
@@ -5199,7 +3837,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 
 /**
  * DefaultApi - factory interface
- * @export
  */
 export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DefaultApiFp(configuration)
@@ -5240,9 +3877,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * DefaultApi - object-oriented interface
- * @export
- * @class DefaultApi
- * @extends {BaseAPI}
  */
 export class DefaultApi extends BaseAPI {
     /**
@@ -5251,7 +3885,6 @@ export class DefaultApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
      */
     public metaAnalysesIdDelete(id: string, options?: RawAxiosRequestConfig) {
         return DefaultApiFp(this.configuration).metaAnalysesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -5263,7 +3896,6 @@ export class DefaultApi extends BaseAPI {
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
      */
     public studysetReferencesGet(nested?: boolean, options?: RawAxiosRequestConfig) {
         return DefaultApiFp(this.configuration).studysetReferencesGet(nested, options).then((request) => request(this.axios, this.basePath));
@@ -5276,7 +3908,6 @@ export class DefaultApi extends BaseAPI {
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
      */
     public studysetReferencesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig) {
         return DefaultApiFp(this.configuration).studysetReferencesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
@@ -5287,7 +3918,6 @@ export class DefaultApi extends BaseAPI {
 
 /**
  * GetApi - axios parameter creator
- * @export
  */
 export const GetApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -5991,7 +4621,6 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
 
 /**
  * GetApi - functional programming interface
- * @export
  */
 export const GetApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = GetApiAxiosParamCreator(configuration)
@@ -6223,7 +4852,6 @@ export const GetApiFp = function(configuration?: Configuration) {
 
 /**
  * GetApi - factory interface
- * @export
  */
 export const GetApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = GetApiFp(configuration)
@@ -6413,9 +5041,6 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
 
 /**
  * GetApi - object-oriented interface
- * @export
- * @class GetApi
- * @extends {BaseAPI}
  */
 export class GetApi extends BaseAPI {
     /**
@@ -6432,7 +5057,6 @@ export class GetApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -6444,7 +5068,6 @@ export class GetApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public annotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -6464,7 +5087,6 @@ export class GetApi extends BaseAPI {
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, desc, options).then((request) => request(this.axios, this.basePath));
@@ -6477,7 +5099,6 @@ export class GetApi extends BaseAPI {
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public metaAnalysesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
@@ -6489,7 +5110,6 @@ export class GetApi extends BaseAPI {
      * @param {string} [metaAnalysisId] search for results with this meta-analysis id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public metaAnalysisResultsGet(metaAnalysisId?: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
@@ -6501,7 +5121,6 @@ export class GetApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -6513,7 +5132,6 @@ export class GetApi extends BaseAPI {
      * @param {string} jobId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(this.axios, this.basePath));
@@ -6524,7 +5142,6 @@ export class GetApi extends BaseAPI {
      * @summary List meta-analysis jobs for the current user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(this.axios, this.basePath));
@@ -6543,7 +5160,6 @@ export class GetApi extends BaseAPI {
      * @param {string} [userId] user id you want to filter on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
@@ -6556,7 +5172,6 @@ export class GetApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
@@ -6576,7 +5191,6 @@ export class GetApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -6588,7 +5202,6 @@ export class GetApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public specificationsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -6608,7 +5221,6 @@ export class GetApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -6620,7 +5232,6 @@ export class GetApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetApi
      */
     public studysetsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -6631,7 +5242,6 @@ export class GetApi extends BaseAPI {
 
 /**
  * MetaAnalysesApi - axios parameter creator
- * @export
  */
 export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -7101,7 +5711,6 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * MetaAnalysesApi - functional programming interface
- * @export
  */
 export const MetaAnalysesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MetaAnalysesApiAxiosParamCreator(configuration)
@@ -7264,7 +5873,6 @@ export const MetaAnalysesApiFp = function(configuration?: Configuration) {
 
 /**
  * MetaAnalysesApi - factory interface
- * @export
  */
 export const MetaAnalysesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = MetaAnalysesApiFp(configuration)
@@ -7394,9 +6002,6 @@ export const MetaAnalysesApiFactory = function (configuration?: Configuration, b
 
 /**
  * MetaAnalysesApi - object-oriented interface
- * @export
- * @class MetaAnalysesApi
- * @extends {BaseAPI}
  */
 export class MetaAnalysesApi extends BaseAPI {
     /**
@@ -7413,7 +6018,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysesGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysesGet(nested, ids, page, pageSize, name, search, description, sort, desc, options).then((request) => request(this.axios, this.basePath));
@@ -7426,7 +6030,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
@@ -7439,7 +6042,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {MetaAnalysis} [metaAnalysis] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
@@ -7451,7 +6053,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -7463,7 +6064,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {string} [metaAnalysisId] search for results with this meta-analysis id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysisResultsGet(metaAnalysisId?: string, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsGet(metaAnalysisId, options).then((request) => request(this.axios, this.basePath));
@@ -7475,7 +6075,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysisResultsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -7488,7 +6087,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysisResultsIdPut(id: string, result?: Result, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsIdPut(id, result, options).then((request) => request(this.axios, this.basePath));
@@ -7500,7 +6098,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {ResultInit} [resultInit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
@@ -7512,7 +6109,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {string} jobId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId: string, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(jobId, options).then((request) => request(this.axios, this.basePath));
@@ -7523,7 +6119,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @summary List meta-analysis jobs for the current user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet(options).then((request) => request(this.axios, this.basePath));
@@ -7535,7 +6130,6 @@ export class MetaAnalysesApi extends BaseAPI {
      * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaAnalysesApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig) {
         return MetaAnalysesApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(this.axios, this.basePath));
@@ -7546,7 +6140,6 @@ export class MetaAnalysesApi extends BaseAPI {
 
 /**
  * PostApi - axios parameter creator
- * @export
  */
 export const PostApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -7836,7 +6429,6 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
 
 /**
  * PostApi - functional programming interface
- * @export
  */
 export const PostApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PostApiAxiosParamCreator(configuration)
@@ -7939,7 +6531,6 @@ export const PostApiFp = function(configuration?: Configuration) {
 
 /**
  * PostApi - factory interface
- * @export
  */
 export const PostApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = PostApiFp(configuration)
@@ -8021,9 +6612,6 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
 
 /**
  * PostApi - object-oriented interface
- * @export
- * @class PostApi
- * @extends {BaseAPI}
  */
 export class PostApi extends BaseAPI {
     /**
@@ -8032,7 +6620,6 @@ export class PostApi extends BaseAPI {
      * @param {AnnotationPostBody} [annotationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -8044,7 +6631,6 @@ export class PostApi extends BaseAPI {
      * @param {MetaAnalysisPostBody} [metaAnalysisPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public metaAnalysesPost(metaAnalysisPostBody?: MetaAnalysisPostBody, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).metaAnalysesPost(metaAnalysisPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -8056,7 +6642,6 @@ export class PostApi extends BaseAPI {
      * @param {ResultInit} [resultInit] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public metaAnalysisResultsPost(resultInit?: ResultInit, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).metaAnalysisResultsPost(resultInit, options).then((request) => request(this.axios, this.basePath));
@@ -8068,7 +6653,6 @@ export class PostApi extends BaseAPI {
      * @param {MetaAnalysisJobRequest} metaAnalysisJobRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest: MetaAnalysisJobRequest, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest, options).then((request) => request(this.axios, this.basePath));
@@ -8082,7 +6666,6 @@ export class PostApi extends BaseAPI {
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(this.axios, this.basePath));
@@ -8094,7 +6677,6 @@ export class PostApi extends BaseAPI {
      * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -8106,7 +6688,6 @@ export class PostApi extends BaseAPI {
      * @param {StudysetPostBody} [studysetPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostApi
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -8117,7 +6698,6 @@ export class PostApi extends BaseAPI {
 
 /**
  * ProjectsApi - axios parameter creator
- * @export
  */
 export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -8367,7 +6947,6 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
 
 /**
  * ProjectsApi - functional programming interface
- * @export
  */
 export const ProjectsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
@@ -8453,7 +7032,6 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
 
 /**
  * ProjectsApi - factory interface
- * @export
  */
 export const ProjectsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ProjectsApiFp(configuration)
@@ -8524,9 +7102,6 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
 
 /**
  * ProjectsApi - object-oriented interface
- * @export
- * @class ProjectsApi
- * @extends {BaseAPI}
  */
 export class ProjectsApi extends BaseAPI {
     /**
@@ -8542,7 +7117,6 @@ export class ProjectsApi extends BaseAPI {
      * @param {string} [userId] user id you want to filter on
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProjectsApi
      */
     public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
@@ -8554,7 +7128,6 @@ export class ProjectsApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProjectsApi
      */
     public projectsIdDelete(id: string, options?: RawAxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).projectsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -8567,7 +7140,6 @@ export class ProjectsApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProjectsApi
      */
     public projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
@@ -8580,7 +7152,6 @@ export class ProjectsApi extends BaseAPI {
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProjectsApi
      */
     public projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
@@ -8594,7 +7165,6 @@ export class ProjectsApi extends BaseAPI {
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProjectsApi
      */
     public projectsPost(sourceId?: string, copyAnnotations?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).projectsPost(sourceId, copyAnnotations, project, options).then((request) => request(this.axios, this.basePath));
@@ -8605,7 +7175,6 @@ export class ProjectsApi extends BaseAPI {
 
 /**
  * PutApi - axios parameter creator
- * @export
  */
 export const PutApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -8869,7 +7438,6 @@ export const PutApiAxiosParamCreator = function (configuration?: Configuration) 
 
 /**
  * PutApi - functional programming interface
- * @export
  */
 export const PutApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PutApiAxiosParamCreator(configuration)
@@ -8963,7 +7531,6 @@ export const PutApiFp = function(configuration?: Configuration) {
 
 /**
  * PutApi - factory interface
- * @export
  */
 export const PutApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = PutApiFp(configuration)
@@ -9039,9 +7606,6 @@ export const PutApiFactory = function (configuration?: Configuration, basePath?:
 
 /**
  * PutApi - object-oriented interface
- * @export
- * @class PutApi
- * @extends {BaseAPI}
  */
 export class PutApi extends BaseAPI {
     /**
@@ -9051,7 +7615,6 @@ export class PutApi extends BaseAPI {
      * @param {AnnotationUpdate} [annotationUpdate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PutApi
      */
     public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig) {
         return PutApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
@@ -9064,7 +7627,6 @@ export class PutApi extends BaseAPI {
      * @param {MetaAnalysis} [metaAnalysis] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PutApi
      */
     public metaAnalysesIdPut(id: string, metaAnalysis?: MetaAnalysis, options?: RawAxiosRequestConfig) {
         return PutApiFp(this.configuration).metaAnalysesIdPut(id, metaAnalysis, options).then((request) => request(this.axios, this.basePath));
@@ -9077,7 +7639,6 @@ export class PutApi extends BaseAPI {
      * @param {Result} [result] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PutApi
      */
     public metaAnalysisResultsIdPut(id: string, result?: Result, options?: RawAxiosRequestConfig) {
         return PutApiFp(this.configuration).metaAnalysisResultsIdPut(id, result, options).then((request) => request(this.axios, this.basePath));
@@ -9090,7 +7651,6 @@ export class PutApi extends BaseAPI {
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PutApi
      */
     public projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig) {
         return PutApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
@@ -9103,7 +7663,6 @@ export class PutApi extends BaseAPI {
      * @param {Specification} [specification] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PutApi
      */
     public specificationsIdPut(id: string, specification?: Specification, options?: RawAxiosRequestConfig) {
         return PutApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
@@ -9116,7 +7675,6 @@ export class PutApi extends BaseAPI {
      * @param {Studyset} [studyset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PutApi
      */
     public studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig) {
         return PutApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
@@ -9127,7 +7685,6 @@ export class PutApi extends BaseAPI {
 
 /**
  * SpecificationsApi - axios parameter creator
- * @export
  */
 export const SpecificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -9325,7 +7882,6 @@ export const SpecificationsApiAxiosParamCreator = function (configuration?: Conf
 
 /**
  * SpecificationsApi - functional programming interface
- * @export
  */
 export const SpecificationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SpecificationsApiAxiosParamCreator(configuration)
@@ -9396,7 +7952,6 @@ export const SpecificationsApiFp = function(configuration?: Configuration) {
 
 /**
  * SpecificationsApi - factory interface
- * @export
  */
 export const SpecificationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SpecificationsApiFp(configuration)
@@ -9455,9 +8010,6 @@ export const SpecificationsApiFactory = function (configuration?: Configuration,
 
 /**
  * SpecificationsApi - object-oriented interface
- * @export
- * @class SpecificationsApi
- * @extends {BaseAPI}
  */
 export class SpecificationsApi extends BaseAPI {
     /**
@@ -9474,7 +8026,6 @@ export class SpecificationsApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationsApi
      */
     public specificationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return SpecificationsApiFp(this.configuration).specificationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -9486,7 +8037,6 @@ export class SpecificationsApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationsApi
      */
     public specificationsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return SpecificationsApiFp(this.configuration).specificationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -9499,7 +8049,6 @@ export class SpecificationsApi extends BaseAPI {
      * @param {Specification} [specification] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationsApi
      */
     public specificationsIdPut(id: string, specification?: Specification, options?: RawAxiosRequestConfig) {
         return SpecificationsApiFp(this.configuration).specificationsIdPut(id, specification, options).then((request) => request(this.axios, this.basePath));
@@ -9511,7 +8060,6 @@ export class SpecificationsApi extends BaseAPI {
      * @param {SpecificationPostBody} [specificationPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SpecificationsApi
      */
     public specificationsPost(specificationPostBody?: SpecificationPostBody, options?: RawAxiosRequestConfig) {
         return SpecificationsApiFp(this.configuration).specificationsPost(specificationPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -9522,7 +8070,6 @@ export class SpecificationsApi extends BaseAPI {
 
 /**
  * StudysetsApi - axios parameter creator
- * @export
  */
 export const StudysetsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -9720,7 +8267,6 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
 
 /**
  * StudysetsApi - functional programming interface
- * @export
  */
 export const StudysetsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = StudysetsApiAxiosParamCreator(configuration)
@@ -9791,7 +8337,6 @@ export const StudysetsApiFp = function(configuration?: Configuration) {
 
 /**
  * StudysetsApi - factory interface
- * @export
  */
 export const StudysetsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = StudysetsApiFp(configuration)
@@ -9850,9 +8395,6 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
 
 /**
  * StudysetsApi - object-oriented interface
- * @export
- * @class StudysetsApi
- * @extends {BaseAPI}
  */
 export class StudysetsApi extends BaseAPI {
     /**
@@ -9869,7 +8411,6 @@ export class StudysetsApi extends BaseAPI {
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetsApi
      */
     public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
         return StudysetsApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
@@ -9881,7 +8422,6 @@ export class StudysetsApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetsApi
      */
     public studysetsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return StudysetsApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -9894,7 +8434,6 @@ export class StudysetsApi extends BaseAPI {
      * @param {Studyset} [studyset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetsApi
      */
     public studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig) {
         return StudysetsApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
@@ -9906,7 +8445,6 @@ export class StudysetsApi extends BaseAPI {
      * @param {StudysetPostBody} [studysetPostBody] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StudysetsApi
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
         return StudysetsApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
@@ -9917,7 +8455,6 @@ export class StudysetsApi extends BaseAPI {
 
 /**
  * UsersApi - axios parameter creator
- * @export
  */
 export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -10070,7 +8607,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 
 /**
  * UsersApi - functional programming interface
- * @export
  */
 export const UsersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
@@ -10132,7 +8668,6 @@ export const UsersApiFp = function(configuration?: Configuration) {
 
 /**
  * UsersApi - factory interface
- * @export
  */
 export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = UsersApiFp(configuration)
@@ -10182,9 +8717,6 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
 
 /**
  * UsersApi - object-oriented interface
- * @export
- * @class UsersApi
- * @extends {BaseAPI}
  */
 export class UsersApi extends BaseAPI {
     /**
@@ -10192,7 +8724,6 @@ export class UsersApi extends BaseAPI {
      * @summary GET list of Users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
      */
     public usersGet(options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).usersGet(options).then((request) => request(this.axios, this.basePath));
@@ -10204,7 +8735,6 @@ export class UsersApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
      */
     public usersIdGet(id: string, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).usersIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -10217,7 +8747,6 @@ export class UsersApi extends BaseAPI {
      * @param {User} [user] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
      */
     public usersIdPut(id: string, user?: User, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).usersIdPut(id, user, options).then((request) => request(this.axios, this.basePath));
@@ -10229,7 +8758,6 @@ export class UsersApi extends BaseAPI {
      * @param {User} [user] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
      */
     public usersPost(user?: User, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).usersPost(user, options).then((request) => request(this.axios, this.basePath));
