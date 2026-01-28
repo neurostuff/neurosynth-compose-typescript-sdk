@@ -11,6 +11,7 @@ All URIs are relative to *https://compose.neurosynth.org/api*
 |[**projectsPost**](#projectspost) | **POST** /projects | |
 |[**specificationsPost**](#specificationspost) | **POST** /specifications | Create a Specification|
 |[**studysetsPost**](#studysetspost) | **POST** /studysets | Create a new Studyset|
+|[**tagsPost**](#tagspost) | **POST** /tags | Create a new Tag|
 
 # **annotationsPost**
 > AnnotationReturn annotationsPost()
@@ -393,6 +394,57 @@ const { status, data } = await apiInstance.studysetsPost(
 |**400** | form when a request goes wrong |  -  |
 |**422** | form when a request goes wrong |  -  |
 |**500** | form when a request goes wrong |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **tagsPost**
+> TagReturn tagsPost()
+
+
+### Example
+
+```typescript
+import {
+    PostApi,
+    Configuration,
+    Tag
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new PostApi(configuration);
+
+let tag: Tag; // (optional)
+
+const { status, data } = await apiInstance.tagsPost(
+    tag
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tag** | **Tag**|  | |
+
+
+### Return type
+
+**TagReturn**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

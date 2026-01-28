@@ -30,6 +30,7 @@ docs/MetaAnalysisResults.md
 docs/MetaAnalysisReturn.md
 docs/MetaAnalysisSpecification.md
 docs/MetaAnalysisStudyset.md
+docs/MetaAnalysisTags.md
 docs/NeurostoreAnalysis.md
 docs/NeurostoreStudy.md
 docs/NeurostoreStudyList.md
@@ -70,6 +71,10 @@ docs/StudysetReferenceReturn.md
 docs/StudysetReferenceSnapshotsInner.md
 docs/StudysetReturn.md
 docs/StudysetsApi.md
+docs/Tag.md
+docs/TagList.md
+docs/TagReturn.md
+docs/TagsApi.md
 docs/User.md
 docs/UserList.md
 docs/UserReturn.md

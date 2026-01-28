@@ -156,6 +156,7 @@ export interface MetaAnalysis {
      * Long form description of the meta-analysis.
      */
     'description'?: string | null;
+    'tags'?: MetaAnalysisTags;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      */
@@ -281,6 +282,7 @@ export interface MetaAnalysisPostBody {
      * Long form description of the meta-analysis.
      */
     'description'?: string | null;
+    'tags'?: MetaAnalysisTags;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      */
@@ -323,6 +325,7 @@ export interface MetaAnalysisReturn {
      * Long form description of the meta-analysis.
      */
     'description'?: string | null;
+    'tags'?: MetaAnalysisTags;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
      */
@@ -373,6 +376,12 @@ export type MetaAnalysisSpecification = Specification | string;
  * @type MetaAnalysisStudyset
  */
 export type MetaAnalysisStudyset = Studyset | string;
+
+/**
+ * @type MetaAnalysisTags
+ * Tags associated with this meta-analysis (use tag names or tag IDs).
+ */
+export type MetaAnalysisTags = Array<Tag> | Array<string>;
 
 export interface NeurostoreAnalysis {
     'neurostore_id'?: string | null;
@@ -834,6 +843,54 @@ export interface StudysetReturn {
      * A string representing a labeled version of this particular studyset.
      */
     'version'?: string | null;
+    /**
+     * the identifier for the resource.
+     */
+    'id'?: string;
+    /**
+     * when the resource was last modified.
+     */
+    'updated_at'?: string | null;
+    /**
+     * When the resource was created.
+     */
+    'created_at'?: string;
+    /**
+     * Who owns the resource.
+     */
+    'user'?: string | null;
+    'username'?: string | null;
+}
+/**
+ * A user-scoped or global label that can be attached to multiple resources. Tag groups are free-form categories (e.g., \"visibility\", \"topic\") used to segment tags across different resource types.
+ */
+export interface Tag {
+    /**
+     * Case-insensitive unique name within the tag scope (user or global).
+     */
+    'name': string;
+    /**
+     * Optional grouping key to categorize tags (case-insensitive exact match in queries).
+     */
+    'group'?: string | null;
+    'description'?: string | null;
+    'official'?: boolean | null;
+}
+export interface TagList {
+    'results'?: Array<TagReturn>;
+    'metadata'?: object;
+}
+export interface TagReturn {
+    /**
+     * Case-insensitive unique name within the tag scope (user or global).
+     */
+    'name': string;
+    /**
+     * Optional grouping key to categorize tags (case-insensitive exact match in queries).
+     */
+    'group'?: string | null;
+    'description'?: string | null;
+    'official'?: boolean | null;
     /**
      * the identifier for the resource.
      */
@@ -2542,6 +2599,172 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsGet: async (ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (group !== undefined) {
+                localVarQueryParameter['group'] = group;
+            }
+
+            if (official !== undefined) {
+                localVarQueryParameter['official'] = official;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tagsIdGet', 'id', id)
+            const localVarPath = `/tags/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsPost: async (tag?: Tag, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tag, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -2963,6 +3186,56 @@ export const ComposeApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.studysetsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.tagsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsIdGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.tagsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsPost(tag?: Tag, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsPost(tag, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.tagsPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -3299,6 +3572,47 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          */
         studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<TagList> {
+            return localVarFp.tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<TagReturn> {
+            return localVarFp.tagsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsPost(tag?: Tag, options?: RawAxiosRequestConfig): AxiosPromise<TagReturn> {
+            return localVarFp.tagsPost(tag, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3661,6 +3975,50 @@ export class ComposeApi extends BaseAPI {
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
         return ComposeApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a list of Tags
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [filter] alias for search when filtering tags
+     * @param {string} [description] search description field for a term
+     * @param {string} [group] filter tags by group
+     * @param {boolean} [official] filter tags by official flag
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get information about a Tag
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).tagsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new Tag
+     * @param {Tag} [tag] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsPost(tag?: Tag, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).tagsPost(tag, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4616,6 +4974,134 @@ export const GetApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsGet: async (ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (group !== undefined) {
+                localVarQueryParameter['group'] = group;
+            }
+
+            if (official !== undefined) {
+                localVarQueryParameter['official'] = official;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tagsIdGet', 'id', id)
+            const localVarPath = `/tags/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4847,6 +5333,43 @@ export const GetApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['GetApi.studysetsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GetApi.tagsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsIdGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GetApi.tagsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -5035,6 +5558,37 @@ export const GetApiFactory = function (configuration?: Configuration, basePath?:
          */
         studysetsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<TagList> {
+            return localVarFp.tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<TagReturn> {
+            return localVarFp.tagsIdGet(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5235,6 +5789,39 @@ export class GetApi extends BaseAPI {
      */
     public studysetsIdGet(id: string, options?: RawAxiosRequestConfig) {
         return GetApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a list of Tags
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [filter] alias for search when filtering tags
+     * @param {string} [description] search description field for a term
+     * @param {string} [group] filter tags by group
+     * @param {boolean} [official] filter tags by official flag
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get information about a Tag
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return GetApiFp(this.configuration).tagsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -6424,6 +7011,44 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsPost: async (tag?: Tag, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tag, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -6526,6 +7151,19 @@ export const PostApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PostApi.studysetsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsPost(tag?: Tag, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsPost(tag, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PostApi.tagsPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -6606,6 +7244,16 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
          */
         studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
             return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsPost(tag?: Tag, options?: RawAxiosRequestConfig): AxiosPromise<TagReturn> {
+            return localVarFp.tagsPost(tag, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6691,6 +7339,17 @@ export class PostApi extends BaseAPI {
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new Tag
+     * @param {Tag} [tag] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsPost(tag?: Tag, options?: RawAxiosRequestConfig) {
+        return PostApiFp(this.configuration).tagsPost(tag, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -8448,6 +9107,340 @@ export class StudysetsApi extends BaseAPI {
      */
     public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
         return StudysetsApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * TagsApi - axios parameter creator
+ */
+export const TagsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsGet: async (ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['description'] = description;
+            }
+
+            if (group !== undefined) {
+                localVarQueryParameter['group'] = group;
+            }
+
+            if (official !== undefined) {
+                localVarQueryParameter['official'] = official;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (desc !== undefined) {
+                localVarQueryParameter['desc'] = desc;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['user_id'] = userId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tagsIdGet', 'id', id)
+            const localVarPath = `/tags/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsPost: async (tag?: Tag, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tag, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TagsApi - functional programming interface
+ */
+export const TagsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TagsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TagsApi.tagsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsIdGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TagsApi.tagsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsPost(tag?: Tag, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsPost(tag, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TagsApi.tagsPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * TagsApi - factory interface
+ */
+export const TagsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TagsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get a list of Tags
+         * @param {Array<string>} [ids] choose the specific ids you wish to get
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of elements to return on a page
+         * @param {string} [name] search the name field for a term
+         * @param {string} [search] search for entries that contain the substring
+         * @param {string} [filter] alias for search when filtering tags
+         * @param {string} [description] search description field for a term
+         * @param {string} [group] filter tags by group
+         * @param {boolean} [official] filter tags by official flag
+         * @param {string} [sort] Parameter to sort results on
+         * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+         * @param {string} [userId] user id you want to filter on
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<TagList> {
+            return localVarFp.tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get information about a Tag
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<TagReturn> {
+            return localVarFp.tagsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new Tag
+         * @param {Tag} [tag] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsPost(tag?: Tag, options?: RawAxiosRequestConfig): AxiosPromise<TagReturn> {
+            return localVarFp.tagsPost(tag, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TagsApi - object-oriented interface
+ */
+export class TagsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get a list of Tags
+     * @param {Array<string>} [ids] choose the specific ids you wish to get
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of elements to return on a page
+     * @param {string} [name] search the name field for a term
+     * @param {string} [search] search for entries that contain the substring
+     * @param {string} [filter] alias for search when filtering tags
+     * @param {string} [description] search description field for a term
+     * @param {string} [group] filter tags by group
+     * @param {boolean} [official] filter tags by official flag
+     * @param {string} [sort] Parameter to sort results on
+     * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
+     * @param {string} [userId] user id you want to filter on
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsGet(ids?: Array<string>, page?: number, pageSize?: number, name?: string, search?: string, filter?: string, description?: string, group?: string, official?: boolean, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
+        return TagsApiFp(this.configuration).tagsGet(ids, page, pageSize, name, search, filter, description, group, official, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get information about a Tag
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return TagsApiFp(this.configuration).tagsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new Tag
+     * @param {Tag} [tag] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public tagsPost(tag?: Tag, options?: RawAxiosRequestConfig) {
+        return TagsApiFp(this.configuration).tagsPost(tag, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

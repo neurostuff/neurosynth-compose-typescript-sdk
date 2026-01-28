@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **annotation** | [**MetaAnalysisAnnotation**](MetaAnalysisAnnotation.md) |  | [optional] [default to undefined]
 **name** | **string** | Human-readable name of the meta-analysis. | [optional] [default to undefined]
 **description** | **string** | Long form description of the meta-analysis. | [optional] [default to undefined]
+**tags** | [**MetaAnalysisTags**](MetaAnalysisTags.md) |  | [optional] [default to undefined]
 **cached_studyset_id** | **string** | The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary. | [optional] [default to undefined]
 **cached_annotation_id** | **string** | The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary. | [optional] [default to undefined]
 **results** | [**MetaAnalysisResults**](MetaAnalysisResults.md) |  | [optional] [default to undefined]
@@ -36,6 +37,7 @@ const instance: MetaAnalysisPostBody = {
     annotation,
     name,
     description,
+    tags,
     cached_studyset_id,
     cached_annotation_id,
     results,
