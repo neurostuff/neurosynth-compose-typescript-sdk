@@ -10,11 +10,9 @@ docs/AnnotationPostBody.md
 docs/AnnotationReturn.md
 docs/AnnotationUpdate.md
 docs/AnnotationsApi.md
-docs/ComposeApi.md
 docs/Corrector.md
 docs/DefaultApi.md
 docs/Estimator.md
-docs/GetApi.md
 docs/MetaAnalysesApi.md
 docs/MetaAnalysesGet400Response.md
 docs/MetaAnalysis.md
@@ -42,13 +40,11 @@ docs/NeurovaultFile.md
 docs/NeurovaultFileList.md
 docs/NeurovaultFileReturn.md
 docs/NeurovaultList.md
-docs/PostApi.md
 docs/Project.md
 docs/ProjectList.md
 docs/ProjectMetaAnalyses.md
 docs/ProjectReturn.md
 docs/ProjectsApi.md
-docs/PutApi.md
 docs/ReadOnly.md
 docs/Result.md
 docs/ResultInit.md
