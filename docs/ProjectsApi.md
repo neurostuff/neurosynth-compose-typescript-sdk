@@ -201,10 +201,12 @@ const configuration = new Configuration();
 const apiInstance = new ProjectsApi(configuration);
 
 let id: string; // (default to undefined)
+let syncMetaAnalysesPublic: boolean; //when updating a project\'s public flag, also set each child meta-analysis to the same public value (optional) (default to undefined)
 let project: Project; // (optional)
 
 const { status, data } = await apiInstance.projectsIdPut(
     id,
+    syncMetaAnalysesPublic,
     project
 );
 ```
@@ -215,6 +217,7 @@ const { status, data } = await apiInstance.projectsIdPut(
 |------------- | ------------- | ------------- | -------------|
 | **project** | **Project**|  | |
 | **id** | [**string**] |  | defaults to undefined|
+| **syncMetaAnalysesPublic** | [**boolean**] | when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value | (optional) defaults to undefined|
 
 
 ### Return type
