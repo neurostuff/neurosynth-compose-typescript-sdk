@@ -156,6 +156,10 @@ export interface MetaAnalysis {
      * Long form description of the meta-analysis.
      */
     'description'?: string | null;
+    /**
+     * whether the meta-analysis is public or private
+     */
+    'public'?: boolean;
     'tags'?: MetaAnalysisTags;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
@@ -282,6 +286,10 @@ export interface MetaAnalysisPostBody {
      * Long form description of the meta-analysis.
      */
     'description'?: string | null;
+    /**
+     * whether the meta-analysis is public or private
+     */
+    'public'?: boolean;
     'tags'?: MetaAnalysisTags;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
@@ -325,6 +333,10 @@ export interface MetaAnalysisReturn {
      * Long form description of the meta-analysis.
      */
     'description'?: string | null;
+    /**
+     * whether the meta-analysis is public or private
+     */
+    'public'?: boolean;
     'tags'?: MetaAnalysisTags;
     /**
      * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
@@ -2633,11 +2645,12 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * 
          * @summary 
          * @param {string} id 
+         * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut: async (id: string, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdPut: async (id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdPut', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -2656,6 +2669,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (syncMetaAnalysesPublic !== undefined) {
+                localVarQueryParameter['sync_meta_analyses_public'] = syncMetaAnalysesPublic;
+            }
 
 
     
@@ -2779,12 +2796,13 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * 
          * @summary 
          * @param {string} id 
+         * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, project, options);
+        async projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, syncMetaAnalysesPublic, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectsApi.projectsIdPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2855,12 +2873,13 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * 
          * @summary 
          * @param {string} id 
+         * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdPut(id, project, options).then((request) => request(axios, basePath));
+        projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, syncMetaAnalysesPublic, project, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2926,12 +2945,13 @@ export class ProjectsApi extends BaseAPI {
      * 
      * @summary 
      * @param {string} id 
+     * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public projectsIdPut(id: string, project?: Project, options?: RawAxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsIdPut(id, project, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsIdPut(id, syncMetaAnalysesPublic, project, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
