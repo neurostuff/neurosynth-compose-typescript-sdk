@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **collection_id** | **string** |  | [optional] [readonly] [default to undefined]
-**files** | [**NeurovaultCollectionFiles**](NeurovaultCollectionFiles.md) |  | [optional] [default to undefined]
+**files** | [**Array&lt;NeurovaultCollectionFilesInner&gt;**](NeurovaultCollectionFilesInner.md) |  | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
 **id** | **string** | the identifier for the resource. | [optional] [default to undefined]
 **updated_at** | **string** | when the resource was last modified. | [optional] [readonly] [default to undefined]

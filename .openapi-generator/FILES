@@ -33,8 +33,9 @@ docs/NeurostoreAnalysis.md
 docs/NeurostoreStudy.md
 docs/NeurostoreStudyList.md
 docs/NeurostoreStudyReturn.md
+docs/NeurovaultApi.md
 docs/NeurovaultCollection.md
-docs/NeurovaultCollectionFiles.md
+docs/NeurovaultCollectionFilesInner.md
 docs/NeurovaultCollectionReturn.md
 docs/NeurovaultFile.md
 docs/NeurovaultFileList.md
