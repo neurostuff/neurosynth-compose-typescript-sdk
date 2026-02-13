@@ -1620,6 +1620,10 @@ export const MetaAnalysesApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
             }

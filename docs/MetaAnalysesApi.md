@@ -76,7 +76,7 @@ const { status, data } = await apiInstance.metaAnalysesGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
