@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **diagnostic_table** | **string** | a text representation of a tsv that marks the contribution of each study to each particular cluster. | [optional] [default to undefined]
 **cli_args** | **object** | additional parameters that were passed to the commandline tool at runtime.  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
+**studyset_snapshot** | **object** | JSON payload accepted for snapshot updates via PUT. | [optional] [default to undefined]
+**annotation_snapshot** | **object** | JSON payload accepted for snapshot updates via PUT. | [optional] [default to undefined]
 **id** | **string** | the identifier for the resource. | [optional] [default to undefined]
 **updated_at** | **string** | when the resource was last modified. | [optional] [readonly] [default to undefined]
 **created_at** | **string** | When the resource was created. | [optional] [readonly] [default to undefined]
@@ -31,6 +33,8 @@ const instance: ResultReturn = {
     diagnostic_table,
     cli_args,
     status,
+    studyset_snapshot,
+    annotation_snapshot,
     id,
     updated_at,
     created_at,

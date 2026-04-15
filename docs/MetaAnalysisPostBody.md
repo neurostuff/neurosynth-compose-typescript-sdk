@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **provenance** | **object** |  | [optional] [default to undefined]
 **project** | **string** |  | [optional] [default to undefined]
 **run_key** | **string** | a special key used to upload the results of this meta analysis. Can be used as an alternative to using your auth token from login.  | [optional] [readonly] [default to undefined]
+**snapshots** | **Array&lt;object&gt;** | Ordered history of (studyset, annotation) snapshot pairs recorded each time a MetaAnalysisResult is created. Each entry contains studyset_id, studyset_md5, annotation_id, annotation_md5, result_id, and created_at.  | [optional] [readonly] [default to undefined]
 **neurostore_analysis** | [**NeurostoreAnalysis**](NeurostoreAnalysis.md) |  | [optional] [default to undefined]
 **cognitive_contrast_cogatlas** | **string** |  | [optional] [default to undefined]
 **cognitive_contrast_cogatlas_id** | **string** |  | [optional] [default to undefined]
@@ -46,6 +47,7 @@ const instance: MetaAnalysisPostBody = {
     provenance,
     project,
     run_key,
+    snapshots,
     neurostore_analysis,
     cognitive_contrast_cogatlas,
     cognitive_contrast_cogatlas_id,

@@ -8,13 +8,13 @@ All URIs are relative to *https://compose.neurosynth.org/api*
 |[**metaAnalysesIdGet**](#metaanalysesidget) | **GET** /meta-analyses/{id} | GET meta-analysis information|
 |[**metaAnalysesIdPut**](#metaanalysesidput) | **PUT** /meta-analyses/{id} | Update a meta-analysis|
 |[**metaAnalysesPost**](#metaanalysespost) | **POST** /meta-analyses | Create a new meta-analysis|
-|[**metaAnalysisResultsGet**](#metaanalysisresultsget) | **GET** /meta-analysis-results | Your GET endpoint|
-|[**metaAnalysisResultsIdGet**](#metaanalysisresultsidget) | **GET** /meta-analysis-results/{id} | Your GET endpoint|
-|[**metaAnalysisResultsIdPut**](#metaanalysisresultsidput) | **PUT** /meta-analysis-results/{id} | |
-|[**metaAnalysisResultsPost**](#metaanalysisresultspost) | **POST** /meta-analysis-results | |
-|[**neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet**](#neurosynthcomposeresourcesmetaanalysisjobsmetaanalysisjobresourceget) | **GET** /meta-analysis-jobs/{job_id} | Get status and logs for a meta-analysis job|
-|[**neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet**](#neurosynthcomposeresourcesmetaanalysisjobsmetaanalysisjobsresourceget) | **GET** /meta-analysis-jobs | List meta-analysis jobs for the current user|
-|[**neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost**](#neurosynthcomposeresourcesmetaanalysisjobsmetaanalysisjobsresourcepost) | **POST** /meta-analysis-jobs | Submit a meta-analysis job|
+|[**metaAnalysisJobsGet**](#metaanalysisjobsget) | **GET** /meta-analysis-jobs | List meta-analysis jobs for the current user|
+|[**metaAnalysisJobsJobIdGet**](#metaanalysisjobsjobidget) | **GET** /meta-analysis-jobs/{job_id} | Get status and logs for a meta-analysis job|
+|[**metaAnalysisJobsPost**](#metaanalysisjobspost) | **POST** /meta-analysis-jobs | Submit a meta-analysis job|
+|[**metaAnalysisResultsGet**](#metaanalysisresultsget) | **GET** /meta-analysis-results | List meta-analysis results|
+|[**metaAnalysisResultsIdGet**](#metaanalysisresultsidget) | **GET** /meta-analysis-results/{id} | Get a meta-analysis result by ID|
+|[**metaAnalysisResultsIdPut**](#metaanalysisresultsidput) | **PUT** /meta-analysis-results/{id} | Update a meta-analysis result with files or snapshots|
+|[**metaAnalysisResultsPost**](#metaanalysisresultspost) | **POST** /meta-analysis-results | Create a new meta-analysis result|
 
 # **metaAnalysesGet**
 > MetaAnalysisList metaAnalysesGet()
@@ -262,6 +262,162 @@ const { status, data } = await apiInstance.metaAnalysesPost(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **metaAnalysisJobsGet**
+> MetaAnalysisJobList metaAnalysisJobsGet()
+
+Return cached job submissions associated with the authenticated user.
+
+### Example
+
+```typescript
+import {
+    MetaAnalysesApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new MetaAnalysesApi(configuration);
+
+const { status, data } = await apiInstance.metaAnalysisJobsGet();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**MetaAnalysisJobList**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | form when a request goes wrong |  -  |
+|**502** | form when a request goes wrong |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **metaAnalysisJobsJobIdGet**
+> MetaAnalysisJobResponse metaAnalysisJobsJobIdGet()
+
+Retrieve the most recent status information and logs for a submitted job.
+
+### Example
+
+```typescript
+import {
+    MetaAnalysesApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new MetaAnalysesApi(configuration);
+
+let jobId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.metaAnalysisJobsJobIdGet(
+    jobId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **jobId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**MetaAnalysisJobResponse**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | form when a request goes wrong |  -  |
+|**404** | form when a request goes wrong |  -  |
+|**502** | form when a request goes wrong |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **metaAnalysisJobsPost**
+> MetaAnalysisJobResponse metaAnalysisJobsPost(metaAnalysisJobRequest)
+
+Submit a meta-analysis to the compose runner service.
+
+### Example
+
+```typescript
+import {
+    MetaAnalysesApi,
+    Configuration,
+    MetaAnalysisJobRequest
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new MetaAnalysesApi(configuration);
+
+let metaAnalysisJobRequest: MetaAnalysisJobRequest; //
+
+const { status, data } = await apiInstance.metaAnalysisJobsPost(
+    metaAnalysisJobRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **metaAnalysisJobRequest** | **MetaAnalysisJobRequest**|  | |
+
+
+### Return type
+
+**MetaAnalysisJobResponse**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**202** | Job accepted |  -  |
+|**401** | form when a request goes wrong |  -  |
+|**403** | form when a request goes wrong |  -  |
+|**422** | form when a request goes wrong |  -  |
+|**502** | form when a request goes wrong |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **metaAnalysisResultsGet**
 > ResultList metaAnalysisResultsGet()
 
@@ -464,162 +620,6 @@ const { status, data } = await apiInstance.metaAnalysisResultsPost(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | OK |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet**
-> MetaAnalysisJobResponse neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet()
-
-Retrieve the most recent status information and logs for a submitted job.
-
-### Example
-
-```typescript
-import {
-    MetaAnalysesApi,
-    Configuration
-} from './api';
-
-const configuration = new Configuration();
-const apiInstance = new MetaAnalysesApi(configuration);
-
-let jobId: string; // (default to undefined)
-
-const { status, data } = await apiInstance.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobResourceGet(
-    jobId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **jobId** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**MetaAnalysisJobResponse**
-
-### Authorization
-
-[JSON-Web-Token](../README.md#JSON-Web-Token)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  -  |
-|**401** | form when a request goes wrong |  -  |
-|**404** | form when a request goes wrong |  -  |
-|**502** | form when a request goes wrong |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet**
-> MetaAnalysisJobList neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet()
-
-Return cached job submissions associated with the authenticated user.
-
-### Example
-
-```typescript
-import {
-    MetaAnalysesApi,
-    Configuration
-} from './api';
-
-const configuration = new Configuration();
-const apiInstance = new MetaAnalysesApi(configuration);
-
-const { status, data } = await apiInstance.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourceGet();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**MetaAnalysisJobList**
-
-### Authorization
-
-[JSON-Web-Token](../README.md#JSON-Web-Token)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  -  |
-|**401** | form when a request goes wrong |  -  |
-|**502** | form when a request goes wrong |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost**
-> MetaAnalysisJobResponse neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(metaAnalysisJobRequest)
-
-Submit a meta-analysis to the compose runner service.
-
-### Example
-
-```typescript
-import {
-    MetaAnalysesApi,
-    Configuration,
-    MetaAnalysisJobRequest
-} from './api';
-
-const configuration = new Configuration();
-const apiInstance = new MetaAnalysesApi(configuration);
-
-let metaAnalysisJobRequest: MetaAnalysisJobRequest; //
-
-const { status, data } = await apiInstance.neurosynthComposeResourcesMetaAnalysisJobsMetaAnalysisJobsResourcePost(
-    metaAnalysisJobRequest
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **metaAnalysisJobRequest** | **MetaAnalysisJobRequest**|  | |
-
-
-### Return type
-
-**MetaAnalysisJobResponse**
-
-### Authorization
-
-[JSON-Web-Token](../README.md#JSON-Web-Token)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**202** | Job accepted |  -  |
-|**401** | form when a request goes wrong |  -  |
-|**403** | form when a request goes wrong |  -  |
-|**422** | form when a request goes wrong |  -  |
-|**502** | form when a request goes wrong |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
