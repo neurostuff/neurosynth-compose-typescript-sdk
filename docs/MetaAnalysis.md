@@ -7,8 +7,8 @@ The combination of the specification determining what meta-analysis to run (requ
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **specification** | [**MetaAnalysisSpecification**](MetaAnalysisSpecification.md) |  | [optional] [default to undefined]
-**studyset** | [**MetaAnalysisStudyset**](MetaAnalysisStudyset.md) |  | [optional] [default to undefined]
-**annotation** | [**MetaAnalysisAnnotation**](MetaAnalysisAnnotation.md) |  | [optional] [default to undefined]
+**neurostore_studyset** | [**MetaAnalysisNeurostoreStudyset**](MetaAnalysisNeurostoreStudyset.md) |  | [optional] [default to undefined]
+**neurostore_annotation** | [**MetaAnalysisNeurostoreAnnotation**](MetaAnalysisNeurostoreAnnotation.md) |  | [optional] [default to undefined]
 **name** | **string** | Human-readable name of the meta-analysis. | [optional] [default to undefined]
 **description** | **string** | Long form description of the meta-analysis. | [optional] [default to undefined]
 **_public** | **boolean** | whether the meta-analysis is public or private | [optional] [default to undefined]
@@ -32,8 +32,8 @@ import { MetaAnalysis } from './api';
 
 const instance: MetaAnalysis = {
     specification,
-    studyset,
-    annotation,
+    neurostore_studyset,
+    neurostore_annotation,
     name,
     description,
     _public,

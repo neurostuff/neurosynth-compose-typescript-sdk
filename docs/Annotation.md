@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **neurostore_id** | **string** | the id of the annotation on neurostore | [optional] [default to undefined]
 **snapshot** | **object** | the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm | [optional] [default to undefined]
-**studyset** | **string** | The related cached studyset to this annotation. | [optional] [readonly] [default to undefined]
+**snapshot_studyset** | **string** | The related cached studyset to this annotation. | [optional] [readonly] [default to undefined]
 **neurostore_url** | **string** |  | [optional] [readonly] [default to undefined]
 
 ## Example
@@ -19,7 +19,7 @@ import { Annotation } from './api';
 const instance: Annotation = {
     neurostore_id,
     snapshot,
-    studyset,
+    snapshot_studyset,
     neurostore_url,
 };
 ```

@@ -38,7 +38,7 @@ export interface Annotation {
     /**
      * The related cached studyset to this annotation.
      */
-    'studyset'?: string;
+    'snapshot_studyset'?: string;
     'neurostore_url'?: string;
 }
 export interface AnnotationList {
@@ -58,7 +58,7 @@ export interface AnnotationPostBody {
     /**
      * The related cached studyset to this annotation.
      */
-    'studyset'?: string;
+    'snapshot_studyset'?: string;
     'neurostore_url'?: string;
 }
 export interface AnnotationReturn {
@@ -73,7 +73,7 @@ export interface AnnotationReturn {
     /**
      * The related cached studyset to this annotation.
      */
-    'studyset'?: string;
+    'snapshot_studyset'?: string;
     'neurostore_url'?: string;
     /**
      * the identifier for the resource.
@@ -105,7 +105,7 @@ export interface AnnotationUpdate {
     /**
      * The related cached studyset to this annotation.
      */
-    'studyset'?: string;
+    'snapshot_studyset'?: string;
     'neurostore_url'?: string;
     'snapshot_studyset_id'?: string;
 }
@@ -146,8 +146,8 @@ export interface MetaAnalysesGet400Response {
  */
 export interface MetaAnalysis {
     'specification'?: MetaAnalysisSpecification;
-    'studyset'?: MetaAnalysisStudyset;
-    'annotation'?: MetaAnalysisAnnotation;
+    'neurostore_studyset'?: MetaAnalysisNeurostoreStudyset;
+    'neurostore_annotation'?: MetaAnalysisNeurostoreAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      */
@@ -179,11 +179,6 @@ export interface MetaAnalysis {
     'cognitive_paradigm_cogatlas_id'?: string | null;
     'neurostore_url'?: string | null;
 }
-/**
- * @type MetaAnalysisAnnotation
- */
-export type MetaAnalysisAnnotation = Annotation | string;
-
 export interface MetaAnalysisJobList {
     'results'?: Array<MetaAnalysisJobResponse>;
     'metadata'?: MetaAnalysisJobListMetadata;
@@ -268,10 +263,20 @@ export interface MetaAnalysisList {
     'results'?: Array<MetaAnalysisReturn>;
     'metadata'?: object;
 }
+/**
+ * @type MetaAnalysisNeurostoreAnnotation
+ */
+export type MetaAnalysisNeurostoreAnnotation = Annotation | string;
+
+/**
+ * @type MetaAnalysisNeurostoreStudyset
+ */
+export type MetaAnalysisNeurostoreStudyset = Studyset | string;
+
 export interface MetaAnalysisPostBody {
     'specification'?: MetaAnalysisSpecification;
-    'studyset'?: MetaAnalysisStudyset;
-    'annotation'?: MetaAnalysisAnnotation;
+    'neurostore_studyset'?: MetaAnalysisNeurostoreStudyset;
+    'neurostore_annotation'?: MetaAnalysisNeurostoreAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      */
@@ -311,8 +316,8 @@ export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
 
 export interface MetaAnalysisReturn {
     'specification'?: MetaAnalysisSpecification;
-    'studyset'?: MetaAnalysisStudyset;
-    'annotation'?: MetaAnalysisAnnotation;
+    'neurostore_studyset'?: MetaAnalysisNeurostoreStudyset;
+    'neurostore_annotation'?: MetaAnalysisNeurostoreAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      */
@@ -365,11 +370,6 @@ export interface MetaAnalysisReturn {
  * @type MetaAnalysisSpecification
  */
 export type MetaAnalysisSpecification = Specification | string;
-
-/**
- * @type MetaAnalysisStudyset
- */
-export type MetaAnalysisStudyset = Studyset | string;
 
 /**
  * @type MetaAnalysisTags
