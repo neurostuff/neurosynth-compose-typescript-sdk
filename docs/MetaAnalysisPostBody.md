@@ -12,8 +12,6 @@ Name | Type | Description | Notes
 **description** | **string** | Long form description of the meta-analysis. | [optional] [default to undefined]
 **_public** | **boolean** | whether the meta-analysis is public or private | [optional] [default to undefined]
 **tags** | [**MetaAnalysisTags**](MetaAnalysisTags.md) |  | [optional] [default to undefined]
-**cached_studyset_id** | **string** | The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary. | [optional] [default to undefined]
-**cached_annotation_id** | **string** | The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary. | [optional] [default to undefined]
 **results** | [**MetaAnalysisResults**](MetaAnalysisResults.md) |  | [optional] [default to undefined]
 **provenance** | **object** |  | [optional] [default to undefined]
 **project** | **string** |  | [optional] [default to undefined]
@@ -24,8 +22,6 @@ Name | Type | Description | Notes
 **cognitive_contrast_cogatlas_id** | **string** |  | [optional] [default to undefined]
 **cognitive_paradigm_cogatlas** | **string** |  | [optional] [default to undefined]
 **cognitive_paradigm_cogatlas_id** | **string** |  | [optional] [default to undefined]
-**cached_studyset** | **string** |  | [optional] [readonly] [default to undefined]
-**cached_annotation** | **string** |  | [optional] [readonly] [default to undefined]
 **neurostore_url** | **string** |  | [optional] [readonly] [default to undefined]
 
 ## Example
@@ -41,8 +37,6 @@ const instance: MetaAnalysisPostBody = {
     description,
     _public,
     tags,
-    cached_studyset_id,
-    cached_annotation_id,
     results,
     provenance,
     project,
@@ -53,8 +47,6 @@ const instance: MetaAnalysisPostBody = {
     cognitive_contrast_cogatlas_id,
     cognitive_paradigm_cogatlas,
     cognitive_paradigm_cogatlas_id,
-    cached_studyset,
-    cached_annotation,
     neurostore_url,
 };
 ```

@@ -13,8 +13,6 @@ Name | Type | Description | Notes
 **diagnostic_table** | **string** | a text representation of a tsv that marks the contribution of each study to each particular cluster. | [optional] [default to undefined]
 **cli_args** | **object** | additional parameters that were passed to the commandline tool at runtime.  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
-**studyset_snapshot** | **object** | JSON payload accepted for snapshot updates via PUT. | [optional] [default to undefined]
-**annotation_snapshot** | **object** | JSON payload accepted for snapshot updates via PUT. | [optional] [default to undefined]
 
 ## Example
 
@@ -29,8 +27,6 @@ const instance: Result = {
     diagnostic_table,
     cli_args,
     status,
-    studyset_snapshot,
-    annotation_snapshot,
 };
 ```
 

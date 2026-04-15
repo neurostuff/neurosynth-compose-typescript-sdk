@@ -161,14 +161,6 @@ export interface MetaAnalysis {
      */
     'public'?: boolean;
     'tags'?: MetaAnalysisTags;
-    /**
-     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     */
-    'cached_studyset_id'?: string;
-    /**
-     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     */
-    'cached_annotation_id'?: string;
     'results'?: MetaAnalysisResults;
     'provenance'?: object | null;
     'project'?: string | null;
@@ -185,8 +177,6 @@ export interface MetaAnalysis {
     'cognitive_contrast_cogatlas_id'?: string | null;
     'cognitive_paradigm_cogatlas'?: string | null;
     'cognitive_paradigm_cogatlas_id'?: string | null;
-    'cached_studyset'?: string | null;
-    'cached_annotation'?: string | null;
     'neurostore_url'?: string | null;
 }
 /**
@@ -295,14 +285,6 @@ export interface MetaAnalysisPostBody {
      */
     'public'?: boolean;
     'tags'?: MetaAnalysisTags;
-    /**
-     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     */
-    'cached_studyset_id'?: string;
-    /**
-     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     */
-    'cached_annotation_id'?: string;
     'results'?: MetaAnalysisResults;
     'provenance'?: object | null;
     'project'?: string | null;
@@ -319,8 +301,6 @@ export interface MetaAnalysisPostBody {
     'cognitive_contrast_cogatlas_id'?: string | null;
     'cognitive_paradigm_cogatlas'?: string | null;
     'cognitive_paradigm_cogatlas_id'?: string | null;
-    'cached_studyset'?: string | null;
-    'cached_annotation'?: string | null;
     'neurostore_url'?: string | null;
 }
 /**
@@ -346,14 +326,6 @@ export interface MetaAnalysisReturn {
      */
     'public'?: boolean;
     'tags'?: MetaAnalysisTags;
-    /**
-     * The id of the studyset on neurosynth-compose (as opposed to the id of the studyset on neurostore). Multiple snapshots of the studyset can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     */
-    'cached_studyset_id'?: string;
-    /**
-     * The id of the annotation on neurosynth-compose (as opposed to the id of the annotation on neurostore). Multiple snapshots of the annotation can be stored on neurosynth-compose so knowing which snapshot is being referenced is necessary.
-     */
-    'cached_annotation_id'?: string;
     'results'?: MetaAnalysisResults;
     'provenance'?: object | null;
     'project'?: string | null;
@@ -370,8 +342,6 @@ export interface MetaAnalysisReturn {
     'cognitive_contrast_cogatlas_id'?: string | null;
     'cognitive_paradigm_cogatlas'?: string | null;
     'cognitive_paradigm_cogatlas_id'?: string | null;
-    'cached_studyset'?: string | null;
-    'cached_annotation'?: string | null;
     'neurostore_url'?: string | null;
     /**
      * the identifier for the resource.
@@ -620,19 +590,19 @@ export interface Result {
      */
     'cli_args'?: object | null;
     'status'?: string | null;
-    /**
-     * JSON payload accepted for snapshot updates via PUT.
-     */
-    'studyset_snapshot'?: object;
-    /**
-     * JSON payload accepted for snapshot updates via PUT.
-     */
-    'annotation_snapshot'?: object;
 }
 export interface ResultInit {
     'meta_analysis_id'?: string;
-    'studyset_snapshot'?: object;
-    'annotation_snapshot'?: object;
+    'cached_studyset'?: object;
+    'cached_annotation'?: object;
+    /**
+     * ID of an existing cached studyset snapshot to link to this result.
+     */
+    'cached_studyset_id'?: string;
+    /**
+     * ID of an existing cached annotation snapshot to link to this result.
+     */
+    'cached_annotation_id'?: string;
     'cli_version'?: string;
 }
 export interface ResultList {
@@ -668,14 +638,6 @@ export interface ResultReturn {
     'cli_args'?: object | null;
     'status'?: string | null;
     /**
-     * JSON payload accepted for snapshot updates via PUT.
-     */
-    'studyset_snapshot'?: object;
-    /**
-     * JSON payload accepted for snapshot updates via PUT.
-     */
-    'annotation_snapshot'?: object;
-    /**
      * the identifier for the resource.
      */
     'id'?: string;
@@ -692,6 +654,8 @@ export interface ResultReturn {
      */
     'user'?: string | null;
     'username'?: string | null;
+    'cached_studyset_id'?: string | null;
+    'cached_annotation_id'?: string | null;
 }
 /**
  * @type ResultUploadStatisticalMaps
