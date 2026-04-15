@@ -4,13 +4,13 @@ All URIs are relative to *https://compose.neurosynth.org/api*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**annotationsGet**](#annotationsget) | **GET** /annotations | GET a list of annotations|
-|[**annotationsIdGet**](#annotationsidget) | **GET** /annotations/{id} | GET information about an annotation|
-|[**annotationsIdPut**](#annotationsidput) | **PUT** /annotations/{id} | Update an Annotation|
-|[**annotationsPost**](#annotationspost) | **POST** /annotations | Create a new Annotation|
+|[**snapshotAnnotationsGet**](#snapshotannotationsget) | **GET** /snapshot-annotations | GET a list of annotations|
+|[**snapshotAnnotationsIdGet**](#snapshotannotationsidget) | **GET** /snapshot-annotations/{id} | GET information about an annotation|
+|[**snapshotAnnotationsIdPut**](#snapshotannotationsidput) | **PUT** /snapshot-annotations/{id} | Update an Annotation|
+|[**snapshotAnnotationsPost**](#snapshotannotationspost) | **POST** /snapshot-annotations | Create a new Annotation|
 
-# **annotationsGet**
-> AnnotationList annotationsGet()
+# **snapshotAnnotationsGet**
+> AnnotationList snapshotAnnotationsGet()
 
 get a list of serialized/referenced annotations
 
@@ -35,7 +35,7 @@ let desc: boolean; //sort results by descending order (as opposed to ascending o
 let userId: string; //user id you want to filter on (optional) (default to undefined)
 let info: boolean; //display additional information about a nested relationship without displaying fully nested object (optional) (default to undefined)
 
-const { status, data } = await apiInstance.annotationsGet(
+const { status, data } = await apiInstance.snapshotAnnotationsGet(
     nested,
     ids,
     page,
@@ -85,8 +85,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **annotationsIdGet**
-> AnnotationReturn annotationsIdGet()
+# **snapshotAnnotationsIdGet**
+> AnnotationReturn snapshotAnnotationsIdGet()
 
 get a single annotation
 
@@ -103,7 +103,7 @@ const apiInstance = new AnnotationsApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.annotationsIdGet(
+const { status, data } = await apiInstance.snapshotAnnotationsIdGet(
     id
 );
 ```
@@ -138,8 +138,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **annotationsIdPut**
-> AnnotationReturn annotationsIdPut()
+# **snapshotAnnotationsIdPut**
+> AnnotationReturn snapshotAnnotationsIdPut()
 
 update an existing annotation
 
@@ -158,7 +158,7 @@ const apiInstance = new AnnotationsApi(configuration);
 let id: string; // (default to undefined)
 let annotationUpdate: AnnotationUpdate; // (optional)
 
-const { status, data } = await apiInstance.annotationsIdPut(
+const { status, data } = await apiInstance.snapshotAnnotationsIdPut(
     id,
     annotationUpdate
 );
@@ -197,8 +197,8 @@ const { status, data } = await apiInstance.annotationsIdPut(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **annotationsPost**
-> AnnotationReturn annotationsPost()
+# **snapshotAnnotationsPost**
+> AnnotationReturn snapshotAnnotationsPost()
 
 create a new serialized/referenced annotation
 
@@ -216,7 +216,7 @@ const apiInstance = new AnnotationsApi(configuration);
 
 let annotationPostBody: AnnotationPostBody; // (optional)
 
-const { status, data } = await apiInstance.annotationsPost(
+const { status, data } = await apiInstance.snapshotAnnotationsPost(
     annotationPostBody
 );
 ```

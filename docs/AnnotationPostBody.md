@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cached_studyset_id** | **string** |  | [optional] [default to undefined]
+**snapshot_studyset_id** | **string** |  | [optional] [default to undefined]
 **neurostore_id** | **string** | the id of the annotation on neurostore | [optional] [default to undefined]
 **snapshot** | **object** | the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm | [optional] [default to undefined]
 **studyset** | **string** | The related cached studyset to this annotation. | [optional] [readonly] [default to undefined]
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 import { AnnotationPostBody } from './api';
 
 const instance: AnnotationPostBody = {
-    cached_studyset_id,
+    snapshot_studyset_id,
     neurostore_id,
     snapshot,
     studyset,

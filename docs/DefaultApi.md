@@ -9,8 +9,8 @@ All URIs are relative to *https://compose.neurosynth.org/api*
 |[**neurostoreStudiesIdGet**](#neurostorestudiesidget) | **GET** /neurostore-studies/{id} | Your GET endpoint|
 |[**neurostoreStudiesIdPut**](#neurostorestudiesidput) | **PUT** /neurostore-studies/{id} | |
 |[**neurostoreStudiesPost**](#neurostorestudiespost) | **POST** /neurostore-studies | |
-|[**studysetReferencesGet**](#studysetreferencesget) | **GET** /studyset-references | Your GET endpoint|
-|[**studysetReferencesIdGet**](#studysetreferencesidget) | **GET** /studyset-references/{id} | Your GET endpoint|
+|[**neurostoreStudysetsGet**](#neurostorestudysetsget) | **GET** /neurostore-studysets | Your GET endpoint|
+|[**neurostoreStudysetsIdGet**](#neurostorestudysetsidget) | **GET** /neurostore-studysets/{id} | Your GET endpoint|
 
 # **metaAnalysesIdDelete**
 > metaAnalysesIdDelete()
@@ -248,8 +248,8 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **studysetReferencesGet**
-> StudysetReferenceList studysetReferencesGet()
+# **neurostoreStudysetsGet**
+> StudysetReferenceList neurostoreStudysetsGet()
 
 
 
@@ -266,7 +266,7 @@ const apiInstance = new DefaultApi(configuration);
 
 let nested: boolean; //show nested component instead of id (optional) (default to undefined)
 
-const { status, data } = await apiInstance.studysetReferencesGet(
+const { status, data } = await apiInstance.neurostoreStudysetsGet(
     nested
 );
 ```
@@ -299,8 +299,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **studysetReferencesIdGet**
-> StudysetReferenceReturn studysetReferencesIdGet()
+# **neurostoreStudysetsIdGet**
+> StudysetReferenceReturn neurostoreStudysetsIdGet()
 
 
 ### Example
@@ -317,7 +317,7 @@ const apiInstance = new DefaultApi(configuration);
 let id: string; // (default to undefined)
 let nested: boolean; //show nested component instead of id (optional) (default to undefined)
 
-const { status, data } = await apiInstance.studysetReferencesIdGet(
+const { status, data } = await apiInstance.neurostoreStudysetsIdGet(
     id,
     nested
 );

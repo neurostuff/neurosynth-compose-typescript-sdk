@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **snapshot** | **object** | the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm | [optional] [default to undefined]
 **studyset** | **string** | The related cached studyset to this annotation. | [optional] [readonly] [default to undefined]
 **neurostore_url** | **string** |  | [optional] [readonly] [default to undefined]
-**cached_studyset_id** | **string** |  | [optional] [default to undefined]
+**snapshot_studyset_id** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -21,7 +21,7 @@ const instance: AnnotationUpdate = {
     snapshot,
     studyset,
     neurostore_url,
-    cached_studyset_id,
+    snapshot_studyset_id,
 };
 ```
 
