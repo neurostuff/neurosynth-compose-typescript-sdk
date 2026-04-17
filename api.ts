@@ -61,6 +61,25 @@ export interface AnnotationPostBody {
     'snapshot_studyset'?: string;
     'neurostore_url'?: string;
 }
+export interface AnnotationReferenceReturn {
+    /**
+     * the identifier for the resource.
+     */
+    'id'?: string;
+    /**
+     * when the resource was last modified.
+     */
+    'updated_at'?: string | null;
+    /**
+     * When the resource was created.
+     */
+    'created_at'?: string;
+    /**
+     * Who owns the resource.
+     */
+    'user'?: string | null;
+    'username'?: string | null;
+}
 export interface AnnotationReturn {
     /**
      * the id of the annotation on neurostore
@@ -818,14 +837,14 @@ export interface StudysetPostBody {
     'version'?: string | null;
 }
 export interface StudysetReference {
-    'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
+    'studysets'?: Array<StudysetReferenceStudysetsInner>;
 }
 export interface StudysetReferenceList {
     'results'?: Array<StudysetReferenceReturn>;
     'metadata'?: object;
 }
 export interface StudysetReferenceReturn {
-    'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
+    'studysets'?: Array<StudysetReferenceStudysetsInner>;
     /**
      * the identifier for the resource.
      */
@@ -845,9 +864,9 @@ export interface StudysetReferenceReturn {
     'username'?: string | null;
 }
 /**
- * @type StudysetReferenceSnapshotsInner
+ * @type StudysetReferenceStudysetsInner
  */
-export type StudysetReferenceSnapshotsInner = Studyset | string;
+export type StudysetReferenceStudysetsInner = StudysetSnapshotSummary | string;
 
 export interface StudysetReturn {
     /**
@@ -880,6 +899,16 @@ export interface StudysetReturn {
      */
     'user'?: string | null;
     'username'?: string | null;
+}
+export interface StudysetSnapshotSummary {
+    /**
+     * Compose snapshot studyset identifier.
+     */
+    'id'?: string;
+    /**
+     * Canonical md5 hash of the snapshot payload.
+     */
+    'md5'?: string | null;
 }
 /**
  * A user-scoped or global label that can be attached to multiple resources. Tag groups are free-form categories (e.g., \"visibility\", \"topic\") used to segment tags across different resource types.
@@ -1389,6 +1418,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+         * @summary Get a Neurostore annotation reference by Neurostore ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreAnnotationsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurostoreAnnotationsIdGet', 'id', id)
+            const localVarPath = `/neurostore-annotations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {*} [options] Override http request option.
@@ -1525,8 +1588,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * List reference rows keyed by the actual Neurostore studyset ID.
+         * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1560,8 +1623,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+         * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1621,6 +1684,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+         * @summary Get a Neurostore annotation reference by Neurostore ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurostoreAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReferenceReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreAnnotationsIdGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.neurostoreAnnotationsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Your GET endpoint
          * @param {*} [options] Override http request option.
@@ -1671,8 +1747,8 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * List reference rows keyed by the actual Neurostore studyset ID.
+         * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1684,8 +1760,8 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+         * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1715,6 +1791,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         metaAnalysesIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.metaAnalysesIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+         * @summary Get a Neurostore annotation reference by Neurostore ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReferenceReturn> {
+            return localVarFp.neurostoreAnnotationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1755,8 +1841,8 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.neurostoreStudiesPost(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * List reference rows keyed by the actual Neurostore studyset ID.
+         * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1765,8 +1851,8 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.neurostoreStudysetsGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+         * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1791,6 +1877,17 @@ export class DefaultApi extends BaseAPI {
      */
     public metaAnalysesIdDelete(id: string, options?: RawAxiosRequestConfig) {
         return DefaultApiFp(this.configuration).metaAnalysesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+     * @summary Get a Neurostore annotation reference by Neurostore ID
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public neurostoreAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreAnnotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1836,8 +1933,8 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Your GET endpoint
+     * List reference rows keyed by the actual Neurostore studyset ID.
+     * @summary List Neurostore studyset references
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1847,8 +1944,8 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Your GET endpoint
+     * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+     * @summary Get a Neurostore studyset reference by Neurostore ID
      * @param {string} id 
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
