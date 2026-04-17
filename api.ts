@@ -35,10 +35,7 @@ export interface Annotation {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'snapshot_studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
 }
 export interface AnnotationList {
@@ -55,13 +52,17 @@ export interface AnnotationPostBody {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'snapshot_studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
 }
+/**
+ * A lightweight reference keyed by the Neurostore annotation ID.
+ */
+export interface AnnotationReference {
+    'annotations'?: Array<AnnotationSnapshotSummary>;
+}
 export interface AnnotationReferenceReturn {
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     /**
      * the identifier for the resource.
      */
@@ -89,10 +90,7 @@ export interface AnnotationReturn {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'snapshot_studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
     /**
      * the identifier for the resource.
@@ -112,6 +110,16 @@ export interface AnnotationReturn {
     'user'?: string | null;
     'username'?: string | null;
 }
+export interface AnnotationSnapshotSummary {
+    /**
+     * Compose snapshot annotation identifier.
+     */
+    'id'?: string;
+    /**
+     * Canonical md5 hash of the snapshot payload.
+     */
+    'md5'?: string | null;
+}
 export interface AnnotationUpdate {
     /**
      * the id of the annotation on neurostore
@@ -121,10 +129,7 @@ export interface AnnotationUpdate {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'snapshot_studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
     'snapshot_studyset_id'?: string;
 }
@@ -811,6 +816,10 @@ export interface Studyset {
      * The snapshot of the studyset pending a successful run of the meta-analysis.
      */
     'snapshot'?: object | null;
+    /**
+     * Compact summaries of cached annotations paired with this studyset snapshot.
+     */
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
@@ -830,6 +839,10 @@ export interface StudysetPostBody {
      * The snapshot of the studyset pending a successful run of the meta-analysis.
      */
     'snapshot'?: object | null;
+    /**
+     * Compact summaries of cached annotations paired with this studyset snapshot.
+     */
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
@@ -837,14 +850,14 @@ export interface StudysetPostBody {
     'version'?: string | null;
 }
 export interface StudysetReference {
-    'studysets'?: Array<StudysetReferenceStudysetsInner>;
+    'studysets'?: Array<StudysetSnapshotSummary>;
 }
 export interface StudysetReferenceList {
     'results'?: Array<StudysetReferenceReturn>;
     'metadata'?: object;
 }
 export interface StudysetReferenceReturn {
-    'studysets'?: Array<StudysetReferenceStudysetsInner>;
+    'studysets'?: Array<StudysetSnapshotSummary>;
     /**
      * the identifier for the resource.
      */
@@ -863,11 +876,6 @@ export interface StudysetReferenceReturn {
     'user'?: string | null;
     'username'?: string | null;
 }
-/**
- * @type StudysetReferenceStudysetsInner
- */
-export type StudysetReferenceStudysetsInner = StudysetSnapshotSummary | string;
-
 export interface StudysetReturn {
     /**
      * The id of the studyset on neurostore.
@@ -877,6 +885,10 @@ export interface StudysetReturn {
      * The snapshot of the studyset pending a successful run of the meta-analysis.
      */
     'snapshot'?: object | null;
+    /**
+     * Compact summaries of cached annotations paired with this studyset snapshot.
+     */
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
@@ -1418,7 +1430,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
          * @summary Get a Neurostore annotation reference by Neurostore ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -1588,7 +1600,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * List reference rows keyed by the actual Neurostore studyset ID.
+         * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
          * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1623,7 +1635,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
          * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
@@ -1684,7 +1696,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
          * @summary Get a Neurostore annotation reference by Neurostore ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -1747,7 +1759,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * List reference rows keyed by the actual Neurostore studyset ID.
+         * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
          * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1760,7 +1772,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
          * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
@@ -1793,7 +1805,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.metaAnalysesIdDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
          * @summary Get a Neurostore annotation reference by Neurostore ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -1841,7 +1853,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.neurostoreStudiesPost(options).then((request) => request(axios, basePath));
         },
         /**
-         * List reference rows keyed by the actual Neurostore studyset ID.
+         * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
          * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
@@ -1851,7 +1863,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.neurostoreStudysetsGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
-         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
          * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
@@ -1880,7 +1892,7 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+     * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
      * @summary Get a Neurostore annotation reference by Neurostore ID
      * @param {string} id 
      * @param {*} [options] Override http request option.
@@ -1933,7 +1945,7 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * List reference rows keyed by the actual Neurostore studyset ID.
+     * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
      * @summary List Neurostore studyset references
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
@@ -1944,7 +1956,7 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+     * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
      * @summary Get a Neurostore studyset reference by Neurostore ID
      * @param {string} id 
      * @param {boolean} [nested] show nested component instead of id

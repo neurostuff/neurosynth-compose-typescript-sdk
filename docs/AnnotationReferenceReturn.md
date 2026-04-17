@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**annotations** | [**Array&lt;AnnotationSnapshotSummary&gt;**](AnnotationSnapshotSummary.md) |  | [optional] [default to undefined]
 **id** | **string** | the identifier for the resource. | [optional] [default to undefined]
 **updated_at** | **string** | when the resource was last modified. | [optional] [readonly] [default to undefined]
 **created_at** | **string** | When the resource was created. | [optional] [readonly] [default to undefined]
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 import { AnnotationReferenceReturn } from './api';
 
 const instance: AnnotationReferenceReturn = {
+    annotations,
     id,
     updated_at,
     created_at,

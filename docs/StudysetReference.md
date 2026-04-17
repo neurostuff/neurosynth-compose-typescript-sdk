@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**studysets** | [**Array&lt;StudysetReferenceStudysetsInner&gt;**](StudysetReferenceStudysetsInner.md) |  | [optional] [default to undefined]
+**studysets** | [**Array&lt;StudysetSnapshotSummary&gt;**](StudysetSnapshotSummary.md) |  | [optional] [default to undefined]
 
 ## Example
 

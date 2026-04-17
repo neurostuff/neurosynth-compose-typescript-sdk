@@ -7,8 +7,10 @@ configuration.ts
 docs/Annotation.md
 docs/AnnotationList.md
 docs/AnnotationPostBody.md
+docs/AnnotationReference.md
 docs/AnnotationReferenceReturn.md
 docs/AnnotationReturn.md
+docs/AnnotationSnapshotSummary.md
 docs/AnnotationUpdate.md
 docs/AnnotationsApi.md
 docs/Corrector.md
@@ -66,7 +68,6 @@ docs/StudysetPostBody.md
 docs/StudysetReference.md
 docs/StudysetReferenceList.md
 docs/StudysetReferenceReturn.md
-docs/StudysetReferenceStudysetsInner.md
 docs/StudysetReturn.md
 docs/StudysetSnapshotSummary.md
 docs/StudysetsApi.md

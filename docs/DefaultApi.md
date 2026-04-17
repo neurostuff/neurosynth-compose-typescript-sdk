@@ -66,7 +66,7 @@ void (empty response body)
 # **neurostoreAnnotationsIdGet**
 > AnnotationReferenceReturn neurostoreAnnotationsIdGet()
 
-Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API.
+Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
 
 ### Example
 
@@ -303,7 +303,7 @@ This endpoint does not have any parameters.
 # **neurostoreStudysetsGet**
 > StudysetReferenceList neurostoreStudysetsGet()
 
-List reference rows keyed by the actual Neurostore studyset ID.
+List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
 
 ### Example
 
@@ -354,7 +354,7 @@ No authorization required
 # **neurostoreStudysetsIdGet**
 > StudysetReferenceReturn neurostoreStudysetsIdGet()
 
-Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API. By default, this returns each linked snapshot with its compose snapshot ID and md5.
+Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
 
 ### Example
 
