@@ -35,10 +35,7 @@ export interface Annotation {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
 }
 export interface AnnotationList {
@@ -46,7 +43,7 @@ export interface AnnotationList {
     'metadata'?: object;
 }
 export interface AnnotationPostBody {
-    'cached_studyset_id'?: string;
+    'snapshot_studyset_id'?: string;
     /**
      * the id of the annotation on neurostore
      */
@@ -55,11 +52,34 @@ export interface AnnotationPostBody {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
+}
+/**
+ * A lightweight reference keyed by the Neurostore annotation ID.
+ */
+export interface AnnotationReference {
+    'annotations'?: Array<AnnotationSnapshotSummary>;
+}
+export interface AnnotationReferenceReturn {
+    'annotations'?: Array<AnnotationSnapshotSummary>;
+    /**
+     * the identifier for the resource.
+     */
+    'id'?: string;
+    /**
+     * when the resource was last modified.
+     */
+    'updated_at'?: string | null;
+    /**
+     * When the resource was created.
+     */
+    'created_at'?: string;
+    /**
+     * Who owns the resource.
+     */
+    'user'?: string | null;
+    'username'?: string | null;
 }
 export interface AnnotationReturn {
     /**
@@ -70,10 +90,7 @@ export interface AnnotationReturn {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
     /**
      * the identifier for the resource.
@@ -93,6 +110,16 @@ export interface AnnotationReturn {
     'user'?: string | null;
     'username'?: string | null;
 }
+export interface AnnotationSnapshotSummary {
+    /**
+     * Compose snapshot annotation identifier.
+     */
+    'id'?: string;
+    /**
+     * Canonical md5 hash of the snapshot payload.
+     */
+    'md5'?: string | null;
+}
 export interface AnnotationUpdate {
     /**
      * the id of the annotation on neurostore
@@ -102,12 +129,9 @@ export interface AnnotationUpdate {
      * the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm
      */
     'snapshot'?: object | null;
-    /**
-     * The related cached studyset to this annotation.
-     */
-    'studyset'?: string;
+    'snapshot_studyset'?: StudysetSnapshotSummary;
     'neurostore_url'?: string;
-    'cached_studyset_id'?: string;
+    'snapshot_studyset_id'?: string;
 }
 /**
  * The function/class applying statistical adjustments to the output of the meta-analysis (optional).
@@ -146,8 +170,8 @@ export interface MetaAnalysesGet400Response {
  */
 export interface MetaAnalysis {
     'specification'?: MetaAnalysisSpecification;
-    'studyset'?: MetaAnalysisStudyset;
-    'annotation'?: MetaAnalysisAnnotation;
+    'neurostore_studyset'?: MetaAnalysisNeurostoreStudyset;
+    'neurostore_annotation'?: MetaAnalysisNeurostoreAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      */
@@ -179,11 +203,6 @@ export interface MetaAnalysis {
     'cognitive_paradigm_cogatlas_id'?: string | null;
     'neurostore_url'?: string | null;
 }
-/**
- * @type MetaAnalysisAnnotation
- */
-export type MetaAnalysisAnnotation = Annotation | string;
-
 export interface MetaAnalysisJobList {
     'results'?: Array<MetaAnalysisJobResponse>;
     'metadata'?: MetaAnalysisJobListMetadata;
@@ -268,10 +287,20 @@ export interface MetaAnalysisList {
     'results'?: Array<MetaAnalysisReturn>;
     'metadata'?: object;
 }
+/**
+ * @type MetaAnalysisNeurostoreAnnotation
+ */
+export type MetaAnalysisNeurostoreAnnotation = Annotation | string;
+
+/**
+ * @type MetaAnalysisNeurostoreStudyset
+ */
+export type MetaAnalysisNeurostoreStudyset = Studyset | string;
+
 export interface MetaAnalysisPostBody {
     'specification'?: MetaAnalysisSpecification;
-    'studyset'?: MetaAnalysisStudyset;
-    'annotation'?: MetaAnalysisAnnotation;
+    'neurostore_studyset'?: MetaAnalysisNeurostoreStudyset;
+    'neurostore_annotation'?: MetaAnalysisNeurostoreAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      */
@@ -311,8 +340,8 @@ export type MetaAnalysisResults = Array<ResultReturn> | Array<string>;
 
 export interface MetaAnalysisReturn {
     'specification'?: MetaAnalysisSpecification;
-    'studyset'?: MetaAnalysisStudyset;
-    'annotation'?: MetaAnalysisAnnotation;
+    'neurostore_studyset'?: MetaAnalysisNeurostoreStudyset;
+    'neurostore_annotation'?: MetaAnalysisNeurostoreAnnotation;
     /**
      * Human-readable name of the meta-analysis.
      */
@@ -365,11 +394,6 @@ export interface MetaAnalysisReturn {
  * @type MetaAnalysisSpecification
  */
 export type MetaAnalysisSpecification = Specification | string;
-
-/**
- * @type MetaAnalysisStudyset
- */
-export type MetaAnalysisStudyset = Studyset | string;
 
 /**
  * @type MetaAnalysisTags
@@ -499,6 +523,14 @@ export interface Project {
     'name'?: string | null;
     'description'?: string | null;
     /**
+     * ID of the project’s linked Neurostore studyset reference.
+     */
+    'neurostore_studyset_id'?: string | null;
+    /**
+     * ID of the project’s linked Neurostore annotation reference.
+     */
+    'neurostore_annotation_id'?: string | null;
+    /**
      * whether the project is public or private
      */
     'public'?: boolean;
@@ -537,6 +569,14 @@ export interface ProjectReturn {
     'meta_analyses'?: ProjectMetaAnalyses;
     'name'?: string | null;
     'description'?: string | null;
+    /**
+     * ID of the project’s linked Neurostore studyset reference.
+     */
+    'neurostore_studyset_id'?: string | null;
+    /**
+     * ID of the project’s linked Neurostore annotation reference.
+     */
+    'neurostore_annotation_id'?: string | null;
     /**
      * whether the project is public or private
      */
@@ -593,16 +633,16 @@ export interface Result {
 }
 export interface ResultInit {
     'meta_analysis_id'?: string;
-    'cached_studyset'?: object;
-    'cached_annotation'?: object;
+    'snapshot_studyset'?: object;
+    'snapshot_annotation'?: object;
     /**
      * ID of an existing cached studyset snapshot to link to this result.
      */
-    'cached_studyset_id'?: string;
+    'snapshot_studyset_id'?: string;
     /**
      * ID of an existing cached annotation snapshot to link to this result.
      */
-    'cached_annotation_id'?: string;
+    'snapshot_annotation_id'?: string;
     'cli_version'?: string;
 }
 export interface ResultList {
@@ -654,8 +694,8 @@ export interface ResultReturn {
      */
     'user'?: string | null;
     'username'?: string | null;
-    'cached_studyset_id'?: string | null;
-    'cached_annotation_id'?: string | null;
+    'snapshot_studyset_id'?: string | null;
+    'snapshot_annotation_id'?: string | null;
 }
 /**
  * @type ResultUploadStatisticalMaps
@@ -776,6 +816,10 @@ export interface Studyset {
      * The snapshot of the studyset pending a successful run of the meta-analysis.
      */
     'snapshot'?: object | null;
+    /**
+     * Compact summaries of cached annotations paired with this studyset snapshot.
+     */
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
@@ -795,6 +839,10 @@ export interface StudysetPostBody {
      * The snapshot of the studyset pending a successful run of the meta-analysis.
      */
     'snapshot'?: object | null;
+    /**
+     * Compact summaries of cached annotations paired with this studyset snapshot.
+     */
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
@@ -802,14 +850,14 @@ export interface StudysetPostBody {
     'version'?: string | null;
 }
 export interface StudysetReference {
-    'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
+    'studysets'?: Array<StudysetSnapshotSummary>;
 }
 export interface StudysetReferenceList {
     'results'?: Array<StudysetReferenceReturn>;
     'metadata'?: object;
 }
 export interface StudysetReferenceReturn {
-    'snapshots'?: Array<StudysetReferenceSnapshotsInner>;
+    'studysets'?: Array<StudysetSnapshotSummary>;
     /**
      * the identifier for the resource.
      */
@@ -828,11 +876,6 @@ export interface StudysetReferenceReturn {
     'user'?: string | null;
     'username'?: string | null;
 }
-/**
- * @type StudysetReferenceSnapshotsInner
- */
-export type StudysetReferenceSnapshotsInner = Studyset | string;
-
 export interface StudysetReturn {
     /**
      * The id of the studyset on neurostore.
@@ -842,6 +885,10 @@ export interface StudysetReturn {
      * The snapshot of the studyset pending a successful run of the meta-analysis.
      */
     'snapshot'?: object | null;
+    /**
+     * Compact summaries of cached annotations paired with this studyset snapshot.
+     */
+    'annotations'?: Array<AnnotationSnapshotSummary>;
     'neurostore_url'?: string;
     /**
      * A string representing a labeled version of this particular studyset.
@@ -864,6 +911,16 @@ export interface StudysetReturn {
      */
     'user'?: string | null;
     'username'?: string | null;
+}
+export interface StudysetSnapshotSummary {
+    /**
+     * Compose snapshot studyset identifier.
+     */
+    'id'?: string;
+    /**
+     * Canonical md5 hash of the snapshot payload.
+     */
+    'md5'?: string | null;
 }
 /**
  * A user-scoped or global label that can be attached to multiple resources. Tag groups are free-form categories (e.g., \"visibility\", \"topic\") used to segment tags across different resource types.
@@ -964,8 +1021,8 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/annotations`;
+        snapshotAnnotationsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/snapshot-annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1031,10 +1088,10 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        snapshotAnnotationsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('annotationsIdGet', 'id', id)
-            const localVarPath = `/annotations/{id}`
+            assertParamExists('snapshotAnnotationsIdGet', 'id', id)
+            const localVarPath = `/snapshot-annotations/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1066,10 +1123,10 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut: async (id: string, annotationUpdate?: AnnotationUpdate, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        snapshotAnnotationsIdPut: async (id: string, annotationUpdate?: AnnotationUpdate, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('annotationsIdPut', 'id', id)
-            const localVarPath = `/annotations/{id}`
+            assertParamExists('snapshotAnnotationsIdPut', 'id', id)
+            const localVarPath = `/snapshot-annotations/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1107,8 +1164,8 @@ export const AnnotationsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost: async (annotationPostBody?: AnnotationPostBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/annotations`;
+        snapshotAnnotationsPost: async (annotationPostBody?: AnnotationPostBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/snapshot-annotations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1162,10 +1219,10 @@ export const AnnotationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
+        async snapshotAnnotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotAnnotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.annotationsGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.snapshotAnnotationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1175,10 +1232,10 @@ export const AnnotationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdGet(id, options);
+        async snapshotAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotAnnotationsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.annotationsIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.snapshotAnnotationsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1189,10 +1246,10 @@ export const AnnotationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsIdPut(id, annotationUpdate, options);
+        async snapshotAnnotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotAnnotationsIdPut(id, annotationUpdate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.annotationsIdPut']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.snapshotAnnotationsIdPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1202,10 +1259,10 @@ export const AnnotationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.annotationsPost(annotationPostBody, options);
+        async snapshotAnnotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotAnnotationsPost(annotationPostBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.annotationsPost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AnnotationsApi.snapshotAnnotationsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1232,8 +1289,8 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
-            return localVarFp.annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
+        snapshotAnnotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationList> {
+            return localVarFp.snapshotAnnotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single annotation
@@ -1242,8 +1299,8 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
-            return localVarFp.annotationsIdGet(id, options).then((request) => request(axios, basePath));
+        snapshotAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
+            return localVarFp.snapshotAnnotationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
          * update an existing annotation
@@ -1253,8 +1310,8 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
-            return localVarFp.annotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
+        snapshotAnnotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
+            return localVarFp.snapshotAnnotationsIdPut(id, annotationUpdate, options).then((request) => request(axios, basePath));
         },
         /**
          * create a new serialized/referenced annotation
@@ -1263,8 +1320,8 @@ export const AnnotationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
-            return localVarFp.annotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
+        snapshotAnnotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReturn> {
+            return localVarFp.snapshotAnnotationsPost(annotationPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1288,8 +1345,8 @@ export class AnnotationsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public annotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
-        return AnnotationsApiFp(this.configuration).annotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
+    public snapshotAnnotationsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return AnnotationsApiFp(this.configuration).snapshotAnnotationsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1299,8 +1356,8 @@ export class AnnotationsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public annotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
-        return AnnotationsApiFp(this.configuration).annotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public snapshotAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return AnnotationsApiFp(this.configuration).snapshotAnnotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1311,8 +1368,8 @@ export class AnnotationsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public annotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig) {
-        return AnnotationsApiFp(this.configuration).annotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
+    public snapshotAnnotationsIdPut(id: string, annotationUpdate?: AnnotationUpdate, options?: RawAxiosRequestConfig) {
+        return AnnotationsApiFp(this.configuration).snapshotAnnotationsIdPut(id, annotationUpdate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1322,8 +1379,8 @@ export class AnnotationsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public annotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig) {
-        return AnnotationsApiFp(this.configuration).annotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
+    public snapshotAnnotationsPost(annotationPostBody?: AnnotationPostBody, options?: RawAxiosRequestConfig) {
+        return AnnotationsApiFp(this.configuration).snapshotAnnotationsPost(annotationPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1360,6 +1417,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // authentication JSON-Web-Token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+         * @summary Get a Neurostore annotation reference by Neurostore ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreAnnotationsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('neurostoreAnnotationsIdGet', 'id', id)
+            const localVarPath = `/neurostore-annotations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -1509,14 +1600,14 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
+         * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesGet: async (nested?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/studyset-references`;
+        neurostoreStudysetsGet: async (nested?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/neurostore-studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1544,17 +1635,17 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+         * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesIdGet: async (id: string, nested?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        neurostoreStudysetsIdGet: async (id: string, nested?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('studysetReferencesIdGet', 'id', id)
-            const localVarPath = `/studyset-references/{id}`
+            assertParamExists('neurostoreStudysetsIdGet', 'id', id)
+            const localVarPath = `/neurostore-studysets/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1602,6 +1693,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysesIdDelete(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DefaultApi.metaAnalysesIdDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+         * @summary Get a Neurostore annotation reference by Neurostore ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async neurostoreAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnnotationReferenceReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreAnnotationsIdGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.neurostoreAnnotationsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1655,30 +1759,30 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
+         * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetReferencesGet(nested?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesGet(nested, options);
+        async neurostoreStudysetsGet(nested?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreStudysetsGet(nested, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DefaultApi.studysetReferencesGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.neurostoreStudysetsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+         * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetReferencesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetReferencesIdGet(id, nested, options);
+        async neurostoreStudysetsIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReferenceReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.neurostoreStudysetsIdGet(id, nested, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DefaultApi.studysetReferencesIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.neurostoreStudysetsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1699,6 +1803,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         metaAnalysesIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.metaAnalysesIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+         * @summary Get a Neurostore annotation reference by Neurostore ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        neurostoreAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AnnotationReferenceReturn> {
+            return localVarFp.neurostoreAnnotationsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1739,25 +1853,25 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.neurostoreStudiesPost(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
+         * @summary List Neurostore studyset references
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesGet(nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReferenceList> {
-            return localVarFp.studysetReferencesGet(nested, options).then((request) => request(axios, basePath));
+        neurostoreStudysetsGet(nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReferenceList> {
+            return localVarFp.neurostoreStudysetsGet(nested, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Your GET endpoint
+         * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+         * @summary Get a Neurostore studyset reference by Neurostore ID
          * @param {string} id 
          * @param {boolean} [nested] show nested component instead of id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetReferencesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReferenceReturn> {
-            return localVarFp.studysetReferencesIdGet(id, nested, options).then((request) => request(axios, basePath));
+        neurostoreStudysetsIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReferenceReturn> {
+            return localVarFp.neurostoreStudysetsIdGet(id, nested, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1775,6 +1889,17 @@ export class DefaultApi extends BaseAPI {
      */
     public metaAnalysesIdDelete(id: string, options?: RawAxiosRequestConfig) {
         return DefaultApiFp(this.configuration).metaAnalysesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resolve a Neurostore annotation reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+     * @summary Get a Neurostore annotation reference by Neurostore ID
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public neurostoreAnnotationsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreAnnotationsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1820,26 +1945,26 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Your GET endpoint
+     * List reference rows keyed by the actual Neurostore studyset ID, including compact snapshot summaries.
+     * @summary List Neurostore studyset references
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public studysetReferencesGet(nested?: boolean, options?: RawAxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).studysetReferencesGet(nested, options).then((request) => request(this.axios, this.basePath));
+    public neurostoreStudysetsGet(nested?: boolean, options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreStudysetsGet(nested, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Your GET endpoint
+     * Resolve a Neurostore studyset reference using the same ID exposed by the Neurostore API, including each linked snapshot\'s compose ID and md5.
+     * @summary Get a Neurostore studyset reference by Neurostore ID
      * @param {string} id 
      * @param {boolean} [nested] show nested component instead of id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public studysetReferencesIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).studysetReferencesIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
+    public neurostoreStudysetsIdGet(id: string, nested?: boolean, options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).neurostoreStudysetsIdGet(id, nested, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4276,8 +4401,8 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/studysets`;
+        snapshotStudysetsGet: async (nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/snapshot-studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4343,10 +4468,10 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        snapshotStudysetsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('studysetsIdGet', 'id', id)
-            const localVarPath = `/studysets/{id}`
+            assertParamExists('snapshotStudysetsIdGet', 'id', id)
+            const localVarPath = `/snapshot-studysets/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4378,10 +4503,10 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdPut: async (id: string, studyset?: Studyset, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        snapshotStudysetsIdPut: async (id: string, studyset?: Studyset, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('studysetsIdPut', 'id', id)
-            const localVarPath = `/studysets/{id}`
+            assertParamExists('snapshotStudysetsIdPut', 'id', id)
+            const localVarPath = `/snapshot-studysets/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4419,8 +4544,8 @@ export const StudysetsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost: async (studysetPostBody?: StudysetPostBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/studysets`;
+        snapshotStudysetsPost: async (studysetPostBody?: StudysetPostBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/snapshot-studysets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4474,10 +4599,10 @@ export const StudysetsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
+        async snapshotStudysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotStudysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.studysetsGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.snapshotStudysetsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4487,10 +4612,10 @@ export const StudysetsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsIdGet(id, options);
+        async snapshotStudysetsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotStudysetsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.studysetsIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.snapshotStudysetsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4501,10 +4626,10 @@ export const StudysetsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsIdPut(id, studyset, options);
+        async snapshotStudysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotStudysetsIdPut(id, studyset, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.studysetsIdPut']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.snapshotStudysetsIdPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4514,10 +4639,10 @@ export const StudysetsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.studysetsPost(studysetPostBody, options);
+        async snapshotStudysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudysetReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.snapshotStudysetsPost(studysetPostBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.studysetsPost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StudysetsApi.snapshotStudysetsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -4544,8 +4669,8 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
-            return localVarFp.studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
+        snapshotStudysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StudysetList> {
+            return localVarFp.snapshotStudysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(axios, basePath));
         },
         /**
          * get a single serialized/referenced studyset
@@ -4554,8 +4679,8 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
-            return localVarFp.studysetsIdGet(id, options).then((request) => request(axios, basePath));
+        snapshotStudysetsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
+            return localVarFp.snapshotStudysetsIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
          * update an existing serialized/referenced studyset
@@ -4565,8 +4690,8 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
-            return localVarFp.studysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
+        snapshotStudysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
+            return localVarFp.snapshotStudysetsIdPut(id, studyset, options).then((request) => request(axios, basePath));
         },
         /**
          * create a new serialized/referenced studyset
@@ -4575,8 +4700,8 @@ export const StudysetsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
-            return localVarFp.studysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
+        snapshotStudysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig): AxiosPromise<StudysetReturn> {
+            return localVarFp.snapshotStudysetsPost(studysetPostBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4600,8 +4725,8 @@ export class StudysetsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public studysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
-        return StudysetsApiFp(this.configuration).studysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
+    public snapshotStudysetsGet(nested?: boolean, ids?: Array<string>, page?: number, pageSize?: number, search?: string, sort?: string, desc?: boolean, userId?: string, info?: boolean, options?: RawAxiosRequestConfig) {
+        return StudysetsApiFp(this.configuration).snapshotStudysetsGet(nested, ids, page, pageSize, search, sort, desc, userId, info, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4611,8 +4736,8 @@ export class StudysetsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public studysetsIdGet(id: string, options?: RawAxiosRequestConfig) {
-        return StudysetsApiFp(this.configuration).studysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public snapshotStudysetsIdGet(id: string, options?: RawAxiosRequestConfig) {
+        return StudysetsApiFp(this.configuration).snapshotStudysetsIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4623,8 +4748,8 @@ export class StudysetsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public studysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig) {
-        return StudysetsApiFp(this.configuration).studysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
+    public snapshotStudysetsIdPut(id: string, studyset?: Studyset, options?: RawAxiosRequestConfig) {
+        return StudysetsApiFp(this.configuration).snapshotStudysetsIdPut(id, studyset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4634,8 +4759,8 @@ export class StudysetsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public studysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
-        return StudysetsApiFp(this.configuration).studysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
+    public snapshotStudysetsPost(studysetPostBody?: StudysetPostBody, options?: RawAxiosRequestConfig) {
+        return StudysetsApiFp(this.configuration).snapshotStudysetsPost(studysetPostBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

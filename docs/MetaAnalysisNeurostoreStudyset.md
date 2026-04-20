@@ -1,4 +1,4 @@
-# Studyset
+# MetaAnalysisNeurostoreStudyset
 
 
 ## Properties
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Studyset } from './api';
+import { MetaAnalysisNeurostoreStudyset } from './api';
 
-const instance: Studyset = {
+const instance: MetaAnalysisNeurostoreStudyset = {
     neurostore_id,
     snapshot,
     annotations,

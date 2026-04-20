@@ -1,11 +1,10 @@
-# AnnotationPostBody
+# MetaAnalysisNeurostoreAnnotation
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**snapshot_studyset_id** | **string** |  | [optional] [default to undefined]
 **neurostore_id** | **string** | the id of the annotation on neurostore | [optional] [default to undefined]
 **snapshot** | **object** | the snapshot taken of the annotation pending a successful run of the meta-analytic algorithm | [optional] [default to undefined]
 **snapshot_studyset** | [**StudysetSnapshotSummary**](StudysetSnapshotSummary.md) |  | [optional] [default to undefined]
@@ -14,10 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AnnotationPostBody } from './api';
+import { MetaAnalysisNeurostoreAnnotation } from './api';
 
-const instance: AnnotationPostBody = {
-    snapshot_studyset_id,
+const instance: MetaAnalysisNeurostoreAnnotation = {
     neurostore_id,
     snapshot,
     snapshot_studyset,

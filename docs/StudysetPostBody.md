@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **neurostore_id** | **string** | The id of the studyset on neurostore. | [optional] [default to undefined]
 **snapshot** | **object** | The snapshot of the studyset pending a successful run of the meta-analysis. | [optional] [default to undefined]
+**annotations** | [**Array&lt;AnnotationSnapshotSummary&gt;**](AnnotationSnapshotSummary.md) | Compact summaries of cached annotations paired with this studyset snapshot. | [optional] [default to undefined]
 **neurostore_url** | **string** |  | [optional] [readonly] [default to undefined]
 **version** | **string** | A string representing a labeled version of this particular studyset. | [optional] [default to undefined]
 
@@ -18,6 +19,7 @@ import { StudysetPostBody } from './api';
 const instance: StudysetPostBody = {
     neurostore_id,
     snapshot,
+    annotations,
     neurostore_url,
     version,
 };

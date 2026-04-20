@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**snapshots** | [**Array&lt;StudysetReferenceSnapshotsInner&gt;**](StudysetReferenceSnapshotsInner.md) |  | [optional] [default to undefined]
+**studysets** | [**Array&lt;StudysetSnapshotSummary&gt;**](StudysetSnapshotSummary.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 import { StudysetReference } from './api';
 
 const instance: StudysetReference = {
-    snapshots,
+    studysets,
 };
 ```
 
