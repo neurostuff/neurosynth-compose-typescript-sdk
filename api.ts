@@ -3527,10 +3527,11 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
          * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [includeProvenance] include the project provenance payload in project responses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3577,6 +3578,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
 
             if (userId !== undefined) {
                 localVarQueryParameter['user_id'] = userId;
+            }
+
+            if (includeProvenance !== undefined) {
+                localVarQueryParameter['include_provenance'] = includeProvenance;
             }
 
 
@@ -3633,10 +3638,11 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * @summary Your GET endpoint
          * @param {string} id 
          * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
+         * @param {boolean} [includeProvenance] include the project provenance payload in project responses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet: async (id: string, info?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdGet: async (id: string, info?: boolean, includeProvenance?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdGet', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -3654,6 +3660,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
 
             if (info !== undefined) {
                 localVarQueryParameter['info'] = info;
+            }
+
+            if (includeProvenance !== undefined) {
+                localVarQueryParameter['include_provenance'] = includeProvenance;
             }
 
 
@@ -3782,11 +3792,12 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
          * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [includeProvenance] include the project provenance payload in project responses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectsApi.projectsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3809,11 +3820,12 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @summary Your GET endpoint
          * @param {string} id 
          * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
+         * @param {boolean} [includeProvenance] include the project provenance payload in project responses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, options);
+        async projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, includeProvenance, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectsApi.projectsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3868,11 +3880,12 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @param {string} [sort] Parameter to sort results on
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
          * @param {string} [userId] user id you want to filter on
+         * @param {boolean} [includeProvenance] include the project provenance payload in project responses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3889,11 +3902,12 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @summary Your GET endpoint
          * @param {string} id 
          * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
+         * @param {boolean} [includeProvenance] include the project provenance payload in project responses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdGet(id, info, options).then((request) => request(axios, basePath));
+        projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, info, includeProvenance, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3937,11 +3951,12 @@ export class ProjectsApi extends BaseAPI {
      * @param {string} [sort] Parameter to sort results on
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
      * @param {string} [userId] user id you want to filter on
+     * @param {boolean} [includeProvenance] include the project provenance payload in project responses
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, options?: RawAxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options?: RawAxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3960,11 +3975,12 @@ export class ProjectsApi extends BaseAPI {
      * @summary Your GET endpoint
      * @param {string} id 
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
+     * @param {boolean} [includeProvenance] include the project provenance payload in project responses
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public projectsIdGet(id: string, info?: boolean, options?: RawAxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).projectsIdGet(id, info, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, options?: RawAxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).projectsIdGet(id, info, includeProvenance, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

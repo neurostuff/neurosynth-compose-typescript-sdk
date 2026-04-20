@@ -33,6 +33,7 @@ let description: string; //search description field for a term (optional) (defau
 let sort: string; //Parameter to sort results on (optional) (default to 'created_at')
 let desc: boolean; //sort results by descending order (as opposed to ascending order) (optional) (default to undefined)
 let userId: string; //user id you want to filter on (optional) (default to undefined)
+let includeProvenance: boolean; //include the project provenance payload in project responses (optional) (default to true)
 
 const { status, data } = await apiInstance.projectsGet(
     page,
@@ -42,7 +43,8 @@ const { status, data } = await apiInstance.projectsGet(
     description,
     sort,
     desc,
-    userId
+    userId,
+    includeProvenance
 );
 ```
 
@@ -58,6 +60,7 @@ const { status, data } = await apiInstance.projectsGet(
 | **sort** | [**string**] | Parameter to sort results on | (optional) defaults to 'created_at'|
 | **desc** | [**boolean**] | sort results by descending order (as opposed to ascending order) | (optional) defaults to undefined|
 | **userId** | [**string**] | user id you want to filter on | (optional) defaults to undefined|
+| **includeProvenance** | [**boolean**] | include the project provenance payload in project responses | (optional) defaults to true|
 
 
 ### Return type
@@ -148,10 +151,12 @@ const apiInstance = new ProjectsApi(configuration);
 
 let id: string; // (default to undefined)
 let info: boolean; //display additional information about a nested relationship without displaying fully nested object (optional) (default to undefined)
+let includeProvenance: boolean; //include the project provenance payload in project responses (optional) (default to true)
 
 const { status, data } = await apiInstance.projectsIdGet(
     id,
-    info
+    info,
+    includeProvenance
 );
 ```
 
@@ -161,6 +166,7 @@ const { status, data } = await apiInstance.projectsIdGet(
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**string**] |  | defaults to undefined|
 | **info** | [**boolean**] | display additional information about a nested relationship without displaying fully nested object | (optional) defaults to undefined|
+| **includeProvenance** | [**boolean**] | include the project provenance payload in project responses | (optional) defaults to true|
 
 
 ### Return type
