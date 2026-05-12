@@ -12,11 +12,10 @@ docs/AnnotationReferenceReturn.md
 docs/AnnotationReturn.md
 docs/AnnotationSnapshotSummary.md
 docs/AnnotationUpdate.md
-docs/AnnotationsApi.md
+docs/ComposeApi.md
 docs/Corrector.md
 docs/DefaultApi.md
 docs/Estimator.md
-docs/MetaAnalysesApi.md
 docs/MetaAnalysesGet400Response.md
 docs/MetaAnalysis.md
 docs/MetaAnalysisJobList.md
@@ -36,7 +35,6 @@ docs/NeurostoreAnalysis.md
 docs/NeurostoreStudy.md
 docs/NeurostoreStudyList.md
 docs/NeurostoreStudyReturn.md
-docs/NeurovaultApi.md
 docs/NeurovaultCollection.md
 docs/NeurovaultCollectionFilesInner.md
 docs/NeurovaultCollectionReturn.md
@@ -48,7 +46,6 @@ docs/Project.md
 docs/ProjectList.md
 docs/ProjectMetaAnalyses.md
 docs/ProjectReturn.md
-docs/ProjectsApi.md
 docs/ReadOnly.md
 docs/Result.md
 docs/ResultInit.md
@@ -61,7 +58,6 @@ docs/SpecificationConditions.md
 docs/SpecificationList.md
 docs/SpecificationPostBody.md
 docs/SpecificationReturn.md
-docs/SpecificationsApi.md
 docs/Studyset.md
 docs/StudysetList.md
 docs/StudysetPostBody.md
@@ -70,14 +66,11 @@ docs/StudysetReferenceList.md
 docs/StudysetReferenceReturn.md
 docs/StudysetReturn.md
 docs/StudysetSnapshotSummary.md
-docs/StudysetsApi.md
 docs/Tag.md
 docs/TagList.md
 docs/TagReturn.md
-docs/TagsApi.md
 docs/User.md
 docs/UserList.md
 docs/UserReturn.md
-docs/UsersApi.md
 git_push.sh
 index.ts
