@@ -565,18 +565,30 @@ No authorization required
 import {
     ComposeApi,
     Configuration,
-    Result
+    ResultUploadStatisticalMaps,
+    ResultUploadStatisticalMaps,
+    ResultUploadStatisticalMaps
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new ComposeApi(configuration);
 
 let id: string; // (default to undefined)
-let result: Result; // (optional)
+let statisticalMaps: ResultUploadStatisticalMaps; // (optional) (default to undefined)
+let clusterTables: ResultUploadStatisticalMaps; // (optional) (default to undefined)
+let diagnosticTables: ResultUploadStatisticalMaps; // (optional) (default to undefined)
+let methodDescription: string; // (optional) (default to undefined)
+let snapshotStudyset: string; //JSON-encoded studyset snapshot payload, optionally provided in multipart form. (optional) (default to undefined)
+let snapshotAnnotation: string; //JSON-encoded annotation snapshot payload, optionally provided in multipart form. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.metaAnalysisResultsIdPut(
     id,
-    result
+    statisticalMaps,
+    clusterTables,
+    diagnosticTables,
+    methodDescription,
+    snapshotStudyset,
+    snapshotAnnotation
 );
 ```
 
@@ -584,8 +596,13 @@ const { status, data } = await apiInstance.metaAnalysisResultsIdPut(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **result** | **Result**|  | |
 | **id** | [**string**] |  | defaults to undefined|
+| **statisticalMaps** | **ResultUploadStatisticalMaps** |  | (optional) defaults to undefined|
+| **clusterTables** | **ResultUploadStatisticalMaps** |  | (optional) defaults to undefined|
+| **diagnosticTables** | **ResultUploadStatisticalMaps** |  | (optional) defaults to undefined|
+| **methodDescription** | [**string**] |  | (optional) defaults to undefined|
+| **snapshotStudyset** | [**string**] | JSON-encoded studyset snapshot payload, optionally provided in multipart form. | (optional) defaults to undefined|
+| **snapshotAnnotation** | [**string**] | JSON-encoded annotation snapshot payload, optionally provided in multipart form. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -598,7 +615,7 @@ const { status, data } = await apiInstance.metaAnalysisResultsIdPut(
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, multipart/form-data
+ - **Content-Type**: multipart/form-data, application/json
  - **Accept**: application/json
 
 
@@ -1220,6 +1237,7 @@ let status: string; // (optional) (default to undefined)
 let imageId: string; // (optional) (default to undefined)
 let name: string; // (optional) (default to undefined)
 let url: string; // (optional) (default to undefined)
+let file: File; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.neurovaultFilesIdPut(
     id,
@@ -1229,7 +1247,8 @@ const { status, data } = await apiInstance.neurovaultFilesIdPut(
     status,
     imageId,
     name,
-    url
+    url,
+    file
 );
 ```
 
@@ -1245,6 +1264,7 @@ const { status, data } = await apiInstance.neurovaultFilesIdPut(
 | **imageId** | [**string**] |  | (optional) defaults to undefined|
 | **name** | [**string**] |  | (optional) defaults to undefined|
 | **url** | [**string**] |  | (optional) defaults to undefined|
+| **file** | [**File**] |  | (optional) defaults to undefined|
 
 
 ### Return type

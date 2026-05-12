@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **image_id** | **string** |  | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
+**file** | **File** |  | [optional] [default to undefined]
 **id** | **string** | the identifier for the resource. | [optional] [default to undefined]
 **updated_at** | **string** | when the resource was last modified. | [optional] [readonly] [default to undefined]
 **created_at** | **string** | When the resource was created. | [optional] [readonly] [default to undefined]
@@ -31,6 +32,7 @@ const instance: NeurovaultFileReturn = {
     image_id,
     name,
     url,
+    file,
     id,
     updated_at,
     created_at,

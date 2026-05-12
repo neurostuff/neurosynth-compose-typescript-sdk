@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **image_id** | **string** |  | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
+**file** | **File** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -26,6 +27,7 @@ const instance: NeurovaultCollectionFilesInner = {
     image_id,
     name,
     url,
+    file,
 };
 ```
 
