@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**studysets** | [**Array&lt;StudysetSnapshotSummary&gt;**](StudysetSnapshotSummary.md) |  | [optional] [default to undefined]
+**snapshots** | [**Array&lt;StudysetReferenceSnapshotsInner&gt;**](StudysetReferenceSnapshotsInner.md) |  | [optional] [default to undefined]
 **id** | **string** | the identifier for the resource. | [optional] [default to undefined]
 **updated_at** | **string** | when the resource was last modified. | [optional] [readonly] [default to undefined]
 **created_at** | **string** | When the resource was created. | [optional] [readonly] [default to undefined]
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 import { StudysetReferenceReturn } from './api';
 
 const instance: StudysetReferenceReturn = {
-    studysets,
+    snapshots,
     id,
     updated_at,
     created_at,

@@ -4,13 +4,13 @@ All URIs are relative to *https://compose.neurosynth.org/api*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**snapshotStudysetsGet**](#snapshotstudysetsget) | **GET** /snapshot-studysets | Get a list of Studysets|
-|[**snapshotStudysetsIdGet**](#snapshotstudysetsidget) | **GET** /snapshot-studysets/{id} | Get information about a Studyset|
-|[**snapshotStudysetsIdPut**](#snapshotstudysetsidput) | **PUT** /snapshot-studysets/{id} | Update a Studyset|
-|[**snapshotStudysetsPost**](#snapshotstudysetspost) | **POST** /snapshot-studysets | Create a new Studyset|
+|[**studysetsGet**](#studysetsget) | **GET** /studysets | Get a list of Studysets|
+|[**studysetsIdGet**](#studysetsidget) | **GET** /studysets/{id} | Get information about a Studyset|
+|[**studysetsIdPut**](#studysetsidput) | **PUT** /studysets/{id} | Update a Studyset|
+|[**studysetsPost**](#studysetspost) | **POST** /studysets | Create a new Studyset|
 
-# **snapshotStudysetsGet**
-> StudysetList snapshotStudysetsGet()
+# **studysetsGet**
+> StudysetList studysetsGet()
 
 get a list of serialized/referenced studysets
 
@@ -35,7 +35,7 @@ let desc: boolean; //sort results by descending order (as opposed to ascending o
 let userId: string; //user id you want to filter on (optional) (default to undefined)
 let info: boolean; //display additional information about a nested relationship without displaying fully nested object (optional) (default to undefined)
 
-const { status, data } = await apiInstance.snapshotStudysetsGet(
+const { status, data } = await apiInstance.studysetsGet(
     nested,
     ids,
     page,
@@ -85,8 +85,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **snapshotStudysetsIdGet**
-> StudysetReturn snapshotStudysetsIdGet()
+# **studysetsIdGet**
+> StudysetReturn studysetsIdGet()
 
 get a single serialized/referenced studyset
 
@@ -103,7 +103,7 @@ const apiInstance = new StudysetsApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.snapshotStudysetsIdGet(
+const { status, data } = await apiInstance.studysetsIdGet(
     id
 );
 ```
@@ -138,8 +138,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **snapshotStudysetsIdPut**
-> StudysetReturn snapshotStudysetsIdPut()
+# **studysetsIdPut**
+> StudysetReturn studysetsIdPut()
 
 update an existing serialized/referenced studyset
 
@@ -158,7 +158,7 @@ const apiInstance = new StudysetsApi(configuration);
 let id: string; // (default to undefined)
 let studyset: Studyset; // (optional)
 
-const { status, data } = await apiInstance.snapshotStudysetsIdPut(
+const { status, data } = await apiInstance.studysetsIdPut(
     id,
     studyset
 );
@@ -197,8 +197,8 @@ const { status, data } = await apiInstance.snapshotStudysetsIdPut(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **snapshotStudysetsPost**
-> StudysetReturn snapshotStudysetsPost()
+# **studysetsPost**
+> StudysetReturn studysetsPost()
 
 create a new serialized/referenced studyset
 
@@ -216,7 +216,7 @@ const apiInstance = new StudysetsApi(configuration);
 
 let studysetPostBody: StudysetPostBody; // (optional)
 
-const { status, data } = await apiInstance.snapshotStudysetsPost(
+const { status, data } = await apiInstance.studysetsPost(
     studysetPostBody
 );
 ```

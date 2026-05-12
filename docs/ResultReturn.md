@@ -17,8 +17,6 @@ Name | Type | Description | Notes
 **created_at** | **string** | When the resource was created. | [optional] [readonly] [default to undefined]
 **user** | **string** | Who owns the resource. | [optional] [default to undefined]
 **username** | **string** |  | [optional] [readonly] [default to undefined]
-**snapshot_studyset_id** | **string** |  | [optional] [readonly] [default to undefined]
-**snapshot_annotation_id** | **string** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -38,8 +36,6 @@ const instance: ResultReturn = {
     created_at,
     user,
     username,
-    snapshot_studyset_id,
-    snapshot_annotation_id,
 };
 ```
 
