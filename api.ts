@@ -524,6 +524,7 @@ export interface Project {
     'meta_analyses'?: ProjectMetaAnalyses;
     'name'?: string | null;
     'description'?: string | null;
+    'type'?: ProjectTypeEnum;
     /**
      * ID of the project’s linked Neurostore studyset reference.
      */
@@ -540,6 +541,14 @@ export interface Project {
     'neurostore_url'?: string | null;
     'draft'?: boolean;
 }
+
+export const ProjectTypeEnum = {
+    Cbma: 'CBMA',
+    Ibma: 'IBMA'
+} as const;
+
+export type ProjectTypeEnum = typeof ProjectTypeEnum[keyof typeof ProjectTypeEnum];
+
 export interface ProjectList {
     'results'?: Array<ProjectReturn>;
     'metadata'?: object;
@@ -571,6 +580,7 @@ export interface ProjectReturn {
     'meta_analyses'?: ProjectMetaAnalyses;
     'name'?: string | null;
     'description'?: string | null;
+    'type'?: ProjectReturnTypeEnum;
     /**
      * ID of the project’s linked Neurostore studyset reference.
      */
@@ -587,6 +597,14 @@ export interface ProjectReturn {
     'neurostore_url'?: string | null;
     'draft'?: boolean;
 }
+
+export const ProjectReturnTypeEnum = {
+    Cbma: 'CBMA',
+    Ibma: 'IBMA'
+} as const;
+
+export type ProjectReturnTypeEnum = typeof ProjectReturnTypeEnum[keyof typeof ProjectReturnTypeEnum];
+
 export interface ReadOnly {
     /**
      * the identifier for the resource.

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **meta_analyses** | [**ProjectMetaAnalyses**](ProjectMetaAnalyses.md) |  | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
+**type** | **string** |  | [optional] [default to undefined]
 **neurostore_studyset_id** | **string** | ID of the project’s linked Neurostore studyset reference. | [optional] [default to undefined]
 **neurostore_annotation_id** | **string** | ID of the project’s linked Neurostore annotation reference. | [optional] [default to undefined]
 **_public** | **boolean** | whether the project is public or private | [optional] [default to undefined]
@@ -26,6 +27,7 @@ const instance: Project = {
     meta_analyses,
     name,
     description,
+    type,
     neurostore_studyset_id,
     neurostore_annotation_id,
     _public,
