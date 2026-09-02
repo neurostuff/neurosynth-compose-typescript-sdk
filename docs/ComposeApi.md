@@ -577,7 +577,8 @@ let id: string; // (default to undefined)
 let statisticalMaps: ResultUploadStatisticalMaps; // (optional) (default to undefined)
 let clusterTables: ResultUploadStatisticalMaps; // (optional) (default to undefined)
 let diagnosticTables: ResultUploadStatisticalMaps; // (optional) (default to undefined)
-let methodDescription: string; // (optional) (default to undefined)
+let methodDescription: string; //the description of the methods applied to create this result. (optional) (default to undefined)
+let methodReferences: string; //BibTeX-formatted references cited by method_description.  (optional) (default to undefined)
 let snapshotStudyset: string; //JSON-encoded studyset snapshot payload, optionally provided in multipart form. (optional) (default to undefined)
 let snapshotAnnotation: string; //JSON-encoded annotation snapshot payload, optionally provided in multipart form. (optional) (default to undefined)
 
@@ -587,6 +588,7 @@ const { status, data } = await apiInstance.metaAnalysisResultsIdPut(
     clusterTables,
     diagnosticTables,
     methodDescription,
+    methodReferences,
     snapshotStudyset,
     snapshotAnnotation
 );
@@ -600,7 +602,8 @@ const { status, data } = await apiInstance.metaAnalysisResultsIdPut(
 | **statisticalMaps** | **ResultUploadStatisticalMaps** |  | (optional) defaults to undefined|
 | **clusterTables** | **ResultUploadStatisticalMaps** |  | (optional) defaults to undefined|
 | **diagnosticTables** | **ResultUploadStatisticalMaps** |  | (optional) defaults to undefined|
-| **methodDescription** | [**string**] |  | (optional) defaults to undefined|
+| **methodDescription** | [**string**] | the description of the methods applied to create this result. | (optional) defaults to undefined|
+| **methodReferences** | [**string**] | BibTeX-formatted references cited by method_description.  | (optional) defaults to undefined|
 | **snapshotStudyset** | [**string**] | JSON-encoded studyset snapshot payload, optionally provided in multipart form. | (optional) defaults to undefined|
 | **snapshotAnnotation** | [**string**] | JSON-encoded annotation snapshot payload, optionally provided in multipart form. | (optional) defaults to undefined|
 

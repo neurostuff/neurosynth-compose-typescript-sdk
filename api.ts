@@ -640,7 +640,11 @@ export interface Result {
     /**
      * the description of the methods applied to create this result.
      */
-    'methods_description'?: string | null;
+    'method_description'?: string | null;
+    /**
+     * BibTeX-formatted references cited by method_description. 
+     */
+    'method_references'?: string | null;
     /**
      * a text representation of a tsv that marks the contribution of each study to each particular cluster.
      */
@@ -687,7 +691,11 @@ export interface ResultReturn {
     /**
      * the description of the methods applied to create this result.
      */
-    'methods_description'?: string | null;
+    'method_description'?: string | null;
+    /**
+     * BibTeX-formatted references cited by method_description. 
+     */
+    'method_references'?: string | null;
     /**
      * a text representation of a tsv that marks the contribution of each study to each particular cluster.
      */
@@ -1412,13 +1420,14 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @param {ResultUploadStatisticalMaps} [statisticalMaps] 
          * @param {ResultUploadStatisticalMaps} [clusterTables] 
          * @param {ResultUploadStatisticalMaps} [diagnosticTables] 
-         * @param {string} [methodDescription] 
+         * @param {string} [methodDescription] the description of the methods applied to create this result.
+         * @param {string} [methodReferences] BibTeX-formatted references cited by method_description. 
          * @param {string} [snapshotStudyset] JSON-encoded studyset snapshot payload, optionally provided in multipart form.
          * @param {string} [snapshotAnnotation] JSON-encoded annotation snapshot payload, optionally provided in multipart form.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdPut: async (id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        metaAnalysisResultsIdPut: async (id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, methodReferences?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('metaAnalysisResultsIdPut', 'id', id)
             const localVarPath = `/meta-analysis-results/{id}`
@@ -1457,6 +1466,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
     
             if (methodDescription !== undefined) { 
                 localVarFormParams.append('method_description', methodDescription as any);
+            }
+    
+            if (methodReferences !== undefined) { 
+                localVarFormParams.append('method_references', methodReferences as any);
             }
     
             if (snapshotStudyset !== undefined) { 
@@ -3292,14 +3305,15 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @param {ResultUploadStatisticalMaps} [statisticalMaps] 
          * @param {ResultUploadStatisticalMaps} [clusterTables] 
          * @param {ResultUploadStatisticalMaps} [diagnosticTables] 
-         * @param {string} [methodDescription] 
+         * @param {string} [methodDescription] the description of the methods applied to create this result.
+         * @param {string} [methodReferences] BibTeX-formatted references cited by method_description. 
          * @param {string} [snapshotStudyset] JSON-encoded studyset snapshot payload, optionally provided in multipart form.
          * @param {string} [snapshotAnnotation] JSON-encoded annotation snapshot payload, optionally provided in multipart form.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async metaAnalysisResultsIdPut(id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdPut(id, statisticalMaps, clusterTables, diagnosticTables, methodDescription, snapshotStudyset, snapshotAnnotation, options);
+        async metaAnalysisResultsIdPut(id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, methodReferences?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.metaAnalysisResultsIdPut(id, statisticalMaps, clusterTables, diagnosticTables, methodDescription, methodReferences, snapshotStudyset, snapshotAnnotation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.metaAnalysisResultsIdPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3971,14 +3985,15 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {ResultUploadStatisticalMaps} [statisticalMaps] 
          * @param {ResultUploadStatisticalMaps} [clusterTables] 
          * @param {ResultUploadStatisticalMaps} [diagnosticTables] 
-         * @param {string} [methodDescription] 
+         * @param {string} [methodDescription] the description of the methods applied to create this result.
+         * @param {string} [methodReferences] BibTeX-formatted references cited by method_description. 
          * @param {string} [snapshotStudyset] JSON-encoded studyset snapshot payload, optionally provided in multipart form.
          * @param {string} [snapshotAnnotation] JSON-encoded annotation snapshot payload, optionally provided in multipart form.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        metaAnalysisResultsIdPut(id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
-            return localVarFp.metaAnalysisResultsIdPut(id, statisticalMaps, clusterTables, diagnosticTables, methodDescription, snapshotStudyset, snapshotAnnotation, options).then((request) => request(axios, basePath));
+        metaAnalysisResultsIdPut(id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, methodReferences?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultReturn> {
+            return localVarFp.metaAnalysisResultsIdPut(id, statisticalMaps, clusterTables, diagnosticTables, methodDescription, methodReferences, snapshotStudyset, snapshotAnnotation, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4540,14 +4555,15 @@ export class ComposeApi extends BaseAPI {
      * @param {ResultUploadStatisticalMaps} [statisticalMaps] 
      * @param {ResultUploadStatisticalMaps} [clusterTables] 
      * @param {ResultUploadStatisticalMaps} [diagnosticTables] 
-     * @param {string} [methodDescription] 
+     * @param {string} [methodDescription] the description of the methods applied to create this result.
+     * @param {string} [methodReferences] BibTeX-formatted references cited by method_description. 
      * @param {string} [snapshotStudyset] JSON-encoded studyset snapshot payload, optionally provided in multipart form.
      * @param {string} [snapshotAnnotation] JSON-encoded annotation snapshot payload, optionally provided in multipart form.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public metaAnalysisResultsIdPut(id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).metaAnalysisResultsIdPut(id, statisticalMaps, clusterTables, diagnosticTables, methodDescription, snapshotStudyset, snapshotAnnotation, options).then((request) => request(this.axios, this.basePath));
+    public metaAnalysisResultsIdPut(id: string, statisticalMaps?: ResultUploadStatisticalMaps, clusterTables?: ResultUploadStatisticalMaps, diagnosticTables?: ResultUploadStatisticalMaps, methodDescription?: string, methodReferences?: string, snapshotStudyset?: string, snapshotAnnotation?: string, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).metaAnalysisResultsIdPut(id, statisticalMaps, clusterTables, diagnosticTables, methodDescription, methodReferences, snapshotStudyset, snapshotAnnotation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
