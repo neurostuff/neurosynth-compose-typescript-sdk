@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **status** | **number** |  | [optional] [default to undefined]
 **title** | **string** |  | [optional] [default to undefined]
 **type** | **string** |  | [optional] [default to undefined]
+**request_id** | **string** | Correlation id for the failing request. Matches the X-Request-ID response header and the server\&#39;s error log. | [optional] [default to undefined]
+**timestamp** | **string** | When the error was produced, ISO 8601. | [optional] [default to undefined]
 
 ## Example
 
@@ -20,6 +22,8 @@ const instance: MetaAnalysesGet400Response = {
     status,
     title,
     type,
+    request_id,
+    timestamp,
 };
 ```
 
