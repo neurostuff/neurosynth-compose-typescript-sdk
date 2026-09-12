@@ -164,6 +164,14 @@ export interface MetaAnalysesGet400Response {
     'status'?: number;
     'title'?: string;
     'type'?: string;
+    /**
+     * Correlation id for the failing request. Matches the X-Request-ID response header and the server\'s error log.
+     */
+    'request_id'?: string;
+    /**
+     * When the error was produced, ISO 8601.
+     */
+    'timestamp'?: string;
 }
 /**
  * The combination of the specification determining what meta-analysis to run (required), the studyset to act as input to the meta-analytic algorithm (required), and the annotation to provide human readable annotations as well as acts as an optional filter on which analyses to select within the studyset (optional, but suggested).
