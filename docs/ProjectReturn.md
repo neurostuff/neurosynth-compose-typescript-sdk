@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **type** | **string** |  | [optional] [default to undefined]
 **neurostore_studyset_id** | **string** | ID of the project’s linked Neurostore studyset reference. | [optional] [default to undefined]
 **neurostore_annotation_id** | **string** | ID of the project’s linked Neurostore annotation reference. | [optional] [default to undefined]
+**tags** | [**ProjectTags**](ProjectTags.md) |  | [optional] [default to undefined]
 **_public** | **boolean** | whether the project is public or private | [optional] [default to undefined]
 **neurostore_study** | [**NeurostoreStudy**](NeurostoreStudy.md) |  | [optional] [default to undefined]
 **neurostore_url** | **string** |  | [optional] [default to undefined]
@@ -40,6 +41,7 @@ const instance: ProjectReturn = {
     type,
     neurostore_studyset_id,
     neurostore_annotation_id,
+    tags,
     _public,
     neurostore_study,
     neurostore_url,

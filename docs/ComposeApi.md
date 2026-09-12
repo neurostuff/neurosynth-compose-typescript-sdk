@@ -1366,6 +1366,8 @@ let sort: string; //Parameter to sort results on (optional) (default to 'created
 let desc: boolean; //sort results by descending order (as opposed to ascending order) (optional) (default to undefined)
 let userId: string; //user id you want to filter on (optional) (default to undefined)
 let includeProvenance: boolean; //include the project provenance payload in project responses (optional) (default to true)
+let tag: Array<string>; //only return projects carrying every one of these tag names (case-insensitive) (optional) (default to undefined)
+let excludeTag: Array<string>; //drop projects carrying any of these tag names (case-insensitive); use this to hide projects a user has tagged away (optional) (default to undefined)
 
 const { status, data } = await apiInstance.projectsGet(
     page,
@@ -1376,7 +1378,9 @@ const { status, data } = await apiInstance.projectsGet(
     sort,
     desc,
     userId,
-    includeProvenance
+    includeProvenance,
+    tag,
+    excludeTag
 );
 ```
 
@@ -1393,6 +1397,8 @@ const { status, data } = await apiInstance.projectsGet(
 | **desc** | [**boolean**] | sort results by descending order (as opposed to ascending order) | (optional) defaults to undefined|
 | **userId** | [**string**] | user id you want to filter on | (optional) defaults to undefined|
 | **includeProvenance** | [**boolean**] | include the project provenance payload in project responses | (optional) defaults to true|
+| **tag** | **Array&lt;string&gt;** | only return projects carrying every one of these tag names (case-insensitive) | (optional) defaults to undefined|
+| **excludeTag** | **Array&lt;string&gt;** | drop projects carrying any of these tag names (case-insensitive); use this to hide projects a user has tagged away | (optional) defaults to undefined|
 
 
 ### Return type
