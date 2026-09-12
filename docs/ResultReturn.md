@@ -8,8 +8,7 @@ Name | Type | Description | Notes
 **meta_analysis_id** | **string** | the meta analysis this result was derived from. | [optional] [default to undefined]
 **cli_version** | **string** | version of the command-line-tool that is uploading the results.  | [optional] [default to undefined]
 **neurovault_collection** | [**NeurovaultCollectionReturn**](NeurovaultCollectionReturn.md) |  | [optional] [default to undefined]
-**method_description** | **string** | the description of the methods applied to create this result. | [optional] [default to undefined]
-**method_references** | **string** | BibTeX-formatted references cited by method_description.  | [optional] [default to undefined]
+**methods_description** | **string** | the description of the methods applied to create this result. | [optional] [default to undefined]
 **diagnostic_table** | **string** | a text representation of a tsv that marks the contribution of each study to each particular cluster. | [optional] [default to undefined]
 **cli_args** | **object** | additional parameters that were passed to the commandline tool at runtime.  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
@@ -30,8 +29,7 @@ const instance: ResultReturn = {
     meta_analysis_id,
     cli_version,
     neurovault_collection,
-    method_description,
-    method_references,
+    methods_description,
     diagnostic_table,
     cli_args,
     status,
