@@ -533,6 +533,7 @@ export interface Project {
      * ID of the project’s linked Neurostore annotation reference.
      */
     'neurostore_annotation_id'?: string | null;
+    'tags'?: ProjectTags;
     /**
      * whether the project is public or private
      */
@@ -589,6 +590,7 @@ export interface ProjectReturn {
      * ID of the project’s linked Neurostore annotation reference.
      */
     'neurostore_annotation_id'?: string | null;
+    'tags'?: ProjectTags;
     /**
      * whether the project is public or private
      */
@@ -604,6 +606,12 @@ export const ProjectReturnTypeEnum = {
 } as const;
 
 export type ProjectReturnTypeEnum = typeof ProjectReturnTypeEnum[keyof typeof ProjectReturnTypeEnum];
+
+/**
+ * @type ProjectTags
+ * Tags associated with this project (use tag names or tag IDs). A name that does not match an existing tag creates a private tag owned by the caller.
+ */
+export type ProjectTags = Array<Tag> | Array<string>;
 
 export interface ReadOnly {
     /**
@@ -2042,10 +2050,12 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
          * @param {string} [userId] user id you want to filter on
          * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+         * @param {Array<string>} [tag] only return projects carrying every one of these tag names (case-insensitive)
+         * @param {Array<string>} [excludeTag] drop projects carrying any of these tag names (case-insensitive); use this to hide projects a user has tagged away
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsGet: async (page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, tag?: Array<string>, excludeTag?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/projects`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2096,6 +2106,14 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
             if (includeProvenance !== undefined) {
                 localVarQueryParameter['include_provenance'] = includeProvenance;
+            }
+
+            if (tag) {
+                localVarQueryParameter['tag'] = tag.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (excludeTag) {
+                localVarQueryParameter['exclude_tag'] = excludeTag.join(COLLECTION_FORMATS.csv);
             }
 
 
@@ -3518,11 +3536,13 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
          * @param {string} [userId] user id you want to filter on
          * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+         * @param {Array<string>} [tag] only return projects carrying every one of these tag names (case-insensitive)
+         * @param {Array<string>} [excludeTag] drop projects carrying any of these tag names (case-insensitive); use this to hide projects a user has tagged away
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, options);
+        async projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, tag?: Array<string>, excludeTag?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, tag, excludeTag, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4153,11 +4173,13 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
          * @param {string} [userId] user id you want to filter on
          * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+         * @param {Array<string>} [tag] only return projects carrying every one of these tag names (case-insensitive)
+         * @param {Array<string>} [excludeTag] drop projects carrying any of these tag names (case-insensitive); use this to hide projects a user has tagged away
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
-            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, options).then((request) => request(axios, basePath));
+        projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, tag?: Array<string>, excludeTag?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<ProjectList> {
+            return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, tag, excludeTag, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4738,11 +4760,13 @@ export class ComposeApi extends BaseAPI {
      * @param {boolean} [desc] sort results by descending order (as opposed to ascending order)
      * @param {string} [userId] user id you want to filter on
      * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+     * @param {Array<string>} [tag] only return projects carrying every one of these tag names (case-insensitive)
+     * @param {Array<string>} [excludeTag] drop projects carrying any of these tag names (case-insensitive); use this to hide projects a user has tagged away
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, options).then((request) => request(this.axios, this.basePath));
+    public projectsGet(page?: number, pageSize?: number, name?: string, search?: string, description?: string, sort?: string, desc?: boolean, userId?: string, includeProvenance?: boolean, tag?: Array<string>, excludeTag?: Array<string>, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, tag, excludeTag, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
