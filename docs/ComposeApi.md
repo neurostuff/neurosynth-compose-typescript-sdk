@@ -168,7 +168,7 @@ const { status, data } = await apiInstance.metaAnalysesIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -490,7 +490,7 @@ const { status, data } = await apiInstance.metaAnalysisResultsGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -540,7 +540,7 @@ const { status, data } = await apiInstance.metaAnalysisResultsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -716,7 +716,7 @@ const { status, data } = await apiInstance.neurostoreAnnotationsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -759,7 +759,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -809,7 +809,7 @@ const { status, data } = await apiInstance.neurostoreStudiesIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -860,7 +860,7 @@ const { status, data } = await apiInstance.neurostoreStudysetsGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -914,7 +914,7 @@ const { status, data } = await apiInstance.neurostoreStudysetsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -957,7 +957,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1007,7 +1007,7 @@ const { status, data } = await apiInstance.neurovaultCollectionsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1152,7 +1152,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1202,7 +1202,7 @@ const { status, data } = await apiInstance.neurovaultFilesIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1513,7 +1513,7 @@ const { status, data } = await apiInstance.projectsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1702,7 +1702,7 @@ const { status, data } = await apiInstance.snapshotAnnotationsGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1754,7 +1754,7 @@ const { status, data } = await apiInstance.snapshotAnnotationsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1945,7 +1945,7 @@ const { status, data } = await apiInstance.snapshotStudysetsGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -1997,7 +1997,7 @@ const { status, data } = await apiInstance.snapshotStudysetsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -2188,7 +2188,7 @@ const { status, data } = await apiInstance.specificationsGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -2240,7 +2240,7 @@ const { status, data } = await apiInstance.specificationsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -2489,7 +2489,7 @@ const { status, data } = await apiInstance.tagsIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -2584,7 +2584,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
@@ -2635,7 +2635,7 @@ const { status, data } = await apiInstance.usersIdGet(
 
 ### Authorization
 
-No authorization required
+[JSON-Web-Token](../README.md#JSON-Web-Token)
 
 ### HTTP request headers
 
