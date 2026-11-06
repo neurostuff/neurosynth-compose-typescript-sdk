@@ -76,7 +76,7 @@ export interface AnnotationReferenceReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -105,7 +105,7 @@ export interface AnnotationReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -393,7 +393,7 @@ export interface MetaAnalysisReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -445,7 +445,7 @@ export interface NeurostoreStudyReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -477,7 +477,7 @@ export interface NeurovaultCollectionReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -518,7 +518,7 @@ export interface NeurovaultFileReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -581,7 +581,7 @@ export interface ProjectReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -635,7 +635,7 @@ export interface ReadOnly {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -734,7 +734,7 @@ export interface ResultReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -846,7 +846,7 @@ export interface SpecificationReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -915,7 +915,7 @@ export interface StudysetReferenceReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -951,7 +951,7 @@ export interface StudysetReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -1009,7 +1009,7 @@ export interface TagReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -1018,14 +1018,20 @@ export interface TagReturn {
  * attributes of the user object
  */
 export interface User {
-    'external_id'?: string;
+    /**
+     * The user\'s Auth0 id, served only to that user; null for anyone else.
+     */
+    'external_id'?: string | null;
 }
 export interface UserList {
     'results'?: Array<UserReturn>;
     'metadata'?: object;
 }
 export interface UserReturn {
-    'external_id'?: string;
+    /**
+     * The user\'s Auth0 id, served only to that user; null for anyone else.
+     */
+    'external_id'?: string | null;
     /**
      * the identifier for the resource.
      */
@@ -1039,7 +1045,7 @@ export interface UserReturn {
      */
     'created_at'?: string;
     /**
-     * Who owns the resource.
+     * The owner\'s Auth0 id, served only to the owner; null for anyone else, who sees `username`.
      */
     'user'?: string | null;
     'username'?: string | null;
@@ -1152,6 +1158,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
@@ -1380,6 +1390,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (metaAnalysisId !== undefined) {
                 localVarQueryParameter['meta_analysis_id'] = metaAnalysisId;
             }
@@ -1417,6 +1431,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1573,6 +1591,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1602,6 +1624,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1637,6 +1663,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1667,6 +1697,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
@@ -1707,6 +1741,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
             }
@@ -1741,6 +1779,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1774,6 +1816,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1881,6 +1927,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1914,6 +1964,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -2198,6 +2252,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (info !== undefined) {
                 localVarQueryParameter['info'] = info;
             }
@@ -2340,6 +2398,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
             }
@@ -2409,6 +2471,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -2529,6 +2595,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
             }
@@ -2598,6 +2668,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -2718,6 +2792,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (nested !== undefined) {
                 localVarQueryParameter['nested'] = nested;
             }
@@ -2787,6 +2865,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -2996,6 +3078,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -3064,6 +3150,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -3097,6 +3187,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
