@@ -147,6 +147,80 @@ export interface Corrector {
     'args'?: object;
 }
 /**
+ * Stub changes applied together. A stub is named by its `id`. `index` is the place in the target column after the earlier changes in this changeset; 0 is the top and a negative index counts from the bottom (-1 is the last place). Added stubs without an `index` go to the top of their column in the order given.
+ */
+export interface CurationChangeset {
+    /**
+     * the project\'s `updated_at` the client last saw; a project that has changed since is refused with 409
+     */
+    'updated_at'?: string | null;
+    /**
+     * ids of stubs to delete
+     */
+    'remove'?: Array<string>;
+    'add'?: Array<CurationChangesetAddInner>;
+    /**
+     * each item names a stub by `id`; its other keys replace that stub\'s keys
+     */
+    'update'?: Array<CurationStub>;
+    'move'?: Array<CurationChangesetMoveInner>;
+}
+export interface CurationChangesetAddInner {
+    'stub': CurationStub;
+    /**
+     * the column to add to; the first column when absent
+     */
+    'column_id'?: string;
+    'index'?: number | null;
+}
+export interface CurationChangesetMoveInner {
+    'id': string;
+    'column_id': string;
+    'index'?: number;
+}
+export interface CurationChangesetResult {
+    'updated_at'?: string;
+    'removed'?: number;
+    'added'?: number;
+    'updated'?: number;
+    'moved'?: number;
+}
+/**
+ * A study on a project\'s curation board, as the frontend writes it in `curationMetadata.columns[].stubStudies` (`id`, `title`, `authors`, `abstractText`, `exclusionTag`, `tags`, `neurostoreId` and so on).
+ */
+export interface CurationStub {
+    [key: string]: any;
+
+    'id'?: string;
+}
+export interface CurationStubList {
+    'results'?: Array<CurationStubListResultsInner>;
+    'metadata'?: object;
+}
+export interface CurationStubListResultsInner {
+    'column_id'?: string;
+    /**
+     * null for the few stored stubs that are not objects
+     */
+    'stub'?: CurationStub | null;
+}
+export interface CurationSummary {
+    'columns'?: Array<CurationSummaryColumnsInner>;
+}
+export interface CurationSummaryColumnsInner {
+    'id'?: string;
+    'name'?: string | null;
+    'stub_count'?: number;
+    /**
+     * stub count per exclusion tag id
+     */
+    'exclusions'?: { [key: string]: number; };
+    /**
+     * stub count per tag id
+     */
+    'tags'?: { [key: string]: number; };
+}
+/**
  * the specification for the function/class running the meta-analysis
  */
 export interface Estimator {
@@ -2180,6 +2254,138 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * One page of the project\'s curation stubs, ordered by column and then by each stub\'s place in its column. Each `stub` is the object the project\'s provenance holds in `curationMetadata.columns[].stubStudies`.
+         * @summary List a project\'s curation stubs
+         * @param {string} id 
+         * @param {string} [columnId] only stubs in this curation column
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of stubs to return on a page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdCurationStubsGet: async (id: string, columnId?: string, page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdCurationStubsGet', 'id', id)
+            const localVarPath = `/projects/{id}/curation-stubs`
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (columnId !== undefined) {
+                localVarQueryParameter['column_id'] = columnId;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/problem+json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Applies a changeset in one transaction, in this order: `remove`, `add`, `update`, `move`. Only the stubs named change; the project\'s other provenance stays as it is. The project\'s `updated_at` changes and is returned.
+         * @summary Change a project\'s curation stubs
+         * @param {string} id 
+         * @param {CurationChangeset} [curationChangeset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdCurationStubsPost: async (id: string, curationChangeset?: CurationChangeset, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdCurationStubsPost', 'id', id)
+            const localVarPath = `/projects/{id}/curation-stubs`
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/problem+json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(curationChangeset, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * For each curation column, in board order: how many stubs it holds, and how many of them carry each exclusion tag id and each tag id.
+         * @summary Count a project\'s curation stubs
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdCurationSummaryGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectsIdCurationSummaryGet', 'id', id)
+            const localVarPath = `/projects/{id}/curation-summary`
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JSON-Web-Token required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/problem+json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary 
          * @param {string} id 
@@ -2222,10 +2428,11 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} id 
          * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+         * @param {boolean} [includeStubs] include each curation column\&#39;s &#x60;stubStudies&#x60; in the provenance; when false the key is left out and stubs are read from &#x60;/projects/{id}/curation-stubs&#x60;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet: async (id: string, info?: boolean, includeProvenance?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdGet: async (id: string, info?: boolean, includeProvenance?: boolean, includeStubs?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdGet', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -2253,6 +2460,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['include_provenance'] = includeProvenance;
             }
 
+            if (includeStubs !== undefined) {
+                localVarQueryParameter['include_stubs'] = includeStubs;
+            }
+
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -2269,11 +2480,12 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
          * @summary 
          * @param {string} id 
          * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
+         * @param {boolean} [keepStubs] ignore &#x60;stubStudies&#x60; in the provenance sent and keep the project\&#39;s stored stubs; removing a column that still holds stubs is refused (409)
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut: async (id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectsIdPut: async (id: string, syncMetaAnalysesPublic?: boolean, keepStubs?: boolean, project?: Project, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectsIdPut', 'id', id)
             const localVarPath = `/projects/{id}`
@@ -2295,6 +2507,10 @@ export const ComposeApiAxiosParamCreator = function (configuration?: Configurati
 
             if (syncMetaAnalysesPublic !== undefined) {
                 localVarQueryParameter['sync_meta_analyses_public'] = syncMetaAnalysesPublic;
+            }
+
+            if (keepStubs !== undefined) {
+                localVarQueryParameter['keep_stubs'] = keepStubs;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -3628,6 +3844,49 @@ export const ComposeApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * One page of the project\'s curation stubs, ordered by column and then by each stub\'s place in its column. Each `stub` is the object the project\'s provenance holds in `curationMetadata.columns[].stubStudies`.
+         * @summary List a project\'s curation stubs
+         * @param {string} id 
+         * @param {string} [columnId] only stubs in this curation column
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of stubs to return on a page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdCurationStubsGet(id: string, columnId?: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurationStubList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdCurationStubsGet(id, columnId, page, pageSize, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsIdCurationStubsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Applies a changeset in one transaction, in this order: `remove`, `add`, `update`, `move`. Only the stubs named change; the project\'s other provenance stays as it is. The project\'s `updated_at` changes and is returned.
+         * @summary Change a project\'s curation stubs
+         * @param {string} id 
+         * @param {CurationChangeset} [curationChangeset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdCurationStubsPost(id: string, curationChangeset?: CurationChangeset, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurationChangesetResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdCurationStubsPost(id, curationChangeset, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsIdCurationStubsPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * For each curation column, in board order: how many stubs it holds, and how many of them carry each exclusion tag id and each tag id.
+         * @summary Count a project\'s curation stubs
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectsIdCurationSummaryGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurationSummary>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdCurationSummaryGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsIdCurationSummaryGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary 
          * @param {string} id 
@@ -3646,11 +3905,12 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @param {string} id 
          * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+         * @param {boolean} [includeStubs] include each curation column\&#39;s &#x60;stubStudies&#x60; in the provenance; when false the key is left out and stubs are read from &#x60;/projects/{id}/curation-stubs&#x60;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, includeProvenance, options);
+        async projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, includeStubs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdGet(id, info, includeProvenance, includeStubs, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3660,12 +3920,13 @@ export const ComposeApiFp = function(configuration?: Configuration) {
          * @summary 
          * @param {string} id 
          * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
+         * @param {boolean} [keepStubs] ignore &#x60;stubStudies&#x60; in the provenance sent and keep the project\&#39;s stored stubs; removing a column that still holds stubs is refused (409)
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, syncMetaAnalysesPublic, project, options);
+        async projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, keepStubs?: boolean, project?: Project, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectReturn>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectsIdPut(id, syncMetaAnalysesPublic, keepStubs, project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ComposeApi.projectsIdPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4262,6 +4523,40 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.projectsGet(page, pageSize, name, search, description, sort, desc, userId, includeProvenance, tag, excludeTag, options).then((request) => request(axios, basePath));
         },
         /**
+         * One page of the project\'s curation stubs, ordered by column and then by each stub\'s place in its column. Each `stub` is the object the project\'s provenance holds in `curationMetadata.columns[].stubStudies`.
+         * @summary List a project\'s curation stubs
+         * @param {string} id 
+         * @param {string} [columnId] only stubs in this curation column
+         * @param {number} [page] page of results
+         * @param {number} [pageSize] number of stubs to return on a page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdCurationStubsGet(id: string, columnId?: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<CurationStubList> {
+            return localVarFp.projectsIdCurationStubsGet(id, columnId, page, pageSize, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Applies a changeset in one transaction, in this order: `remove`, `add`, `update`, `move`. Only the stubs named change; the project\'s other provenance stays as it is. The project\'s `updated_at` changes and is returned.
+         * @summary Change a project\'s curation stubs
+         * @param {string} id 
+         * @param {CurationChangeset} [curationChangeset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdCurationStubsPost(id: string, curationChangeset?: CurationChangeset, options?: RawAxiosRequestConfig): AxiosPromise<CurationChangesetResult> {
+            return localVarFp.projectsIdCurationStubsPost(id, curationChangeset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * For each curation column, in board order: how many stubs it holds, and how many of them carry each exclusion tag id and each tag id.
+         * @summary Count a project\'s curation stubs
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectsIdCurationSummaryGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CurationSummary> {
+            return localVarFp.projectsIdCurationSummaryGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary 
          * @param {string} id 
@@ -4277,23 +4572,25 @@ export const ComposeApiFactory = function (configuration?: Configuration, basePa
          * @param {string} id 
          * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
          * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+         * @param {boolean} [includeStubs] include each curation column\&#39;s &#x60;stubStudies&#x60; in the provenance; when false the key is left out and stubs are read from &#x60;/projects/{id}/curation-stubs&#x60;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdGet(id, info, includeProvenance, options).then((request) => request(axios, basePath));
+        projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, includeStubs?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdGet(id, info, includeProvenance, includeStubs, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary 
          * @param {string} id 
          * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
+         * @param {boolean} [keepStubs] ignore &#x60;stubStudies&#x60; in the provenance sent and keep the project\&#39;s stored stubs; removing a column that still holds stubs is refused (409)
          * @param {Project} [project] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
-            return localVarFp.projectsIdPut(id, syncMetaAnalysesPublic, project, options).then((request) => request(axios, basePath));
+        projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, keepStubs?: boolean, project?: Project, options?: RawAxiosRequestConfig): AxiosPromise<ProjectReturn> {
+            return localVarFp.projectsIdPut(id, syncMetaAnalysesPublic, keepStubs, project, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4850,6 +5147,43 @@ export class ComposeApi extends BaseAPI {
     }
 
     /**
+     * One page of the project\'s curation stubs, ordered by column and then by each stub\'s place in its column. Each `stub` is the object the project\'s provenance holds in `curationMetadata.columns[].stubStudies`.
+     * @summary List a project\'s curation stubs
+     * @param {string} id 
+     * @param {string} [columnId] only stubs in this curation column
+     * @param {number} [page] page of results
+     * @param {number} [pageSize] number of stubs to return on a page
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public projectsIdCurationStubsGet(id: string, columnId?: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdCurationStubsGet(id, columnId, page, pageSize, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Applies a changeset in one transaction, in this order: `remove`, `add`, `update`, `move`. Only the stubs named change; the project\'s other provenance stays as it is. The project\'s `updated_at` changes and is returned.
+     * @summary Change a project\'s curation stubs
+     * @param {string} id 
+     * @param {CurationChangeset} [curationChangeset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public projectsIdCurationStubsPost(id: string, curationChangeset?: CurationChangeset, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdCurationStubsPost(id, curationChangeset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * For each curation column, in board order: how many stubs it holds, and how many of them carry each exclusion tag id and each tag id.
+     * @summary Count a project\'s curation stubs
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public projectsIdCurationSummaryGet(id: string, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdCurationSummaryGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 
      * @summary 
      * @param {string} id 
@@ -4866,11 +5200,12 @@ export class ComposeApi extends BaseAPI {
      * @param {string} id 
      * @param {boolean} [info] display additional information about a nested relationship without displaying fully nested object
      * @param {boolean} [includeProvenance] include the project provenance payload in project responses
+     * @param {boolean} [includeStubs] include each curation column\&#39;s &#x60;stubStudies&#x60; in the provenance; when false the key is left out and stubs are read from &#x60;/projects/{id}/curation-stubs&#x60;
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsIdGet(id, info, includeProvenance, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdGet(id: string, info?: boolean, includeProvenance?: boolean, includeStubs?: boolean, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdGet(id, info, includeProvenance, includeStubs, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4878,12 +5213,13 @@ export class ComposeApi extends BaseAPI {
      * @summary 
      * @param {string} id 
      * @param {boolean} [syncMetaAnalysesPublic] when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value
+     * @param {boolean} [keepStubs] ignore &#x60;stubStudies&#x60; in the provenance sent and keep the project\&#39;s stored stubs; removing a column that still holds stubs is refused (409)
      * @param {Project} [project] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
-        return ComposeApiFp(this.configuration).projectsIdPut(id, syncMetaAnalysesPublic, project, options).then((request) => request(this.axios, this.basePath));
+    public projectsIdPut(id: string, syncMetaAnalysesPublic?: boolean, keepStubs?: boolean, project?: Project, options?: RawAxiosRequestConfig) {
+        return ComposeApiFp(this.configuration).projectsIdPut(id, syncMetaAnalysesPublic, keepStubs, project, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

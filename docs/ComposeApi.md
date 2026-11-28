@@ -29,6 +29,9 @@ All URIs are relative to *https://compose.neurosynth.org/api*
 |[**neurovaultFilesIdPut**](#neurovaultfilesidput) | **PUT** /neurovault-files/{id} | |
 |[**neurovaultFilesPost**](#neurovaultfilespost) | **POST** /neurovault-files | |
 |[**projectsGet**](#projectsget) | **GET** /projects | Your GET endpoint|
+|[**projectsIdCurationStubsGet**](#projectsidcurationstubsget) | **GET** /projects/{id}/curation-stubs | List a project\&#39;s curation stubs|
+|[**projectsIdCurationStubsPost**](#projectsidcurationstubspost) | **POST** /projects/{id}/curation-stubs | Change a project\&#39;s curation stubs|
+|[**projectsIdCurationSummaryGet**](#projectsidcurationsummaryget) | **GET** /projects/{id}/curation-summary | Count a project\&#39;s curation stubs|
 |[**projectsIdDelete**](#projectsiddelete) | **DELETE** /projects/{id} | |
 |[**projectsIdGet**](#projectsidget) | **GET** /projects/{id} | Your GET endpoint|
 |[**projectsIdPut**](#projectsidput) | **PUT** /projects/{id} | |
@@ -1422,6 +1425,180 @@ const { status, data } = await apiInstance.projectsGet(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **projectsIdCurationStubsGet**
+> CurationStubList projectsIdCurationStubsGet()
+
+One page of the project\'s curation stubs, ordered by column and then by each stub\'s place in its column. Each `stub` is the object the project\'s provenance holds in `curationMetadata.columns[].stubStudies`.
+
+### Example
+
+```typescript
+import {
+    ComposeApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new ComposeApi(configuration);
+
+let id: string; // (default to undefined)
+let columnId: string; //only stubs in this curation column (optional) (default to undefined)
+let page: number; //page of results (optional) (default to undefined)
+let pageSize: number; //number of stubs to return on a page (optional) (default to 100)
+
+const { status, data } = await apiInstance.projectsIdCurationStubsGet(
+    id,
+    columnId,
+    page,
+    pageSize
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] |  | defaults to undefined|
+| **columnId** | [**string**] | only stubs in this curation column | (optional) defaults to undefined|
+| **page** | [**number**] | page of results | (optional) defaults to undefined|
+| **pageSize** | [**number**] | number of stubs to return on a page | (optional) defaults to 100|
+
+
+### Return type
+
+**CurationStubList**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**404** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **projectsIdCurationStubsPost**
+> CurationChangesetResult projectsIdCurationStubsPost()
+
+Applies a changeset in one transaction, in this order: `remove`, `add`, `update`, `move`. Only the stubs named change; the project\'s other provenance stays as it is. The project\'s `updated_at` changes and is returned.
+
+### Example
+
+```typescript
+import {
+    ComposeApi,
+    Configuration,
+    CurationChangeset
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new ComposeApi(configuration);
+
+let id: string; // (default to undefined)
+let curationChangeset: CurationChangeset; // (optional)
+
+const { status, data } = await apiInstance.projectsIdCurationStubsPost(
+    id,
+    curationChangeset
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **curationChangeset** | **CurationChangeset**|  | |
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**CurationChangesetResult**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+|**403** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+|**404** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+|**409** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+|**413** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+|**422** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **projectsIdCurationSummaryGet**
+> CurationSummary projectsIdCurationSummaryGet()
+
+For each curation column, in board order: how many stubs it holds, and how many of them carry each exclusion tag id and each tag id.
+
+### Example
+
+```typescript
+import {
+    ComposeApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new ComposeApi(configuration);
+
+let id: string; // (default to undefined)
+
+const { status, data } = await apiInstance.projectsIdCurationSummaryGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**CurationSummary**
+
+### Authorization
+
+[JSON-Web-Token](../README.md#JSON-Web-Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**404** | form when a request goes wrong |  * X-Request-ID -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **projectsIdDelete**
 > projectsIdDelete()
 
@@ -1490,11 +1667,13 @@ const apiInstance = new ComposeApi(configuration);
 let id: string; // (default to undefined)
 let info: boolean; //display additional information about a nested relationship without displaying fully nested object (optional) (default to undefined)
 let includeProvenance: boolean; //include the project provenance payload in project responses (optional) (default to true)
+let includeStubs: boolean; //include each curation column\'s `stubStudies` in the provenance; when false the key is left out and stubs are read from `/projects/{id}/curation-stubs` (optional) (default to true)
 
 const { status, data } = await apiInstance.projectsIdGet(
     id,
     info,
-    includeProvenance
+    includeProvenance,
+    includeStubs
 );
 ```
 
@@ -1505,6 +1684,7 @@ const { status, data } = await apiInstance.projectsIdGet(
 | **id** | [**string**] |  | defaults to undefined|
 | **info** | [**boolean**] | display additional information about a nested relationship without displaying fully nested object | (optional) defaults to undefined|
 | **includeProvenance** | [**boolean**] | include the project provenance payload in project responses | (optional) defaults to true|
+| **includeStubs** | [**boolean**] | include each curation column\&#39;s &#x60;stubStudies&#x60; in the provenance; when false the key is left out and stubs are read from &#x60;/projects/{id}/curation-stubs&#x60; | (optional) defaults to true|
 
 
 ### Return type
@@ -1546,11 +1726,13 @@ const apiInstance = new ComposeApi(configuration);
 
 let id: string; // (default to undefined)
 let syncMetaAnalysesPublic: boolean; //when updating a project\'s public flag, also set each child meta-analysis to the same public value (optional) (default to undefined)
+let keepStubs: boolean; //ignore `stubStudies` in the provenance sent and keep the project\'s stored stubs; removing a column that still holds stubs is refused (409) (optional) (default to false)
 let project: Project; // (optional)
 
 const { status, data } = await apiInstance.projectsIdPut(
     id,
     syncMetaAnalysesPublic,
+    keepStubs,
     project
 );
 ```
@@ -1562,6 +1744,7 @@ const { status, data } = await apiInstance.projectsIdPut(
 | **project** | **Project**|  | |
 | **id** | [**string**] |  | defaults to undefined|
 | **syncMetaAnalysesPublic** | [**boolean**] | when updating a project\&#39;s public flag, also set each child meta-analysis to the same public value | (optional) defaults to undefined|
+| **keepStubs** | [**boolean**] | ignore &#x60;stubStudies&#x60; in the provenance sent and keep the project\&#39;s stored stubs; removing a column that still holds stubs is refused (409) | (optional) defaults to false|
 
 
 ### Return type

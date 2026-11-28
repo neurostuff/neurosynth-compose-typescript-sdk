@@ -14,6 +14,15 @@ docs/AnnotationSnapshotSummary.md
 docs/AnnotationUpdate.md
 docs/ComposeApi.md
 docs/Corrector.md
+docs/CurationChangeset.md
+docs/CurationChangesetAddInner.md
+docs/CurationChangesetMoveInner.md
+docs/CurationChangesetResult.md
+docs/CurationStub.md
+docs/CurationStubList.md
+docs/CurationStubListResultsInner.md
+docs/CurationSummary.md
+docs/CurationSummaryColumnsInner.md
 docs/DefaultApi.md
 docs/Estimator.md
 docs/MetaAnalysesGet400Response.md
